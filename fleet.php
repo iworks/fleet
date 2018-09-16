@@ -1,9 +1,9 @@
 <?php
 /*
-Plugin Name: 5o5
-Text Domain: 5o5
-Plugin URI: http://iworks.pl/5o5/
-Description: 5O5 class plugin: regata, boats, crew
+Plugin Name: Fleet Manager
+Text Domain: fleet
+Plugin URI: http://iworks.pl/fleet/
+Description: Manage the fleet of sailing boats. Add sailors, boats, regatta results and more.
 Version: PLUGIN_VERSION
 Author: Marcin Pietrzak
 Author URI: http://iworks.pl/
@@ -34,16 +34,16 @@ if ( ! defined( 'WPINC' ) ) {
 /**
  * static options
  */
-define( 'IWORKS_5O5_VERSION', 'PLUGIN_VERSION' );
-define( 'IWORKS_5O5_PREFIX',  'iworks_5o5_' );
+define( 'IWORKS_FLEET_VERSION', 'PLUGIN_VERSION' );
+define( 'IWORKS_FLEET_PREFIX',  'iworks_fleet_' );
 $base = dirname( __FILE__ );
 $vendor = $base.'/vendor';
 
 /**
- * require: Iworks5o5 Class
+ * require: Iworksfleet Class
  */
-if ( ! class_exists( 'iworks_5o5' ) ) {
-	require_once $vendor.'/iworks/5o5.php';
+if ( ! class_exists( 'iworks_fleet' ) ) {
+	require_once $vendor.'/iworks/fleet.php';
 }
 /**
  * configuration
@@ -59,41 +59,41 @@ if ( ! class_exists( 'iworks_options' ) ) {
 /**
  * i18n
  */
-load_plugin_textdomain( '5o5', false, plugin_basename( dirname( __FILE__ ) ).'/languages' );
+load_plugin_textdomain( 'fleet', false, plugin_basename( dirname( __FILE__ ) ).'/languages' );
 
 /**
  * load options
  */
-$iworks_5o5_options = new iworks_options();
-$iworks_5o5_options->set_option_function_name( 'iworks_5o5_options' );
-$iworks_5o5_options->set_option_prefix( IWORKS_5O5_PREFIX );
+$iworks_fleet_options = new iworks_options();
+$iworks_fleet_options->set_option_function_name( 'iworks_fleet_options' );
+$iworks_fleet_options->set_option_prefix( IWORKS_FLEET_PREFIX );
 
-function iworks_5o5_options_init() {
-	global $iworks_5o5_options;
-	$iworks_5o5_options->options_init();
+function iworks_fleet_options_init() {
+	global $iworks_fleet_options;
+	$iworks_fleet_options->options_init();
 }
 
-function iworks_5o5_activate() {
-	$iworks_5o5_options = new iworks_options();
-	$iworks_5o5_options->set_option_function_name( 'iworks_5o5_options' );
-	$iworks_5o5_options->set_option_prefix( IWORKS_5O5_PREFIX );
-	$iworks_5o5_options->activate();
+function iworks_fleet_activate() {
+	$iworks_fleet_options = new iworks_options();
+	$iworks_fleet_options->set_option_function_name( 'iworks_fleet_options' );
+	$iworks_fleet_options->set_option_prefix( IWORKS_FLEET_PREFIX );
+	$iworks_fleet_options->activate();
 	/**
 	 * install tables
 	 */
-	$iworks_5o5 = new iworks_5o5;
-	$iworks_5o5->db_install();
+	$iworks_fleet = new iworks_fleet;
+	$iworks_fleet->db_install();
 }
 
-function iworks_5o5_deactivate() {
-	global $iworks_5o5_options;
-	$iworks_5o5_options->deactivate();
+function iworks_fleet_deactivate() {
+	global $iworks_fleet_options;
+	$iworks_fleet_options->deactivate();
 }
 
-$iworks_5o5 = new iworks_5o5();
+$iworks_fleet = new iworks_fleet();
 
 /**
  * install & uninstall
  */
-register_activation_hook( __FILE__, 'iworks_5o5_activate' );
-register_deactivation_hook( __FILE__, 'iworks_5o5_deactivate' );
+register_activation_hook( __FILE__, 'iworks_fleet_activate' );
+register_deactivation_hook( __FILE__, 'iworks_fleet_deactivate' );
