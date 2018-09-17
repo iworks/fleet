@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 5o5 PLUGIN_VERSION\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/fleet\n"
-"POT-Creation-Date: 2018-09-16 13:50:46+00:00\n"
-"PO-Revision-Date: 2018-09-14 22:36+0200\n"
+"POT-Creation-Date: 2018-09-17 05:09:25+00:00\n"
+"PO-Revision-Date: 2018-09-17 07:13+0200\n"
 "Last-Translator: Marcin Pietrzak <marcin@iworks.pl>\n"
 "Language-Team: \n"
 "Language: pl_PL\n"
@@ -597,7 +597,7 @@ msgstr "Adres mail"
 
 #: vendor/iworks/fleet/posttypes/person.php:117
 msgid "Fleet"
-msgstr ""
+msgstr "Flota"
 
 #: vendor/iworks/fleet/posttypes/person.php:118
 msgid "Person"
@@ -993,9 +993,8 @@ msgid "Number of event results"
 msgstr "Liczba wyników"
 
 #: vendor/iworks/fleet.php:111
-#, fuzzy
 msgid "fleet do not have such post type!"
-msgstr "5o5 nie ma wybranego typu wpisów!"
+msgstr "Flota nie ma wybranego typu wpisów!"
 
 #: vendor/iworks/fleet.php:208
 msgid "Settings"
@@ -1078,16 +1077,20 @@ msgid "ON"
 msgstr "Włącz"
 
 #. Plugin Name of the plugin/theme
-msgid "5o5"
-msgstr "5o5"
+msgid "Fleet Manager"
+msgstr "Manager Floty"
 
 #. Plugin URI of the plugin/theme
-msgid "http://iworks.pl/5o5/"
-msgstr "http://iworks.pl/5o5/"
+msgid "http://iworks.pl/fleet/"
+msgstr "http://iworks.pl/fleet/"
 
 #. Description of the plugin/theme
-msgid "5O5 class plugin: regata, boats, crew"
-msgstr "5O5 class plugin: regata, boats, crew"
+msgid ""
+"Manage the fleet of sailing boats. Add sailors, boats, regatta results and "
+"more."
+msgstr ""
+"Zarządzaj flotą żaglówek. Dodaj żeglarzy, łódki, wyniki regat oraz dużo "
+"więcej."
 
 #. Author of the plugin/theme
 msgid "Marcin Pietrzak"
@@ -1113,27 +1116,24 @@ msgid "Boat"
 msgstr "Łodka"
 
 #: vendor/iworks/fleet/posttypes/boat.php:264
-#, fuzzy
 msgctxt "slug for archive"
 msgid "fleet-boats"
-msgstr "5o5-lodki"
+msgstr "lodki"
 
 #: vendor/iworks/fleet/posttypes/person.php:157
-#, fuzzy
 msgctxt "slug for archive"
 msgid "fleet-persons"
-msgstr "5o5-osoby"
+msgstr "osoby"
 
 #: vendor/iworks/fleet/posttypes/result.php:784
-#, fuzzy
 msgctxt "slug for archive"
 msgid "fleet-results"
-msgstr "5o5-wyniki"
+msgstr "wyniki"
 
 #: vendor/iworks/fleet/posttypes/boat.php:271
 msgctxt "slug for single boat"
 msgid "fleet-boat"
-msgstr ""
+msgstr "lodka"
 
 #: vendor/iworks/fleet/posttypes/boat.php:279
 msgctxt "Taxonomy General Name"
@@ -1224,7 +1224,6 @@ msgid "Person"
 msgstr "Osoba"
 
 #: vendor/iworks/fleet/posttypes/person.php:164
-#, fuzzy
 msgctxt "slug for single person"
 msgid "fleet-person"
 msgstr "osoba"
@@ -1261,10 +1260,18 @@ msgid "result"
 msgstr "wynik"
 
 #: vendor/iworks/fleet.php:248
-#, fuzzy
 msgctxt "slug for images"
 msgid "fleet-boat-number"
-msgstr "5o5-numer"
+msgstr "numer-lodki"
+
+#~ msgid "5o5"
+#~ msgstr "5o5"
+
+#~ msgid "http://iworks.pl/5o5/"
+#~ msgstr "http://iworks.pl/5o5/"
+
+#~ msgid "5O5 class plugin: regata, boats, crew"
+#~ msgstr "5O5 class plugin: regata, boats, crew"
 
 #~ msgctxt "slug for single boat"
 #~ msgid "5o5-boat"

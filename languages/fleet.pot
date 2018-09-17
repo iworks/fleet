@@ -2,9 +2,9 @@
 # This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: 5o5 PLUGIN_VERSION\n"
+"Project-Id-Version: Fleet Manager PLUGIN_VERSION\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/fleet\n"
-"POT-Creation-Date: 2018-09-16 13:50:46+00:00\n"
+"POT-Creation-Date: 2018-09-17 05:09:25+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1078,15 +1078,17 @@ msgid "ON"
 msgstr ""
 
 #. Plugin Name of the plugin/theme
-msgid "5o5"
+msgid "Fleet Manager"
 msgstr ""
 
 #. Plugin URI of the plugin/theme
-msgid "http://iworks.pl/5o5/"
+msgid "http://iworks.pl/fleet/"
 msgstr ""
 
 #. Description of the plugin/theme
-msgid "5O5 class plugin: regata, boats, crew"
+msgid ""
+"Manage the fleet of sailing boats. Add sailors, boats, regatta results and "
+"more."
 msgstr ""
 
 #. Author of the plugin/theme
