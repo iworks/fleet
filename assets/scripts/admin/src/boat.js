@@ -1,15 +1,15 @@
 jQuery( document ).ready(function($) {
-    var iworks_5o5_people_list = [];
+    var iworks_fleet_people_list = [];
     var data = {
-        action: 'iworks_5o5_persons_list',
-        _wpnonce: iworks_5o5.nonces.iworks_5o5_persons_list_nonce,
-        user_id: iworks_5o5.user_id
+        action: 'iworks_fleet_persons_list',
+        _wpnonce: iworks_fleet.nonces.iworks_fleet_persons_list_nonce,
+        user_id: iworks_fleet.user_id
     };
     $.post(ajaxurl, data, function(response) {
         if ( response.success ) {
-            iworks_5o5_people_list = response.data;
+            iworks_fleet_people_list = response.data;
             $('select', $('#iworks-crews-list') ).select2({
-                data: iworks_5o5_people_list
+                data: iworks_fleet_people_list
             });
         }
     });
@@ -23,7 +23,7 @@ jQuery( document ).ready(function($) {
             } ) ).ready( function() {
                 var parent = $('#iworks-crew-'+id);
                 $('select', parent).select2({
-                    data: iworks_5o5_people_list
+                    data: iworks_fleet_people_list
                 });
             });
             return false;
