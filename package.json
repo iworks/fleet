@@ -3,7 +3,7 @@
     "title": "Fleet Manager",
     "homepage": "https://iworks.pl/",
     "version": "1.2.2",
-    "description": "Sail fleet manager allow to add person, boat and results.",
+    "description": "The sailboat manager makes it possible to manage boats, sailors, regattas and their results.",
     "repository": {
         "type": "git",
         "url": "git@bitbucket.org:iworks-pl/fleet.git"

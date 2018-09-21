@@ -8,6 +8,7 @@ Stable tag: 1.2.2
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
+The sailboat manager makes it possible to manage boats, sailors, regattas and their results.
 
 == Description ==
 
