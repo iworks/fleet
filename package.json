@@ -1,8 +1,8 @@
 {
     "name": "fleet",
-    "title": "Sail Fleet Manager",
+    "title": "Fleet Manager",
     "homepage": "https://iworks.pl/",
-    "version": "1.0.0",
+    "version": "1.2.2",
     "description": "Sail fleet manager allow to add person, boat and results.",
     "repository": {
         "type": "git",
