@@ -17,9 +17,9 @@
     ],
     "license": "GPL-2.0",
     "devDependencies": {
-        "grunt": "^1.0.3",
+        "grunt": ">1.0.0",
         "grunt-autoprefixer": ">3.0.0",
-        "grunt-clear": "^0.2.0",
+        "grunt-clear": "~0.2.1",
         "grunt-contrib-clean": "^1.1.0",
         "grunt-contrib-compass": "^1.1.1",
         "grunt-contrib-compress": "^1.4.3",
@@ -42,6 +42,6 @@
         "load-grunt-tasks": "^4.0.0",
         "time-grunt": "^0.2.3",
         "grunt-concat-css": "^0.3.1",
-        "grunt-po2mo": ""
+        "grunt-po2mo": "~0.1.2"
     }
 }
