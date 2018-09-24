@@ -52,12 +52,26 @@ module.exports = function( grunt ) {
 		// BUILD branches.
 		plugin_branches: {
 			exclude_pro: [
+				'./assets/sass',
+				'./assets/sass/**',
+				'./LICENSE',
+				'./README.md',
 				'./README.MD',
 				'./readme.txt',
+				'./vendor/iworks/options/LICENSE',
+				'./vendor/iworks/options/README.md',
 			],
 			exclude_free: [
-				'./README.MD',
+				'./assets/sass',
+				'./assets/sass/**',
 				'./changelog.txt',
+				'./languages/*.mo',
+				'./languages/*.po',
+				'./LICENSE',
+				'./README.md',
+				'./README.MD',
+				'./vendor/iworks/options/LICENSE',
+				'./vendor/iworks/options/README.md',
 			],
 			include_files: [
 				'**',
@@ -410,11 +424,11 @@ module.exports = function( grunt ) {
 		copy: {
 			pro: {
 				src: conf.plugin_branches.include_files,
-				dest: 'release/<%= pkg.version %>-pro/'
+				dest: 'release/<%= pkg.name %>-<%= pkg.version %>-pro/'
 			},
 			free: {
 				src: conf.plugin_branches.include_files,
-				dest: 'release/<%= pkg.version %>-free/'
+				dest: 'release/<%= pkg.name %>-<%= pkg.version %>-free/'
 			},
 		},
 
@@ -574,22 +588,22 @@ module.exports = function( grunt ) {
 			grunt.log.subhead( 'Update product branch [' + branch + ']...' );
 
 			// Checkout the destination branch.
-			grunt.task.run( 'gitcheckout:' + branch );
+			// grunt.task.run( 'gitcheckout:' + branch );
 
 			// Remove code and files that does not belong to this version.
-			grunt.task.run( 'replace:' + branch );
+			// grunt.task.run( 'replace:' + branch );
 			// grunt.task.run( 'clean:' + branch );
 
 			// Add the processes/cleaned files to the target branch.
-			grunt.task.run( 'gitadd:' + branch );
-			grunt.task.run( 'gitcommit:' + branch );
+			// grunt.task.run( 'gitadd:' + branch );
+			// grunt.task.run( 'gitcommit:' + branch );
 
 			// Create a distributable zip-file of the plugin branch.
 			// grunt.task.run( 'clean:release_' + branch );
-			grunt.task.run( 'copy:' + branch );
-			grunt.task.run( 'compress:' + branch );
+			// grunt.task.run( 'copy:' + branch );
+			// grunt.task.run( 'compress:' + branch );
 
-			grunt.task.run( 'gitcheckout:base');
+			// grunt.task.run( 'gitcheckout:base');
 		}
 	});
 
