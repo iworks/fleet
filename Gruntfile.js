@@ -590,22 +590,22 @@ module.exports = function( grunt ) {
 			grunt.log.subhead( 'Update product branch [' + branch + ']...' );
 
 			// Checkout the destination branch.
-            grunt.task.run( 'gitcheckout:' + branch );
+			grunt.task.run( 'gitcheckout:' + branch );
 
 			// Remove code and files that does not belong to this version.
-            grunt.task.run( 'replace:' + branch );
-            grunt.task.run( 'clean:' + branch );
+			grunt.task.run( 'replace:' + branch );
+			grunt.task.run( 'clean:' + branch );
 
 			// Add the processes/cleaned files to the target branch.
-			// grunt.task.run( 'gitadd:' + branch );
-			// grunt.task.run( 'gitcommit:' + branch );
+			grunt.task.run( 'gitadd:' + branch );
+			grunt.task.run( 'gitcommit:' + branch );
 
 			// Create a distributable zip-file of the plugin branch.
-			// grunt.task.run( 'clean:release_' + branch );
-            grunt.task.run( 'copy:' + branch );
-			// grunt.task.run( 'compress:' + branch );
+			grunt.task.run( 'clean:release_' + branch );
+			grunt.task.run( 'copy:' + branch );
+			grunt.task.run( 'compress:' + branch );
 
-            grunt.task.run( 'gitcheckout:base');
+			grunt.task.run( 'gitcheckout:base');
 		}
 	});
 
