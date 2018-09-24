@@ -1,16 +1,16 @@
 <?php
 /*
-Plugin Name: Fleet Manager Base
+Plugin Name: Fleet Manager Pro
 Text Domain: fleet
 Plugin URI: http://iworks.pl/fleet/
 Description: Manage the fleet of sailing boats. Add sailors, boats, regatta results and more.
-Version: PLUGIN_VERSION
+Version: 1.2.3
 Author: Marcin Pietrzak
 Author URI: http://iworks.pl/
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Copyright 2017-PLUGIN_TILL_YEAR Marcin Pietrzak (marcin@iworks.pl)
+Copyright 2017-2018 Marcin Pietrzak (marcin@iworks.pl)
 
 this program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License, version 2, as
@@ -34,7 +34,7 @@ if ( ! defined( 'WPINC' ) ) {
 /**
  * static options
  */
-define( 'IWORKS_FLEET_VERSION', 'PLUGIN_VERSION' );
+define( 'IWORKS_FLEET_VERSION', '1.2.3' );
 define( 'IWORKS_FLEET_PREFIX',  'iworks_fleet_' );
 $base = dirname( __FILE__ );
 $vendor = $base.'/vendor';
