@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 5o5 PLUGIN_VERSION\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/fleet\n"
-"POT-Creation-Date: 2018-09-24 18:23:18+00:00\n"
+"POT-Creation-Date: 2018-09-24 18:29:17+00:00\n"
 "PO-Revision-Date: 2018-09-17 07:13+0200\n"
 "Last-Translator: Marcin Pietrzak <marcin@iworks.pl>\n"
 "Language-Team: \n"
@@ -1099,7 +1099,8 @@ msgid "ON"
 msgstr "Włącz"
 
 #. Plugin Name of the plugin/theme
-msgid "Fleet Manager"
+#, fuzzy
+msgid "Fleet Manager Base"
 msgstr "Manager Floty"
 
 #. Plugin URI of the plugin/theme

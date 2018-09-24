@@ -593,7 +593,7 @@ module.exports = function( grunt ) {
             grunt.task.run( 'gitcheckout:' + branch );
 
 			// Remove code and files that does not belong to this version.
-			// grunt.task.run( 'replace:' + branch );
+            grunt.task.run( 'replace:' + branch );
 			// grunt.task.run( 'clean:' + branch );
 
 			// Add the processes/cleaned files to the target branch.
