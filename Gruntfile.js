@@ -585,7 +585,7 @@ module.exports = function( grunt ) {
 			grunt.task.run( 'gitcommit:' + branch );
 
 			// Create a distributable zip-file of the plugin branch.
-			grunt.task.run( 'clean:release_' + branch );
+			// grunt.task.run( 'clean:release_' + branch );
 			grunt.task.run( 'copy:' + branch );
 			grunt.task.run( 'compress:' + branch );
 
