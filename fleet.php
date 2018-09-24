@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Fleet Manager
+Plugin Name: Fleet Manager Base
 Text Domain: fleet
 Plugin URI: http://iworks.pl/fleet/
 Description: Manage the fleet of sailing boats. Add sailors, boats, regatta results and more.
@@ -10,7 +10,7 @@ Author URI: http://iworks.pl/
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Copyright 2017-2018 Marcin Pietrzak (marcin@iworks.pl)
+Copyright 2017-PLUGIN_TILL_YEAR Marcin Pietrzak (marcin@iworks.pl)
 
 this program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License, version 2, as
