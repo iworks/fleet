@@ -101,8 +101,6 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 				'in_poland_date' => array( 'label' => __( 'In Poland', 'fleet' ) ),
 				'location' => array( 'label' => __( 'Location', 'fleet' ) ),
 				'hull_material' => array( 'label' => __( 'Hull material', 'fleet' ) ),
-				'helm' => array( 'label' => __( 'Helmsman', 'fleet' ) ),
-				'crew' => array( 'label' => __( 'Crew', 'fleet' ) ),
 				'first_certified_date' => array( 'type' => 'date', 'label' => __( 'First Certified', 'fleet' ) ),
 			),
 			'social' => array(
@@ -215,6 +213,11 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 
 	public function register() {
 		global $iworks_fleet;
+		/**
+		 * taxonomies configuration
+		 */
+		$taxonomies = $this->options->get_option( 'boat_taxonomies' );
+
 		$show_in_menu = add_query_arg( 'post_type', $iworks_fleet->get_post_type_name( 'person' ), 'edit.php' );
 		$labels = array(
 			'name'                  => _x( 'Boats', 'Boat General Name', 'fleet' ),
@@ -275,114 +278,120 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		/**
 		 * Boat hull Manufacturer Taxonomy.
 		 */
-		$labels = array(
-			'name'                       => _x( 'Hull Manufacturers', 'Taxonomy General Name', 'fleet' ),
-			'singular_name'              => _x( 'Hull Manufacturer', 'Taxonomy Singular Name', 'fleet' ),
-			'menu_name'                  => __( 'Hull Manufacturer', 'fleet' ),
-			'all_items'                  => __( 'All Hull Manufacturers', 'fleet' ),
-			'new_item_name'              => __( 'New Hull Manufacturer Name', 'fleet' ),
-			'add_new_item'               => __( 'Add New Hull Manufacturer', 'fleet' ),
-			'edit_item'                  => __( 'Edit Hull Manufacturer', 'fleet' ),
-			'update_item'                => __( 'Update Hull Manufacturer', 'fleet' ),
-			'view_item'                  => __( 'View Hull Manufacturer', 'fleet' ),
-			'separate_items_with_commas' => __( 'Separate items with commas', 'fleet' ),
-			'add_or_remove_items'        => __( 'Add or remove items', 'fleet' ),
-			'choose_from_most_used'      => __( 'Choose from the most used', 'fleet' ),
-			'popular_items'              => __( 'Popular Hull Manufacturers', 'fleet' ),
-			'search_items'               => __( 'Search Hull Manufacturers', 'fleet' ),
-			'not_found'                  => __( 'Not Found', 'fleet' ),
-			'no_terms'                   => __( 'No items', 'fleet' ),
-			'items_list'                 => __( 'Hull Manufacturers list', 'fleet' ),
-			'items_list_navigation'      => __( 'Hull Manufacturers list navigation', 'fleet' ),
-		);
-		$args = array(
-			'labels'                     => $labels,
-			'hierarchical'               => false,
-			'public'                     => true,
-			'show_admin_column'          => true,
-			'show_in_nav_menus'          => true,
-			'show_tagcloud'              => true,
-			'show_ui'                    => true,
-			'show_in_quick_edit' => true,
-			'rewrite' => array(
-				'slug' => 'fleet-manufacturer',
-			),
-		);
-		register_taxonomy( $this->taxonomy_name_manufacturer, array( $this->post_type_name ), $args );
+		if ( isset( $taxonomies['hull'] ) && $taxonomies['hull'] ) {
+			$labels = array(
+				'name'                       => _x( 'Hull Manufacturers', 'Taxonomy General Name', 'fleet' ),
+				'singular_name'              => _x( 'Hull Manufacturer', 'Taxonomy Singular Name', 'fleet' ),
+				'menu_name'                  => __( 'Hull Manufacturer', 'fleet' ),
+				'all_items'                  => __( 'All Hull Manufacturers', 'fleet' ),
+				'new_item_name'              => __( 'New Hull Manufacturer Name', 'fleet' ),
+				'add_new_item'               => __( 'Add New Hull Manufacturer', 'fleet' ),
+				'edit_item'                  => __( 'Edit Hull Manufacturer', 'fleet' ),
+				'update_item'                => __( 'Update Hull Manufacturer', 'fleet' ),
+				'view_item'                  => __( 'View Hull Manufacturer', 'fleet' ),
+				'separate_items_with_commas' => __( 'Separate items with commas', 'fleet' ),
+				'add_or_remove_items'        => __( 'Add or remove items', 'fleet' ),
+				'choose_from_most_used'      => __( 'Choose from the most used', 'fleet' ),
+				'popular_items'              => __( 'Popular Hull Manufacturers', 'fleet' ),
+				'search_items'               => __( 'Search Hull Manufacturers', 'fleet' ),
+				'not_found'                  => __( 'Not Found', 'fleet' ),
+				'no_terms'                   => __( 'No items', 'fleet' ),
+				'items_list'                 => __( 'Hull Manufacturers list', 'fleet' ),
+				'items_list_navigation'      => __( 'Hull Manufacturers list navigation', 'fleet' ),
+			);
+			$args = array(
+				'labels'                     => $labels,
+				'hierarchical'               => false,
+				'public'                     => true,
+				'show_admin_column'          => true,
+				'show_in_nav_menus'          => true,
+				'show_tagcloud'              => true,
+				'show_ui'                    => true,
+				'show_in_quick_edit' => true,
+				'rewrite' => array(
+					'slug' => 'fleet-manufacturer',
+				),
+			);
+			register_taxonomy( $this->taxonomy_name_manufacturer, array( $this->post_type_name ), $args );
+		}
 		/**
 		 * Sails Sails Manufacturer Taxonomy.
 		 */
-		$labels = array(
-			'name'                       => _x( 'Sails Manufacturers', 'Taxonomy General Name', 'fleet' ),
-			'singular_name'              => _x( 'Sails Manufacturer', 'Taxonomy Singular Name', 'fleet' ),
-			'menu_name'                  => __( 'Sails Manufacturer', 'fleet' ),
-			'all_items'                  => __( 'All Sails Manufacturers', 'fleet' ),
-			'new_item_name'              => __( 'New Sails Manufacturer Name', 'fleet' ),
-			'add_new_item'               => __( 'Add New Sails Manufacturer', 'fleet' ),
-			'edit_item'                  => __( 'Edit Sails Manufacturer', 'fleet' ),
-			'update_item'                => __( 'Update Sails Manufacturer', 'fleet' ),
-			'view_item'                  => __( 'View Sails Manufacturer', 'fleet' ),
-			'separate_items_with_commas' => __( 'Separate items with commas', 'fleet' ),
-			'add_or_remove_items'        => __( 'Add or remove items', 'fleet' ),
-			'choose_from_most_used'      => __( 'Choose from the most used', 'fleet' ),
-			'popular_items'              => __( 'Popular Sails Manufacturers', 'fleet' ),
-			'search_items'               => __( 'Search Sails Manufacturers', 'fleet' ),
-			'not_found'                  => __( 'Not Found', 'fleet' ),
-			'no_terms'                   => __( 'No items', 'fleet' ),
-			'items_list'                 => __( 'Sails Manufacturers list', 'fleet' ),
-			'items_list_navigation'      => __( 'Sails Manufacturers list navigation', 'fleet' ),
-		);
-		$args = array(
-			'labels'                     => $labels,
-			'hierarchical'               => false,
-			'public'                     => true,
-			'show_admin_column'          => true,
-			'show_in_nav_menus'          => true,
-			'show_tagcloud'              => true,
-			'show_ui'                    => true,
-			'show_in_quick_edit' => true,
-			'rewrite' => array(
-				'slug' => 'fleet-sails-manufacturer',
-			),
-		);
-		register_taxonomy( $this->taxonomy_name_sails, array( $this->post_type_name ), $args );
+		if ( isset( $taxonomies['sails'] ) && $taxonomies['sails'] ) {
+			$labels = array(
+				'name'                       => _x( 'Sails Manufacturers', 'Taxonomy General Name', 'fleet' ),
+				'singular_name'              => _x( 'Sails Manufacturer', 'Taxonomy Singular Name', 'fleet' ),
+				'menu_name'                  => __( 'Sails Manufacturer', 'fleet' ),
+				'all_items'                  => __( 'All Sails Manufacturers', 'fleet' ),
+				'new_item_name'              => __( 'New Sails Manufacturer Name', 'fleet' ),
+				'add_new_item'               => __( 'Add New Sails Manufacturer', 'fleet' ),
+				'edit_item'                  => __( 'Edit Sails Manufacturer', 'fleet' ),
+				'update_item'                => __( 'Update Sails Manufacturer', 'fleet' ),
+				'view_item'                  => __( 'View Sails Manufacturer', 'fleet' ),
+				'separate_items_with_commas' => __( 'Separate items with commas', 'fleet' ),
+				'add_or_remove_items'        => __( 'Add or remove items', 'fleet' ),
+				'choose_from_most_used'      => __( 'Choose from the most used', 'fleet' ),
+				'popular_items'              => __( 'Popular Sails Manufacturers', 'fleet' ),
+				'search_items'               => __( 'Search Sails Manufacturers', 'fleet' ),
+				'not_found'                  => __( 'Not Found', 'fleet' ),
+				'no_terms'                   => __( 'No items', 'fleet' ),
+				'items_list'                 => __( 'Sails Manufacturers list', 'fleet' ),
+				'items_list_navigation'      => __( 'Sails Manufacturers list navigation', 'fleet' ),
+			);
+			$args = array(
+				'labels'                     => $labels,
+				'hierarchical'               => false,
+				'public'                     => true,
+				'show_admin_column'          => true,
+				'show_in_nav_menus'          => true,
+				'show_tagcloud'              => true,
+				'show_ui'                    => true,
+				'show_in_quick_edit' => true,
+				'rewrite' => array(
+					'slug' => 'fleet-sails-manufacturer',
+				),
+			);
+			register_taxonomy( $this->taxonomy_name_sails, array( $this->post_type_name ), $args );
+		}
 		/**
 		 * Masts Manufacturer Taxonomy.
 		 */
-		$labels = array(
-			'name'                       => _x( 'Masts Manufacturers', 'Taxonomy General Name', 'fleet' ),
-			'singular_name'              => _x( 'Masts Manufacturer', 'Taxonomy Singular Name', 'fleet' ),
-			'menu_name'                  => __( 'Masts Manufacturer', 'fleet' ),
-			'all_items'                  => __( 'All Masts Manufacturers', 'fleet' ),
-			'new_item_name'              => __( 'New Masts Manufacturer Name', 'fleet' ),
-			'add_new_item'               => __( 'Add New Masts Manufacturer', 'fleet' ),
-			'edit_item'                  => __( 'Edit Masts Manufacturer', 'fleet' ),
-			'update_item'                => __( 'Update Masts Manufacturer', 'fleet' ),
-			'view_item'                  => __( 'View Masts Manufacturer', 'fleet' ),
-			'separate_items_with_commas' => __( 'Separate items with commas', 'fleet' ),
-			'add_or_remove_items'        => __( 'Add or remove items', 'fleet' ),
-			'choose_from_most_used'      => __( 'Choose from the most used', 'fleet' ),
-			'popular_items'              => __( 'Popular Masts Manufacturers', 'fleet' ),
-			'search_items'               => __( 'Search Masts Manufacturers', 'fleet' ),
-			'not_found'                  => __( 'Not Found', 'fleet' ),
-			'no_terms'                   => __( 'No items', 'fleet' ),
-			'items_list'                 => __( 'Masts Manufacturers list', 'fleet' ),
-			'items_list_navigation'      => __( 'Masts Manufacturers list navigation', 'fleet' ),
-		);
-		$args = array(
-			'labels'                     => $labels,
-			'hierarchical'               => false,
-			'public'                     => true,
-			'show_admin_column'          => true,
-			'show_in_nav_menus'          => true,
-			'show_tagcloud'              => true,
-			'show_ui'                    => true,
-			'show_in_quick_edit'         => true,
-			'rewrite' => array(
-				'slug' => 'fleet-masts-manufacturer',
-			),
-		);
-		register_taxonomy( $this->taxonomy_name_mast, array( $this->post_type_name ), $args );
+		if ( isset( $taxonomies['mast'] ) && $taxonomies['mast'] ) {
+			$labels = array(
+				'name'                       => _x( 'Masts Manufacturers', 'Taxonomy General Name', 'fleet' ),
+				'singular_name'              => _x( 'Masts Manufacturer', 'Taxonomy Singular Name', 'fleet' ),
+				'menu_name'                  => __( 'Masts Manufacturer', 'fleet' ),
+				'all_items'                  => __( 'All Masts Manufacturers', 'fleet' ),
+				'new_item_name'              => __( 'New Masts Manufacturer Name', 'fleet' ),
+				'add_new_item'               => __( 'Add New Masts Manufacturer', 'fleet' ),
+				'edit_item'                  => __( 'Edit Masts Manufacturer', 'fleet' ),
+				'update_item'                => __( 'Update Masts Manufacturer', 'fleet' ),
+				'view_item'                  => __( 'View Masts Manufacturer', 'fleet' ),
+				'separate_items_with_commas' => __( 'Separate items with commas', 'fleet' ),
+				'add_or_remove_items'        => __( 'Add or remove items', 'fleet' ),
+				'choose_from_most_used'      => __( 'Choose from the most used', 'fleet' ),
+				'popular_items'              => __( 'Popular Masts Manufacturers', 'fleet' ),
+				'search_items'               => __( 'Search Masts Manufacturers', 'fleet' ),
+				'not_found'                  => __( 'Not Found', 'fleet' ),
+				'no_terms'                   => __( 'No items', 'fleet' ),
+				'items_list'                 => __( 'Masts Manufacturers list', 'fleet' ),
+				'items_list_navigation'      => __( 'Masts Manufacturers list navigation', 'fleet' ),
+			);
+			$args = array(
+				'labels'                     => $labels,
+				'hierarchical'               => false,
+				'public'                     => true,
+				'show_admin_column'          => true,
+				'show_in_nav_menus'          => true,
+				'show_tagcloud'              => true,
+				'show_ui'                    => true,
+				'show_in_quick_edit'         => true,
+				'rewrite' => array(
+					'slug' => 'fleet-masts-manufacturer',
+				),
+			);
+			register_taxonomy( $this->taxonomy_name_mast, array( $this->post_type_name ), $args );
+		}
 	}
 
 	public function save_post_meta( $post_id, $post, $update ) {
@@ -393,7 +402,10 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		/**
 		 * save crews
 		 */
-		if ( isset( $_POST[ $this->single_crew_field_name ] ) ) {
+		if (
+			$this->options->get_option( 'boat_add_crew_manually' )
+		    && isset( $_POST[ $this->single_crew_field_name ] )
+		) {
 			$value = $_POST[ $this->single_crew_field_name ];
 			if ( ! isset( $value['crew'] ) ) {
 				$value['crew'] = array();
@@ -612,51 +624,53 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		/**
 		 * crews data
 		 */
-		$text = '';
-		$crews = $this->get_crews_data( $post_id );
-		if ( ! empty( $crews ) ) {
-			global $iworks_fleet;
-			$current = isset( $crews['current'] )? $crews['current'] : 'no';
-			if ( isset( $crews['crew'][ $current ] ) ) {
-				$crew = $crews['crew'][ $current ];
-				$text .= '<div class="iworks-fleet-current-crew">';
-				$text .= sprintf( '<h2>%s</h2>', esc_html__( 'Current crew', 'fleet' ) );
-				$text .= '<dl>';
-				$text .= sprintf( '<dt>%s</dt>', esc_html__( 'Helmsman', 'fleet' ) );
-				$text .= sprintf( '<dd>%s</dd>', $iworks_fleet->get_person_name( $crew['helmsman'] ) );
-				$text .= sprintf( '<dt>%s</dt>', esc_html__( 'Crew', 'fleet' ) );
-				$text .= sprintf( '<dd>%s</dd>', $iworks_fleet->get_person_name( $crew['crew'] ) );
-				$text .= '</dl>';
-				$text .= '<div>';
-				unset( $crews['crew'][ $current ] );
-			}
-			$crews = $crews['crew'];
+		if ( $this->options->get_option( 'boat_add_crew_manually' ) ) {
+			$text = '';
+			$crews = $this->get_crews_data( $post_id );
 			if ( ! empty( $crews ) ) {
-				$text .= '<div class="iworks-fleet-past-crews">';
-				$text .= sprintf( '<h2>%s</h2>', esc_html( _nx( 'Past crew', 'Past crews', count( $crews ), 'Past crews number', 'fleet' ) ) );
-				$text .= '<table>';
-				$text .= '<thead>';
-				$text .= '<tr>';
-				$text .= sprintf( '<th>%s</th>', esc_html__( 'Helmsman', 'fleet' ) );
-				$text .= sprintf( '<th>%s</th>', esc_html__( 'Crew', 'fleet' ) );
-				$text .= '</tr>';
-				$text .= '<thead>';
-				$text .= '<tbody>';
-				foreach ( $crews as $data ) {
-					$text .= '<tr>';
-					$text .= sprintf( '<td class="helmsman">%s</td>', $iworks_fleet->get_person_name( $data['helmsman'] ) );
-					$text .= sprintf( '<td class="crew">%s</td>', $iworks_fleet->get_person_name( $data['crew'] ) );
-					$text .= '</tr>';
+				global $iworks_fleet;
+				$current = isset( $crews['current'] )? $crews['current'] : 'no';
+				if ( isset( $crews['crew'][ $current ] ) ) {
+					$crew = $crews['crew'][ $current ];
+					$text .= '<div class="iworks-fleet-current-crew">';
+					$text .= sprintf( '<h2>%s</h2>', esc_html__( 'Current crew', 'fleet' ) );
+					$text .= '<dl>';
+					$text .= sprintf( '<dt>%s</dt>', esc_html__( 'Helmsman', 'fleet' ) );
+					$text .= sprintf( '<dd>%s</dd>', $iworks_fleet->get_person_name( $crew['helmsman'] ) );
+					$text .= sprintf( '<dt>%s</dt>', esc_html__( 'Crew', 'fleet' ) );
+					$text .= sprintf( '<dd>%s</dd>', $iworks_fleet->get_person_name( $crew['crew'] ) );
+					$text .= '</dl>';
+					$text .= '<div>';
+					unset( $crews['crew'][ $current ] );
 				}
-				$text .= '<tbody>';
-				$text .= '</table>';
-			}
-			if ( ! empty( $text ) ) {
-				$content = sprintf(
-					'<div class="iworks-fleet-crews-container">%s</div>%s',
-					$text,
-					$content
-				);
+				$crews = $crews['crew'];
+				if ( ! empty( $crews ) ) {
+					$text .= '<div class="iworks-fleet-past-crews">';
+					$text .= sprintf( '<h2>%s</h2>', esc_html( _nx( 'Past crew', 'Past crews', count( $crews ), 'Past crews number', 'fleet' ) ) );
+					$text .= '<table>';
+					$text .= '<thead>';
+					$text .= '<tr>';
+					$text .= sprintf( '<th>%s</th>', esc_html__( 'Helmsman', 'fleet' ) );
+					$text .= sprintf( '<th>%s</th>', esc_html__( 'Crew', 'fleet' ) );
+					$text .= '</tr>';
+					$text .= '<thead>';
+					$text .= '<tbody>';
+					foreach ( $crews as $data ) {
+						$text .= '<tr>';
+						$text .= sprintf( '<td class="helmsman">%s</td>', $iworks_fleet->get_person_name( $data['helmsman'] ) );
+						$text .= sprintf( '<td class="crew">%s</td>', $iworks_fleet->get_person_name( $data['crew'] ) );
+						$text .= '</tr>';
+					}
+					$text .= '<tbody>';
+					$text .= '</table>';
+				}
+				if ( ! empty( $text ) ) {
+					$content = sprintf(
+						'<div class="iworks-fleet-crews-container">%s</div>%s',
+						$text,
+						$content
+					);
+				}
 			}
 		}
 
@@ -692,7 +706,7 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 	}
 
 	private function boat_single_row( $key, $label, $value ) {
-		if ( empty( $value ) || '-' == $value ) {
+		if ( empty( $value ) || '-' == $value || is_wp_error( $value ) ) {
 			return '';
 		}
 		$text = '';
@@ -704,9 +718,15 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 	}
 
 	public function register_meta_boxes( $post ) {
-		add_meta_box( 'crew', __( 'Crews data', 'fleet' ), array( $this, 'crew' ), $this->post_type_name );
-		add_meta_box( 'boat', __( 'Boat data', 'fleet' ), array( $this, 'boat' ), $this->post_type_name );
-		add_meta_box( 'social', __( 'Social Media', 'fleet' ), array( $this, 'social' ), $this->post_type_name );
+		if ( $this->options->get_option( 'boat_add_crew_manually' ) ) {
+			add_meta_box( 'crew', __( 'Crews data', 'fleet' ), array( $this, 'crew' ), $this->post_type_name );
+		}
+		if ( $this->options->get_option( 'boat_add_extra_data' ) ) {
+			add_meta_box( 'boat', __( 'Boat data', 'fleet' ), array( $this, 'boat' ), $this->post_type_name );
+		}
+		if ( $this->options->get_option( 'boad_add_social_media' ) ) {
+			add_meta_box( 'social', __( 'Social Media', 'fleet' ), array( $this, 'social' ), $this->post_type_name );
+		}
 	}
 
 	public function crew( $post ) {

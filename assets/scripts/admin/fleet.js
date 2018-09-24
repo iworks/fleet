@@ -4,7 +4,7 @@
  */
 jQuery( document ).ready(function($) {
     $( function() {
-        $( ".iworks-5o5-row .datepicker" ).each( function() {
+        $( ".iworks-fleet-row .datepicker" ).each( function() {
             var format = $(this).data('date-format') || 'yy-mm-dd';
             $(this).datepicker({ dateFormat: format });
         });
@@ -12,17 +12,17 @@ jQuery( document ).ready(function($) {
 });
 
 jQuery( document ).ready(function($) {
-    var iworks_5o5_people_list = [];
+    var iworks_fleet_people_list = [];
     var data = {
-        action: 'iworks_5o5_persons_list',
-        _wpnonce: iworks_5o5.nonces.iworks_5o5_persons_list_nonce,
-        user_id: iworks_5o5.user_id
+        action: 'iworks_fleet_persons_list',
+        _wpnonce: iworks_fleet.nonces.iworks_fleet_persons_list_nonce,
+        user_id: iworks_fleet.user_id
     };
     $.post(ajaxurl, data, function(response) {
         if ( response.success ) {
-            iworks_5o5_people_list = response.data;
+            iworks_fleet_people_list = response.data;
             $('select', $('#iworks-crews-list') ).select2({
-                data: iworks_5o5_people_list
+                data: iworks_fleet_people_list
             });
         }
     });
@@ -36,7 +36,7 @@ jQuery( document ).ready(function($) {
             } ) ).ready( function() {
                 var parent = $('#iworks-crew-'+id);
                 $('select', parent).select2({
-                    data: iworks_5o5_people_list
+                    data: iworks_fleet_people_list
                 });
             });
             return false;
@@ -49,15 +49,15 @@ jQuery( document ).ready(function($) {
 
 jQuery( document ).ready(function($) {
     $( function() {
-        $('.post-type-iworks_5o5_result #race button').on( 'click', function( event  ) {
+        $('.post-type-iworks_fleet_result #race button').on( 'click', function( event  ) {
             event.preventDefault();
             var data = new FormData();
-            $.each( $('#file_5o5_races')[0].files, function(i, file) {
+            $.each( $('#file_fleet_races')[0].files, function(i, file) {
                 data.append('file', file, file.name );
             });
-            data.append( 'action', 'iworks_5o5_upload_races' );
+            data.append( 'action', 'iworks_fleet_upload_races' );
             data.append( 'id', $('#post_ID' ).val() );
-            data.append( '_wpnonce', $('#iworks_5o5_posttypes_result').val() );
+            data.append( '_wpnonce', $('#iworks_fleet_posttypes_result').val() );
             var data = {
                 url: ajaxurl,
                 method: 'POST',

@@ -42,6 +42,14 @@ There are 3 ways to install this plugin:
 
 == Changelog ==
 
+= 1.2.3 =
+* Allow to turn on/off boat hull taxonomy.
+* Allow to turn on/off boat mast taxonomy.
+* Allow to turn on/off boat sails taxonomy.
+* Allow to turn on/off boat crew.
+* Fixed problem with last regatta result by serie - it was doubled.
+* Updated iWorks Options to 2.6.6
+
 = 1.2.2 =
 * Show regatta city instead area.
 * Improved dates.

@@ -394,6 +394,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 					$rows = $tbody . $rows;
 				} else {
 					$content .= $tbody;
+					$tbody = '';
 				}
 			}
 			if ( $by_year ) {
