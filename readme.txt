@@ -44,7 +44,9 @@ There are 3 ways to install this plugin:
 
 = 1.2.4 =
 * Changed default sort order in admin for persons.
-* Added option to auto-magically add a feature image to boat, based on image tags. By default it is turn off.
+* Added option to automagically add a feature image to a boat, based on image tags. By default, it is turned off.
+* Changed slug for results archive from `fleet-results` to `results`.
+* Added filter to adjust dates of results, to use on integrations.
 
 = 1.2.3 =
 * Allow to turn on/off boat hull taxonomy.

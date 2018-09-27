@@ -138,6 +138,10 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		add_filter( 'get_next_post_where', array( $this, 'adjacent_post_where' ), 10, 5 );
 		add_filter( 'get_previous_post_join', array( $this, 'adjacent_post_join' ), 10, 5 );
 		add_filter( 'get_next_post_join', array( $this, 'adjacent_post_join' ), 10, 5 );
+		/**
+		 * adjust dates
+		 */
+		add_filter( 'iworks_fleet_result_adjust_dates', array( $this, 'adjacent_dates' ), 10, 3 );
 	}
 
 	/**
@@ -782,11 +786,10 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			'show_in_admin_bar'     => true,
 			'show_in_nav_menus'     => true,
 			'can_export'            => true,
-			'has_archive'           => _x( 'fleet-results', 'slug for archive', 'fleet' ),
+			'has_archive'           => _x( 'results', 'slug for archive', 'fleet' ),
 			'exclude_from_search'   => false,
 			'publicly_queryable'    => true,
 			'capability_type'       => 'page',
-			'menu_icon'             => plugins_url( '/assets/images/fleet_logo.svg', $this->base ),
 			'register_meta_box_cb'  => array( $this, 'register_meta_boxes' ),
 			'rewrite' => array(
 				'slug' => _x( 'result', 'slug for single result', 'fleet' ),
@@ -1411,5 +1414,8 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		}
 		return sprintf( '%s - %s', date_i18n( 'j M Y', $start ), date_i18n( 'j M y', $end ) );
 	}
-}
 
+	public function adjacent_dates( $content, $start, $end ) {
+		return $this->get_dates( $start, $end );
+	}
+}
