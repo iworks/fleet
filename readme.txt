@@ -4,7 +4,7 @@ Donate link: http://iworks.pl/donate/fleet.php
 Tags: fleet, result, boat, crew, team
 Requires at least: 3.9
 Tested up to: 4.9
-Stable tag: 1.2.2
+Stable tag: 1.2.3
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -41,6 +41,8 @@ There are 3 ways to install this plugin:
 == Screenshots ==
 
 == Changelog ==
+
+= 1.2.4 =
 
 = 1.2.3 =
 * Allow to turn on/off boat hull taxonomy.
