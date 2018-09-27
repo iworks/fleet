@@ -44,6 +44,7 @@ There are 3 ways to install this plugin:
 
 = 1.2.4 =
 * Changed default sort order in admin for persons.
+* Added option to auto-magically add a feature image to boat, based on image tags. By default it is turn off.
 
 = 1.2.3 =
 * Allow to turn on/off boat hull taxonomy.

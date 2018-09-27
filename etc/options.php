@@ -88,6 +88,15 @@ function iworks_fleet_options() {
 					'hull' => __( 'Hull manufacturer', 'fleet' ),
 				),
 			),
+			array(
+				'name'              => 'boat_auto_add_feature_image',
+				'type'              => 'checkbox',
+				'th'                => __( 'Auto add feature image', 'fleet' ),
+				'description'       => __( 'Automagicaly add feature image, if there is some taged with boat number..', 'fleet' ),
+				'default'           => 0,
+				'sanitize_callback' => 'absint',
+				'classes' => array( 'switch-button' ),
+			),
 		),
 		//      'metaboxes' => array(),
 		'pages' => array(

@@ -701,6 +701,15 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 			$content .= sprintf( '<h2>%s</h2>', esc_html__( 'Gallery', 'fleet' ) );
 			$shortcode = sprintf( '[gallery ids="%s" link="file"]', implode( ',', $ids ) );
 			$content .= do_shortcode( $shortcode );
+			/**
+			 * check feature image
+			 */
+			if ( ! has_post_thumbnail( $post_id ) ) {
+				$add = $this->options->get_option( 'boat_auto_add_feature_image' );
+				if ( $add ) {
+					set_post_thumbnail( $post_id, $ids[0] );
+				}
+			}
 		}
 		return $content;
 	}
