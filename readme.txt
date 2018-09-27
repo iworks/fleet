@@ -43,6 +43,7 @@ There are 3 ways to install this plugin:
 == Changelog ==
 
 = 1.2.4 =
+* Changed default sort order in admin for persons.
 
 = 1.2.3 =
 * Allow to turn on/off boat hull taxonomy.

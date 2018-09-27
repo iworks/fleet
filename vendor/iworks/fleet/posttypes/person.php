@@ -158,13 +158,13 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 			'exclude_from_search'   => false,
 			'publicly_queryable'    => true,
 			'capability_type'       => 'page',
-            'menu_icon'             => 'dashicons-sos',
+			'menu_icon'             => 'dashicons-sos',
 			'register_meta_box_cb'  => array( $this, 'register_meta_boxes' ),
 			'rewrite' => array(
 				'slug' => _x( 'fleet-person', 'slug for single person', 'fleet' ),
 			),
-        );
-        $args = apply_filters( 'fleet_register_person_post_type_args', $args );
+		);
+		$args = apply_filters( 'fleet_register_person_post_type_args', $args );
 		register_post_type( $this->post_type_name, $args );
 		/**
 		 * person hull club Taxonomy.
@@ -201,7 +201,7 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 			'show_in_quick_edit' => true,
 			'rewrite' => array( 'slug' => 'fleet-club' ),
 		);
-        $args = apply_filters( 'fleet_register_person_taxonomy_args', $args );
+		$args = apply_filters( 'fleet_register_person_taxonomy_args', $args );
 		register_taxonomy( $this->taxonomy_name_club, array( $this->post_type_name ), $args );
 	}
 
@@ -283,44 +283,32 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 			return $query;
 		}
 		/**
+		 * only main query
+		 */
+		if ( ! $query->is_main_query() ) {
+			return $query;
+		}
+		/**
 		 * do not change outsite th admin area
 		 */
-		if ( ! is_admin() ) {
-			if ( ! $query->is_main_query() ) {
-				return $query;
+		$post_type = get_query_var( 'post_type' );
+		if ( is_admin() ) {
+			/**
+			 * check get_current_screen()
+			 */
+			if ( function_exists( 'get_current_screen' ) ) {
+				$screen = get_current_screen();
+				if ( isset( $screen->post_type ) && $this->get_name() == $screen->post_type ) {
+					$query->set( 'order', 'ASC' );
+					$query->set( 'orderby', 'post_title' );
+				}
 			}
-			$post_type = get_query_var( 'post_type' );
+		} else {
 			if ( ! empty( $post_type ) && $post_type === $this->post_type_name ) {
 				$query->set( 'order', 'ASC' );
 				$query->set( 'orderby', 'post_title' );
 				return $query;
 			}
-			return $query;
-		}
-		/**
-		 * check get_current_screen()
-		 */
-		if ( ! function_exists( 'get_current_screen' ) ) {
-			return $query;
-		}
-		/**
-		 * check screen post type
-		 */
-		if ( ! function_exists( 'get_current_screen' ) ) {
-			return $query;
-		}
-		/**
-		 * query post type
-		 */
-		if ( isset( $query->query['post_type'] ) && $this->get_name() != $query->query['post_type'] ) {
-			return $query;
-		}
-		/**
-		 * screen post type
-		 */
-		$screen = get_current_screen();
-		if ( isset( $screen->post_type ) && $this->get_name() == $screen->post_type ) {
-			$query->set( 'orderby', 'post_title' );
 		}
 		return $query;
 	}
