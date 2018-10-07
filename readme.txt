@@ -44,6 +44,7 @@ There are 3 ways to install this plugin:
 
 = 1.2.5 =
 * Added ability to change tag link into person link.
+* Added ability to show posts list on fleet person page.
 
 = 1.2.4 =
 * Added filter to adjust dates of results, to use on integrations.
