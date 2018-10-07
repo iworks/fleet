@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Plugins - Fleet - Development (trunk)\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/fleet\n"
-"POT-Creation-Date: 2018-10-07 16:20:48+00:00\n"
-"PO-Revision-Date: 2018-09-26 15:33:35+0000\n"
+"POT-Creation-Date: 2018-10-07 17:06:47+00:00\n"
+"PO-Revision-Date: 2018-10-07 17:06:14+0000\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -46,9 +46,8 @@ msgid "Show boats table"
 msgstr "Pokaż tabelę łódek"
 
 #: etc/options.php:56
-#, fuzzy
 msgid "Tag to person"
-msgstr "osoba"
+msgstr "Tag do osoby"
 
 #: etc/options.php:57
 msgid "Replace person tag by fleet person."
@@ -60,7 +59,7 @@ msgstr "Dodaj listę wpisów"
 
 #: etc/options.php:66
 msgid "Add posts list to person with matching tag."
-msgstr "Dodaje listę wpisów do osoby, której nazwa pasuje do tegu."
+msgstr "Dodaje listę wpisów do osoby, której nazwa pasuje do tagu."
 
 #: etc/options.php:73 vendor/iworks/fleet/posttypes/boat.php:227
 #: vendor/iworks/fleet/posttypes/boat.php:229
@@ -96,14 +95,13 @@ msgid "Hull manufacturer"
 msgstr "Producent kadłuba"
 
 #: etc/options.php:112
-#, fuzzy
 msgid "Auto add feature image"
-msgstr "Ustaw obrazek wyróżniający"
+msgstr "Automatycznie ustaw obrazek wyróżniający."
 
 #: etc/options.php:113
 msgid ""
 "Automagicaly add feature image, if there is some taged with boat number."
-msgstr "Automagicznie dodaje obrazek wyróżniajacy, otagowany numerem łódki."
+msgstr "Automagicznie dodaje obrazek wyróżniający, otagowany numerem łódki."
 
 #: etc/options.php:124 vendor/iworks/fleet/posttypes/boat.php:230
 msgid "Add New Boat"
@@ -1167,10 +1165,9 @@ msgid "fleet-persons"
 msgstr "osoby"
 
 #: vendor/iworks/fleet/posttypes/result.php:789
-#, fuzzy
 msgctxt "slug for archive"
 msgid "results"
-msgstr "wynik"
+msgstr "wyniki"
 
 #: vendor/iworks/fleet/posttypes/boat.php:274
 msgctxt "slug for single boat"
@@ -1305,7 +1302,3 @@ msgstr "wynik"
 msgctxt "slug for images"
 msgid "fleet-boat-number"
 msgstr "numer-lodki"
-
-#~ msgctxt "slug for archive"
-#~ msgid "fleet-results"
-#~ msgstr "wyniki"
