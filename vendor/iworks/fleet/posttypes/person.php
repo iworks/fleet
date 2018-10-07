@@ -99,6 +99,10 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 			$key = sprintf( 'postbox_classes_%s_%s', $this->get_name(), $name );
 			add_filter( $key, array( $this, 'add_defult_class_to_postbox' ) );
 		}
+		/**
+		 * Change tag link to person
+		 */
+		add_filter( 'term_link', array( $this, 'change_tag_link_to_person_link' ), 10, 3 );
 	}
 
 	/**
@@ -462,6 +466,43 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 		 */
 		$content .= apply_filters( 'iworks_fleet_result_sailor_regata_list', '', $post_id );
 		/**
+		 * posts list
+		 *
+		 * @since 1.2.5
+		 */
+		$show = $this->options->get_option( 'person_show_articles_with_person_tag' );
+		if ( '1' === $show ) {
+			$term = get_term_by( 'name', get_the_title(), 'post_tag' );
+			if ( ! empty( $term ) ) {
+				$args = array(
+					'tag_id' => $term->term_id,
+					'posts_per_page' => get_option( 'posts_per_page' ),
+				);
+				$the_query = new WP_Query( $args );
+				if ( $the_query->have_posts() ) {
+					$content .= '<div class="fleet-person-post-list">';
+					$content .= sprintf(
+						'<h3>%s</h3>',
+						esc_html__( 'Read more about sailor', 'fleet' )
+					);
+					$content .= '<ul>';
+					while ( $the_query->have_posts() ) {
+						$the_query->the_post();
+						$content .= sprintf(
+							'<li><a href="%s">%s</a></li>',
+							get_permalink(),
+							get_the_title()
+						);
+					}
+					$content .= '</ul>';
+					$content .= '</div>';
+					/* Restore original Post Data */
+					wp_reset_postdata();
+				}
+				wp_reset_query();
+			}
+		}
+		/**
 		 * Endomondo
 		 */
 		$name = $this->options->get_option_name( 'social_endomondo' );
@@ -620,5 +661,40 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 		$done_key = 'helmsman-'.$boat_id.'-'.$post_id;
 		return $done_key;
 	}
-}
 
+	/**
+	 * Change tag link to person
+	 *
+	 * @since 1.2.5
+	 *
+	 * @param string $termlink Term link URL.
+	 * @param objec $term Term object.
+	 * @param string $taxonomy Taxonomy slug.
+	 */
+	public function change_tag_link_to_person_link( $termlink, $term, $taxonomy ) {
+		if ( 'post_tag' !== $taxonomy ) {
+			return $termlink;
+		}
+		$show = $this->options->get_option( 'person_tag_to_person' );
+		if ( '1' !== $show ) {
+			return $termlink;
+		}
+		$post_id = get_term_meta( $term->term_id, $this->post_type_name, true );
+		if ( empty( $post_id ) ) {
+			$post = get_page_by_title( $term->name, OBJECT, $this->post_type_name );
+			if ( $post ) {
+				$post_id = $post->ID;
+				add_term_meta( $term->term_id, $this->post_type_name, $post->ID, true );
+			}
+		}
+		if ( ! empty( $post_id ) ) {
+			$link = get_permalink( $post_id );
+			if ( false === $link ) {
+				delete_term_meta( $term->term_id, $this->post_type_name );
+			} else {
+				return $link;
+			}
+		}
+		return $termlink;
+	}
+}
