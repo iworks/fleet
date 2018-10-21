@@ -140,7 +140,7 @@ function iworks_fleet_options() {
 				'menu_slug' => htmlentities(
 					add_query_arg(
 						array(
-							'taxonomy' => 'iworks_dinghy_serie',
+							'taxonomy' => 'iworks_fleet_serie',
 							'post_type' => 'iworks_fleet_result',
 						),
 						'edit-tags.php'
@@ -204,7 +204,7 @@ function iworks_fleet_options() {
 				'menu_slug' => htmlentities(
 					add_query_arg(
 						array(
-							'taxonomy' => 'iworks_dinghy_location',
+							'taxonomy' => 'iworks_fleet_location',
 							'post_type' => 'iworks_fleet_person',
 						),
 						'edit-tags.php'

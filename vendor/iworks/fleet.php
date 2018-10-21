@@ -65,6 +65,10 @@ class iworks_fleet extends iworks {
 		 * @since 1.2.2
 		 */
 		add_filter( 'upload_mimes', array( $this, 'add_mime_types' ) );
+		/**
+		 * iWorks Rate integration
+		 */
+		add_action( 'iworks_rate_css', array( $this, 'iworks_rate_css' ) );
 	}
 
 	/**
@@ -356,5 +360,17 @@ class iworks_fleet extends iworks {
 				update_option( 'fleet_db_version', $install );
 			}
 		}
+	}
+
+	/**
+	 * Change logo for "rate" message.
+	 *
+	 * @since 2.6.6
+	 */
+	public function iworks_rate_css() {
+		$logo = plugin_dir_url( dirname( dirname( __FILE__ ) ) ).'assets/images/logo.svg';
+		echo '<style type="text/css">';
+		printf( '.iworks-notice-fleet .iworks-notice-logo{background-image:url(%s);}', esc_url( $logo ) );
+		echo '</style>';
 	}
 }

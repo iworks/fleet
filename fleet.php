@@ -97,3 +97,13 @@ $iworks_fleet = new iworks_fleet();
  */
 register_activation_hook( __FILE__, 'iworks_fleet_activate' );
 register_deactivation_hook( __FILE__, 'iworks_fleet_deactivate' );
+/**
+ * Ask for vote
+ */
+include_once dirname( __FILE__ ) .'/vendor/iworks/rate/rate.php';
+do_action(
+	'iworks-register-plugin',
+	plugin_basename( __FILE__ ),
+	__( 'Fleet Manager', 'fleet' ),
+	'fleet'
+);
