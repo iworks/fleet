@@ -42,6 +42,9 @@ There are 3 ways to install this plugin:
 
 == Changelog ==
 
+= 1.2.7 (2018-xx-xx) =
+* Fixed function for `the_title` filter - second argument should have default.
+
 = 1.2.6 (2018-10-22) =
 * Fixed taxonomies links in admin menu.
 

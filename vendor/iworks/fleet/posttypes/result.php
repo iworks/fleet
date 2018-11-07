@@ -485,7 +485,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		return date( 'Y', $start );
 	}
 
-	public function add_year_to_title( $title, $post_id ) {
+	public function add_year_to_title( $title, $post_id = null ) {
 		$post_type = get_post_type( $post_id );
 		if ( $post_type != $this->post_type_name ) {
 			return $title;
