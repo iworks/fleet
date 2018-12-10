@@ -142,6 +142,13 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		 * adjust dates
 		 */
 		add_filter( 'iworks_fleet_result_adjust_dates', array( $this, 'adjacent_dates' ), 10, 3 );
+
+		/**
+ * Gutenberg
+ *
+ * @since 1.3.0
+ */
+		add_action( 'init', array( $this, 'gutenberg_blocks' ) );
 	}
 
 	/**
@@ -1417,5 +1424,34 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 
 	public function adjacent_dates( $content, $start, $end ) {
 		return $this->get_dates( $start, $end );
+	}
+
+	/**
+	 * Register Gutenberg blocks
+	 *
+	 * @since 1.3.0
+	 */
+	public function gutenberg_blocks() {
+		$file = $this->get_asset_url( 'admin/gutenberg-result.js' );
+		wp_register_script(
+			__CLASS__,
+			$file,
+			array( 'wp-blocks', 'wp-element' ),
+			'PLUGIN_VERSION'
+		);
+		wp_localize_script(
+			__CLASS__,
+			'fleet_result',
+			array(
+				'result' => array(
+					'title' => __( 'Regatta result', 'fleet' ),
+				),
+			)
+		);
+
+		register_block_type( 'fleet/result', array(
+			'editor_script' => __CLASS__,
+		) );
+
 	}
 }

@@ -37,7 +37,7 @@ class iworks_fleet extends iworks {
 
 	public function __construct() {
 		parent::__construct();
-		$this->version = '1.2.3';
+		$this->version = 'PLUGIN_VERSION';
 		$this->capability = apply_filters( 'iworks_fleet_capability', 'manage_options' );
 		/**
 		 * post_types

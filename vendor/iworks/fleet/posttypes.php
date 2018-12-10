@@ -290,5 +290,20 @@ class iworks_fleet_posttypes {
 		}
 		set_transient( $key, $data, $expiration );
 	}
+
+	/**
+	 * Get asset file url
+	 *
+	 * @since 1.3.0
+	 */
+	protected function get_asset_url( $asset ) {
+		$dir = preg_match( '/css/', $asset )? 'styles':'scripts';
+		if ( ! defined( 'IWORKS_DEV_MODE' ) || ! IWORKS_DEV_MODE ) {
+			$asset = preg_replace( '/\.(js|css)$/', '.min$0', $asset );
+		}
+		$file = sprintf( 'assets/%s/%s', $dir, $asset );
+		$file = plugins_url( $file, $this->base );
+		return $file;
+	}
 }
 

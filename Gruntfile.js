@@ -37,8 +37,11 @@ module.exports = function( grunt ) {
 				'{js}admin/src/boat.js',
 				'{js}admin/src/person.js',
 				'{js}admin/src/result.js',
-				'{js}admin/src/select2.js'
-			]
+				'{js}admin/src/select2.js',
+			],
+			'{js}admin/gutenberg-result.js': [
+				'{js}admin/src/gutenberg/result.js'
+            ]
 		},
 
 		// SASS files to process. Resulting CSS files will be minified as well.
