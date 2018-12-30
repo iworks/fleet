@@ -1,4 +1,4 @@
-/*! Fleet Manager - v1.2.4
+/*! Fleet Manager - v1.2.6
  * https://iworks.pl/
  * Copyright (c) 2018; * Licensed GPLv2+
  */
