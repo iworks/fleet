@@ -1,22 +1,80 @@
 /*! Fleet Manager - v1.3.0
  * https://iworks.pl/
- * Copyright (c) 2018; * Licensed GPLv2+
+ * Copyright (c) 2019; * Licensed GPLv2+
  */
-var el = wp.element.createElement,
-    registerBlockType = wp.blocks.registerBlockType;
+( function( blocks, editor, i18n, element ) {
+	var el = element.createElement;
+	var __ = i18n.__;
+	var RichText = editor.RichText;
+	var AlignmentToolbar = editor.AlignmentToolbar;
+	var BlockControls = editor.BlockControls;
 
-registerBlockType( 'fleet/result', {
-    title: fleet_result.result.title,
+	blocks.registerBlockType( 'fleet/result', {
+		title: __( 'FLeet: Results', 'fleet' ),
+		icon: 'menu',
+		category: 'layout',
 
-    icon: 'editor-ol',
+		attributes: {
+			content: {
+				type: 'array',
+				source: 'children',
+				selector: 'p',
+			},
+			alignment: {
+				type: 'string',
+				default: 'none',
+			},
+		},
 
-    category: 'widgets',
+		edit: function( props ) {
+			var content = props.attributes.content;
+			var alignment = props.attributes.alignment;
 
-    edit: function() {
-        return el( 'p', { style: blockStyle }, 'Hello editor.' );
-    },
+			function onChangeContent( newContent ) {
+				props.setAttributes( { content: newContent } );
+			}
 
-    save: function() {
-        return el( 'p', { style: blockStyle }, 'Hello saved content.' );
-    },
-} );
+			function onChangeAlignment( newAlignment ) {
+				props.setAttributes( { alignment: newAlignment === undefined ? 'none' : newAlignment } );
+			}
+
+			return [
+				el(
+					BlockControls,
+					{ key: 'controls' },
+					el(
+						AlignmentToolbar,
+						{
+							value: alignment,
+							onChange: onChangeAlignment,
+						}
+					)
+				),
+				el(
+					RichText,
+					{
+						key: 'richtext',
+						tagName: 'p',
+						style: { textAlign: alignment },
+						className: props.className,
+						onChange: onChangeContent,
+						value: content,
+					}
+				),
+			];
+		},
+
+		save: function( props ) {
+			return el( RichText.Content, {
+				tagName: 'p',
+				className: 'fleet-align-' + props.attributes.alignment,
+				value: props.attributes.content,
+			} );
+		},
+	} );
+}(
+	window.wp.blocks,
+	window.wp.editor,
+	window.wp.i18n,
+	window.wp.element
+) );

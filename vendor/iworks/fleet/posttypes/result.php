@@ -109,7 +109,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		}
 		/**
 		 * handle results
-		 */
+         */
 		add_action( 'wp_ajax_iworks_fleet_upload_races', array( $this, 'upload' ) );
 		/**
 		 * content filters
@@ -1010,7 +1010,18 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		$sailors = $iworks_fleet->get_list_by_post_type( 'person' );
 		$wpdb->delete( $table_name_regatta, array( 'post_regata_id' => $post_id ), array( '%d' ) );
 		$wpdb->delete( $table_name_regatta_race, array( 'post_regata_id' => $post_id ), array( '%d' ) );
-		$year = date( 'Y', get_post_meta( $post_id, 'iworks_fleet_result_date_end', true ) );
+        
+        /**
+         * Result date end
+         */
+        $name = $this->options->get_option_name( 'result_date_end' );
+        $year = get_post_meta( $post_id, $name, true );
+        $year = $year? date( 'Y', $year ):'';
+        /**
+         * Result date end
+         */
+        $name = $this->options->get_option_name( 'result_number_of_races' );
+        $number_of_races = intval( get_post_meta( $post_id, $name, true ) );
 		foreach ( $data as $row ) {
 			$boat = array_shift( $row );
 			$boat_id = intval( preg_replace( '/[^\d]+/', '', $boat ) );
@@ -1041,8 +1052,13 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			foreach ( $row as $one ) {
 				$races[] = $one;
 			}
-			$number = 1;
-			foreach ( $races as $one ) {
+            $number = 1;
+            foreach ( $races as $one ) {
+                if ( 0 < $number_of_races ) {
+                    if ( $number > $number_of_races ) {
+                        continue;
+                    }
+                }
 				$race = array(
 					'post_regata_id' => $_POST['id'],
 					'regata_id' => $regatta_id,
@@ -1054,7 +1070,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 				$one = preg_replace( '/\*/', '', $one );
 				$one = trim( $one );
 				$race['code'] = preg_replace( '/[^a-z]+/i', '', $one );
-				$race['points'] = preg_replace( '/[^\d]+/', '', $one );
+				$race['points'] = preg_replace( '/[^\d^\,^\.]+/', '', $one );
 				$wpdb->insert( $table_name_regatta_race, $race );
 			}
 		}
@@ -1436,7 +1452,12 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		wp_register_script(
 			__CLASS__,
 			$file,
-			array( 'wp-blocks', 'wp-element' ),
+            array(
+                'wp-blocks',
+                'wp-element',
+                'wp-i18n',
+                'wp-components',
+            ),
 			'PLUGIN_VERSION'
 		);
 		wp_localize_script(
