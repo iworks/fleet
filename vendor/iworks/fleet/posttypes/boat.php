@@ -1,7 +1,6 @@
 <?php
 /*
-
-Copyright 2017-2018 Marcin Pietrzak (marcin@iworks.pl)
+Copyright 2017-2019 Marcin Pietrzak (marcin@iworks.pl)
 
 this program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License, version 2, as
@@ -26,14 +25,14 @@ if ( class_exists( 'iworks_fleet_posttypes_boat' ) ) {
 	return;
 }
 
-require_once( dirname( dirname( __FILE__ ) ) . '/posttypes.php' );
+require_once dirname( dirname( __FILE__ ) ) . '/posttypes.php';
 
 class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 
-	protected $post_type_name = 'iworks_fleet_boat';
+	protected $post_type_name             = 'iworks_fleet_boat';
 	protected $taxonomy_name_manufacturer = 'iworks_fleet_boat_manufacturer';
-	protected $taxonomy_name_sails = 'iworks_fleet_sails_manufacturer';
-	protected $taxonomy_name_mast = 'iworks_fleet_mast_manufacturer';
+	protected $taxonomy_name_sails        = 'iworks_fleet_sails_manufacturer';
+	protected $taxonomy_name_mast         = 'iworks_fleet_mast_manufacturer';
 	/**
 	 * Sinle crew meta field name
 	 */
@@ -58,7 +57,7 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		 * change default columns
 		 */
 		add_filter( "manage_{$this->get_name()}_posts_columns", array( $this, 'add_columns' ) );
-		add_action( 'manage_posts_custom_column' , array( $this, 'custom_columns' ), 10, 2 );
+		add_action( 'manage_posts_custom_column', array( $this, 'custom_columns' ), 10, 2 );
 		/**
 		 * apply default sort order
 		 */
@@ -91,24 +90,28 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		 * fields
 		 */
 		$this->fields = array(
-			'crew' => array(),
-			'boat' => array(
-				'build_year' => array( 'label' => __( 'Year of building', 'fleet' ) ),
-				'name' => array( 'label' => __( 'Boat name', 'fleet' ) ),
-				'color_top' => array( 'label' => __( 'Color top', 'fleet' ) ),
-				'color_side' => array( 'label' => __( 'Color side', 'fleet' ) ),
-				'color_bottom' => array( 'label' => __( 'Color bottom', 'fleet' ) ),
-				'in_poland_date' => array( 'label' => __( 'In Poland', 'fleet' ) ),
-				'location' => array( 'label' => __( 'Location', 'fleet' ) ),
-				'hull_material' => array( 'label' => __( 'Hull material', 'fleet' ) ),
-				'first_certified_date' => array( 'type' => 'date', 'label' => __( 'First Certified', 'fleet' ) ),
+			'crew'   => array(),
+			'boat'   => array(
+				'build_year'           => array( 'label' => __( 'Year of building', 'fleet' ) ),
+				'hull_number'          => array( 'label' => __( 'Hull number', 'fleet' ) ),
+				'name'                 => array( 'label' => __( 'Boat name', 'fleet' ) ),
+				'color_top'            => array( 'label' => __( 'Color top', 'fleet' ) ),
+				'color_side'           => array( 'label' => __( 'Color side', 'fleet' ) ),
+				'color_bottom'         => array( 'label' => __( 'Color bottom', 'fleet' ) ),
+				'in_poland_date'       => array( 'label' => __( 'In Poland', 'fleet' ) ),
+				'location'             => array( 'label' => __( 'Location', 'fleet' ) ),
+				'hull_material'        => array( 'label' => __( 'Hull material', 'fleet' ) ),
+				'first_certified_date' => array(
+					'type'  => 'date',
+					'label' => __( 'First Certified', 'fleet' ),
+				),
 			),
 			'social' => array(
-				'website' => array( 'label' => __( 'Web site', 'fleet' ) ),
-				'facebook' => array( 'label' => __( 'Facebook', 'fleet' ) ),
-				'twitter' => array( 'label' => __( 'Twitter', 'fleet' ) ),
+				'website'   => array( 'label' => __( 'Web site', 'fleet' ) ),
+				'facebook'  => array( 'label' => __( 'Facebook', 'fleet' ) ),
+				'twitter'   => array( 'label' => __( 'Twitter', 'fleet' ) ),
 				'instagram' => array( 'label' => __( 'Instagram', 'fleet' ) ),
-				'gplus' => array( 'label' => __( 'G+', 'fleet' ) ),
+				'gplus'     => array( 'label' => __( 'G+', 'fleet' ) ),
 			),
 		);
 		/**
@@ -125,13 +128,18 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		 * shortcodes
 		 */
 		add_shortcode( 'fleet_boats_list', array( $this, 'shortcode_list' ) );
+		add_shortcode( 'boat', array( $this, 'shortcode_boat' ) );
 	}
 
 	public function shortcode_list( $atts ) {
-		$atts = shortcode_atts( array(
-			'location' => null,
-			'show_counter' => true,
-		), $atts, 'fleet_boats_list' );
+		$atts = shortcode_atts(
+			array(
+				'location'     => null,
+				'show_counter' => true,
+			),
+			$atts,
+			'fleet_boats_list'
+		);
 		/**
 		 * params: location
 		 */
@@ -141,28 +149,28 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		 */
 		$args = array(
 			'post_type' => $this->post_type_name,
-			'nopaging' => true,
-			'orderby' => 'post_title',
+			'nopaging'  => true,
+			'orderby'   => 'post_title',
 		);
 		/**
 		 * location
 		 */
 		if ( ! empty( $location ) ) {
 			if ( preg_match( '/^[\d+, ]$/', $location ) ) {
-				$locations = array_map( 'trim', explode( ',', $location ) );
+				$locations         = array_map( 'trim', explode( ',', $location ) );
 				$args['tax_query'] = array(
 					array(
 						'taxonomy' => $this->taxonomy_name_location,
-						'terms' => $locations,
+						'terms'    => $locations,
 					),
 				);
 			} else {
-				$locations = array_map( 'trim', explode( ',', $location ) );
+				$locations         = array_map( 'trim', explode( ',', $location ) );
 				$args['tax_query'] = array(
 					array(
 						'taxonomy' => $this->taxonomy_name_location,
-						'field' => 'name',
-						'terms' => $locations,
+						'field'    => 'name',
+						'terms'    => $locations,
 					),
 				);
 			}
@@ -170,7 +178,7 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		/**
 		 * start
 		 */
-		$format = get_option( 'date_format' );
+		$format  = get_option( 'date_format' );
 		$content = '';
 		/**
 		 * WP_Query
@@ -219,7 +227,7 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		$taxonomies = $this->options->get_option( 'boat_taxonomies' );
 
 		$show_in_menu = add_query_arg( 'post_type', $iworks_fleet->get_post_type_name( 'person' ), 'edit.php' );
-		$labels = array(
+		$labels       = array(
 			'name'                  => _x( 'Boats', 'Boat General Name', 'fleet' ),
 			'singular_name'         => _x( 'Boat', 'Boat Singular Name', 'fleet' ),
 			'menu_name'             => __( '5O5', 'fleet' ),
@@ -247,30 +255,30 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 			'items_list_navigation' => __( 'Items list navigation', 'fleet' ),
 			'filter_items_list'     => __( 'Filter items list', 'fleet' ),
 		);
-		$args = array(
-			'label'                 => __( 'Boat', 'fleet' ),
-			'labels'                => $labels,
-			'supports'              => array( 'title', 'editor', 'thumbnail', 'revision' ),
-			'taxonomies'            => array(
+		$args         = array(
+			'label'                => __( 'Boat', 'fleet' ),
+			'labels'               => $labels,
+			'supports'             => array( 'title', 'editor', 'thumbnail', 'revision' ),
+			'taxonomies'           => array(
 				$this->taxonomy_name_manufacturer,
 				$this->taxonomy_name_sails,
 				$this->taxonomy_name_mast,
 				$this->taxonomy_name_location,
 			),
-			'hierarchical'          => false,
-			'public'                => true,
-			'show_ui'               => true,
-			'show_in_menu'          => $show_in_menu,
-			'show_in_admin_bar'     => true,
-			'show_in_nav_menus'     => true,
-			'can_export'            => true,
-			'has_archive'           => _x( 'fleet-boats', 'slug for archive', 'fleet' ),
-			'exclude_from_search'   => false,
-			'publicly_queryable'    => true,
-			'capability_type'       => 'page',
-			'menu_icon'             => plugins_url( '/assets/images/fleet_logo.svg', $this->base ),
-			'register_meta_box_cb'  => array( $this, 'register_meta_boxes' ),
-			'rewrite' => array(
+			'hierarchical'         => false,
+			'public'               => true,
+			'show_ui'              => true,
+			'show_in_menu'         => $show_in_menu,
+			'show_in_admin_bar'    => true,
+			'show_in_nav_menus'    => true,
+			'can_export'           => true,
+			'has_archive'          => _x( 'fleet-boats', 'slug for archive', 'fleet' ),
+			'exclude_from_search'  => false,
+			'publicly_queryable'   => true,
+			'capability_type'      => 'page',
+			'menu_icon'            => plugins_url( '/assets/images/fleet_logo.svg', $this->base ),
+			'register_meta_box_cb' => array( $this, 'register_meta_boxes' ),
+			'rewrite'              => array(
 				'slug' => _x( 'fleet-boat', 'slug for single boat', 'fleet' ),
 			),
 		);
@@ -299,16 +307,16 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 				'items_list'                 => __( 'Hull Manufacturers list', 'fleet' ),
 				'items_list_navigation'      => __( 'Hull Manufacturers list navigation', 'fleet' ),
 			);
-			$args = array(
-				'labels'                     => $labels,
-				'hierarchical'               => false,
-				'public'                     => true,
-				'show_admin_column'          => true,
-				'show_in_nav_menus'          => true,
-				'show_tagcloud'              => true,
-				'show_ui'                    => true,
+			$args   = array(
+				'labels'             => $labels,
+				'hierarchical'       => false,
+				'public'             => true,
+				'show_admin_column'  => true,
+				'show_in_nav_menus'  => true,
+				'show_tagcloud'      => true,
+				'show_ui'            => true,
 				'show_in_quick_edit' => true,
-				'rewrite' => array(
+				'rewrite'            => array(
 					'slug' => 'fleet-manufacturer',
 				),
 			);
@@ -338,16 +346,16 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 				'items_list'                 => __( 'Sails Manufacturers list', 'fleet' ),
 				'items_list_navigation'      => __( 'Sails Manufacturers list navigation', 'fleet' ),
 			);
-			$args = array(
-				'labels'                     => $labels,
-				'hierarchical'               => false,
-				'public'                     => true,
-				'show_admin_column'          => true,
-				'show_in_nav_menus'          => true,
-				'show_tagcloud'              => true,
-				'show_ui'                    => true,
+			$args   = array(
+				'labels'             => $labels,
+				'hierarchical'       => false,
+				'public'             => true,
+				'show_admin_column'  => true,
+				'show_in_nav_menus'  => true,
+				'show_tagcloud'      => true,
+				'show_ui'            => true,
 				'show_in_quick_edit' => true,
-				'rewrite' => array(
+				'rewrite'            => array(
 					'slug' => 'fleet-sails-manufacturer',
 				),
 			);
@@ -377,16 +385,16 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 				'items_list'                 => __( 'Masts Manufacturers list', 'fleet' ),
 				'items_list_navigation'      => __( 'Masts Manufacturers list navigation', 'fleet' ),
 			);
-			$args = array(
-				'labels'                     => $labels,
-				'hierarchical'               => false,
-				'public'                     => true,
-				'show_admin_column'          => true,
-				'show_in_nav_menus'          => true,
-				'show_tagcloud'              => true,
-				'show_ui'                    => true,
-				'show_in_quick_edit'         => true,
-				'rewrite' => array(
+			$args   = array(
+				'labels'             => $labels,
+				'hierarchical'       => false,
+				'public'             => true,
+				'show_admin_column'  => true,
+				'show_in_nav_menus'  => true,
+				'show_tagcloud'      => true,
+				'show_ui'            => true,
+				'show_in_quick_edit' => true,
+				'rewrite'            => array(
 					'slug' => 'fleet-masts-manufacturer',
 				),
 			);
@@ -404,7 +412,7 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		 */
 		if (
 			$this->options->get_option( 'boat_add_crew_manually' )
-		    && isset( $_POST[ $this->single_crew_field_name ] )
+			&& isset( $_POST[ $this->single_crew_field_name ] )
 		) {
 			$value = $_POST[ $this->single_crew_field_name ];
 			if ( ! isset( $value['crew'] ) ) {
@@ -511,26 +519,26 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		if ( $post_type != $this->post_type_name ) {
 			return $content;
 		}
-		$post_id = get_the_ID();
-		$text = '';
-		$options = array(
-			'boat_build_year' => __( 'Year of building', 'fleet' ),
-			'manufacturer' => __( 'Hull manufacturer', 'fleet' ),
+		$post_id    = get_the_ID();
+		$text       = '';
+		$options    = array(
+			'boat_build_year'           => __( 'Year of building', 'fleet' ),
+			'manufacturer'              => __( 'Hull manufacturer', 'fleet' ),
 			'boat_first_certified_date' => __( 'First certified date', 'fleet' ),
-			'boat_hull_material' => __( 'Hull material', 'fleet' ),
-			'boat_in_poland_date' => __( 'In Poland', 'fleet' ),
-			'boat_name' => __( 'Name', 'fleet' ),
-			'colors' => __( 'Colors (top/side/bottom)', 'fleet' ),
-			'sails' => __( 'Sails manufacturer', 'fleet' ),
-			'mast' => __( 'Mast manufacturer', 'fleet' ),
-			'boat_location' => __( 'Location', 'fleet' ),
-			'social_website' => __( 'Web site', 'fleet' ),
-			'social' => __( 'Social Media', 'fleet' ),
+			'boat_hull_material'        => __( 'Hull material', 'fleet' ),
+			'boat_in_poland_date'       => __( 'In Poland', 'fleet' ),
+			'boat_name'                 => __( 'Name', 'fleet' ),
+			'colors'                    => __( 'Colors (top/side/bottom)', 'fleet' ),
+			'sails'                     => __( 'Sails manufacturer', 'fleet' ),
+			'mast'                      => __( 'Mast manufacturer', 'fleet' ),
+			'boat_location'             => __( 'Location', 'fleet' ),
+			'social_website'            => __( 'Web site', 'fleet' ),
+			'social'                    => __( 'Social Media', 'fleet' ),
 		);
-		$separator = _x( ', ', 'Custom taxonomies separator.', 'fleet' );
+		$separator  = _x( ', ', 'Custom taxonomies separator.', 'fleet' );
 		$dateformat = get_option( 'date_format' );
 		foreach ( $options as $key => $label ) {
-			$name = $this->options->get_option_name( $key );
+			$name  = $this->options->get_option_name( $key );
 			$value = get_post_meta( $post_id, $name, true );
 			if ( empty( $value ) ) {
 				switch ( $key ) {
@@ -538,17 +546,17 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 					 * handle colors
 					 */
 					case 'colors':
-						$colors = array();
+						$colors      = array();
 						$colors_keys = array( 'top', 'side', 'bottom' );
 						foreach ( $colors_keys as $ckey ) {
-							$cname = $this->options->get_option_name( 'boat_color_'.$ckey );
+							$cname    = $this->options->get_option_name( 'boat_color_' . $ckey );
 							$colors[] = get_post_meta( $post_id, $cname, true );
 						}
 						$colors = array_filter( $colors );
 						if ( ! empty( $colors ) ) {
 							$value = implode( '/', $colors );
 						}
-					break;
+						break;
 					case 'manufacturer':
 						$value = get_the_term_list(
 							$post_id,
@@ -557,7 +565,7 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 							$separator,
 							'</span>'
 						);
-					break;
+						break;
 					case 'sails':
 						$value = get_the_term_list(
 							$post_id,
@@ -566,7 +574,7 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 							$separator,
 							'</span>'
 						);
-					break;
+						break;
 					case 'mast':
 						$value = get_the_term_list(
 							$post_id,
@@ -575,13 +583,13 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 							$separator,
 							'</span>'
 						);
-					break;
+						break;
 					case 'social':
 						foreach ( $this->fields['social'] as $social_key => $social ) {
 							if ( 'website' == $social_key ) {
 								continue;
 							}
-							$name = $this->options->get_option_name( 'social_'.$social_key );
+							$name         = $this->options->get_option_name( 'social_' . $social_key );
 							$social_value = get_post_meta( $post_id, $name, true );
 							if ( empty( $social_value ) ) {
 								continue;
@@ -592,7 +600,7 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 								$social_key
 							);
 						}
-					break;
+						break;
 				}
 				if ( empty( $value ) ) {
 					$value = _x( 'unknown', 'value of boat', 'fleet' );
@@ -625,13 +633,13 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		 * crews data
 		 */
 		if ( $this->options->get_option( 'boat_add_crew_manually' ) ) {
-			$text = '';
+			$text  = '';
 			$crews = $this->get_crews_data( $post_id );
 			if ( ! empty( $crews ) ) {
 				global $iworks_fleet;
-				$current = isset( $crews['current'] )? $crews['current'] : 'no';
+				$current = isset( $crews['current'] ) ? $crews['current'] : 'no';
 				if ( isset( $crews['crew'][ $current ] ) ) {
-					$crew = $crews['crew'][ $current ];
+					$crew  = $crews['crew'][ $current ];
 					$text .= '<div class="iworks-fleet-current-crew">';
 					$text .= sprintf( '<h2>%s</h2>', esc_html__( 'Current crew', 'fleet' ) );
 					$text .= '<dl>';
@@ -696,11 +704,11 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 			return $content;
 		}
 		$post_id = get_the_ID();
-		$ids = $this->get_media( $post_id );
+		$ids     = $this->get_media( $post_id );
 		if ( ! empty( $ids ) ) {
-			$content .= sprintf( '<h2>%s</h2>', esc_html__( 'Gallery', 'fleet' ) );
+			$content  .= sprintf( '<h2>%s</h2>', esc_html__( 'Gallery', 'fleet' ) );
 			$shortcode = sprintf( '[gallery ids="%s" link="file"]', implode( ',', $ids ) );
-			$content .= do_shortcode( $shortcode );
+			$content  .= do_shortcode( $shortcode );
 			/**
 			 * check feature image
 			 */
@@ -718,7 +726,7 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		if ( empty( $value ) || '-' == $value || is_wp_error( $value ) ) {
 			return '';
 		}
-		$text = '';
+		$text  = '';
 		$text .= sprintf( '<tr class="boat-%s">', esc_attr( $key ) );
 		$text .= sprintf( '<td>%s</td>', esc_html( $label ) );
 		$text .= sprintf( '<td>%s</td>', $value );
@@ -740,33 +748,33 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 
 	public function crew( $post ) {
 		add_action( 'admin_footer', array( $this, 'print_js_templates' ) );
-?>
-    <table class="iworks-crews-list-container">
-        <thead>
-            <tr>
-                <th><?php esc_html_e( 'Current', 'fleet' ); ?></th>
-                <th><?php esc_html_e( 'Helmsman', 'fleet' ); ?></th>
-                <th><?php esc_html_e( 'Crew', 'fleet' ); ?></th>
-                <th><?php esc_html_e( 'Action', 'fleet' ); ?></th>
-            </tr>
-        </thead>
-        <tbody id="iworks-crews-list">
-<?php
-		$crews = $this->get_crews_data( $post->ID );
-		$current = isset( $crews['current'] )? $crews['current']:'no';
-if ( isset( $crews['crew'] ) ) {
-	$persons = array();
-	foreach ( $crews['crew'] as $key => $data ) {
-		foreach ( array( 'helmsman', 'crew' ) as $role ) {
-			if ( ! isset( $data[ $role ] ) || empty( $data[ $role ] ) ) {
-				continue;
-			}
-			if ( isset( $persons[ $data[ $role ] ] ) ) {
-				continue;
-			}
-			$persons[ $data[ $role ] ] = get_the_title( $data[ $role ] );
-		}
-?>
+		?>
+	<table class="iworks-crews-list-container">
+		<thead>
+			<tr>
+				<th><?php esc_html_e( 'Current', 'fleet' ); ?></th>
+				<th><?php esc_html_e( 'Helmsman', 'fleet' ); ?></th>
+				<th><?php esc_html_e( 'Crew', 'fleet' ); ?></th>
+				<th><?php esc_html_e( 'Action', 'fleet' ); ?></th>
+			</tr>
+		</thead>
+		<tbody id="iworks-crews-list">
+		<?php
+		$crews   = $this->get_crews_data( $post->ID );
+		$current = isset( $crews['current'] ) ? $crews['current'] : 'no';
+		if ( isset( $crews['crew'] ) ) {
+			$persons = array();
+			foreach ( $crews['crew'] as $key => $data ) {
+				foreach ( array( 'helmsman', 'crew' ) as $role ) {
+					if ( ! isset( $data[ $role ] ) || empty( $data[ $role ] ) ) {
+						continue;
+					}
+					if ( isset( $persons[ $data[ $role ] ] ) ) {
+						continue;
+					}
+					$persons[ $data[ $role ] ] = get_the_title( $data[ $role ] );
+				}
+				?>
 <tr class="iworks-crew-single-row" id="iworks-crew-<?php echo esc_attr( $key ); ?>">
 <td class="iworks-crew-current">
 <input type="radio" name="<?php echo $this->single_crew_field_name; ?>[current]" value="<?php echo esc_attr( $key ); ?>" <?php checked( $current, $key ); ?> />
@@ -774,78 +782,78 @@ if ( isset( $crews['crew'] ) ) {
 <td class="iworks-crew-helmsman">
 <select name="<?php echo $this->single_crew_field_name; ?>[crew][<?php echo esc_attr( $key ); ?>][helmsman]">
 	<option value=""><?php esc_html_e( 'Select or remove a helmsman', 'fleet' ); ?></option>
-<?php
-if ( isset( $data['helmsman'] ) && ! empty( $data['helmsman'] ) && isset( $persons[ $data['helmsman'] ] ) ) {
-	printf(
-		'<option value="%d" selected>%s</option>',
-		esc_attr( $data['helmsman'] ),
-		esc_html( $persons[ $data['helmsman'] ] )
-	);
-}
-?>
+				<?php
+				if ( isset( $data['helmsman'] ) && ! empty( $data['helmsman'] ) && isset( $persons[ $data['helmsman'] ] ) ) {
+					printf(
+						'<option value="%d" selected>%s</option>',
+						esc_attr( $data['helmsman'] ),
+						esc_html( $persons[ $data['helmsman'] ] )
+					);
+				}
+				?>
 </select>
 </td>
 <td class="iworks-crew-crew">
 <select name="<?php echo $this->single_crew_field_name; ?>[crew][<?php echo esc_attr( $key ); ?>][crew]">
 	<option value=""><?php esc_html_e( 'Select or remove a  crew', 'fleet' ); ?></option>
-<?php
-if ( isset( $data['crew'] ) && ! empty( $data['crew'] ) && isset( $persons[ $data['crew'] ] ) ) {
-	printf(
-		'<option value="%d" selected>%s</option>',
-		esc_attr( $data['crew'] ),
-		esc_html( $persons[ $data['crew'] ] )
-	);
-}
-?>
+				<?php
+				if ( isset( $data['crew'] ) && ! empty( $data['crew'] ) && isset( $persons[ $data['crew'] ] ) ) {
+					printf(
+						'<option value="%d" selected>%s</option>',
+						esc_attr( $data['crew'] ),
+						esc_html( $persons[ $data['crew'] ] )
+					);
+				}
+				?>
 </select>
 </td>
 <td>
 <a href="#" class="iworks-crew-single-delete" data-id="<?php echo esc_attr( $key ); ?>"><?php esc_html_e( 'Delete', 'fleet' ); ?></a>
 </td>
 </tr>
-<?php
-	}
-}
-?>
-        </tbody>
-        <tfoot>
-            <tr>
-                <td colspan="4">
-                    <label>
-                    <input type="radio" name="<?php echo $this->single_crew_field_name; ?>[current]" value="no" <?php checked( 'no', $current ) ?> />
-                        <?php esc_html_e( 'There is no current team', 'fleet' ); ?>
-                    </label>
-                </td>
-            </tr>
-        </tfoot>
-    </table>
-    <button class="iworks-add-crew"><?php esc_html_e( 'Add a crew', 'fleet' ); ?></button>
-<?php
+				<?php
+			}
+		}
+		?>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan="4">
+					<label>
+					<input type="radio" name="<?php echo $this->single_crew_field_name; ?>[current]" value="no" <?php checked( 'no', $current ); ?> />
+						<?php esc_html_e( 'There is no current team', 'fleet' ); ?>
+					</label>
+				</td>
+			</tr>
+		</tfoot>
+	</table>
+	<button class="iworks-add-crew"><?php esc_html_e( 'Add a crew', 'fleet' ); ?></button>
+		<?php
 	}
 
 	public function print_js_templates() {
-?>
+		?>
 <script type="text/html" id="tmpl-iworks-boat-crew">
 <tr class="iworks-crew-single-row" id="iworks-crew-{{{data.id}}}">
-    <td class="iworks-crew-current">
+	<td class="iworks-crew-current">
 <input type="radio" name="<?php echo $this->single_crew_field_name; ?>[current]" value="{{{data.id}}}" />
-    </td>
-    <td class="iworks-crew-helmsman">
-        <select name="<?php echo $this->single_crew_field_name; ?>[crew][{{{data.id}}}][helmsman]">
-            <option value=""><?php esc_html_e( 'Select a helmsman', 'fleet' ); ?></option>
-        </select>
-    </td>
-    <td class="iworks-crew-crew">
-        <select name="<?php echo $this->single_crew_field_name; ?>[crew][{{{data.id}}}][crew]">
-            <option value=""><?php esc_html_e( 'Select a crew', 'fleet' ); ?></option>
-        </select>
-    </td>
-    <td>
-        <a href="#" class="iworks-crew-single-delete" data-id="{{{data.id}}}"><?php esc_html_e( 'Delete', 'fleet' ); ?></a>
-    </td>
+	</td>
+	<td class="iworks-crew-helmsman">
+		<select name="<?php echo $this->single_crew_field_name; ?>[crew][{{{data.id}}}][helmsman]">
+			<option value=""><?php esc_html_e( 'Select a helmsman', 'fleet' ); ?></option>
+		</select>
+	</td>
+	<td class="iworks-crew-crew">
+		<select name="<?php echo $this->single_crew_field_name; ?>[crew][{{{data.id}}}][crew]">
+			<option value=""><?php esc_html_e( 'Select a crew', 'fleet' ); ?></option>
+		</select>
+	</td>
+	<td>
+		<a href="#" class="iworks-crew-single-delete" data-id="{{{data.id}}}"><?php esc_html_e( 'Delete', 'fleet' ); ?></a>
+	</td>
 </tr>
 </script>
-<?php
+		<?php
 	}
 
 
@@ -862,14 +870,13 @@ if ( isset( $data['crew'] ) && ! empty( $data['crew'] ) && isset( $persons[ $dat
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param string $column Column name,
+	 * @param string  $column Column name,
 	 * @param integer $post_id Current post id (Boat),
-	 *
 	 */
 	public function custom_columns( $column, $post_id ) {
 		switch ( $column ) {
 			case 'builder':
-				$id = get_post_meta( $post_id, $this->get_custom_field_basic_manufacturer_name() , true );
+				$id = get_post_meta( $post_id, $this->get_custom_field_basic_manufacturer_name(), true );
 				if ( empty( $id ) ) {
 					echo '-';
 				} else {
@@ -877,23 +884,23 @@ if ( isset( $data['crew'] ) && ! empty( $data['crew'] ) && isset( $persons[ $dat
 						'<a href="%s">%s</a>',
 						add_query_arg(
 							array(
-							'builder' => $id,
-							'post_type' => 'iworks_fleet_boat',
+								'builder'   => $id,
+								'post_type' => 'iworks_fleet_boat',
 							),
 							admin_url( 'edit.php' )
 						),
 						get_post_meta( $id, 'iworks_fleet_manufacturer_data_full_name', true )
 					);
 				}
-			break;
+				break;
 			case 'build_year':
 				$name = $this->options->get_option_name( 'boat_build_year' );
 				echo get_post_meta( $post_id, $name, true );
-			break;
+				break;
 			case 'location':
 				$name = $this->options->get_option_name( 'boat_location' );
 				echo get_post_meta( $post_id, $name, true );
-			break;
+				break;
 		}
 	}
 
@@ -908,8 +915,8 @@ if ( isset( $data['crew'] ) && ! empty( $data['crew'] ) && isset( $persons[ $dat
 	public function add_columns( $columns ) {
 		unset( $columns['date'] );
 		$columns['build_year'] = __( 'Year of building', 'fleet' );
-		$columns['location'] = __( 'Location', 'fleet' );
-		$columns['title'] = __( 'Boat Number', 'fleet' );
+		$columns['location']   = __( 'Location', 'fleet' );
+		$columns['title']      = __( 'Boat Number', 'fleet' );
 		return $columns;
 	}
 
@@ -990,7 +997,7 @@ if ( isset( $data['crew'] ) && ! empty( $data['crew'] ) && isset( $persons[ $dat
 			return $content;
 		}
 		$terms = wp_get_post_terms( $post_id, $this->taxonomy_name_manufacturer );
-		$t = array();
+		$t     = array();
 		foreach ( $terms as $term ) {
 			$t[] = $term->name;
 		}
@@ -1014,14 +1021,14 @@ if ( isset( $data['crew'] ) && ! empty( $data['crew'] ) && isset( $persons[ $dat
 	}
 
 	private function get_media( $post_id ) {
-		$media = get_attached_media( 'image', $post_id );
-		$ids = array_keys( $media );
-		$args = array(
-			'nopaging' => true,
-			'fields' => 'ids',
-			'post_type' => 'attachment',
+		$media     = get_attached_media( 'image', $post_id );
+		$ids       = array_keys( $media );
+		$args      = array(
+			'nopaging'    => true,
+			'fields'      => 'ids',
+			'post_type'   => 'attachment',
 			'post_status' => 'inherit',
-			'tax_query' => array(
+			'tax_query'   => array(
 				array(
 					'taxonomy' => 'boat_number',
 					'field'    => 'name',
@@ -1044,7 +1051,7 @@ if ( isset( $data['crew'] ) && ! empty( $data['crew'] ) && isset( $persons[ $dat
 	public function add_crew_to_boat( $post_id ) {
 		global $iworks_fleet;
 		$content = '';
-		$crews = $this->get_crews_data( $post_id );
+		$crews   = $this->get_crews_data( $post_id );
 		if ( ! isset( $crews['current'] ) || ! isset( $crews['crew'] ) || empty( $crews['crew'] ) ) {
 			return;
 		}
@@ -1070,7 +1077,7 @@ if ( isset( $data['crew'] ) && ! empty( $data['crew'] ) && isset( $persons[ $dat
 	}
 
 	private function get_location_array( $location, $term_id ) {
-		$term = get_term( $term_id, $this->taxonomy_name_location );
+		$term       = get_term( $term_id, $this->taxonomy_name_location );
 		$location[] = $term->name;
 		if ( 0 != $term->parent ) {
 			return $this->get_location_array( $location, $term->parent );
@@ -1079,7 +1086,7 @@ if ( isset( $data['crew'] ) && ! empty( $data['crew'] ) && isset( $persons[ $dat
 	}
 
 	public function save_google_map_data( $term_id, $tt_id ) {
-		$location = $this->get_location_array( array(), $term_id );
+		$location   = $this->get_location_array( array(), $term_id );
 		$meta_value = $this->google_get_one( implode( ', ', $location ) );
 		delete_term_meta( $term_id, 'google' );
 		add_term_meta( $term_id, 'google', $meta_value, true );
@@ -1090,12 +1097,12 @@ if ( isset( $data['crew'] ) && ! empty( $data['crew'] ) && isset( $persons[ $dat
 		if ( ! $encoded ) {
 			$url = urlencode( $url );
 		}
-		$args = array(
+		$args                 = array(
 			'address' => $url,
-			'sensor' => 'false',
+			'sensor'  => 'false',
 		);
 		$google_maps_data_url = add_query_arg( $args, 'http://maps.google.com/maps/api/geocode/json' );
-		$response = wp_remote_get( $google_maps_data_url );
+		$response             = wp_remote_get( $google_maps_data_url );
 		if ( is_array( $response ) ) {
 			$data = json_decode( $response['body'] );
 			if ( 'OK' == $data->status && count( $data->results ) ) {
@@ -1104,6 +1111,63 @@ if ( isset( $data['crew'] ) && ! empty( $data['crew'] ) && isset( $persons[ $dat
 			}
 		}
 		return $data;
+	}
+
+	/**
+	 * Shortcode "BOAT" to show single boat.
+	 *
+	 * @sonce 1.2.7
+	 */
+	public function shortcode_boat( $atts, $content = '' ) {
+		$atts = shortcode_atts(
+			array(
+				'show_gallery' => false,
+				'getby'        => 'number',
+				'id'           => 0,
+				'type'         => 'link',
+			),
+			$atts,
+			'fleet_boat'
+		);
+		/**
+		 * params: id
+		 */
+		if ( empty( $atts['id'] ) ) {
+			return $content;
+		}
+		$atts['type'] = explode( ',', $atts['type'] );
+		/**
+		 * WP Query base args
+		 */
+		$args      = array(
+			'post_type'      => $this->post_type_name,
+			'meta_key'       => $this->options->get_option_name( 'boat_hull_number' ),
+			'meta_value'     => $atts['id'],
+			'posts_per_page' => 1,
+		);
+		$the_query = new WP_Query( $args );
+		if ( $the_query->have_posts() ) {
+			while ( $the_query->have_posts() ) {
+				$the_query->the_post();
+				foreach ( $atts['type'] as $type ) {
+					switch ( $type ) {
+						case 'gallery':
+							$content = $this->add_media( '' );
+							break;
+						case 'link':
+							$content = sprintf(
+								'<a href="%s" title="%s">%s</a>',
+								get_permalink(),
+								esc_attr( get_the_title() ),
+								$content
+							);
+					}
+				}
+			}
+			/* Restore original Post Data */
+			wp_reset_postdata();
+		}
+		return $content;
 	}
 }
 

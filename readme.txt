@@ -44,6 +44,7 @@ There are 3 ways to install this plugin:
 
 = 1.2.7 (2018-xx-xx) =
 * Fixed function for `the_title` filter - second argument should have default.
+* Added shortcode "boat" to allow show boat link, data or gallery.
 
 = 1.2.6 (2018-10-22) =
 * Fixed taxonomies links in admin menu.

@@ -1,6 +1,5 @@
 <?php
 /*
-
 Copyright 2017-2018 Marcin Pietrzak (marcin@iworks.pl)
 
 this program is free software; you can redistribute it and/or modify
@@ -26,7 +25,7 @@ if ( class_exists( 'iworks_fleet' ) ) {
 	return;
 }
 
-require_once( dirname( dirname( __FILE__ ) ) . '/iworks.php' );
+require_once dirname( dirname( __FILE__ ) ) . '/iworks.php';
 
 class iworks_fleet extends iworks {
 
@@ -37,16 +36,18 @@ class iworks_fleet extends iworks {
 
 	public function __construct() {
 		parent::__construct();
-		$this->version = '1.2.3';
+		$this->base       = dirname( dirname( __FILE__ ) );
+		$this->dir        = basename( dirname( $this->base ) );
+		$this->version    = 'PLUGIN_VERSION';
 		$this->capability = apply_filters( 'iworks_fleet_capability', 'manage_options' );
 		/**
 		 * post_types
 		 */
 		$post_types = array( 'boat', 'person', 'result' );
 		foreach ( $post_types as $post_type ) {
-			include_once( $this->base.'/iworks/fleet/posttypes/'.$post_type.'.php' );
-			$class = sprintf( 'iworks_fleet_posttypes_%s', $post_type );
-			$value = sprintf( 'post_type_%s', $post_type );
+			include_once $this->base . '/iworks/fleet/posttypes/' . $post_type . '.php';
+			$class        = sprintf( 'iworks_fleet_posttypes_%s', $post_type );
+			$value        = sprintf( 'post_type_%s', $post_type );
 			$this->$value = new $class();
 		}
 		/**
@@ -87,7 +88,7 @@ class iworks_fleet extends iworks {
 	 * #since 1.0.0
 	 */
 	public function stats() {
-		$content = '<div class="fleet-statistsics">';
+		$content  = '<div class="fleet-statistsics">';
 		$content .= sprintf( '<h2>%s</h2>', esc_html__( 'Statistics', 'fleet' ) );
 		$content .= '<dl>';
 		$content .= sprintf( '<dt>%s</dt>', esc_html__( 'Number of sailors', 'fleet' ) );
@@ -139,9 +140,9 @@ class iworks_fleet extends iworks {
 		/**
 		 * Admin styles
 		 */
-		$file = sprintf( '/assets/styles/fleet-admin%s.css', $this->dev );
+		$file    = sprintf( '/assets/styles/fleet-admin%s.css', $this->dev );
 		$version = $this->get_version( $file );
-		$file = plugins_url( $file, $this->base );
+		$file    = plugins_url( $file, $this->base );
 		wp_register_style( 'admin-fleet', $file, array( 'jquery-ui-datepicker', 'select2' ), $version );
 		wp_enqueue_style( 'admin-fleet' );
 		/**
@@ -156,12 +157,12 @@ class iworks_fleet extends iworks {
 		);
 		if ( '' == $this->dev ) {
 			$files = array(
-				'fleet-admin-select2' => 'assets/scripts/admin/src/select2.js',
-				'fleet-admin-boat' => 'assets/scripts/admin/src/boat.js',
+				'fleet-admin-select2'    => 'assets/scripts/admin/src/select2.js',
+				'fleet-admin-boat'       => 'assets/scripts/admin/src/boat.js',
 				'fleet-admin-datepicker' => 'assets/scripts/admin/src/datepicker.js',
-				'fleet-admin-person' => 'assets/scripts/admin/src/person.js',
-				'fleet-admin-result' => 'assets/scripts/admin/src/result.js',
-				'fleet-admin' => 'assets/scripts/admin/src/fleet.js',
+				'fleet-admin-person'     => 'assets/scripts/admin/src/person.js',
+				'fleet-admin-result'     => 'assets/scripts/admin/src/result.js',
+				'fleet-admin'            => 'assets/scripts/admin/src/fleet.js',
 			);
 		}
 		$deps = array(
@@ -185,8 +186,8 @@ class iworks_fleet extends iworks {
 		 */
 		$data = array(
 			'messages' => array(),
-			'nonces' => array(),
-			'user_id' => get_current_user_id(),
+			'nonces'   => array(),
+			'user_id'  => get_current_user_id(),
 		);
 		wp_localize_script(
 			'fleet-admin',
@@ -198,7 +199,7 @@ class iworks_fleet extends iworks {
 	public function init() {
 		if ( is_admin() ) {
 		} else {
-			$file = 'assets/styles/fleet'.$this->dev.'.css';
+			$file = 'assets/styles/fleet' . $this->dev . '.css';
 			wp_enqueue_style( 'fleet', plugins_url( $file, $this->base ), array(), $this->get_version( $file ) );
 		}
 	}
@@ -207,9 +208,9 @@ class iworks_fleet extends iworks {
 	 * Plugin row data
 	 */
 	public function plugin_row_meta( $links, $file ) {
-		if ( $this->dir.'/fleet.php' == $file ) {
+		if ( $this->dir . '/fleet.php' == $file ) {
 			if ( ! is_multisite() && current_user_can( $this->capability ) ) {
-				$links[] = '<a href="themes.php?page='.$this->dir.'/admin/index.php">' . __( 'Settings' ) . '</a>';
+				$links[] = '<a href="themes.php?page=' . $this->dir . '/admin/index.php">' . __( 'Settings' ) . '</a>';
 			}
 
 			$links[] = '<a href="http://iworks.pl/donate/fleet.php">' . __( 'Donate' ) . '</a>';
@@ -239,16 +240,16 @@ class iworks_fleet extends iworks {
 			'items_list'                 => __( 'Boat Numbers list', 'fleet' ),
 			'items_list_navigation'      => __( 'Boat Numbers list navigation', 'fleet' ),
 		);
-		$args = array(
-			'labels'                     => $labels,
-			'hierarchical'               => false,
-			'public'                     => true,
-			'show_admin_column'          => true,
-			'show_in_nav_menus'          => true,
-			'show_tagcloud'              => true,
-			'show_ui'                    => true,
+		$args   = array(
+			'labels'             => $labels,
+			'hierarchical'       => false,
+			'public'             => true,
+			'show_admin_column'  => true,
+			'show_in_nav_menus'  => true,
+			'show_tagcloud'      => true,
+			'show_ui'            => true,
 			'show_in_quick_edit' => true,
-			'rewrite' => array(
+			'rewrite'            => array(
 				'slug' => _x( 'fleet-boat-number', 'slug for images', 'fleet' ),
 			),
 		);
@@ -269,11 +270,11 @@ class iworks_fleet extends iworks {
 	}
 
 	public function get_list_by_post_type( $type ) {
-		$args = array(
-			'post_type' => $this->{'post_type_'.$type}->get_name(),
-			'nopaging' => true,
+		$args  = array(
+			'post_type' => $this->{'post_type_' . $type}->get_name(),
+			'nopaging'  => true,
 		);
-		$list = array();
+		$list  = array();
 		$posts = get_posts( $args );
 		foreach ( $posts as $post ) {
 			$list[ $post->post_title ] = $post->ID;
@@ -290,9 +291,9 @@ class iworks_fleet extends iworks {
 		$install = 20180611;
 		if ( $install > $version ) {
 			$charset_collate = $wpdb->get_charset_collate();
-			require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+			require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 			$table_name = $wpdb->prefix . 'fleet_regatta';
-			$sql = "CREATE TABLE $table_name (
+			$sql        = "CREATE TABLE $table_name (
                 ID mediumint(9) NOT NULL AUTO_INCREMENT,
                 post_regata_id mediumint(9) NOT NULL,
                 year year,
@@ -312,7 +313,7 @@ class iworks_fleet extends iworks {
             ) $charset_collate;";
 			dbDelta( $sql );
 			$table_name = $wpdb->prefix . 'fleet_regatta_race';
-			$sql = "CREATE TABLE $table_name (
+			$sql        = "CREATE TABLE $table_name (
                 ID mediumint(9) NOT NULL AUTO_INCREMENT,
                 post_regata_id mediumint(9) NOT NULL,
                 regata_id mediumint(9) NOT NULL,
@@ -334,10 +335,10 @@ class iworks_fleet extends iworks {
 		$install = 20180618;
 		if ( $install > $version ) {
 			$charset_collate = $wpdb->get_charset_collate();
-			require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+			require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 			$table_name = $wpdb->prefix . 'fleet_regatta';
-			$sql = "ALTER TABLE $table_name ADD COLUMN country TEXT AFTER boat_id;";
-			$result = $wpdb->query( $sql );
+			$sql        = "ALTER TABLE $table_name ADD COLUMN country TEXT AFTER boat_id;";
+			$result     = $wpdb->query( $sql );
 			if ( $result ) {
 				update_option( 'fleet_db_version', $install );
 			}
@@ -348,12 +349,12 @@ class iworks_fleet extends iworks {
 		$install = 20180619;
 		if ( $install > $version ) {
 			$charset_collate = $wpdb->get_charset_collate();
-			require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+			require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 			$table_name = $wpdb->prefix . 'fleet_regatta';
-			$sql = "ALTER TABLE $table_name ADD COLUMN date date AFTER year;";
-			$result = $wpdb->query( $sql );
+			$sql        = "ALTER TABLE $table_name ADD COLUMN date date AFTER year;";
+			$result     = $wpdb->query( $sql );
 			if ( $result ) {
-				$sql = "ALTER TABLE $table_name ADD key ( date );";
+				$sql    = "ALTER TABLE $table_name ADD key ( date );";
 				$result = $wpdb->query( $sql );
 			}
 			if ( $result ) {
@@ -368,7 +369,7 @@ class iworks_fleet extends iworks {
 	 * @since 2.6.6
 	 */
 	public function iworks_rate_css() {
-		$logo = plugin_dir_url( dirname( dirname( __FILE__ ) ) ).'assets/images/logo.svg';
+		$logo = plugin_dir_url( dirname( dirname( __FILE__ ) ) ) . 'assets/images/logo.svg';
 		echo '<style type="text/css">';
 		printf( '.iworks-notice-fleet .iworks-notice-logo{background-image:url(%s);}', esc_url( $logo ) );
 		echo '</style>';
