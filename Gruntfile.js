@@ -18,6 +18,7 @@ module.exports = function( grunt ) {
 	require( 'load-grunt-tasks' )(grunt);
 
 	var buildtime = new Date().toISOString();
+	var buildyear = 1900 + new Date().getYear();
 
 	var conf = {
 

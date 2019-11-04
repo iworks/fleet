@@ -3,8 +3,8 @@ Contributors: iworks
 Donate link: http://iworks.pl/donate/fleet.php
 Tags: fleet, result, boat, crew, team
 Requires at least: 3.9
-Tested up to: 4.9
-Stable tag: 1.2.6
+Tested up to: 5.2.4
+Stable tag: PLUGIN_VERSION
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -42,11 +42,9 @@ There are 3 ways to install this plugin:
 
 == Changelog ==
 
-= 1.2.7 (2018-xx-xx) =
+= 1.2.6 (2019-11-04) =
 * Fixed function for `the_title` filter - second argument should have default.
 * Added shortcode "boat" to allow show boat link, data or gallery.
-
-= 1.2.6 (2018-10-22) =
 * Fixed taxonomies links in admin menu.
 
 = 1.2.5 =
