@@ -83,6 +83,7 @@ module.exports = function( grunt ) {
 				'!node_modules/**',
 				'!Gruntfile.js',
 				'!package.json',
+				'!package-lock.json',
 				'!build/**',
 				'!tests/**',
 				'!**/css/src/**',
@@ -387,11 +388,9 @@ module.exports = function( grunt ) {
 			},
 
 			po2mo: {
-				files: [ 'languages/*.po'],
-				tasks: ['po2mo'],
-				options: {
-					debounceDelay: 500
-				}
+				files: {
+					src: conf.translation.pot_dir + 'fleet-pl_PL.po',
+					desc: conf.translation.pot_dir + 'fleet-pl_PL.mo'
 			}
 		},
 
