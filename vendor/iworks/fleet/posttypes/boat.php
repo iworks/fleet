@@ -220,12 +220,17 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 	}
 
 	public function register() {
+		/**
+		 * Check iworks_options object
+		 */
+		if ( ! is_a( $this->options, 'iworks_options' ) ) {
+			return;
+		}
 		global $iworks_fleet;
 		/**
 		 * taxonomies configuration
 		 */
-		$taxonomies = $this->options->get_option( 'boat_taxonomies' );
-
+		$taxonomies   = $this->options->get_option( 'boat_taxonomies' );
 		$show_in_menu = add_query_arg( 'post_type', $iworks_fleet->get_post_type_name( 'person' ), 'edit.php' );
 		$labels       = array(
 			'name'                  => _x( 'Boats', 'Boat General Name', 'fleet' ),
