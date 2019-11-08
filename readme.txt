@@ -42,6 +42,9 @@ There are 3 ways to install this plugin:
 
 == Changelog ==
 
+= 1.2.7 (2019-11-07) =
+* Updated iWorks Options to 2.6.7
+
 = 1.2.6 (2019-11-04) =
 * Fixed function for `the_title` filter - second argument should have default.
 * Added shortcode "boat" to allow show boat link, data or gallery.
