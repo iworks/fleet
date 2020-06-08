@@ -140,6 +140,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		 * shortcodes
 		 */
 		add_shortcode( 'fleet_regattas_list', array( $this, 'shortcode_list' ) );
+		add_shortcode( 'fleet_ranking', array( $this, 'shortcode_ranking' ) );
 		/**
 		 * sort next/previous links by title
 		 */
@@ -265,8 +266,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		 */
 		$by_year = false;
 		if ( 'all' === $year ) {
-			$by_year = true;
-
+			$by_year          = true;
 			$args['meta_key'] = $this->options->get_option_name( 'result_date_start' );
 		} else {
 			$args['meta_query'] = array(
@@ -1453,4 +1453,366 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 	public function adjacent_dates( $content, $start, $end ) {
 		return $this->get_dates( $start, $end );
 	}
+
+	/**
+	 * get ranking
+	 *
+	 * @since 1.2.8
+	 */
+	public function shortcode_ranking( $atts ) {
+		$atts    = shortcode_atts(
+			array(
+				'year'       => date( 'Y' ),
+				'serie'      => null,
+				'title'      => __( 'Ranking', 'fleet' ),
+				'protected'  => 0,
+				'remove_one' => 'yes',
+			),
+			$atts,
+			'fleet_results_ranking'
+		);
+		$content = '';
+		/**
+		 * params: year
+		 */
+		$year = intval( $atts['year'] );
+		if ( 0 === $year ) {
+			return __( 'Please setup year attribute first!', 'fleet' );
+		}
+		/**
+		 * params: serie
+		 */
+		$serie = $atts['serie'];
+		if ( empty( $serie ) ) {
+			return __( 'Please setup serie attribute first!', 'fleet' );
+		}
+		/**
+		 * WP Query base args
+		 */
+		$args = array(
+			'post_type'  => $this->post_type_name,
+			'nopaging'   => true,
+			'orderby'    => 'meta_value_num',
+			'order'      => 'asc',
+			'meta_query' => array(
+				array(
+					'key'     => $this->options->get_option_name( 'result_date_start' ),
+					'value'   => strtotime( ( $year - 1 ) . '-12-31 23:59:59' ),
+					'compare' => '>',
+					'type'    => 'NUMERIC',
+				),
+				array(
+					'key'     => $this->options->get_option_name( 'result_date_start' ),
+					'value'   => strtotime( ( $year + 1 ) . '-01-01 00:00:00' ),
+					'compare' => '<',
+					'type'    => 'NUMERIC',
+				),
+			),
+		);
+		/**
+		 * serie
+		 */
+		if ( preg_match( '/^\d+$/', $atts['serie'] ) ) {
+			$args['tax_query'] = array(
+				array(
+					'taxonomy' => $this->taxonomy_name_serie,
+					'terms'    => $atts['serie'],
+				),
+			);
+		} else {
+			$args['tax_query'] = array(
+				array(
+					'taxonomy' => $this->taxonomy_name_serie,
+					'field'    => 'name',
+					'terms'    => $atts['serie'],
+				),
+			);
+		}
+		/**
+		 * WP_Query
+		 */
+		$the_query = new WP_Query( $args );
+		if ( ! $the_query->have_posts() ) {
+			return __( 'Currently we do not have anny results!', 'fleet' );
+		}
+		/**
+		 * prepare
+		 */
+		global $wpdb, $iworks_fleet;
+		$table_name_regatta      = $wpdb->prefix . 'fleet_regatta';
+		$table_name_regatta_race = $wpdb->prefix . 'fleet_regatta_race';
+		$all                     = array();
+		$max                     = 0;
+		$regattas                = array();
+		/**
+		 * get regatta data
+		 */
+		while ( $the_query->have_posts() ) {
+			$the_query->the_post();
+			$post_id = get_the_ID();
+			/**
+			 * $regattas_ids
+			 */
+			if ( ! array_key_exists( $post_id, $regattas ) ) {
+				$regattas[ $post_id ] = 0;
+			}
+		}
+		/**
+		 * results
+		 */
+		foreach ( $regattas as $post_id => $points ) {
+			$query   = $wpdb->prepare( "SELECT * FROM {$table_name_regatta} where post_regata_id = %d order by place", $post_id );
+			$results = $wpdb->get_results( $query );
+			foreach ( $results as $one ) {
+
+				$x = array( $one->boat_id, $one->helm_id, $one->crew_id );
+				sort( $x );
+
+				$keys = array(
+					implode( $x, '-' ),
+					sprintf( 'b%dp%d', $one->boat_id, $one->helm_id ),
+					sprintf( 'b%dp%d', $one->boat_id, $one->crew_id ),
+					sprintf( 'p%dp%d', $one->helm_id, $one->crew_id ),
+				);
+				foreach ( $keys as $key ) {
+					if (
+						empty( $one->boat_id )
+						|| empty( $one->helm_id )
+						|| empty( $one->crew_id )
+					) {
+						continue;
+					}
+					if ( ! isset( $all[ $key ] ) ) {
+						$all[ $key ] = array(
+							'results' => array(),
+							'boats'   => array(),
+							'persons' => array(
+								'helms' => array(),
+								'crews' => array(),
+							),
+						);
+						foreach ( $regattas as $id => $v ) {
+							$all[ $key ]['results'][ $id ] = null;
+						}
+					}
+					$all[ $key ]['results'][ $one->post_regata_id ] = $one->place;
+					if ( ! in_array( $one->boat_id, $all[ $key ]['boats'] ) ) {
+						$all[ $key ]['boats'][] = $one->boat_id;
+					}
+					if ( ! in_array( $one->helm_id, $all[ $key ]['persons']['helms'] ) ) {
+						$all[ $key ]['persons']['helms'][] = $one->helm_id;
+					}
+					if ( ! in_array( $one->crew_id, $all[ $key ]['persons']['crews'] ) ) {
+						$all[ $key ]['persons']['crews'][] = $one->crew_id;
+					}
+					$all[ $key ]['md5'] = md5( serialize( $all[ $key ]['results'] ) );
+					/**
+					 * improve max
+					 */
+					if ( $max < $one->place ) {
+						$max = $one->place;
+					}
+					/**
+					 * improve max per reggata
+					 */
+					if ( $regattas[ $post_id ] < $one->place ) {
+						$regattas[ $post_id ] = $one->place;
+					}
+				}
+			}
+		}
+		/**
+		 * remove duplicates, identical results
+		 */
+		$results = array();
+		foreach ( $all as $key => $one ) {
+			if ( array_key_exists( $one['md5'], $results ) ) {
+				continue;
+			}
+			/**
+			 * remove more changes
+			 */
+			if (
+				1 < count( $one['persons']['helms'] )
+				&& 1 < count( $one['persons']['crews'] )
+			) {
+				continue;
+			}
+			$sum   = 0;
+			$worse = 0;
+			foreach ( $regattas as $id => $points ) {
+				if ( empty( $one['results'][ $id ] ) && 0 < $points ) {
+					$one['results'][ $id ] = $max + 1;
+				}
+				$sum += $one['results'][ $id ];
+				if (
+					$one['results'][ $id ] > $worse
+					&& intval( $atts['protected'] ) !== $id
+				) {
+					$one['worse'] = $id;
+					$worse        = $one['results'][ $id ];
+				}
+			}
+			$one['brutto']          = $sum;
+			$one['netto']           = $sum - $one['results'][ $one['worse'] ];
+			$results[ $one['md5'] ] = $one;
+		}
+		/**
+		 * remove the worse result
+		 */
+
+		/**
+		 * sort
+		 */
+		$this->sort_on_tie = intval( $atts['protected'] );
+		uasort( $results, array( $this, 'sort_by_result' ) );
+		/**
+		 * remove changing crew
+		 */
+		$all     = $results;
+		$results = array();
+		foreach ( $all as $key => $one ) {
+			if (
+				1 === count( $one['persons']['helms'] )
+				&& 1 === count( $one['boats'] )
+			) {
+				$key = sprintf( '%d-%d', $one['boats'][0], $one['persons']['helms'][0] );
+			}
+			if ( array_key_exists( $key, $results ) ) {
+				continue;
+			}
+			$results[ $key ] = $one;
+		}
+		/**
+		 * remove changing helm
+		 */
+		$all     = $results;
+		$results = array();
+		foreach ( $all as $key => $one ) {
+			if (
+				1 === count( $one['persons']['crews'] )
+				&& 1 === count( $one['boats'] )
+			) {
+				$key = sprintf( '%d-%d', $one['boats'][0], $one['persons']['crews'][0] );
+			}
+			if ( array_key_exists( $key, $results ) ) {
+				continue;
+			}
+			$results[ $key ] = $one;
+		}
+		/**
+		 * print
+		 */
+		$content  = '<table class="fleet-results fleet-results-list">';
+		$content .= '<thead>';
+		$content .= '<tr>';
+		$content .= sprintf( '<th class="dates" rowspan="2">%s</th>', esc_attr__( '#', 'fleet' ) );
+		$content .= sprintf( '<th class="title" rowspan="2">%s</th>', esc_attr__( 'Boat', 'fleet' ) );
+		$content .= sprintf( '<th class="helm" rowspan="2">%s</th>', esc_attr__( 'Helm', 'fleet' ) );
+		$content .= sprintf( '<th class="crew" rowspan="2">%s</th>', esc_attr__( 'Crew', 'fleet' ) );
+		$content .= sprintf( '<th colspan="%d" class="races">%s</th>', count( $regattas ), esc_attr__( 'Results', 'fleet' ) );
+		$content .= sprintf( '<th colspan="2" class="points">%s</th>', esc_attr__( 'Points', 'fleet' ) );
+		$content .= '</tr>';
+		$content .= '<tr>';
+		remove_filter( 'the_title', array( $this, 'add_year_to_title' ), 10, 2 );
+		foreach ( $regattas as $id => $points ) {
+			$content .= sprintf(
+				'<th class="r-%d"><a href="%s">%s</a></td>',
+				$id,
+				get_permalink( $id ),
+				get_the_title( $id )
+			);
+		}
+		$content      .= sprintf( '<th class="brutto">%s</th>', esc_attr__( 'brutto', 'fleet' ) );
+		$content      .= sprintf( '<th class="netto">%s</th>', esc_attr__( 'netto', 'fleet' ) );
+		$content      .= '</tr>';
+		$content      .= '<thead>';
+		$content      .= '<tbody>';
+		$i             = 0;
+		$last_score    = 0;
+		$last_protectd = 0;
+		foreach ( $results as $result ) {
+			if ( $result['netto'] > $last_score ) {
+				$i++;
+			} elseif ( isset( $result['results'][ $atts['protected'] ] ) ) {
+				if ( $result['results'][ $atts['protected'] ] > $last_protectd ) {
+					$i++;
+				}
+			}
+			$content .= '<tr>';
+			$content .= sprintf( '<td class="place">%d</td>', $i );
+			$content .= sprintf( '<td class="boat">%s</td>', implode( ', ', $result['boats'] ) );
+			$content .= sprintf( '<td class="helm">%s</td>', $this->implode_persons( $result['persons']['helms'] ) );
+			$content .= sprintf( '<td class="crew">%s</td>', $this->implode_persons( $result['persons']['crews'] ) );
+			foreach ( $regattas as $id => $points ) {
+				if ( empty( $result['results'][ $id ] ) ) {
+					$content .= sprintf( '<td class="r-%d no-result">&ndash;</td>', $id );
+				} else {
+					$content .= sprintf(
+						'<td class="r-%d %s result">%d%s</td>',
+						$id,
+						$id === intval( $atts['protected'] ) ? 'protected-result' : '',
+						$result['results'][ $id ],
+						$id === $result['worse'] ? '*' : ''
+					);
+				}
+			}
+			$content .= sprintf( '<td class="brutto">%d</td>', $result['brutto'] );
+			$content .= sprintf( '<td class="netto">%d</td>', $result['netto'] );
+			$content .= '</tr>';
+			/**
+			 * set last
+			 */
+			$last_score = $result['netto'];
+			if ( isset( $result['results'][ $atts['protected'] ] ) ) {
+				$last_protectd = $result['results'][ $atts['protected'] ];
+			}
+		}
+		$content .= '</tbody>';
+		$content .= '</table>';
+
+		return $content;
+	}
+
+	private function sort_by_result( $a, $b ) {
+		if ( $a['netto'] === $b['netto'] ) {
+			if (
+				isset( $a['results'][ $this->sort_on_tie ] )
+				&& isset( $b['results'][ $this->sort_on_tie ] )
+			) {
+				return $a['results'][ $this->sort_on_tie ] > $b['results'][ $this->sort_on_tie ] ? 1 : -1;
+			}
+			if ( isset( $a['results'][ $this->sort_on_tie ] ) ) {
+				return 1;
+			}
+			if ( isset( $b['results'][ $this->sort_on_tie ] ) ) {
+				return -1;
+			}
+			return 0;
+		}
+		return $a['netto'] > $b['netto'] ? 1 : -1;
+	}
+
+	private function implode_persons( $persons ) {
+		if ( empty( $this->sailors ) ) {
+			global $iworks_fleet;
+			$this->sailors = array_flip( $iworks_fleet->get_list_by_post_type( 'person' ) );
+		}
+		$content = '';
+		foreach ( $persons as $id ) {
+			if ( ! isset( $this->sailors[ $id ] ) ) {
+				continue;
+			}
+			if ( ! empty( $content ) ) {
+				$content .= '<br />';
+			}
+			$content .= sprintf(
+				'<a href="%s">%s</a>',
+				get_permalink( $id ),
+				$this->sailors[ $id ]
+			);
+		}
+		return $content;
+	}
+
 }

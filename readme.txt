@@ -42,6 +42,9 @@ There are 3 ways to install this plugin:
 
 == Changelog ==
 
+= 1.2.8 (2020-xx-xx) =
+* Added ranking-o-mat.
+
 = 1.2.7 (2019-11-07) =
 * Updated iWorks Options to 2.6.7
 

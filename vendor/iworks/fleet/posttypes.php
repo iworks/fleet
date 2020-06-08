@@ -34,9 +34,8 @@ class iworks_fleet_posttypes {
 	protected $taxonomy_name_location = 'iworks_fleet_location';
 
 	public function __construct() {
-		global $iworks_fleet_options;
-		$this->options = $iworks_fleet_options;
-		$this->base = preg_replace( '/iworks.+/', '', __FILE__ );
+		$this->options = iworks_fleet_get_options_object();
+		$this->base    = preg_replace( '/iworks.+/', '', __FILE__ );
 		/**
 		 * register
 		 */
@@ -49,8 +48,8 @@ class iworks_fleet_posttypes {
 		/**
 		 * save map data
 		 */
-		add_action( 'created_'.$this->taxonomy_name_location, array( $this, 'save_google_map_data' ), 10, 2 );
-		add_action( 'edited_'.$this->taxonomy_name_location, array( $this, 'save_google_map_data' ), 10, 2 );
+		add_action( 'created_' . $this->taxonomy_name_location, array( $this, 'save_google_map_data' ), 10, 2 );
+		add_action( 'edited_' . $this->taxonomy_name_location, array( $this, 'save_google_map_data' ), 10, 2 );
 	}
 
 	public function get_name() {
@@ -58,14 +57,14 @@ class iworks_fleet_posttypes {
 	}
 
 	protected function get_meta_box_content( $post, $fields, $group ) {
-		$content = '';
+		$content  = '';
 		$basename = $this->options->get_option_name( $group );
 		foreach ( $fields[ $group ] as $key => $data ) {
-			$args = isset( $data['args'] )? $data['args']:array();
+			$args = isset( $data['args'] ) ? $data['args'] : array();
 			/**
 			 * ID
 			 */
-			$args['id'] = $this->options->get_option_name( $group.'_'.$key );
+			$args['id'] = $this->options->get_option_name( $group . '_' . $key );
 			/**
 			 * name
 			 */
@@ -117,13 +116,11 @@ class iworks_fleet_posttypes {
 	 * @param bool $update Whether this is an existing post being updated or not.
 	 */
 	public function save_post_meta_fields( $post_id, $post, $update, $fields ) {
-
 		/*
-         * In production code, $slug should be set only once in the plugin,
-         * preferably as a class property, rather than in each function that needs it.
-         */
+		 * In production code, $slug should be set only once in the plugin,
+		 * preferably as a class property, rather than in each function that needs it.
+		 */
 		$post_type = get_post_type( $post_id );
-
 		// If this isn't a Copyricorrect post, don't update it.
 		if ( $this->post_type_name != $post_type ) {
 			return false;
@@ -132,10 +129,10 @@ class iworks_fleet_posttypes {
 			$post_key = $this->options->get_option_name( $group );
 			if ( isset( $_POST[ $post_key ] ) ) {
 				foreach ( $group_data as $key => $data ) {
-					$value = isset( $_POST[ $post_key ][ $key ] )? $_POST[ $post_key ][ $key ]:null;
+					$value = isset( $_POST[ $post_key ][ $key ] ) ? $_POST[ $post_key ][ $key ] : null;
 					if ( is_string( $value ) ) {
 						$value = trim( $value );
-					} else if ( is_array( $value ) ) {
+					} elseif ( is_array( $value ) ) {
 						if (
 							isset( $value['integer'] ) && 0 == $value['integer']
 							&& isset( $value['fractional'] ) && 0 == $value['fractional']
@@ -143,7 +140,7 @@ class iworks_fleet_posttypes {
 							$value = null;
 						}
 					}
-					$option_name = $this->options->get_option_name( $group.'_'.$key );
+					$option_name = $this->options->get_option_name( $group . '_' . $key );
 					if ( empty( $value ) ) {
 						delete_post_meta( $post->ID, $option_name );
 					} else {
@@ -153,7 +150,7 @@ class iworks_fleet_posttypes {
 						/**
 						 * filter
 						 */
-						$value = apply_filters( 'iworks_fleet_meta_value', $value, $post->ID, $option_name );
+						$value  = apply_filters( 'iworks_fleet_meta_value', $value, $post->ID, $option_name );
 						$result = add_post_meta( $post->ID, $option_name, $value, true );
 						if ( ! $result ) {
 							update_post_meta( $post->ID, $option_name, $value );
@@ -253,16 +250,16 @@ class iworks_fleet_posttypes {
 			'items_list'                 => __( 'Locations list', 'fleet' ),
 			'items_list_navigation'      => __( 'Locations list navigation', 'fleet' ),
 		);
-		$args = array(
-			'labels'                     => $labels,
-			'hierarchical'               => true,
-			'public'                     => true,
-			'show_admin_column'          => true,
-			'show_in_nav_menus'          => true,
-			'show_tagcloud'              => true,
-			'show_ui'                    => true,
-			'show_in_quick_edit'         => true,
-			'rewrite' => array(
+		$args   = array(
+			'labels'             => $labels,
+			'hierarchical'       => true,
+			'public'             => true,
+			'show_admin_column'  => true,
+			'show_in_nav_menus'  => true,
+			'show_tagcloud'      => true,
+			'show_ui'            => true,
+			'show_in_quick_edit' => true,
+			'rewrite'            => array(
 				'slug' => 'fleet-locations',
 			),
 		);
