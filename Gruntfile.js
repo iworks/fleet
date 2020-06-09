@@ -391,6 +391,7 @@ module.exports = function( grunt ) {
 				files: {
 					src: conf.translation.pot_dir + 'fleet-pl_PL.po',
 					desc: conf.translation.pot_dir + 'fleet-pl_PL.mo'
+                }
 			}
 		},
 
