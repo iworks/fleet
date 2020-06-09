@@ -3,7 +3,7 @@ Contributors: iworks
 Donate link: http://iworks.pl/donate/fleet.php
 Tags: fleet, result, boat, crew, team
 Requires at least: 3.9
-Tested up to: 5.2.4
+Tested up to: 5.4
 Stable tag: PLUGIN_VERSION
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
