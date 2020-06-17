@@ -47,7 +47,6 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		add_filter( 'enter_title_here', array( $this, 'enter_title_here' ), 10, 2 );
 		add_filter( 'the_content', array( $this, 'the_content' ), 10 );
 		add_filter( 'the_content', array( $this, 'add_media' ), 999 );
-		add_filter( 'default_title', array( $this, 'default_title' ), 10, 2 );
 		add_filter( 'international_fleet_posted_on', array( $this, 'get_manufacturer' ), 10, 2 );
 		/**
 		 * save post
@@ -495,19 +494,6 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 	public function enter_title_here( $title, $post ) {
 		if ( $post->post_type == $this->post_type_name ) {
 			return __( 'Enter boat number eg. POL 7020', 'fleet' );
-		}
-		return $title;
-	}
-	/**
-	 *
-	 * @since 1.0
-	 */
-	public function default_title( $title, $post ) {
-		if ( ! empty( $title ) ) {
-			return $title;
-		}
-		if ( $post->post_type == $this->post_type_name ) {
-			return __( 'POL ', 'fleet' );
 		}
 		return $title;
 	}

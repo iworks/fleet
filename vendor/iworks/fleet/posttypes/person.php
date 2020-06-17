@@ -30,11 +30,11 @@ require_once( dirname( dirname( __FILE__ ) ) . '/posttypes.php' );
 
 class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 
-	protected $post_type_name = 'iworks_fleet_person';
+	protected $post_type_name     = 'iworks_fleet_person';
 	protected $taxonomy_name_club = 'iworks_fleet_club';
-	private $nonce_list = 'iworks_fleet_person_persons_list_nonce';
-	private $users_list = array();
-	private $boats_list = array();
+	private $nonce_list           = 'iworks_fleet_person_persons_list_nonce';
+	private $users_list           = array();
+	private $boats_list           = array();
 
 	public function __construct() {
 		parent::__construct();
@@ -44,7 +44,7 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 		 * change default columns
 		 */
 		add_filter( "manage_{$this->get_name()}_posts_columns", array( $this, 'add_columns' ) );
-		add_action( 'manage_posts_custom_column' , array( $this, 'custom_columns' ), 10, 2 );
+		add_action( 'manage_posts_custom_column', array( $this, 'custom_columns' ), 10, 2 );
 		/**
 		 * apply default sort order
 		 */
@@ -72,21 +72,28 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 		 */
 		$this->fields = array(
 			'personal' => array(
+				'nation'     => array(
+					'label' => __( 'Nation', 'fleet' ),
+					'type'  => 'select2',
+				),
 				'birth_year' => array( 'label' => __( 'Birth Year', 'fleet' ) ),
-				'birth_date' => array( 'type' => 'date', 'label' => __( 'Birth Date', 'fleet' ) ),
+				'birth_date' => array(
+					'type'  => 'date',
+					'label' => __( 'Birth Date', 'fleet' ),
+				),
 			),
-			'social' => array(
-				'website' => array( 'label' => __( 'Website', 'fleet' ) ),
-				'facebook' => array( 'label' => __( 'Facebook', 'fleet' ) ),
-				'twitter' => array( 'label' => __( 'Twitter', 'fleet' ) ),
+			'social'   => array(
+				'website'   => array( 'label' => __( 'Website', 'fleet' ) ),
+				'facebook'  => array( 'label' => __( 'Facebook', 'fleet' ) ),
+				'twitter'   => array( 'label' => __( 'Twitter', 'fleet' ) ),
 				'instagram' => array( 'label' => __( 'Instagram', 'fleet' ) ),
-				'gplus' => array( 'label' => __( 'G+', 'fleet' ) ),
+				'gplus'     => array( 'label' => __( 'G+', 'fleet' ) ),
 				'endomondo' => array( 'label' => __( 'Endomondo', 'fleet' ) ),
-				'skype' => array( 'label' => __( 'Skype', 'fleet' ) ),
+				'skype'     => array( 'label' => __( 'Skype', 'fleet' ) ),
 			),
-			'contact' => array(
+			'contact'  => array(
 				'mobile' => array( 'label' => __( 'Mobile', 'fleet' ) ),
-				'email' => array( 'label' => __( 'E-mail', 'fleet' ) ),
+				'email'  => array( 'label' => __( 'E-mail', 'fleet' ) ),
 			),
 		);
 		/**
@@ -143,32 +150,32 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 			'items_list_navigation' => __( 'Items list navigation', 'fleet' ),
 			'filter_items_list'     => __( 'Filter items list', 'fleet' ),
 		);
-		$args = array(
-			'label'                 => __( 'person', 'fleet' ),
-			'labels'                => $labels,
-			'supports'              => array( 'title', 'editor', 'thumbnail', 'revision' ),
-			'taxonomies'            => array(
+		$args   = array(
+			'label'                => __( 'person', 'fleet' ),
+			'labels'               => $labels,
+			'supports'             => array( 'title', 'editor', 'thumbnail', 'revision' ),
+			'taxonomies'           => array(
 				$this->taxonomy_name_club,
 				$this->taxonomy_name_location,
 			),
-			'hierarchical'          => false,
-			'public'                => true,
-			'show_ui'               => true,
-			'show_in_menu'          => $parent,
-			'show_in_admin_bar'     => true,
-			'show_in_nav_menus'     => true,
-			'can_export'            => true,
-			'has_archive'           => _x( 'fleet-persons', 'slug for archive', 'fleet' ),
-			'exclude_from_search'   => false,
-			'publicly_queryable'    => true,
-			'capability_type'       => 'page',
-			'menu_icon'             => 'dashicons-sos',
-			'register_meta_box_cb'  => array( $this, 'register_meta_boxes' ),
-			'rewrite' => array(
+			'hierarchical'         => false,
+			'public'               => true,
+			'show_ui'              => true,
+			'show_in_menu'         => $parent,
+			'show_in_admin_bar'    => true,
+			'show_in_nav_menus'    => true,
+			'can_export'           => true,
+			'has_archive'          => _x( 'fleet-persons', 'slug for archive', 'fleet' ),
+			'exclude_from_search'  => false,
+			'publicly_queryable'   => true,
+			'capability_type'      => 'page',
+			'menu_icon'            => 'dashicons-sos',
+			'register_meta_box_cb' => array( $this, 'register_meta_boxes' ),
+			'rewrite'              => array(
 				'slug' => _x( 'fleet-person', 'slug for single person', 'fleet' ),
 			),
 		);
-		$args = apply_filters( 'fleet_register_person_post_type_args', $args );
+		$args   = apply_filters( 'fleet_register_person_post_type_args', $args );
 		register_post_type( $this->post_type_name, $args );
 		/**
 		 * person hull club Taxonomy.
@@ -193,19 +200,19 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 			'items_list'                 => __( 'Clubs list', 'fleet' ),
 			'items_list_navigation'      => __( 'Clubs list navigation', 'fleet' ),
 		);
-		$args = array(
-			'labels'                     => $labels,
-			'hierarchical'               => false,
-			'public'                     => true,
-			'show_admin_column'          => true,
-			'show_in_nav_menus'          => true,
-			'show_tagcloud'              => true,
-			'show_ui'                    => true,
-			'show_in_menu'          => true,
+		$args   = array(
+			'labels'             => $labels,
+			'hierarchical'       => false,
+			'public'             => true,
+			'show_admin_column'  => true,
+			'show_in_nav_menus'  => true,
+			'show_tagcloud'      => true,
+			'show_ui'            => true,
+			'show_in_menu'       => true,
 			'show_in_quick_edit' => true,
-			'rewrite' => array( 'slug' => 'fleet-club' ),
+			'rewrite'            => array( 'slug' => 'fleet-club' ),
 		);
-		$args = apply_filters( 'fleet_register_person_taxonomy_args', $args );
+		$args   = apply_filters( 'fleet_register_person_taxonomy_args', $args );
 		register_taxonomy( $this->taxonomy_name_club, array( $this->post_type_name ), $args );
 	}
 
@@ -228,6 +235,19 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 	}
 
 	public function personal( $post ) {
+		$mna_codes = $this->options->get_group( 'mna_codes' );
+		if ( ! empty( $mna_codes ) ) {
+			$data = array();
+			foreach ( $mna_codes as $code ) {
+				if ( empty( $code['code'] ) ) {
+					continue;
+				}
+				$data[ $code['code'] ] = $code['nation'];
+			}
+			asort( $data );
+			$this->fields['personal']['nation']['args']['options'] = $data;
+		}
+
 		$this->get_meta_box_content( $post, $this->fields, __FUNCTION__ );
 	}
 
@@ -243,16 +263,16 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 	public function custom_columns( $column, $post_id ) {
 		switch ( $column ) {
 			case 'birth_year':
-				$meta_name = $this->options->get_option_name( 'personal_'.$column );
+				$meta_name = $this->options->get_option_name( 'personal_' . $column );
 				echo get_post_meta( $post_id, $meta_name, true );
-			break;
+				break;
 			case 'email':
-				$meta_name = $this->options->get_option_name( 'contact_'.$column );
-				$email = get_post_meta( $post_id, $meta_name, true );
+				$meta_name = $this->options->get_option_name( 'contact_' . $column );
+				$email     = get_post_meta( $post_id, $meta_name, true );
 				if ( ! empty( $email ) ) {
 					printf( '<a href="mailto:%s">%s</a>', esc_attr( $email ), esc_html( $email ) );
 				}
-			break;
+				break;
 		}
 	}
 
@@ -266,9 +286,9 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 	 */
 	public function add_columns( $columns ) {
 		unset( $columns['date'] );
-		$columns['title'] = __( 'Name', 'fleet' );
+		$columns['title']      = __( 'Name', 'fleet' );
 		$columns['birth_year'] = __( 'Birth year', 'fleet' );
-		$columns['email'] = __( 'E-mail', 'fleet' );
+		$columns['email']      = __( 'E-mail', 'fleet' );
 		return $columns;
 	}
 
@@ -323,7 +343,7 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 			return $content;
 		}
 		$terms = wp_get_post_terms( $post_id, $this->taxonomy_name_club );
-		$t = array();
+		$t     = array();
 		foreach ( $terms as $term ) {
 			$t[] = $term->name;
 		}
@@ -335,22 +355,22 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 			wp_send_json_error();
 		}
 		$nonce = $_POST['_wpnonce'];
-		if ( ! wp_verify_nonce( $nonce, $this->nonce_list.$_POST['user_id'] ) ) {
+		if ( ! wp_verify_nonce( $nonce, $this->nonce_list . $_POST['user_id'] ) ) {
 			wp_send_json_error();
 		}
-		$data = array();
-		$args = array(
-			'nopaging' => true,
+		$data      = array();
+		$args      = array(
+			'nopaging'  => true,
 			'post_type' => $this->get_name(),
-			'orderby' => 'post_title',
-			'order' => 'ASC',
+			'orderby'   => 'post_title',
+			'order'     => 'ASC',
 		);
 		$the_query = new WP_Query( $args );
 		// The Loop
 		if ( $the_query->have_posts() ) {
 			foreach ( $the_query->posts as $post ) {
 				$data[] = array(
-					'id' => $post->ID,
+					'id'   => $post->ID,
 					'text' => $post->post_title,
 				);
 			}
@@ -360,7 +380,7 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 	}
 
 	public function add_nonce( $data ) {
-		$data['nonces'][ $this->nonce_list ] = wp_create_nonce( $this->nonce_list.get_current_user_id() );
+		$data['nonces'][ $this->nonce_list ] = wp_create_nonce( $this->nonce_list . get_current_user_id() );
 		return $data;
 	}
 
@@ -371,9 +391,9 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 			/**
 			 * try to get gravatar
 			 */
-			$email = $this->options->get_option_name( 'contact_email' );
-			$email = get_post_meta( $user_post_id, $email, true );
-			$avatar = get_avatar( $email, $avatar_size, null );
+			$email       = $this->options->get_option_name( 'contact_email' );
+			$email       = get_post_meta( $user_post_id, $email, true );
+			$avatar      = get_avatar( $email, $avatar_size, null );
 			$avatar_meta = get_avatar_data( $email, $avatar_size );
 			if ( $avatar_meta['found_avatar'] ) {
 				$thumbnail = $avatar;
@@ -390,12 +410,12 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 			if ( empty( $thumbnail ) ) {
 				$thumbnail = $avatar;
 			}
-			$post = get_post( $user_post_id );
+			$post                              = get_post( $user_post_id );
 			$this->users_list[ $user_post_id ] = array(
 				'user_post_id' => $user_post_id,
-				'permalink' => get_permalink( $post ),
-				'post_title' => get_the_title( $post ),
-				'avatar' => $thumbnail,
+				'permalink'    => get_permalink( $post ),
+				'post_title'   => get_the_title( $post ),
+				'avatar'       => $thumbnail,
 			);
 		}
 		return $this->users_list[ $user_post_id ];
@@ -474,8 +494,8 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 		if ( '1' === $show ) {
 			$term = get_term_by( 'name', get_the_title(), 'post_tag' );
 			if ( ! empty( $term ) ) {
-				$args = array(
-					'tag_id' => $term->term_id,
+				$args      = array(
+					'tag_id'         => $term->term_id,
 					'posts_per_page' => get_option( 'posts_per_page' ),
 				);
 				$the_query = new WP_Query( $args );
@@ -505,7 +525,7 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 		/**
 		 * Endomondo
 		 */
-		$name = $this->options->get_option_name( 'social_endomondo' );
+		$name  = $this->options->get_option_name( 'social_endomondo' );
 		$value = get_post_meta( $post_id, $name, true );
 		if ( ! empty( $value ) ) {
 			$content .= sprintf( '<iframe src="https://www.endomondo.com/embed/user/summary?id=%d&sport=12&measure=0&zone=Gp0100_SAR&width=400&height=217" width="400" height="217" frameborder="0" scrolling="no" ></iframe>', $value );
@@ -523,7 +543,7 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 			return $this->boats_list[ $boat_id ];
 		}
 		$content = get_the_title( $boat_id );
-		$url = get_permalink( $boat_id );
+		$url     = get_permalink( $boat_id );
 		if ( ! empty( $url ) ) {
 			$content = sprintf(
 				'<a href="%s">%s</a>',
@@ -537,12 +557,12 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 
 	private function social_media( $post_id ) {
 		$content = '';
-		$show = $this->options->get_option( 'person_show_social_media' );
+		$show    = $this->options->get_option( 'person_show_social_media' );
 		if ( empty( $show ) ) {
 			return $content;
 		}
 		foreach ( $this->fields['social'] as $key => $data ) {
-			$name = $this->options->get_option_name( 'social_'.$key );
+			$name  = $this->options->get_option_name( 'social_' . $key );
 			$value = get_post_meta( $post_id, $name, true );
 			if ( empty( $value ) ) {
 				continue;
@@ -563,7 +583,7 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 
 	private function boats( $post_id ) {
 		$content = '';
-		$show = $this->options->get_option( 'person_show_boats_table' );
+		$show    = $this->options->get_option( 'person_show_boats_table' );
 		if ( empty( $show ) ) {
 			return $content;
 		}
@@ -574,10 +594,10 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 		if ( empty( $boats ) ) {
 			return $content;
 		}
-		$meta_name = $this->options->get_option_name( 'crew' );
-		$boats = array_unique( $boats );
+		$meta_name          = $this->options->get_option_name( 'crew' );
+		$boats              = array_unique( $boats );
 		$currently_sails_on = $sails_on = array();
-		$done = array();
+		$done               = array();
 		/**
 		 * past
 		 */
@@ -597,7 +617,7 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 						__( 'Sail on %s as helmsman.', 'fleet' ),
 						$this->get_boat( $boat_id )
 					);
-					$done[] = $this->get_done_key( 'helmsman', $boat_id, $post_id );
+					$done[]               = $this->get_done_key( 'helmsman', $boat_id, $post_id );
 				}
 				if ( isset( $value['crew'] ) && $post_id == $value['crew'] ) {
 					$currently_sails_on[] = sprintf(
@@ -615,7 +635,7 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 					if ( in_array( $done_key, $done ) ) {
 						continue;
 					}
-					$done[] = $done_key;
+					$done[]     = $done_key;
 					$sails_on[] = sprintf(
 						__( 'Sailed on %s as helmsman.', 'fleet' ),
 						$this->get_boat( $boat_id )
@@ -626,7 +646,7 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 					if ( in_array( $done_key, $done ) ) {
 						continue;
 					}
-					$done[] = $done_key;
+					$done[]     = $done_key;
 					$sails_on[] = sprintf(
 						__( 'Sailed on %s as crew.', 'fleet' ),
 						$this->get_boat( $boat_id )
@@ -658,7 +678,7 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 	 * generate key
 	 */
 	private function get_done_key( $prefix, $boat_id, $post_id ) {
-		$done_key = 'helmsman-'.$boat_id.'-'.$post_id;
+		$done_key = 'helmsman-' . $boat_id . '-' . $post_id;
 		return $done_key;
 	}
 

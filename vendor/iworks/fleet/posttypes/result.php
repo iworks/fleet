@@ -1328,7 +1328,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			global $iworks_fleet;
 			$this->boat_post_type = $iworks_fleet->get_post_type_name( 'boat' );
 		}
-		$boat = get_page_by_title( 'POL ' . $number, OBJECT, $this->boat_post_type );
+		$boat = get_page_by_title( $number, OBJECT, $this->boat_post_type );
 		if ( is_a( $boat, 'WP_Post' ) ) {
 			return array(
 				'ID'         => $boat->ID,
