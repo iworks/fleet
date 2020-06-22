@@ -95,6 +95,14 @@ function iworks_fleet_options() {
 				'classes'           => array( 'switch-button' ),
 			),
 			array(
+				'name'              => 'boad_add_owners',
+				'type'              => 'checkbox',
+				'th'                => __( 'Add boat owners', 'fleet' ),
+				'default'           => 0,
+				'sanitize_callback' => 'absint',
+				'classes'           => array( 'switch-button' ),
+			),
+			array(
 				'name'    => 'boat_taxonomies',
 				'type'    => 'checkbox_group',
 				'th'      => __( 'Boat taxonomies', 'fleet' ),

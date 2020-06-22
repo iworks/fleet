@@ -1,6 +1,6 @@
 <?php
 /*
-Copyright 2017-2019 Marcin Pietrzak (marcin@iworks.pl)
+Copyright 2017-PLUGIN_TILL_YEAR Marcin Pietrzak (marcin@iworks.pl)
 
 this program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License, version 2, as
@@ -38,9 +38,23 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 	 */
 	private $single_crew_field_name = 'iworks_fleet_boat_crew';
 	/**
-	 * Sinle boat meta field name
+	 * Single boat meta field name
 	 */
 	private $single_boat_field_name = 'iworks_fleet_boat_boat';
+
+	/**
+	 * Boat owners meta field name (single fields)
+	 *
+	 * @since 1.3.0
+	 */
+	private $owners_field_name = 'iworks_fleet_boat_owners';
+
+	/**
+	 * Boat owner ID meta field name (multiple field)
+	 *
+	 * @since 1.3.0
+	 */
+	private $owners_index_field_name = '_if_boot_owner_id';
 
 	public function __construct() {
 		parent::__construct();
@@ -52,6 +66,7 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		 * save post
 		 */
 		add_action( 'save_post', array( $this, 'add_thumbnail' ), 10, 3 );
+		add_action( 'save_post', array( $this, 'save_post_owners_save' ), 10, 3 );
 		/**
 		 * change default columns
 		 */
@@ -81,7 +96,7 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 			 */
 			$this->single_crew_field_name = $this->options->get_option_name( 'crew' );
 			/**
-			 * Sinle boat meta field name
+			 * Single boat meta field name
 			 */
 			$this->single_boat_field_name = $this->options->get_option_name( 'boat', true );
 		}
@@ -735,6 +750,9 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		if ( $this->options->get_option( 'boad_add_social_media' ) ) {
 			add_meta_box( 'social', __( 'Social Media', 'fleet' ), array( $this, 'social' ), $this->post_type_name );
 		}
+		if ( $this->options->get_option( 'boad_add_owners' ) ) {
+			add_meta_box( 'owners', __( 'Owners', 'fleet' ), array( $this, 'owners' ), $this->post_type_name );
+		}
 	}
 
 	public function crew( $post ) {
@@ -854,6 +872,91 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 
 	public function social( $post ) {
 		$this->get_meta_box_content( $post, $this->fields, __FUNCTION__ );
+	}
+
+	/**
+	 * Meta box "Owners"
+	 *
+	 * since 1.3.0
+	 */
+	public function owners( $post ) {
+		?>
+	<table class="iworks-owners-list-container wp-list-table widefat fixed striped">
+		<thead>
+			<tr>
+				<th style="width:4em"><?php esc_html_e( 'First', 'fleet' ); ?></th>
+				<th style="width:4em"><?php esc_html_e( 'Current', 'fleet' ); ?></th>
+				<th><?php esc_html_e( 'Person', 'fleet' ); ?></th>
+				<th><?php esc_html_e( 'Date from', 'fleet' ); ?></th>
+				<th><?php esc_html_e( 'Date to', 'fleet' ); ?></th>
+				<th><span class="dashicons dashicons-trash"></span></th>
+			</tr>
+		</thead>
+		<tfoot>
+			<tr>
+				<td colspan="6"><a href="#" id="iworks-owners-list-add" class="button"><?php esc_html_e( 'Add owner', 'fleet' ); ?></a></td>
+			</tr>
+		</tfoot>
+		<tbody id="iworks-owners-list">
+		<?php
+		$owners = get_post_meta( $post->ID, $this->owners_field_name, true );
+		if ( is_array( $owners ) ) {
+			foreach ( $owners as $id => $owner ) {
+				$owner['id'] = $id;
+				$this->owners_one_row_helper( $owner );
+			}
+		}
+
+		?>
+		</tbody>
+	</table>
+<script type="text/html" id="tmpl-iworks-fleet-boat-owner">
+		<?php
+		echo $this->owners_one_row_helper();
+		?>
+</script>
+		<?php
+	}
+
+	/**
+	 * One row owner helper
+	 *
+	 * @since 1.3.0
+	 */
+	public function owners_one_row_helper( $data = array() ) {
+		$data = wp_parse_args(
+			$data,
+			array(
+				'id'        => '{{{data.id}}}',
+				'current'   => '{{{data.current}}}',
+				'first'     => '{{{data.first}}}',
+				'user_id'   => '{{{data.user_id}}}',
+				'date_from' => '{{{data.date_from}}}',
+				'date_to'   => '{{{data.date_to}}}',
+			)
+		);
+		$name = esc_attr( $this->owners_field_name );
+		?>
+	<tr id="<?php echo esc_attr( $data['id'] ); ?>">
+	<td><input type="radio" name="<?php echo $name; ?>_first" value="<?php echo esc_attr( $data['id'] ); ?>" <?php echo true === $data['first'] ? ' checked="checked"' : ''; ?> /></td>
+	<td><input type="radio" name="<?php echo $name; ?>_current" value="<?php echo esc_attr( $data['id'] ); ?>" <?php echo true === $data['current'] ? ' checked="checked"' : ''; ?> /></td>
+	<td><select name="<?php echo $name; ?>[<?php echo esc_attr( $data['id'] ); ?>][user_id]" class="select2" data-value="<?php echo esc_attr( $data['user_id'] ); ?>">
+		<?php
+		if ( 0 < intval( $data['user_id'] ) ) {
+			global $iworks_fleet;
+			printf(
+				'<option value="%d">%s</option>',
+				$data['user_id'],
+				$iworks_fleet->get_person_name( $data['user_id'] )
+			);
+		}
+		?>
+</select></td>
+	<td><input type="date_from" class="datepicker" name="<?php echo $name; ?>[<?php echo esc_attr( $data['id'] ); ?>][date_from]" value="<?php echo esc_attr( $data['date_from'] ); ?>" /></td>
+	<td><input type="date_to" class="datepicker" name="<?php echo $name; ?>[<?php echo esc_attr( $data['id'] ); ?>][date_to]" value="<?php echo esc_attr( $data['date_to'] ); ?>" /></td>
+	<td><span class="dashicons dashicons-trash"></span></td>
+</tr>
+		<?php
 	}
 
 	/**
@@ -1160,5 +1263,63 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		}
 		return $content;
 	}
+
+	public function save_post_owners_save( $post_id, $post, $update ) {
+		$valid_post_type = $this->check_post_type_by_id( $post_id );
+		if ( ! $valid_post_type ) {
+			return;
+		}
+		$first   = filter_input( INPUT_POST, $this->owners_field_name . '_first', FILTER_SANITIZE_STRING );
+		$current = filter_input( INPUT_POST, $this->owners_field_name . '_current', FILTER_SANITIZE_STRING );
+		$owners  = array();
+		delete_post_meta( $post_id, $this->owners_field_name );
+		delete_post_meta( $post_id, $this->owners_index_field_name );
+		foreach ( $_POST[ $this->owners_field_name ] as $key => $value ) {
+			$user_id = 0;
+			if ( isset( $value['user_id'] ) ) {
+				$user_id = intval( $value['user_id'] );
+				if ( 0 < $user_id ) {
+					add_post_meta( $post_id, $this->owners_index_field_name, $user_id );
+				}
+			}
+
+			$owner = wp_parse_args(
+				array(
+					'user_id'   => $user_id,
+					'first'     => $key === $first,
+					'current'   => $key === $current,
+					'date_to'   => preg_replace( '/[^0-9^\-]/', '', $value['date_to'] ),
+					'date_from' => preg_replace( '/[^0-9^\-]/', '', $value['date_from'] ),
+				),
+				array(
+					'user_id'   => 0,
+					'first'     => false,
+					'current'   => false,
+					'date_to'   => false,
+					'date_from' => false,
+				)
+			);
+			$add   = false;
+			foreach ( $owner as $value ) {
+				if ( $add ) {
+					continue;
+				}
+				if ( ! empty( $value ) && $value ) {
+					$add = true;
+				}
+			}
+
+			if ( $add ) {
+				$owners[ md5( serialize( $owner ) ) ] = $owner;
+			}
+		}
+		if ( ! empty( $owners ) ) {
+			$result = update_post_meta( $post_id, $this->owners_field_name, $owners );
+			if ( ! $result ) {
+				add_post_meta( $post_id, $this->owners_field_name, $owners, true );
+			}
+		}
+	}
+
 }
 

@@ -29,4 +29,53 @@ jQuery( document ).ready(function($) {
             return false;
         });
     } );
+    /**
+     * boot owner
+     */
+    $( '#iworks-owners-list-add' ).on( 'click', function() {
+        var $container = $( '.iworks-owners-list-container tbody' );
+        var template = wp.template( 'iworks-fleet-boat-owner' );
+        var id = 'iworks-fleet-boat-owner-' + Date.now();
+        var list = iworks_fleet_people_list;
+        var year = parseInt( $( '#iworks_fleet_boat_build_year').val() );
+        /**
+         * bind select2
+         */
+        $( 'select', $container ).select2({ data: list });
+        /**
+         * bind datepicker
+         */
+        $( '.datepicker', $container ).each( function() {
+            $(this).datepicker( {
+                changeMonth: true,
+                changeYear: true,
+                showButtonPanel: true,
+                yearRange: 0 < year? year + ':+0': '1955:+0',
+                dateFormat: $(this).data('date-format') || 'yy-mm-dd',
+            } );
+        });
+        /**
+         * generate
+         */
+        list.unshift( { id: '-', text: '-select-' } );
+        $container.append(
+            template( {
+                id: id,
+
+            } )
+        ).ready( function() {
+            var parent = $( '#' + id );
+            $( 'select', parent ).select2({ data: list });
+            $( '.datepicker', parent ).each( function() {
+                $(this).datepicker( {
+                    changeMonth: true,
+                    changeYear: true,
+                    showButtonPanel: true,
+                    yearRange: 0 < year? year + ':+0': '1955:+0',
+                    dateFormat: $(this).data('date-format') || 'yy-mm-dd',
+                } );
+            });
+        });
+        return false;
+    });
 });
