@@ -955,11 +955,11 @@ function iworks_fleet_options() {
 
 	$iworks_fleet_options['colors'] = array(
 		'aliceblue'            => array(
-			'name' => __( 'AliceBlue', 'fleet' ),
+			'name' => __( 'Alice Blue', 'fleet' ),
 			'code' => '#f0f8ff',
 		),
 		'antiquewhite'         => array(
-			'name' => __( 'AntiqueWhite', 'fleet' ),
+			'name' => __( 'Antique White', 'fleet' ),
 			'code' => '#faebd7',
 		),
 		'aqua'                 => array(
@@ -987,7 +987,7 @@ function iworks_fleet_options() {
 			'code' => '#000000',
 		),
 		'blanchedalmond'       => array(
-			'name' => __( 'BlanchedAlmond', 'fleet' ),
+			'name' => __( 'Blanched Almond', 'fleet' ),
 			'code' => '#ffebcd',
 		),
 		'blue'                 => array(
@@ -995,7 +995,7 @@ function iworks_fleet_options() {
 			'code' => '#0000ff',
 		),
 		'blueviolet'           => array(
-			'name' => __( 'BlueViolet', 'fleet' ),
+			'name' => __( 'Blue Violet', 'fleet' ),
 			'code' => '#8a2be2',
 		),
 		'brown'                => array(
@@ -1003,11 +1003,11 @@ function iworks_fleet_options() {
 			'code' => '#a52a2a',
 		),
 		'burlywood'            => array(
-			'name' => __( 'BurlyWood', 'fleet' ),
+			'name' => __( 'Burly Wood', 'fleet' ),
 			'code' => '#deb887',
 		),
 		'cadetblue'            => array(
-			'name' => __( 'CadetBlue', 'fleet' ),
+			'name' => __( 'Cadet Blue', 'fleet' ),
 			'code' => '#5f9ea0',
 		),
 		'chartreuse'           => array(
@@ -1016,86 +1016,82 @@ function iworks_fleet_options() {
 		),
 		'chocolate'            => array(
 			'name' => __( 'Chocolate', 'fleet' ),
-			'code' => '#D2691E',
+			'code' => '#d2691e',
 		),
-		'Coral'                => array(
+		'coral'                => array(
 			'name' => __( 'Coral', 'fleet' ),
-			'code' => '#FF7F50',
+			'code' => '#ff7f50',
 		),
-		'CornflowerBlue'       => array(
-			'name' => __( 'CornflowerBlue', 'fleet' ),
-			'code' => '#6495ED',
+		'cornflowerblue'       => array(
+			'name' => __( 'Cornflower Blue', 'fleet' ),
+			'code' => '#6495ed',
 		),
-		'Cornsilk'             => array(
+		'cornsilk'             => array(
 			'name' => __( 'Cornsilk', 'fleet' ),
-			'code' => '#FFF8DC',
+			'code' => '#fff8dc',
 		),
-		'Crimson'              => array(
+		'crimson'              => array(
 			'name' => __( 'Crimson', 'fleet' ),
-			'code' => '#DC143C',
+			'code' => '#dc143c',
 		),
-		'Cyan'                 => array(
+		'cyan'                 => array(
 			'name' => __( 'Cyan', 'fleet' ),
-			'code' => '#00FFFF',
+			'code' => '#00ffff',
 		),
-		'DarkBlue'             => array(
-			'name' => __( 'DarkBlue', 'fleet' ),
-			'code' => '#00008B',
+		'darkblue'             => array(
+			'name' => __( 'Dark Blue', 'fleet' ),
+			'code' => '#00008b',
 		),
-		'DarkCyan'             => array(
-			'name' => __( 'DarkCyan', 'fleet' ),
-			'code' => '#008B8B',
+		'darkcyan'             => array(
+			'name' => __( 'Dark Cyan', 'fleet' ),
+			'code' => '#008b8b',
 		),
-		'DarkGoldenRod'        => array(
-			'name' => __( 'DarkGoldenRod', 'fleet' ),
-			'code' => '#B8860B',
+		'darkgoldenrod'        => array(
+			'name' => __( 'Dark Golden Rod', 'fleet' ),
+			'code' => '#b8860b',
 		),
-		'DarkGray'             => array(
-			'name' => __( 'DarkGray', 'fleet' ),
-			'code' => '#A9A9A9',
+		'darkgrey'             => array(
+			'name' => __( 'Dark Grey', 'fleet' ),
+			'code' => '#a9a9a9',
 		),
-		'DarkGrey'             => array(
-			'name' => __( 'DarkGrey', 'fleet' ),
-			'code' => '#A9A9A9',
-		),
-		'DarkGreen'            => array(
-			'name' => __( 'DarkGreen', 'fleet' ),
+		'darkgreen'            => array(
+			'name' => __( 'Dark Green', 'fleet' ),
 			'code' => '#006400',
 		),
-		'DarkKhaki'            => array(
-			'name' => __( 'DarkKhaki', 'fleet' ),
-			'code' => '#BDB76B',
+		'darkkhaki'            => array(
+			'name' => __( 'Dark Khaki', 'fleet' ),
+			'code' => '#bdb76b',
 		),
-		'DarkMagenta'          => array(
-			'name' => __( 'DarkMagenta', 'fleet' ),
-			'code' => '#8B008B',
+		'darkmagenta'          => array(
+			'name' => __( 'Dark Magenta', 'fleet' ),
+			'code' => '#8b008b',
 		),
-		'DarkOliveGreen'       => array(
-			'name' => __( 'DarkOliveGreen', 'fleet' ),
-			'code' => '#556B2F',
+		'darkolivegreen'       => array(
+			'name' => __( 'Dark Olive Green', 'fleet' ),
+			'code' => '#556b2f',
 		),
-		'Darkorange'           => array(
-			'name' => __( 'Darkorange', 'fleet' ),
-			'code' => '#FF8C00',
+		'darkorange'           => array(
+			'name' => __( 'Dark Orange', 'fleet' ),
+			'code' => '#ff8c00',
 		),
-		'DarkOrchid'           => array(
-			'name' => __( 'DarkOrchid', 'fleet' ),
-			'code' => '#9932CC',
+		'darkorchid'           => array(
+			'name' => __( 'Dark Orchid', 'fleet' ),
+			'code' => '#9932cc',
 		),
-		'DarkRed'              => array(
-			'name' => __( 'DarkRed', 'fleet' ),
-			'code' => '#8B0000',
+		'darkred'              => array(
+			'name' => __( 'Dark Red', 'fleet' ),
+			'code' => '#8b0000',
 		),
-		'DarkSalmon'           => array(
-			'name' => __( 'DarkSalmon', 'fleet' ),
-			'code' => '#E9967A',
+		'darksalmon'           => array(
+			'name' => __( 'Dark Salmon', 'fleet' ),
+			'code' => '#e9967a',
 		),
-		'DarkSeaGreen'         => array(
-			'name' => __( 'DarkSeaGreen', 'fleet' ),
-			'code' => '#8FBC8F',
+		'darkseagreen'         => array(
+			'name' => __( 'Dark Sea Green', 'fleet' ),
+			'code' => '#8fbc8f',
 		),
-		'DarkSlateBlue'        => array(
-			'name' => __( 'DarkSlateBlue', 'fleet' ),
+		'darkslateblue'        => array(
+			'name' => __( 'Dark Slate Blue', 'fleet' ),
 			'code' => '#483D8B',
 		),
 		'DarkSlateGray'        => array(
