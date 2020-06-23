@@ -53,6 +53,28 @@ jQuery( document ).ready(function($) {
     if ( true ) {
         var $container = $( '.iworks-owners-list-container tbody' );
         var year = parseInt( $( '#iworks_fleet_boat_build_year').val() );
+        var bind_datepicker = function( el ) {
+            el.datepicker( {
+                changeMonth: true,
+                changeYear: true,
+                showButtonPanel: true,
+                yearRange: 0 < year? year + ':+0': '1955:+0',
+                dateFormat:el.data('date-format') || 'yy-mm-dd',
+            } );
+        };
+        var bind_add_person = function( el ) {
+            el.on( 'click', function() {
+                var $parent = $(this).closest( 'td' );
+                var template = wp.template( 'iworks-fleet-boat-owner-user' );
+                var id = $(this).closest( 'tr' ).data( 'id' );
+                $( '.persons', $parent ).append( template( { id: id } )).ready( function() {
+                    var list = iworks_fleet_people_list;
+                    list.unshift( { id: '-', text: '-select-' } );
+                    $('.select2.empty' ).select2( { data: list } ).removeClass( 'empty' );
+                });
+                return false;
+            });
+        };
         /**
          * bind delete
          */
@@ -64,14 +86,12 @@ jQuery( document ).ready(function($) {
          * bind datepicker
          */
         $( '.datepicker', $container ).each( function() {
-            $(this).datepicker( {
-                changeMonth: true,
-                changeYear: true,
-                showButtonPanel: true,
-                yearRange: 0 < year? year + ':+0': '1955:+0',
-                dateFormat: $(this).data('date-format') || 'yy-mm-dd',
-            } );
+            bind_datepicker( $(this) );
         });
+        /**
+         * bind add person
+         */
+        bind_add_person( $( 'a.add-person-selector', $container ) );
         $( '#iworks-owners-list-add' ).on( 'click', function() {
             var template = wp.template( 'iworks-fleet-boat-owner' );
             var id = 'iworks-fleet-boat-owner-' + Date.now();
@@ -83,10 +103,18 @@ jQuery( document ).ready(function($) {
             $container.append(
                 template( {
                     id: id,
-
+                    kind: 'person',
                 } )
             ).ready( function() {
                 var $parent = $( '#' + id );
+                /**
+                 * set kind
+                 */
+                $( 'input[type=radio][value=person]', $parent ).attr( 'checked', 'checked' );
+                $( '.person', $parent ).show();
+                template = wp.template( 'iworks-fleet-boat-owner-user' );
+                $( '.persons', $parent ).append( template( { id: id } ) );
+                bind_add_person( $( 'a.add-person-selector', $parent ) );
                 /**
                  * bind delete
                  */
@@ -96,13 +124,7 @@ jQuery( document ).ready(function($) {
                 });
                 $( 'select', $parent ).select2({ data: list });
                 $( '.datepicker', $parent ).each( function() {
-                    $(this).datepicker( {
-                        changeMonth: true,
-                        changeYear: true,
-                        showButtonPanel: true,
-                        yearRange: 0 < year? year + ':+0': '1955:+0',
-                        dateFormat: $(this).data('date-format') || 'yy-mm-dd',
-                    } );
+                    bind_datepicker( $(this) );
                 });
             });
             return false;

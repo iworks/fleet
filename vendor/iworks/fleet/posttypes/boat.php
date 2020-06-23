@@ -54,7 +54,7 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 	 *
 	 * @since 1.3.0
 	 */
-	private $owners_index_field_name = '_if_boot_owner_id';
+	private $owners_index_field_name = 'iworks_fleet_boot_owner_id';
 
 	public function __construct() {
 		parent::__construct();
@@ -886,7 +886,8 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 			<tr>
 				<th style="width:4em"><?php esc_html_e( 'First', 'fleet' ); ?></th>
 				<th style="width:4em"><?php esc_html_e( 'Current', 'fleet' ); ?></th>
-				<th><?php esc_html_e( 'Person', 'fleet' ); ?></th>
+				<th><?php esc_html_e( 'Type', 'fleet' ); ?></th>
+				<th><?php esc_html_e( 'Owner', 'fleet' ); ?></th>
 				<th><?php esc_html_e( 'Date from', 'fleet' ); ?></th>
 				<th><?php esc_html_e( 'Date to', 'fleet' ); ?></th>
 				<th><span class="dashicons dashicons-trash"></span></th>
@@ -894,7 +895,7 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		</thead>
 		<tfoot>
 			<tr>
-				<td colspan="6"><a href="#" id="iworks-owners-list-add" class="button"><?php esc_html_e( 'Add owner', 'fleet' ); ?></a></td>
+				<td colspan="7"><a href="#" id="iworks-owners-list-add" class="button"><?php esc_html_e( 'Add owner', 'fleet' ); ?></a></td>
 			</tr>
 		</tfoot>
 		<tbody id="iworks-owners-list">
@@ -902,7 +903,21 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		$owners = get_post_meta( $post->ID, $this->owners_field_name, true );
 		if ( is_array( $owners ) ) {
 			foreach ( $owners as $id => $owner ) {
-				$owner['id'] = $id;
+				$owner = wp_parse_args(
+					$owner,
+					array(
+						'id'        => $id,
+						'current'   => '',
+						'first'     => '',
+						'date_from' => '',
+						'date_to'   => '',
+						'users_ids' => array(),
+						'kind'      => 'person',
+					)
+				);
+				if ( isset( $owner['user_id'] ) ) {
+					$owner['users_ids'][] = $owner['user_id'];
+				}
 				$this->owners_one_row_helper( $owner );
 			}
 		}
@@ -910,6 +925,12 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		?>
 		</tbody>
 	</table>
+		<?php
+		$name = esc_attr( $this->owners_field_name );
+		?>
+<script type="text/html" id="tmpl-iworks-fleet-boat-owner-user">
+	  <select name="<?php echo $name; ?>[{{{data.id}}}][users_ids][]" class="select2 empty"></select>
+</script>
 <script type="text/html" id="tmpl-iworks-fleet-boat-owner">
 		<?php
 		echo $this->owners_one_row_helper();
@@ -933,25 +954,44 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 				'user_id'   => '{{{data.user_id}}}',
 				'date_from' => '{{{data.date_from}}}',
 				'date_to'   => '{{{data.date_to}}}',
+				'users_ids' => array(),
+				'kind'      => '{{{data.kind}}}',
 			)
 		);
 		$name = esc_attr( $this->owners_field_name );
 		?>
-	<tr id="<?php echo esc_attr( $data['id'] ); ?>">
+			<tr data-id="<?php echo esc_attr( $data['id'] ); ?>" data-kind="<?php echo esc_attr( $data['kind'] ); ?>">
 	<td><input type="radio" name="<?php echo $name; ?>_first" value="<?php echo esc_attr( $data['id'] ); ?>" <?php echo true === $data['first'] ? ' checked="checked"' : ''; ?> /></td>
 	<td><input type="radio" name="<?php echo $name; ?>_current" value="<?php echo esc_attr( $data['id'] ); ?>" <?php echo true === $data['current'] ? ' checked="checked"' : ''; ?> /></td>
-	<td><select name="<?php echo $name; ?>[<?php echo esc_attr( $data['id'] ); ?>][user_id]" class="select2" data-value="<?php echo esc_attr( $data['user_id'] ); ?>">
+	<td>
+		<ul>
+			<li><label><input type="radio" <?php echo 'person' === $data['kind'] ? ' checked="checked"' : ''; ?> name="<?php echo $name; ?>[<?php echo esc_attr( $data['id'] ); ?>][kind]" value="person"> <?php esc_html_e( 'Person', 'fleet' ); ?></label></li>
+			<li><label><input type="radio" <?php echo 'organization' === $data['kind'] ? ' checked="checked"' : ''; ?>  name="<?php echo $name; ?>[<?php echo esc_attr( $data['id'] ); ?>][kind]" value="organization"> <?php esc_html_e( 'Organization', 'fleet' ); ?></label></li>
+		</ul>
+	</td>
+	<td>
+		<div class="person<?php echo 'person' === $data['kind'] ? '' : ' hidden'; ?>">
+			<div class="persons">
 		<?php
-		if ( 0 < intval( $data['user_id'] ) ) {
+		if ( is_array( $data['users_ids'] ) ) {
 			global $iworks_fleet;
-			printf(
-				'<option value="%d">%s</option>',
-				$data['user_id'],
-				$iworks_fleet->get_person_name( $data['user_id'] )
-			);
+			foreach ( $data['users_ids'] as $user_id ) {
+				?>
+			<select name="<?php echo $name; ?>[<?php echo esc_attr( $data['id'] ); ?>][users_ids][]" class="select2">
+				<?php printf( '<option value="%d">%s</option>', $user_id, $iworks_fleet->get_person_name( $user_id ) ); ?>
+			</select>
+				<?php
+			}
 		}
+
 		?>
-</select></td>
+</div>
+			<a href="#" class="add-person-selector"><span class="dashicons dashicons-plus"></span></a>
+		</div>
+		<div class="organization<?php echo 'organization' === $data['kind'] ? '' : ' hidden'; ?>">
+			<input type="text" name="<?php echo $name; ?>[<?php echo esc_attr( $data['id'] ); ?>][organization]" value="" />
+		</div>
+	</td>
 	<td><input type="date_from" class="datepicker" name="<?php echo $name; ?>[<?php echo esc_attr( $data['id'] ); ?>][date_from]" value="<?php echo esc_attr( $data['date_from'] ); ?>" /></td>
 	<td><input type="date_to" class="datepicker" name="<?php echo $name; ?>[<?php echo esc_attr( $data['id'] ); ?>][date_to]" value="<?php echo esc_attr( $data['date_to'] ); ?>" /></td>
 	<td><a href="#" class="iworks-fleet-boat-delete"><span class="dashicons dashicons-trash"></span></a></td>
@@ -1272,34 +1312,47 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		if ( ! isset( $_POST[ $this->owners_field_name ] ) ) {
 			return;
 		}
+
+		l( $_POST[ $this->owners_field_name ] );
+
 		$first   = filter_input( INPUT_POST, $this->owners_field_name . '_first', FILTER_SANITIZE_STRING );
 		$current = filter_input( INPUT_POST, $this->owners_field_name . '_current', FILTER_SANITIZE_STRING );
 		$owners  = array();
 		delete_post_meta( $post_id, $this->owners_field_name );
 		delete_post_meta( $post_id, $this->owners_index_field_name );
 		foreach ( $_POST[ $this->owners_field_name ] as $key => $value ) {
-			$user_id = 0;
-			if ( isset( $value['user_id'] ) ) {
-				$user_id = intval( $value['user_id'] );
-				if ( 0 < $user_id ) {
-					add_post_meta( $post_id, $this->owners_index_field_name, $user_id );
+			$kind         = ( isset( $value['kind'] ) && preg_match( '/^(person|organization)$/', $value['kind'] ) ) ? $value['kind'] : 'person';
+			$users_ids    = array();
+			$organization = '';
+			if ( 'person' === $kind ) {
+				foreach ( $value['users_ids'] as $user_id ) {
+					$user_id = intval( $user_id );
+					if ( 0 < $user_id ) {
+						add_post_meta( $post_id, $this->owners_index_field_name, $user_id );
+						$users_ids[] = $user_id;
+					}
 				}
+			} else {
+				$organization = filter_var( $value['organization'], FILTER_SANITIZE_STRING );
 			}
-
 			$owner = wp_parse_args(
 				array(
-					'user_id'   => $user_id,
-					'first'     => $key === $first,
-					'current'   => $key === $current,
-					'date_to'   => preg_replace( '/[^0-9^\-]/', '', $value['date_to'] ),
-					'date_from' => preg_replace( '/[^0-9^\-]/', '', $value['date_from'] ),
+					'users_ids'    => $users_ids,
+					'organization' => $organization,
+					'first'        => $key === $first,
+					'current'      => $key === $current,
+					'date_to'      => preg_replace( '/[^0-9^\-]/', '', $value['date_to'] ),
+					'date_from'    => preg_replace( '/[^0-9^\-]/', '', $value['date_from'] ),
+					'kind '        => $kind,
 				),
 				array(
-					'user_id'   => 0,
-					'first'     => false,
-					'current'   => false,
-					'date_to'   => false,
-					'date_from' => false,
+					'users_ids'    => array(),
+					'organization' => '',
+					'first'        => false,
+					'current'      => false,
+					'date_to'      => false,
+					'date_from'    => false,
+					'kind '        => $kind,
 				)
 			);
 			$add   = false;
@@ -1311,7 +1364,6 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 					$add = true;
 				}
 			}
-
 			if ( $add ) {
 				$owners[ md5( serialize( $owner ) ) ] = $owner;
 			}
