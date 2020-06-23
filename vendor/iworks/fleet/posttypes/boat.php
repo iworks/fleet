@@ -954,7 +954,7 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 </select></td>
 	<td><input type="date_from" class="datepicker" name="<?php echo $name; ?>[<?php echo esc_attr( $data['id'] ); ?>][date_from]" value="<?php echo esc_attr( $data['date_from'] ); ?>" /></td>
 	<td><input type="date_to" class="datepicker" name="<?php echo $name; ?>[<?php echo esc_attr( $data['id'] ); ?>][date_to]" value="<?php echo esc_attr( $data['date_to'] ); ?>" /></td>
-	<td><span class="dashicons dashicons-trash"></span></td>
+	<td><a href="#" class="iworks-fleet-boat-delete"><span class="dashicons dashicons-trash"></span></a></td>
 </tr>
 		<?php
 	}
@@ -1267,6 +1267,9 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 	public function save_post_owners_save( $post_id, $post, $update ) {
 		$valid_post_type = $this->check_post_type_by_id( $post_id );
 		if ( ! $valid_post_type ) {
+			return;
+		}
+		if ( ! isset( $_POST[ $this->owners_field_name ] ) ) {
 			return;
 		}
 		$first   = filter_input( INPUT_POST, $this->owners_field_name . '_first', FILTER_SANITIZE_STRING );

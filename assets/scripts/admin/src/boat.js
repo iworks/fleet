@@ -11,6 +11,11 @@ jQuery( document ).ready(function($) {
             $('select', $('#iworks-crews-list') ).select2({
                 data: iworks_fleet_people_list
             });
+            $( 'select', $( '.iworks-owners-list-container tbody' ) ).each( function() {
+                var list = iworks_fleet_people_list;
+                list.unshift( { id: '-', text: '-select-' } );
+                $(this).select2({ data: list });
+            });
         }
     });
     $( function() {
@@ -32,16 +37,16 @@ jQuery( document ).ready(function($) {
     /**
      * boot owner
      */
-    $( '#iworks-owners-list-add' ).on( 'click', function() {
+    if ( true ) {
         var $container = $( '.iworks-owners-list-container tbody' );
-        var template = wp.template( 'iworks-fleet-boat-owner' );
-        var id = 'iworks-fleet-boat-owner-' + Date.now();
-        var list = iworks_fleet_people_list;
         var year = parseInt( $( '#iworks_fleet_boat_build_year').val() );
         /**
-         * bind select2
+         * bind delete
          */
-        $( 'select', $container ).select2({ data: list });
+        $( 'a.iworks-fleet-boat-delete', $container ).on( 'click', function() {
+            $(this).closest( 'tr' ).detach();
+            return false;
+        });
         /**
          * bind datepicker
          */
@@ -54,28 +59,40 @@ jQuery( document ).ready(function($) {
                 dateFormat: $(this).data('date-format') || 'yy-mm-dd',
             } );
         });
-        /**
-         * generate
-         */
-        list.unshift( { id: '-', text: '-select-' } );
-        $container.append(
-            template( {
-                id: id,
+        $( '#iworks-owners-list-add' ).on( 'click', function() {
+            var template = wp.template( 'iworks-fleet-boat-owner' );
+            var id = 'iworks-fleet-boat-owner-' + Date.now();
+            var list = iworks_fleet_people_list;
+            /**
+             * generate
+             */
+            list.unshift( { id: '-', text: '-select-' } );
+            $container.append(
+                template( {
+                    id: id,
 
-            } )
-        ).ready( function() {
-            var parent = $( '#' + id );
-            $( 'select', parent ).select2({ data: list });
-            $( '.datepicker', parent ).each( function() {
-                $(this).datepicker( {
-                    changeMonth: true,
-                    changeYear: true,
-                    showButtonPanel: true,
-                    yearRange: 0 < year? year + ':+0': '1955:+0',
-                    dateFormat: $(this).data('date-format') || 'yy-mm-dd',
-                } );
+                } )
+            ).ready( function() {
+                var $parent = $( '#' + id );
+                /**
+                 * bind delete
+                 */
+                $( 'a.iworks-fleet-boat-delete', $parent ).on( 'click', function() {
+                    $(this).closest( 'tr' ).detach();
+                    return false;
+                });
+                $( 'select', $parent ).select2({ data: list });
+                $( '.datepicker', $parent ).each( function() {
+                    $(this).datepicker( {
+                        changeMonth: true,
+                        changeYear: true,
+                        showButtonPanel: true,
+                        yearRange: 0 < year? year + ':+0': '1955:+0',
+                        dateFormat: $(this).data('date-format') || 'yy-mm-dd',
+                    } );
+                });
             });
+            return false;
         });
-        return false;
-    });
+    }
 });
