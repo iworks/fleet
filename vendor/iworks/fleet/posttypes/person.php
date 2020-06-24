@@ -49,6 +49,7 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 		 * apply default sort order
 		 */
 		add_action( 'pre_get_posts', array( $this, 'apply_default_sort_order' ) );
+		add_action( 'pre_get_posts', array( $this, 'apply_countries_selector' ) );
 		/**
 		 * sort next/previous links by title
 		 */
@@ -75,6 +76,9 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 				'nation'     => array(
 					'label' => __( 'Nation', 'fleet' ),
 					'type'  => 'select2',
+					'args'  => array(
+						'options' => $this->get_nations(),
+					),
 				),
 				'birth_year' => array( 'label' => __( 'Birth Year', 'fleet' ) ),
 				'birth_date' => array(
@@ -235,19 +239,6 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 	}
 
 	public function personal( $post ) {
-		$mna_codes = $this->options->get_group( 'mna_codes' );
-		if ( ! empty( $mna_codes ) ) {
-			$data = array();
-			foreach ( $mna_codes as $code ) {
-				if ( empty( $code['code'] ) ) {
-					continue;
-				}
-				$data[ $code['code'] ] = $code['nation'];
-			}
-			asort( $data );
-			$this->fields['personal']['nation']['args']['options'] = $data;
-		}
-
 		$this->get_meta_box_content( $post, $this->fields, __FUNCTION__ );
 	}
 

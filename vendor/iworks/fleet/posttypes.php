@@ -287,5 +287,66 @@ class iworks_fleet_posttypes {
 		}
 		set_transient( $key, $data, $expiration );
 	}
+
+	public function apply_countries_selector( $query ) {
+		if ( is_admin() ) {
+			return;
+		}
+		if ( ! $query->is_main_query() ) {
+			return;
+		}
+		if ( ! $query->is_post_type_archive() ) {
+			return;
+		}
+		if ( $query->get( 'post_type' ) !== $this->post_type_name ) {
+			return;
+		}
+		$filter = $this->options->get_option( 'country' );
+		if ( empty( $filter ) ) {
+			return;
+		}
+		$meta_key = null;
+		switch ( $query->get( 'post_type' ) ) {
+			case $this->options->get_option_name( 'boat' ):
+				$meta_key = $this->options->get_option_name( 'boat_nation' );
+				break;
+			case $this->options->get_option_name( 'person' ):
+				$meta_key = $this->options->get_option_name( 'personal_nation' );
+				break;
+		}
+		if ( empty( $meta_key ) ) {
+			return;
+		}
+		$meta_query = array(
+			'relation' => 'OR',
+		);
+		foreach ( $filter as $value ) {
+			$meta_query[] = array(
+				'key'   => $meta_key,
+				'value' => $value,
+			);
+		}
+		$query->set( 'meta_query', $meta_query );
+	}
+
+	protected function get_nations() {
+		$data      = array();
+		$mna_codes = $this->options->get_group( 'mna_codes' );
+		if ( ! empty( $mna_codes ) ) {
+			foreach ( $mna_codes as $code ) {
+				if ( empty( $code['code'] ) ) {
+					continue;
+				}
+				$data[ $code['code'] ] = sprintf( '%s (%s)', $code['nation'], $code['code'] );
+			}
+			asort( $data );
+		}
+		return array_merge(
+			array(
+				'-' => __( 'select nation', 'fleet' ),
+			),
+			$data
+		);
+	}
 }
 

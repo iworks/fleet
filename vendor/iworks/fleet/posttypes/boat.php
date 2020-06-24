@@ -62,6 +62,7 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		add_filter( 'the_content', array( $this, 'the_content' ), 10 );
 		add_filter( 'the_content', array( $this, 'add_media' ), 999 );
 		add_filter( 'international_fleet_posted_on', array( $this, 'get_manufacturer' ), 10, 2 );
+		add_filter( 'posts_orderby', array( $this, 'posts_orderby_post_title' ), 10, 2 );
 		/**
 		 * save post
 		 */
@@ -76,6 +77,7 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		 * apply default sort order
 		 */
 		add_action( 'pre_get_posts', array( $this, 'apply_default_sort_order' ) );
+		add_action( 'pre_get_posts', array( $this, 'apply_countries_selector' ) );
 		/**
 		 * sort next/previous links by title
 		 */
@@ -106,6 +108,13 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		$this->fields = array(
 			'crew'   => array(),
 			'boat'   => array(
+				'nation'               => array(
+					'label' => __( 'Current nation', 'fleet' ),
+					'type'  => 'select2',
+					'args'  => array(
+						'options' => $this->get_nations(),
+					),
+				),
 				'build_year'           => array( 'label' => __( 'Year of building', 'fleet' ) ),
 				'hull_number'          => array( 'label' => __( 'Hull number', 'fleet' ) ),
 				'name'                 => array( 'label' => __( 'Boat name', 'fleet' ) ),
@@ -1123,6 +1132,28 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 			$query->set( 'orderby', 'post_title' );
 		}
 		return $query;
+	}
+
+	public function posts_orderby_post_title( $orderby, $query ) {
+		/**
+		 * query post type
+		 */
+		if ( isset( $query->query['post_type'] ) && $this->get_name() != $query->query['post_type'] ) {
+			return $orderby;
+		}
+		global $wpdb;
+		$re = sprintf(
+			'/^(%s.post_title) (DESC|ASC)$/',
+			$wpdb->posts
+		);
+		if ( preg_match( $re, $orderby, $matches ) ) {
+			return sprintf(
+				'CAST( %s as unsigned ) %s',
+				$matches[1],
+				$matches[2]
+			);
+		}
+		return $orderby;
 	}
 
 	public function get_manufacturer( $content, $post_id ) {

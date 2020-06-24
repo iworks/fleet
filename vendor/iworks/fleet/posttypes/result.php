@@ -1037,9 +1037,14 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		$name            = $this->options->get_option_name( 'result_number_of_races' );
 		$number_of_races = intval( get_post_meta( $post_id, $name, true ) );
 		foreach ( $data as $row ) {
-			$boat    = array_shift( $row );
-			$boat_id = intval( preg_replace( '/[^\d]+/', '', $boat ) );
-			$country = preg_replace( '/[^a-zA-Z]+/', '', $boat );
+			$boat = array_shift( $row );
+			if ( preg_match( '/^([a-zA-Z]+)[ \-\t]*(\d+)$/', $boat, $matches ) ) {
+				$country = $matches[1];
+				$boat_id = $matches[2];
+			} else {
+				$country = $boat;
+				$boat_id = intval( array_shift( $row ) );
+			}
 			$helm    = trim( array_shift( $row ) );
 			$crew    = trim( array_shift( $row ) );
 			$club    = trim( array_shift( $row ) );
@@ -1078,11 +1083,17 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 					'regata_id'      => $regatta_id,
 					'number'         => $number++,
 				);
-				if ( preg_match( '/\*/', $one ) ) {
+				$one  = trim( $one );
+				if (
+					preg_match( '/\*/', $one )
+					|| preg_match( '/^\‑/', $one )
+					|| preg_match( '/^\-/', $one )
+					|| preg_match( '/^\([^\)]+\)$/', $one )
+					|| 0 > $one
+				) {
 					$race['discard'] = true;
 				}
 				$one            = preg_replace( '/\*/', '', $one );
-				$one            = trim( $one );
 				$race['code']   = preg_replace( '/[^a-z]+/i', '', $one );
 				$race['points'] = preg_replace( '/[^\d^\,^\.]+/', '', $one );
 				$wpdb->insert( $table_name_regatta_race, $race );
