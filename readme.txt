@@ -44,6 +44,7 @@ There are 3 ways to install this plugin:
 
 * Added ability to choose country or countries for whole plugin.
 * Improved results importer.
+* Added boats owners.
 
 = 1.2.9 (2020-06-17) =
 * Added MNA Codes see: https://www.sailing.org/raceofficials/eventorganizers/mna_codes.php

@@ -534,6 +534,7 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		if ( $post_type != $this->post_type_name ) {
 			return $content;
 		}
+		global $iworks_fleet;
 		$post_id    = get_the_ID();
 		$text       = '';
 		$options    = array(
@@ -636,14 +637,65 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 			}
 			$text .= $this->boat_single_row( $key, $label, $value );
 		}
-		if ( ! empty( $text ) ) {
-			$content = sprintf(
-				'<h2>%s</h2><table class="boat-data">%s</table>%s',
-				esc_html__( 'Boat details', 'fleet' ),
-				$text,
-				$content
-			);
+		/**
+		 * Owners
+		 */
+		if ( $this->options->get_option( 'boat_show_owners' ) ) {
+			$owners_text = '';
+			$owners      = get_post_meta( $post_id, $this->owners_field_name, true );
+			if ( ! empty( $owners ) ) {
+				foreach ( $owners as $one ) {
+					$classes = array( $one['kind'] );
+					if ( $one['first'] ) {
+						$classes[] = 'first';
+					}
+					if ( $one['current'] ) {
+						$classes[] = 'current';
+					}
+					$owners_text .= sprintf( '<li class="%s">', esc_attr( implode( ' ', $classes ) ) );
+					if ( 'person' === $one['kind'] ) {
+						$print_amp = false;
+						foreach ( $one['users_ids'] as $user_id ) {
+							if ( $print_amp ) {
+								$owners_text .= ' &amp; ';
+							}
+							$owners_text .= sprintf(
+								'<a href="%s">%s</a>',
+								get_permalink( $user_id ),
+								$iworks_fleet->get_person_name( $user_id )
+							);
+							$print_amp    = true;
+						}
+					} else {
+						$owners_text .= $one['organization'];
+					}
+					if (
+						! empty( $one['date_from'] )
+						|| ! empty( $one['date_to'] )
+					) {
+						$owners_text .= sprintf(
+							' <span class="dates">%s - %s</span>',
+							empty( $one['date_from'] ) ? '?' : substr( $one['date_from'], 0, 4 ),
+							empty( $one['date_to'] ) ? '?' : substr( $one['date_to'], 0, 4 )
+						);
+					}
+					$owners_text .= '</li>';
+				}
+				$owners_text .= '</ul>';
+			}
+			$text .= $this->boat_single_row( 'owners', __( 'Owners', 'fleet' ), $owners_text );
 		}
+		$section = current_theme_supports( 'html5' ) ? 'section' : 'div';
+		if ( ! empty( $text ) ) {
+			$content .= sprintf( '<%s class="fleet-boat-details">', $section );
+			$content .= sprintf(
+				'<h2>%s</h2><table class="boat-data">%s</table>',
+				esc_html__( 'Boat details', 'fleet' ),
+				$text
+			);
+			$content .= sprintf( '</%s>', $section );
+		}
+
 		/**
 		 * crews data
 		 */
@@ -957,14 +1009,15 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		$data = wp_parse_args(
 			$data,
 			array(
-				'id'        => '{{{data.id}}}',
-				'current'   => '{{{data.current}}}',
-				'first'     => '{{{data.first}}}',
-				'user_id'   => '{{{data.user_id}}}',
-				'date_from' => '{{{data.date_from}}}',
-				'date_to'   => '{{{data.date_to}}}',
-				'users_ids' => array(),
-				'kind'      => '{{{data.kind}}}',
+				'id'           => '{{{data.id}}}',
+				'current'      => '{{{data.current}}}',
+				'first'        => '{{{data.first}}}',
+				'user_id'      => '{{{data.user_id}}}',
+				'date_from'    => '{{{data.date_from}}}',
+				'date_to'      => '{{{data.date_to}}}',
+				'users_ids'    => array(),
+				'kind'         => '{{{data.kind}}}',
+				'organization' => '{{{data.organization}}}',
 			)
 		);
 		$name = esc_attr( $this->owners_field_name );
@@ -1343,9 +1396,6 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		if ( ! isset( $_POST[ $this->owners_field_name ] ) ) {
 			return;
 		}
-
-		l( $_POST[ $this->owners_field_name ] );
-
 		$first   = filter_input( INPUT_POST, $this->owners_field_name . '_first', FILTER_SANITIZE_STRING );
 		$current = filter_input( INPUT_POST, $this->owners_field_name . '_current', FILTER_SANITIZE_STRING );
 		$owners  = array();

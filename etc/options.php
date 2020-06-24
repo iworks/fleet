@@ -57,6 +57,14 @@ function iworks_fleet_options() {
 				'classes'           => array( 'switch-button' ),
 			),
 			array(
+				'name'              => 'person_show_boats_owned_table',
+				'type'              => 'checkbox',
+				'th'                => __( 'Show boat owned on person details page', 'fleet' ),
+				'default'           => 0,
+				'sanitize_callback' => 'absint',
+				'classes'           => array( 'switch-button' ),
+			),
+			array(
 				'name'              => 'person_tag_to_person',
 				'type'              => 'checkbox',
 				'th'                => __( 'Tag to person', 'fleet' ),
@@ -95,7 +103,7 @@ function iworks_fleet_options() {
 				'classes'           => array( 'switch-button' ),
 			),
 			array(
-				'name'              => 'boad_add_social_media',
+				'name'              => 'boat_add_social_media',
 				'type'              => 'checkbox',
 				'th'                => __( 'Add boat social media', 'fleet' ),
 				'default'           => 0,
@@ -103,9 +111,17 @@ function iworks_fleet_options() {
 				'classes'           => array( 'switch-button' ),
 			),
 			array(
-				'name'              => 'boad_add_owners',
+				'name'              => 'boat_add_owners',
 				'type'              => 'checkbox',
 				'th'                => __( 'Add boat owners', 'fleet' ),
+				'default'           => 0,
+				'sanitize_callback' => 'absint',
+				'classes'           => array( 'switch-button' ),
+			),
+			array(
+				'name'              => 'boat_show_owners',
+				'type'              => 'checkbox',
+				'th'                => __( 'Show boat owners on boat details page', 'fleet' ),
 				'default'           => 0,
 				'sanitize_callback' => 'absint',
 				'classes'           => array( 'switch-button' ),
