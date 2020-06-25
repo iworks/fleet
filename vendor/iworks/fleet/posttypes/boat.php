@@ -1047,12 +1047,24 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 				'organization' => '{{{data.organization}}}',
 			)
 		);
+		/**
+		 * remove empty
+		 */
+		if (
+			true
+			&& empty( $data['date_to'] )
+			&& empty( $data['date_from'] )
+			&& empty( $data['users_ids'] )
+			&& empty( $data['organization'] )
+		) {
+			return;
+		}
 		$name = esc_attr( $this->owners_field_name );
 		?>
 			<tr data-id="<?php echo esc_attr( $data['id'] ); ?>" data-kind="<?php echo esc_attr( $data['kind'] ); ?>">
 	<td><input type="radio" name="<?php echo $name; ?>_first" value="<?php echo esc_attr( $data['id'] ); ?>" <?php echo true === $data['first'] ? ' checked="checked"' : ''; ?> /></td>
 	<td><input type="radio" name="<?php echo $name; ?>_current" value="<?php echo esc_attr( $data['id'] ); ?>" <?php echo true === $data['current'] ? ' checked="checked"' : ''; ?> /></td>
-	<td>
+	<td class="boat-kind">
 		<ul>
 			<li><label><input type="radio" <?php echo 'person' === $data['kind'] ? ' checked="checked"' : ''; ?> name="<?php echo $name; ?>[<?php echo esc_attr( $data['id'] ); ?>][kind]" value="person"> <?php esc_html_e( 'Person', 'fleet' ); ?></label></li>
 			<li><label><input type="radio" <?php echo 'organization' === $data['kind'] ? ' checked="checked"' : ''; ?>  name="<?php echo $name; ?>[<?php echo esc_attr( $data['id'] ); ?>][kind]" value="organization"> <?php esc_html_e( 'Organization', 'fleet' ); ?></label></li>
@@ -1078,7 +1090,7 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 			<a href="#" class="add-person-selector"><span class="dashicons dashicons-plus"></span></a>
 		</div>
 		<div class="organization<?php echo 'organization' === $data['kind'] ? '' : ' hidden'; ?>">
-			<input type="text" name="<?php echo $name; ?>[<?php echo esc_attr( $data['id'] ); ?>][organization]" value="" />
+		<input type="text" name="<?php echo $name; ?>[<?php echo esc_attr( $data['id'] ); ?>][organization]" value="<?php echo esc_attr( $data['organization'] ); ?>" />
 		</div>
 	</td>
 	<td><input type="date_from" class="datepicker" name="<?php echo $name; ?>[<?php echo esc_attr( $data['id'] ); ?>][date_from]" value="<?php echo esc_attr( $data['date_from'] ); ?>" /></td>

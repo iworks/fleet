@@ -13,7 +13,6 @@ jQuery( document ).ready(function($) {
             });
             $( 'select', $( '.iworks-owners-list-container tbody' ) ).each( function() {
                 var list = iworks_fleet_people_list;
-                list.unshift( { id: '-', text: '-select-' } );
                 $(this).select2({ data: list });
             });
         }
@@ -56,12 +55,29 @@ jQuery( document ).ready(function($) {
                 var id = $(this).closest( 'tr' ).data( 'id' );
                 $( '.persons', $parent ).append( template( { id: id } )).ready( function() {
                     var list = iworks_fleet_people_list;
-                    list.unshift( { id: '-', text: '-select-' } );
                     $('.select2.empty' ).select2( { data: list } ).removeClass( 'empty' );
                 });
                 return false;
             });
         };
+        var bind_kind = function( el ) {
+            el.on( 'change', function() {
+                var $parent = $(this).closest( 'tr' );
+                if ( 'organization' === el.val() ) {
+                    $( 'div.person', $parent ).hide();
+                    $( 'div.organization', $parent ).show();
+                } else {
+                    $( 'div.person', $parent ).show();
+                    $( 'div.organization', $parent ).hide();
+                }
+            });
+        };
+        /**
+         * bind kind
+         */
+        $( '.boat-kind input', $container ).each( function() {
+            bind_kind( $(this) );
+        });
         /**
          * bind delete
          */
@@ -86,14 +102,19 @@ jQuery( document ).ready(function($) {
             /**
              * generate
              */
-            list.unshift( { id: '-', text: '-select-' } );
             $container.append(
                 template( {
                     id: id,
                     kind: 'person',
                 } )
             ).ready( function() {
-                var $parent = $( '#' + id );
+                var $parent = $( 'tr[data-id="' + id  + '"]' );
+                /**
+                 * bind kind
+                 */
+                $( '.boat-kind input', $parent ).each( function() {
+                    bind_kind( $(this) );
+                });
                 /**
                  * set kind
                  */
