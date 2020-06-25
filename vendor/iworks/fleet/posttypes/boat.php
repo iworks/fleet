@@ -118,10 +118,27 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 				'build_year'           => array( 'label' => __( 'Year of building', 'fleet' ) ),
 				'hull_number'          => array( 'label' => __( 'Hull number', 'fleet' ) ),
 				'name'                 => array( 'label' => __( 'Boat name', 'fleet' ) ),
-				'color_top'            => array( 'label' => __( 'Color top', 'fleet' ) ),
-				'color_side'           => array( 'label' => __( 'Color side', 'fleet' ) ),
-				'color_bottom'         => array( 'label' => __( 'Color bottom', 'fleet' ) ),
-				'in_poland_date'       => array( 'label' => __( 'In Poland', 'fleet' ) ),
+				'color_top'            => array(
+					'label' => __( 'Color top', 'fleet' ),
+					'type'  => 'select2',
+					'args'  => array(
+						'options' => $this->get_colors(),
+					),
+				),
+				'color_side'           => array(
+					'label' => __( 'Color side', 'fleet' ),
+					'type'  => 'select2',
+					'args'  => array(
+						'options' => $this->get_colors(),
+					),
+				),
+				'color_bottom'         => array(
+					'label' => __( 'Color bottom', 'fleet' ),
+					'type'  => 'select2',
+					'args'  => array(
+						'options' => $this->get_colors(),
+					),
+				),
 				'location'             => array( 'label' => __( 'Location', 'fleet' ) ),
 				'hull_material'        => array( 'label' => __( 'Hull material', 'fleet' ) ),
 				'first_certified_date' => array(
@@ -544,7 +561,7 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 			'boat_hull_material'        => __( 'Hull material', 'fleet' ),
 			'boat_in_poland_date'       => __( 'In Poland', 'fleet' ),
 			'boat_name'                 => __( 'Name', 'fleet' ),
-			'colors'                    => __( 'Colors (top/side/bottom)', 'fleet' ),
+			'colors'                    => __( 'Colors', 'fleet' ),
 			'sails'                     => __( 'Sails manufacturer', 'fleet' ),
 			'mast'                      => __( 'Mast manufacturer', 'fleet' ),
 			'boat_location'             => __( 'Location', 'fleet' ),
@@ -562,15 +579,25 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 					 * handle colors
 					 */
 					case 'colors':
+						$col_loc     = array();
 						$colors      = array();
 						$colors_keys = array( 'top', 'side', 'bottom' );
 						foreach ( $colors_keys as $ckey ) {
-							$cname    = $this->options->get_option_name( 'boat_color_' . $ckey );
-							$colors[] = get_post_meta( $post_id, $cname, true );
+							$cname            = $this->options->get_option_name( 'boat_color_' . $ckey );
+							$x                = get_post_meta( $post_id, $cname, true );
+							$colors[]         = $x;
+							$col_loc[ $ckey ] = $x;
 						}
 						$colors = array_filter( $colors );
 						if ( ! empty( $colors ) ) {
-							$value = implode( '/', $colors );
+							$file  = file_get_contents( dirname( $this->base ) . '/assets/images/hull.svg' );
+							$c     = empty( $col_loc['top'] ) ? 'white' : $col_loc['top'];
+							$file  = preg_replace( '/fill="yellow"/', sprintf( 'fill="%s"', $c ), $file );
+							$c     = empty( $col_loc['side'] ) ? 'white' : $col_loc['side'];
+							$file  = preg_replace( '/fill="green"/', sprintf( 'fill="%s"', $c ), $file );
+							$c     = empty( $col_loc['bottom'] ) ? 'white' : $col_loc['bottom'];
+							$file  = preg_replace( '/fill="blue"/', sprintf( 'fill="%s"', $c ), $file );
+							$value = $file;
 						}
 						break;
 					case 'manufacturer':
@@ -644,7 +671,7 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 			$owners_text = '';
 			$owners      = get_post_meta( $post_id, $this->owners_field_name, true );
 			if ( ! empty( $owners ) ) {
-				foreach ( $owners as $one ) {
+				foreach ( $owners as $owner_key => $one ) {
 					$classes = array( $one['kind'] );
 					if ( $one['first'] ) {
 						$classes[] = 'first';
@@ -1424,7 +1451,7 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 					'current'      => $key === $current,
 					'date_to'      => preg_replace( '/[^0-9^\-]/', '', $value['date_to'] ),
 					'date_from'    => preg_replace( '/[^0-9^\-]/', '', $value['date_from'] ),
-					'kind '        => $kind,
+					'kind'         => $kind,
 				),
 				array(
 					'users_ids'    => array(),
@@ -1433,7 +1460,7 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 					'current'      => false,
 					'date_to'      => false,
 					'date_from'    => false,
-					'kind '        => $kind,
+					'kind'         => $kind,
 				)
 			);
 			$add   = false;

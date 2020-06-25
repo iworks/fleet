@@ -1,7 +1,7 @@
 <?php
 /*
 
-Copyright 2017-2018 Marcin Pietrzak (marcin@iworks.pl)
+Copyright 2017-PLUGIN_TILL_YEAR Marcin Pietrzak (marcin@iworks.pl)
 
 this program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License, version 2, as
@@ -329,6 +329,11 @@ class iworks_fleet_posttypes {
 		$query->set( 'meta_query', $meta_query );
 	}
 
+	/**
+	 * Get nations list from config
+	 *
+	 * @since 1.3.0
+	 */
 	protected function get_nations() {
 		$data      = array();
 		$mna_codes = $this->options->get_group( 'mna_codes' );
@@ -344,6 +349,22 @@ class iworks_fleet_posttypes {
 		return array_merge(
 			array(
 				'-' => __( 'select nation', 'fleet' ),
+			),
+			$data
+		);
+	}
+
+	/**
+	 * Get colors list from config
+	 *
+	 * @since 1.3.0
+	 */
+	protected function get_colors() {
+		$data = $this->options->get_group( 'colors' );
+		asort( $data );
+		return array_merge(
+			array(
+				'' => __( 'select color', 'fleet' ),
 			),
 			$data
 		);
