@@ -140,7 +140,24 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 					),
 				),
 				'location'             => array( 'label' => __( 'Location', 'fleet' ) ),
-				'hull_material'        => array( 'label' => __( 'Hull material', 'fleet' ) ),
+				'hull_material'        => array(
+					'label' => __( 'Hull material', 'fleet' ),
+					'type'  => 'select',
+					'args'  => array(
+						'options' => array(
+							''           => __( '--- select hull material ---', 'fleet' ),
+							'mixed'      => __( 'Mixed', 'fleet' ),
+							'carbon'     => __( 'Carbon', 'fleet' ),
+							'plywood'    => __( 'Plywood', 'fleet' ),
+							'gpr'        => __( 'GPR', 'fleet' ),
+							'fibreglass' => __( 'Fiberglass', 'fleet' ),
+							'composite'  => __( 'Composite', 'fleet' ),
+							'wood'       => __( 'Wood', 'fleet' ),
+							'kevlar'     => __( 'Kevlar', 'fleet' ),
+							''           => __( '', 'fleet' ),
+						),
+					),
+				),
 				'first_certified_date' => array(
 					'type'  => 'date',
 					'label' => __( 'First Certified', 'fleet' ),
