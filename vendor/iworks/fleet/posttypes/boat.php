@@ -579,26 +579,27 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 					 * handle colors
 					 */
 					case 'colors':
-						$col_loc     = array();
-						$colors      = array();
 						$colors_keys = array( 'top', 'side', 'bottom' );
+						$value       = '<style>';
 						foreach ( $colors_keys as $ckey ) {
-							$cname            = $this->options->get_option_name( 'boat_color_' . $ckey );
-							$x                = get_post_meta( $post_id, $cname, true );
-							$colors[]         = $x;
-							$col_loc[ $ckey ] = $x;
+							$cname = $this->options->get_option_name( 'boat_color_' . $ckey );
+							$x     = get_post_meta( $post_id, $cname, true );
+							if ( empty( $x ) ) {
+								$x = '#fff';
+							}
+							$value .= sprintf(
+								'path.boat-hull-%s { fill: %s }',
+								$ckey,
+								$x
+							);
 						}
-						$colors = array_filter( $colors );
-						if ( ! empty( $colors ) ) {
-							$file  = file_get_contents( dirname( $this->base ) . '/assets/images/hull.svg' );
-							$c     = empty( $col_loc['top'] ) ? 'white' : $col_loc['top'];
-							$file  = preg_replace( '/fill="yellow"/', sprintf( 'fill="%s"', $c ), $file );
-							$c     = empty( $col_loc['side'] ) ? 'white' : $col_loc['side'];
-							$file  = preg_replace( '/fill="green"/', sprintf( 'fill="%s"', $c ), $file );
-							$c     = empty( $col_loc['bottom'] ) ? 'white' : $col_loc['bottom'];
-							$file  = preg_replace( '/fill="blue"/', sprintf( 'fill="%s"', $c ), $file );
-							$value = $file;
-						}
+						$value     .= '</style>';
+							$file   = sprintf(
+								'%s/%s/assets/images/hull.svg',
+								plugins_url(),
+								plugin_basename( dirname( $this->base ) )
+							);
+							$value .= apply_filters( 'iworks_fleet_boat_hull_image', file_get_contents( dirname( $this->base ) . '/assets/images/hull.svg' ) );
 						break;
 					case 'manufacturer':
 						$value = get_the_term_list(
