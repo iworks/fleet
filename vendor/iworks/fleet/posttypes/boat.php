@@ -1527,19 +1527,23 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		);
 		$the_query = new WP_Query( $args );
 		if ( $the_query->have_posts() ) {
-			$content .= '<section class="iworks-fleet-boats-list">';
-			$content .= sprintf( '<h2>%s</h2>', esc_html__( 'Boats list', 'fleet' ) );
-			$content .= '<ul class="iworks-fleet-list">';
+			$list = array();
 			while ( $the_query->have_posts() ) {
 				$the_query->the_post();
-				$content .= sprintf(
-					'<li><a href="%s">%s</a></li>',
+				$list[ get_the_title() ] = sprintf(
+					'<a href="%s">%s</a>',
 					get_permalink(),
 					get_the_title()
 				);
 			}
-			$content .= '</ul>';
-			$content .= '</section>';
+			if ( ! empty( $list ) ) {
+				ksort( $list );
+				$content .= sprintf(
+					'<p>%s: %s</p>',
+					esc_html__( 'Boats list', 'fleet' ),
+					implode( ', ', $list )
+				);
+			}
 			/* Restore original Post Data */
 			wp_reset_postdata();
 		}

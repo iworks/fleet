@@ -469,14 +469,14 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 		 */
 		$content .= $this->social_media( $post_id );
 		/**
+		 * regatta
+		 */
+		$content .= apply_filters( 'iworks_fleet_result_sailor_regata_list', '', $post_id );
+		/**
 		 * add boats
 		 */
 		$content .= $this->boats( $post_id );
 		$content .= $this->own_boats( $post_id );
-		/**
-		 * regatta
-		 */
-		$content .= apply_filters( 'iworks_fleet_result_sailor_regata_list', '', $post_id );
 		/**
 		 * posts list
 		 *
