@@ -1089,6 +1089,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 					|| preg_match( '/^\‑/', $one )
 					|| preg_match( '/^\-/', $one )
 					|| preg_match( '/^\([^\)]+\)$/', $one )
+					|| preg_match( '/^\[[^\]]+\]$/', $one )
 					|| 0 > $one
 				) {
 					$race['discard'] = true;
