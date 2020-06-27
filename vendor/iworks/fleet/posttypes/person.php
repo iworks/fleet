@@ -472,6 +472,7 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 		 * add boats
 		 */
 		$content .= $this->boats( $post_id );
+		$content .= $this->own_boats( $post_id );
 		/**
 		 * regatta
 		 */
@@ -570,6 +571,18 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 		}
 		$content = sprintf( '<ul class="fleet-person-social-media">%s</ul>', $content );
 		return $content;
+	}
+
+	private function own_boats( $post_id ) {
+		$content = '';
+		$show    = $this->options->get_option( 'person_show_boats_owned_table' );
+		if ( empty( $show ) ) {
+			return $content;
+		}
+		/**
+		 * boats
+		 */
+		return $content = apply_filters( 'iworks_fleet_boat_get_by_owner_id', $content, $post_id );
 	}
 
 	private function boats( $post_id ) {

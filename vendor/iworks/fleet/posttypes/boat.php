@@ -103,6 +103,10 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 			$this->single_boat_field_name = $this->options->get_option_name( 'boat', true );
 		}
 		/**
+		 * get owner boats
+		 */
+		add_filter( 'iworks_fleet_boat_get_by_owner_id', array( $this, 'get_content_table_by_owner_id' ), 10, 2 );
+		/**
 		 * fields
 		 */
 		$this->fields = array(
@@ -1514,5 +1518,32 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		}
 	}
 
+	public function get_content_table_by_owner_id( $content, $owner_id ) {
+		$args      = array(
+			'post_type'      => $this->post_type_name,
+			'posts_per_page' => -1,
+			'meta_key'       => $this->owners_index_field_name,
+			'meta_value'     => $owner_id,
+		);
+		$the_query = new WP_Query( $args );
+		if ( $the_query->have_posts() ) {
+			$content .= '<section class="iworks-fleet-boats-list">';
+			$content .= sprintf( '<h2>%s</h2>', esc_html__( 'Boats list', 'fleet' ) );
+			$content .= '<ul class="iworks-fleet-list">';
+			while ( $the_query->have_posts() ) {
+				$the_query->the_post();
+				$content .= sprintf(
+					'<li><a href="%s">%s</a></li>',
+					get_permalink(),
+					get_the_title()
+				);
+			}
+			$content .= '</ul>';
+			$content .= '</section>';
+			/* Restore original Post Data */
+			wp_reset_postdata();
+		}
+		return $content;
+	}
 }
 
