@@ -1038,7 +1038,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		$number_of_races = intval( get_post_meta( $post_id, $name, true ) );
 		foreach ( $data as $row ) {
 			$boat = array_shift( $row );
-			if ( preg_match( '/^([a-zA-Z]+)[ \-\t]*(\d+)$/', $boat, $matches ) ) {
+			if ( preg_match( '/^([a-zA-Z\/]+)[ \-\t]*(\d+)$/', $boat, $matches ) ) {
 				$country = $matches[1];
 				$boat_id = $matches[2];
 			} else {
@@ -1094,8 +1094,22 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 				) {
 					$race['discard'] = true;
 				}
-				$one            = preg_replace( '/\*/', '', $one );
-				$race['code']   = preg_replace( '/[^a-z]+/i', '', $one );
+				$one          = preg_replace( '/\*/', '', $one );
+				$race['code'] = preg_replace( '/[^a-z]+/i', '', $one );
+				switch ( $race['code'] ) {
+					case 's';
+					case 'S';
+						$race['code'] = 'DNS';
+					break;
+					case 'f';
+					case 'F';
+						$race['code'] = 'DNF';
+					break;
+					case 'q';
+					case 'Q';
+						$race['code'] = 'DSQ';
+					break;
+				}
 				$race['points'] = preg_replace( '/[^\d^\,^\.]+/', '', $one );
 				$wpdb->insert( $table_name_regatta_race, $race );
 			}
