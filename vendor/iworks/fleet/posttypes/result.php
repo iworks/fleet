@@ -1045,8 +1045,16 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 				$country = $boat;
 				$boat_id = intval( array_shift( $row ) );
 			}
-			$helm    = trim( array_shift( $row ) );
-			$crew    = trim( array_shift( $row ) );
+			/**
+			 * helm & crew
+			 */
+			$h    = $helm    = trim( array_shift( $row ) );
+			$crew = trim( array_shift( $row ) );
+			$helm = trim( apply_filters( 'iworks_fleet_result_upload_helm', $helm, $crew ) );
+			$crew = trim( apply_filters( 'iworks_fleet_result_upload_crew', $crew, $h ) );
+			/**
+			 * club
+			 */
 			$club    = trim( array_shift( $row ) );
 			$place   = intval( array_pop( $row ) );
 			$points  = intval( array_pop( $row ) );
