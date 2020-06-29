@@ -1079,10 +1079,10 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			 * maybe update sailors nation
 			 */
 			if ( 0 < $regatta['helm_id'] ) {
-				do_action( 'maybe_update_person_nation', $regatta['helm_id'], $country );
+				do_action( 'maybe_add_person_nation', $regatta['helm_id'], $country );
 			}
 			if ( 0 < $regatta['crew_id'] ) {
-				do_action( 'maybe_update_person_nation', $regatta['crew_id'], $country );
+				do_action( 'maybe_add_person_nation', $regatta['crew_id'], $country );
 			}
 
 			/**
