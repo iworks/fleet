@@ -614,13 +614,13 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 								$x
 							);
 						}
-						$value     .= '</style>';
-							$file   = sprintf(
-								'%s/%s/assets/images/hull.svg',
-								plugins_url(),
-								plugin_basename( dirname( $this->base ) )
-							);
-							$value .= apply_filters( 'iworks_fleet_boat_hull_image', file_get_contents( dirname( $this->base ) . '/assets/images/hull.svg' ) );
+						$value .= '</style>';
+						$file   = sprintf(
+							'%s/%s/assets/images/hull.svg',
+							plugins_url(),
+							plugin_basename( dirname( $this->base ) )
+						);
+						$value .= apply_filters( 'iworks_fleet_boat_hull_image', file_get_contents( dirname( $this->base ) . '/assets/images/hull.svg' ) );
 						break;
 					case 'manufacturer':
 						$value = get_the_term_list(

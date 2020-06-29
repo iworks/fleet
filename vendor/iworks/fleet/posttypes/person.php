@@ -41,6 +41,10 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 		add_filter( 'the_content', array( $this, 'the_content' ) );
 		add_filter( 'international_fleet_posted_on', array( $this, 'get_club' ), 10, 2 );
 		/**
+		 * get flag
+		 */
+		add_filter( 'iworks_fleet_person_get_flag', array( $this, 'add_flag_to_title' ), 10, 2 );
+		/**
 		 * change default columns
 		 */
 		add_filter( "manage_{$this->get_name()}_posts_columns", array( $this, 'add_columns' ) );
@@ -68,6 +72,10 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 		 * add nonce
 		 */
 		add_filter( 'wp_localize_script_fleet_admin', array( $this, 'add_nonce' ) );
+		/**
+		 * maybe update country
+		 */
+		add_action( 'maybe_add_person_nation', array( $this, 'maybe_update_person_nation' ), 10, 2 );
 		/**
 		 * fields
 		 */
@@ -721,4 +729,38 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 		}
 		return $termlink;
 	}
+
+	public function maybe_add_person_nation( $post_ID, $nation ) {
+		if ( empty( $nation ) ) {
+			return;
+		}
+		$meta_key = $this->options->get_option_name( 'personal_nation' );
+		$value    = get_post_meta( $post_ID, $meta_key, true );
+		if ( empty( $value ) ) {
+			add_post_meta( $post_ID, $meta_key, $nation, true );
+		}
+	}
+
+	public function add_flag_to_title( $content, $post_ID ) {
+
+		$meta_key = $this->options->get_option_name( 'personal_nation' );
+		$code     = get_post_meta( $post_ID, $meta_key, true );
+		if ( empty( $code ) ) {
+			return $content;
+		}
+		$file = sprintf(
+			'%s/assets/images/flags/%s.svg',
+			dirname( $this->base ),
+			strtolower( $code )
+		);
+		if ( is_file( $file ) ) {
+			$code = preg_replace( '/<svg/', '<svg style="max-width:20px;height:auto;max-height:16px;" ', file_get_contents( $file ) );
+		}
+		if ( ! empty( $code ) ) {
+			$content .= ' ';
+		}
+		return $code;
+	}
+
+
 }

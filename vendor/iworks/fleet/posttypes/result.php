@@ -716,7 +716,12 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 				 * Helmsman
 				 */
 				if ( $regatta->helm_id && $regatta->helm_id != $post_id ) {
-					$content .= sprintf( '<td class="helmsman"><a href="%s">%s</a></td>', get_permalink( $regatta->helm_id ), get_the_title( $regatta->helm_id ) );
+					$content .= sprintf(
+						'<td class="helmsman">%s<a href="%s">%s</a></td>',
+						apply_filters( 'iworks_fleet_person_get_flag', '', $regatta->helm_id ),
+						get_permalink( $regatta->helm_id ),
+						get_the_title( $regatta->helm_id )
+					);
 				} elseif ( $regatta->helm_id == $post_id ) {
 					$content .= sprintf( '<td class="helmsman current">%s</td>', $regatta->helm_name );
 				} else {
@@ -1070,6 +1075,19 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 				'place'          => $place,
 				'points'         => $points,
 			);
+			/**
+			 * maybe update sailors nation
+			 */
+			if ( 0 < $regatta['helm_id'] ) {
+				do_action( 'maybe_update_person_nation', $regatta['helm_id'], $country );
+			}
+			if ( 0 < $regatta['crew_id'] ) {
+				do_action( 'maybe_update_person_nation', $regatta['crew_id'], $country );
+			}
+
+			/**
+			 * insert
+			 */
 			$wpdb->insert( $table_name_regatta, $regatta );
 			$regatta_id = $wpdb->insert_id;
 			if ( empty( $row ) ) {
