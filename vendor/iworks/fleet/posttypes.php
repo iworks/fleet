@@ -50,6 +50,24 @@ class iworks_fleet_posttypes {
 		 */
 		add_action( 'created_' . $this->taxonomy_name_location, array( $this, 'save_google_map_data' ), 10, 2 );
 		add_action( 'edited_' . $this->taxonomy_name_location, array( $this, 'save_google_map_data' ), 10, 2 );
+		add_filter( 'dashboard_glance_items', array( $this, 'dashboard_glance_items' ) );
+	}
+
+	public function dashboard_glance_items( $elements ) {
+		$num_posts = wp_count_posts( $this->post_type_name );
+		if ( $num_posts && $num_posts->publish ) {
+			$post_type_object = get_post_type_object( $this->post_type_name );
+			$text             = sprintf( '%s %s', number_format_i18n( $num_posts->publish ), $post_type_object->labels->singular_name );
+			if ( 1 < $num_posts->publish ) {
+				$text = sprintf( '%s %s', number_format_i18n( $num_posts->publish ), $post_type_object->labels->name );
+			}
+			if ( $post_type_object && current_user_can( $post_type_object->cap->edit_posts ) ) {
+				$elements[] = sprintf( '<li class="%1$s-count"><a href="edit.php?post_type=%1$s">%2$s</a></li>', $this->post_type_name, $text );
+			} else {
+				$elements[] = sprintf( '<li class="%1$s-count"><span>%2$s</span></li>', $this->post_type_name, $text );
+			}
+		}
+		return $elements;
 	}
 
 	public function get_name() {
