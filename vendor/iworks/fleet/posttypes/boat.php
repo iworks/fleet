@@ -709,7 +709,8 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 								$owners_text .= ' &amp; ';
 							}
 							$owners_text .= sprintf(
-								'<a href="%s">%s</a>',
+								'%s<a href="%s">%s</a>',
+								apply_filters( 'iworks_fleet_person_get_flag', '', $user_id ),
 								get_permalink( $user_id ),
 								$iworks_fleet->get_person_name( $user_id )
 							);

@@ -736,7 +736,12 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 				 * crew
 				 */
 				if ( $regatta->crew_id && $regatta->crew_id != $post_id ) {
-					$content .= sprintf( '<td class="crew"><a href="%s">%s</a></td>', get_permalink( $regatta->crew_id ), get_the_title( $regatta->crew_id ) );
+					$content .= sprintf(
+						'<td class="crew">%s<a href="%s">%s</a></td>',
+						apply_filters( 'iworks_fleet_person_get_flag', '', $regatta->crew_id ),
+						get_permalink( $regatta->crew_id ),
+						get_the_title( $regatta->crew_id )
+					);
 				} elseif ( $regatta->crew_id == $post_id ) {
 					$content .= sprintf( '<td class="crew current">%s</td>', $regatta->crew_name );
 				} else {
