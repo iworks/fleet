@@ -75,7 +75,7 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 		/**
 		 * maybe update country
 		 */
-		add_action( 'maybe_add_person_nation', array( $this, 'maybe_update_person_nation' ), 10, 2 );
+		add_action( 'maybe_add_person_nation', array( $this, 'maybe_add_person_nation' ), 10, 2 );
 		/**
 		 * fields
 		 */

@@ -154,6 +154,11 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		 * adjust dates
 		 */
 		add_filter( 'iworks_fleet_result_adjust_dates', array( $this, 'adjacent_dates' ), 10, 3 );
+		/**
+		 * import
+		 */
+
+		add_action( 'iworks_fleet_result_import_data', array( $this, 'import_data' ), 10, 2 );
 	}
 
 	/**
@@ -1022,6 +1027,13 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		if ( empty( $data ) ) {
 			wp_send_json_error();
 		}
+		$result = $this->import_data( $post_id, $data );
+
+		wp_send_json_success();
+	}
+
+
+	public function import_data( $post_id, $data ) {
 		global $wpdb, $iworks_fleet;
 		$table_name_regatta      = $wpdb->prefix . 'fleet_regatta';
 		$table_name_regatta_race = $wpdb->prefix . 'fleet_regatta_race';
@@ -1105,7 +1117,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 					}
 				}
 				$race = array(
-					'post_regata_id' => $_POST['id'],
+					'post_regata_id' => $post_id,
 					'regata_id'      => $regatta_id,
 					'number'         => $number++,
 				);
@@ -1140,7 +1152,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 				$wpdb->insert( $table_name_regatta_race, $race );
 			}
 		}
-		wp_send_json_success();
+		return true;
 	}
 
 	public function the_content( $content ) {
