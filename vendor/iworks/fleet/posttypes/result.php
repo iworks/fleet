@@ -1000,6 +1000,9 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		return 0 < $val;
 	}
 
+	/**
+	 * handle upload results file
+	 */
 	public function upload() {
 		if ( ! isset( $_POST['id'] ) ) {
 			wp_send_json_error();
@@ -1033,7 +1036,6 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			wp_send_json_error();
 		}
 		$result = $this->import_data( $post_id, $data );
-
 		wp_send_json_success();
 	}
 
@@ -1046,7 +1048,6 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		$sailors = $iworks_fleet->get_list_by_post_type( 'person' );
 		$wpdb->delete( $table_name_regatta, array( 'post_regata_id' => $post_id ), array( '%d' ) );
 		$wpdb->delete( $table_name_regatta_race, array( 'post_regata_id' => $post_id ), array( '%d' ) );
-
 		/**
 		 * Result date end
 		 */
@@ -1059,8 +1060,11 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		$name            = $this->options->get_option_name( 'result_number_of_races' );
 		$number_of_races = intval( get_post_meta( $post_id, $name, true ) );
 		foreach ( $data as $row ) {
-			$boat = array_shift( $row );
-			if ( preg_match( '/^([a-zA-Z\/]+)[ \-\t]*(\d+)$/', $boat, $matches ) ) {
+			$country = '';
+			$boat    = array_shift( $row );
+			if ( preg_match( '/^\?(\d+)$/', $boat, $matches ) ) {
+				$boat_id = intval( $matches[1] );
+			} elseif ( preg_match( '/^([a-zA-Z\/]+)[ \-\t]*(\d+)$/', $boat, $matches ) ) {
 				$country = $matches[1];
 				$boat_id = $matches[2];
 			} else {

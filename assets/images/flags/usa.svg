@@ -1,12 +1,129 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1235" height="650">
-<defs>
-<polygon id="pt" points="-0.1624598481164531,0 0,-0.5 0.1624598481164531,0" transform="scale(0.0616)" fill="#FFF"/>
-<g id="star"><use xlink:href="#pt" transform="rotate(-144)"/><use xlink:href="#pt" transform="rotate(-72)"/><use xlink:href="#pt"/><use xlink:href="#pt" transform="rotate(72)"/><use xlink:href="#pt" transform="rotate(144)"/></g>
-<g id="s5"><use xlink:href="#star" x="-0.252"/><use xlink:href="#star" x="-0.126"/><use xlink:href="#star"/><use xlink:href="#star" x="0.126"/><use xlink:href="#star" x="0.252"/></g>
-<g id="s6"><use xlink:href="#s5" x="-0.063"/><use xlink:href="#star" x="0.315"/></g>
-<g id="x4"><use xlink:href="#s6"/><use xlink:href="#s5" y="0.054"/><use xlink:href="#s6" y="0.108"/><use xlink:href="#s5" y="0.162"/></g>
-<g id="u"><use xlink:href="#x4" y="-0.216"/><use xlink:href="#x4"/><use xlink:href="#s6" y="0.216"/></g>
-<rect id="stripe" width="1235" height="50" fill="#B22234"/>
-</defs>
-<rect width="1235" height="650" fill="#FFF"/><use xlink:href="#stripe"/><use xlink:href="#stripe" y="100"/><use xlink:href="#stripe" y="200"/><use xlink:href="#stripe" y="300"/><use xlink:href="#stripe" y="400"/><use xlink:href="#stripe" y="500"/><use xlink:href="#stripe" y="600"/><rect width="494" height="350" fill="#3C3B6E"/><use xlink:href="#u" transform="translate(247,175) scale(650)"/></svg>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   id="svg1265"
+   version="1.1"
+   viewBox="0 0 20 14"
+   height="14"
+   width="20">
+  <metadata
+     id="metadata1271">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs1269" />
+  <rect
+     style="fill:#b22234;stroke-width:0.00311271"
+     y="0"
+     x="9.2651362e-09"
+     id="rect1234"
+     height="14"
+     width="20" />
+  <path
+     style="stroke:#ffffff;stroke-width:1.07692301"
+     id="path1236"
+     d="m 0,1.6155 h 26.6 m 0,2.1538 H 0 m 0,2.1538 h 26.6 m 0,2.1539 H 0 m 0,2.1538 h 26.6 m 0,2.1538 H 0" />
+  <rect
+     style="fill:#3c3b6e;stroke-width:0.00358975"
+     y="0"
+     x="9.2651362e-09"
+     id="rect1238"
+     height="7.5384612"
+     width="10.64" />
+  <g
+     transform="scale(0.00358975)"
+     style="fill:#ffffff"
+     id="g1263">
+    <g
+       id="s18">
+      <g
+         id="s9">
+        <g
+           id="s5">
+          <g
+             id="s4">
+            <path
+               d="M 247,90 317.53423,307.08204 132.87322,172.91796 H 361.12678 L 176.46577,307.08204 Z"
+               id="s" />
+            <use
+               height="100%"
+               width="100%"
+               x="0"
+               id="use1241"
+               y="420"
+               xlink:href="#s" />
+            <use
+               height="100%"
+               width="100%"
+               x="0"
+               id="use1243"
+               y="840"
+               xlink:href="#s" />
+            <use
+               height="100%"
+               width="100%"
+               x="0"
+               id="use1245"
+               y="1260"
+               xlink:href="#s" />
+          </g>
+          <use
+             height="100%"
+             width="100%"
+             x="0"
+             id="use1248"
+             y="1680"
+             xlink:href="#s" />
+        </g>
+        <use
+           height="100%"
+           width="100%"
+           id="use1251"
+           y="210"
+           x="247"
+           xlink:href="#s4" />
+      </g>
+      <use
+         height="100%"
+         width="100%"
+         y="0"
+         id="use1254"
+         x="494"
+         xlink:href="#s9" />
+    </g>
+    <use
+       height="100%"
+       width="100%"
+       y="0"
+       id="use1257"
+       x="988"
+       xlink:href="#s18" />
+    <use
+       height="100%"
+       width="100%"
+       y="0"
+       id="use1259"
+       x="1976"
+       xlink:href="#s9" />
+    <use
+       height="100%"
+       width="100%"
+       y="0"
+       id="use1261"
+       x="2470"
+       xlink:href="#s5" />
+  </g>
+</svg>
