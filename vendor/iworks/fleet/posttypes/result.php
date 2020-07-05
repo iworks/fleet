@@ -553,6 +553,9 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		if ( $post_type != $this->post_type_name ) {
 			return $title;
 		}
+		if ( apply_filters( 'iworks_fleet_result_skip_year_in_title', false ) ) {
+			return $title;
+		}
 		$year = $this->get_year( $post_id );
 		if ( ! empty( $year ) ) {
 			return sprintf( '%d - %s', $year, $title );
