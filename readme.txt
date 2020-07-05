@@ -46,6 +46,7 @@ There are 3 ways to install this plugin:
 * Improved results importer.
 * Added boats owners.
 * Improved hull colors choose.
+* Added ability to filter results by year.
 
 = 1.2.9 (2020-06-17) =
 * Added MNA Codes see: https://www.sailing.org/raceofficials/eventorganizers/mna_codes.php

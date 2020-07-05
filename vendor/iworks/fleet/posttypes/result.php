@@ -136,6 +136,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		 * change default sort order
 		 */
 		add_action( 'pre_get_posts', array( $this, 'change_order' ) );
+		add_action( 'pre_get_posts', array( $this, 'pre_get_posts_limit_to_year' ) );
 		/**
 		 * shortcodes
 		 */
@@ -442,6 +443,43 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		return $content;
 	}
 
+	/**
+	 * Filter results by year
+	 *
+	 * @since 1.3.0
+	 */
+	public function pre_get_posts_limit_to_year( $query ) {
+		if ( ! isset( $query->query['post_type'] ) ) {
+			return;
+		}
+		if ( $this->post_type_name !== $query->query['post_type'] ) {
+			return;
+		}
+		$year = filter_input( INPUT_GET, 'iworks_fleet_result_year', FILTER_VALIDATE_INT );
+		if ( empty( $year ) ) {
+			return;
+		}
+		$query->set(
+			'meta_query',
+			array(
+				'relation' => 'AND',
+				array(
+					'key'     => $this->options->get_option_name( 'result_date_start' ),
+					'value'   => strtotime( sprintf( '%d-12-31 23:59:59', $year - 1 ) ),
+					'compare' => '>',
+					'type'    => 'NUMERIC',
+				),
+				array(
+					'key'     => $this->options->get_option_name( 'result_date_start' ),
+					'value'   => strtotime( sprintf( '%d-01-01 00:00:00', $year + 1 ) ),
+					'compare' => '<',
+					'type'    => 'NUMERIC',
+				),
+			)
+		);
+
+	}
+
 	public function change_order( $query ) {
 		if ( is_admin() ) {
 			return;
@@ -491,7 +529,11 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 				if ( empty( $year ) ) {
 					esc_html_e( 'Start date is not set.', 'fleet' );
 				} else {
-					echo esc_html( $year );
+					printf(
+						'<a href="%s">%d</a>',
+						add_query_arg( 'iworks_fleet_result_year', intval( $year ) ),
+						esc_html( $year )
+					);
 				}
 				break;
 		}
@@ -1067,9 +1109,12 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			} elseif ( preg_match( '/^([a-zA-Z\/]+)[ \-\t]*(\d+)$/', $boat, $matches ) ) {
 				$country = $matches[1];
 				$boat_id = $matches[2];
-			} else {
+			} elseif ( preg_match( '/^\d+$/', $row[0] ) ) {
 				$country = $boat;
 				$boat_id = intval( array_shift( $row ) );
+			} else {
+				$boat_id = intval( $boat );
+				$country = trim( preg_replace( '/\d+/', '', $boat ) );
 			}
 			/**
 			 * helm & crew
