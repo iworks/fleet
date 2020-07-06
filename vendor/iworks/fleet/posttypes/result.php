@@ -1,6 +1,6 @@
 <?php
 /*
-Copyright 2018 Marcin Pietrzak (marcin@iworks.pl)
+Copyright 2018-PLUGIN_TILL_YEAR Marcin Pietrzak (marcin@iworks.pl)
 
 this program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License, version 2, as
@@ -693,8 +693,9 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 				$content .= '<td class="boat">';
 				if ( isset( $regatta->boat ) ) {
 					$content .= sprintf(
-						'<a href="%s">%s</a>',
+						'<a href="%s">%s%s</a>',
 						esc_url( $regatta->boat['url'] ),
+						empty( $regatta->country ) ? '' : $regatta->country . ' ',
 						esc_html( $regatta->boat['post_title'] )
 					);
 				} elseif ( empty( $regatta->country ) && empty( $regatta->boat_id ) ) {
