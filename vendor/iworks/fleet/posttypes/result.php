@@ -482,6 +482,12 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 
 	public function change_order( $query ) {
 		if ( is_admin() ) {
+			if ( __( 'Year' === $query->get( 'orderby' ) ) ) {
+				$query->set( 'meta_key', $this->options->get_option_name( 'result_date_start' ) );
+				$query->set( 'meta_value_num', 0 );
+				$query->set( 'meta_compare', '>' );
+				$query->set( 'orderby', 'meta_value_num' );
+			}
 			return;
 		}
 		if (
