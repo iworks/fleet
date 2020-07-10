@@ -227,7 +227,8 @@ class iworks_fleet_posttypes {
 	public function adjacent_post_where( $sql, $in_same_term, $excluded_terms, $taxonomy, $post ) {
 		if ( $post->post_type === $this->post_type_name ) {
 			global $wpdb;
-			$sql = preg_replace( '/p.post_date ([<> ]+) \'[^\']+\'/', "p.post_title $1 '{$post->post_title}'", $sql );
+			$post_title = $wpdb->_real_escape( $post->post_title );
+			$sql        = preg_replace( '/p.post_date ([<> ]+) \'[^\']+\'/', "p.post_title $1 '{$post_title}'", $sql );
 		}
 		return $sql;
 	}

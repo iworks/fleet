@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   id="svg909"
+   version="1.1"
+   viewBox="-120 -80 20 14"
+   height="14"
+   width="20">
+  <metadata
+     id="metadata913">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs878">
+    <path
+       style="stroke-miterlimit:10"
+       transform="rotate(30)"
+       stroke-miterlimit="10"
+       d="M -1,55.425626 H 1 V -38 c 2,-2 2,-5 2,-8 C 3,-48 3,-56 0,-64.66323 -3,-56 -3,-48 -3,-46 c 0,3 0,6 2,8 z"
+       id="spearshape" />
+    <!-- 32*sqrt(3), -112/sqrt(3)-->
+  </defs>
+  <rect
+     style="fill:#ffffff;stroke-width:0.08749977"
+     id="rect880"
+     height="13.999967"
+     width="20.999949"
+     y="-80.000008"
+     x="-120.49998" />
+  <rect
+     style="stroke-width:0.08539113"
+     id="rect882"
+     height="4.1999898"
+     width="20"
+     y="-80.000008"
+     x="-120" />
+  <rect
+     style="fill:#006600;stroke-width:0.08539113"
+     id="rect884"
+     height="4.1999898"
+     width="20"
+     y="-70.199989"
+     x="-120" />
+  <use
+     transform="matrix(0.08749978,0,0,0.08749978,-110.00001,-73.000014)"
+     xlink:href="#spearshape"
+     id="use886"
+     style="stroke:#000000"
+     x="0"
+     y="0"
+     width="100%"
+     height="100%" />
+  <use
+     transform="matrix(0.08749978,0,0,0.08749978,-110.00001,-73.000014)"
+     xlink:href="#spearshape"
+     id="use888"
+     style="fill:#ffffff"
+     x="0"
+     y="0"
+     width="100%"
+     height="100%" />
+  <use
+     transform="matrix(-0.08749978,0,0,0.08749978,-109.99999,-73.000018)"
+     height="100%"
+     width="100%"
+     y="0"
+     x="0"
+     style="stroke:#000000"
+     id="use1557"
+     xlink:href="#spearshape" />
+  <use
+     transform="matrix(-0.08749978,0,0,0.08749978,-109.99999,-73.000018)"
+     height="100%"
+     width="100%"
+     y="0"
+     x="0"
+     style="fill:#ffffff"
+     id="use1559"
+     xlink:href="#spearshape" />
+  <path
+     style="fill:#bb0000;stroke-width:0.08749977"
+     id="path893"
+     d="m -120,-75.1 v 4.2 l 8.33751,-1.4e-5 c 0.2625,0.70001 1.13749,2.09999 1.66248,2.09999 0.52501,0 1.39999,-1.39998 1.6625,-2.09999 L -100,-70.9 v -4.2 l -8.33751,-4e-6 c -0.26251,-0.69998 -1.13749,-2.1 -1.6625,-2.1 -0.52499,0 -1.39998,1.40002 -1.66248,2.1 z" />
+  <path
+     style="stroke-width:0.08749977"
+     d="m -108.33752,-70.900014 c 0.2625,-0.69998 0.43751,-1.39999 0.43751,-2.1 0,-0.69997 -0.17512,-1.39998 -0.43751,-2.09999 -0.2625,0.70001 -0.43748,1.40002 -0.43748,2.09999 0,0.70001 0.17513,1.40002 0.43748,2.1"
+     id="deco_r" />
+  <use
+     height="100%"
+     width="100%"
+     y="0"
+     x="0"
+     id="use896"
+     transform="matrix(-1,0,0,1,-220,-4.0531158e-6)"
+     xlink:href="#deco_r" />
+  <path
+     d="m -109.91251,-72.48814 c 0,0 0.35,0.699998 0.35,1.837495 0,1.137497 -0.35,1.837495 -0.35,1.837495 z m 0.2625,-0.511875 a 0.34999913,0.52499866 0 0 1 -0.35,0.524998 0.34999913,0.52499866 0 0 1 -0.35,-0.524998 0.34999913,0.52499866 0 0 1 0.35,-0.524999 0.34999913,0.52499866 0 0 1 0.35,0.524999 z"
+     style="fill:#ffffff;stroke-width:0.08749978"
+     id="deco_br" />
+  <use
+     xlink:href="#deco_br"
+     transform="rotate(180,-110.00001,-73.000014)"
+     id="use901"
+     x="0"
+     y="0"
+     width="100%"
+     height="100%"
+     style="fill:#ffffff" />
+  <use
+     xlink:href="#deco_br"
+     transform="matrix(-0.99999999,0,0,0.99999999,-220.00002,-1.683534e-7)"
+     id="use903"
+     x="0"
+     y="0"
+     width="100%"
+     height="100%"
+     style="fill:#ffffff" />
+  <use
+     xlink:href="#deco_br"
+     transform="matrix(0.99999999,0,0,-0.99999999,-1.822142e-6,-146.00003)"
+     id="use905"
+     x="0"
+     y="0"
+     width="100%"
+     height="100%"
+     style="fill:#ffffff" />
+</svg>
