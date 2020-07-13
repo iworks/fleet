@@ -3,6 +3,11 @@
 .fleet-results {
     @include table;
 
+    .boat_id,
+    .race {
+        white-space: nowrap;
+    }
+
     .fleet-place-1 {
         td {
             background-color: $color_place_gold;

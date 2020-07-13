@@ -396,7 +396,6 @@ class iworks_fleet_posttypes {
 	 */
 	public function add_wide_body_class( $classes ) {
 		if ( $this->options->get_option( 'wide_class' ) ) {
-			l( $this->post_type_name );
 			if ( is_singular( $this->post_type_name ) ) {
 				$classes[] = 'template-full-width';
 			}

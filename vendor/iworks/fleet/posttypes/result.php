@@ -232,17 +232,32 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 	}
 
 	public function shortcode_list( $atts ) {
-		$atts    = shortcode_atts(
+		$atts = shortcode_atts(
 			array(
-				'year'       => date( 'Y' ),
-				'serie'      => null,
-				'title'      => __( 'Results', 'fleet' ),
-				'title_show' => 'on',
-				'order'      => 'DESC',
+				'year'         => date( 'Y' ),
+				'serie'        => null,
+				'title'        => __( 'Results', 'fleet' ),
+				'title_show'   => 'on',
+				'area_show'    => 'on',
+				'year_show'    => 'on',
+				'serie_show'   => 'off',
+				'country_show' => 'off',
+				'order'        => 'DESC',
 			),
 			$atts,
 			'fleet_results_list'
 		);
+		/**
+		 * boolean params
+		 */
+		$show_area    = preg_match( '/^(on|yes|1)$/i', $atts['area_show'] );
+		$show_country = preg_match( '/^(on|yes|1)$/i', $atts['country_show'] );
+		$show_serie   = preg_match( '/^(on|yes|1)$/i', $atts['serie_show'] );
+		$show_title   = preg_match( '/^(on|yes|1)$/i', $atts['title_show'] );
+		$show_year    = preg_match( '/^(on|yes|1)$/i', $atts['year_show'] );
+		/**
+		 * content
+		 */
 		$content = '';
 		/**
 		 * params: year

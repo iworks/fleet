@@ -40,6 +40,7 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 		parent::__construct();
 		add_filter( 'the_content', array( $this, 'the_content' ) );
 		add_filter( 'international_fleet_posted_on', array( $this, 'get_club' ), 10, 2 );
+		add_filter( 'the_title', array( $this, 'add_flag_to_single_title' ), 10, 2 );
 		/**
 		 * get flag
 		 */
@@ -741,26 +742,48 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 		}
 	}
 
-	public function add_flag_to_title( $content, $post_ID ) {
-
+	private function get_flag( $post_ID ) {
 		$meta_key = $this->options->get_option_name( 'personal_nation' );
 		$code     = get_post_meta( $post_ID, $meta_key, true );
 		if ( empty( $code ) ) {
-			return $content;
+			return '';
 		}
-		$file = sprintf(
+		$file    = sprintf(
 			'%s/assets/images/flags/%s.svg',
 			dirname( $this->base ),
 			strtolower( $code )
 		);
+		$content = $code;
 		if ( is_file( $file ) ) {
-			$code = preg_replace( '/<svg/', '<svg style="max-width:20px;height:auto;max-height:16px;" ', file_get_contents( $file ) );
+			$content = file_get_contents( $file );
 		}
-		if ( ! empty( $code ) ) {
-			$content .= ' ';
-		}
-		return $code;
+		return $content . ' ';
 	}
 
+	public function add_flag_to_title( $content, $post_ID ) {
+		$code = $this->get_flag( $post_ID );
+		if ( ! empty( $code ) ) {
+			$code = preg_replace( '/<svg/', '<svg style="max-width:20px;height:auto;max-height:16px;" ', $code );
+		}
+		return $code . $content;
+	}
 
+	public function add_flag_to_single_title( $post_title, $post_ID ) {
+		if ( is_singular( $this->post_type_name ) ) {
+			global $wp_query;
+			if ( $wp_query->queried_object_id === $post_ID ) {
+				$show = $this->options->get_option( 'person_show_flag_on_single' );
+				if ( $show ) {
+					$code = $this->get_flag( $post_ID );
+					if ( ! empty( $code ) ) {
+						return $code . $post_title;
+					}
+				}
+			} else {
+				return $this->add_flag_to_title( $post_title, $post_ID );
+			}
+		}
+		return $post_title;
+	}
 }
+

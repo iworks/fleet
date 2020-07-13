@@ -40,6 +40,9 @@ function iworks_fleet_options() {
 				'sanitize_callback' => 'absint',
 				'classes'           => array( 'switch-button' ),
 			),
+			/**
+			 * Results
+			 */
 			array(
 				'type'  => 'heading',
 				'label' => __( 'Results', 'fleet' ),
@@ -52,6 +55,9 @@ function iworks_fleet_options() {
 				'sanitize_callback' => 'absint',
 				'classes'           => array( 'switch-button' ),
 			),
+			/**
+			 * Persons
+			 */
 			array(
 				'type'  => 'heading',
 				'label' => __( 'Persons', 'fleet' ),
@@ -98,6 +104,18 @@ function iworks_fleet_options() {
 				'sanitize_callback' => 'absint',
 				'classes'           => array( 'switch-button' ),
 			),
+			array(
+				'name'              => 'person_show_flag_on_single',
+				'type'              => 'checkbox',
+				'th'                => __( 'Show flag', 'fleet' ),
+				'description'       => __( 'Show country flag before person on single person page.', 'fleet' ),
+				'default'           => 0,
+				'sanitize_callback' => 'absint',
+				'classes'           => array( 'switch-button' ),
+			),
+			/**
+			 * Boats
+			 */
 			array(
 				'type'  => 'heading',
 				'label' => __( 'Boats', 'fleet' ),

@@ -36,3 +36,8 @@ td.place,
 td.points {
   text-align: right;
 }
+
+body.single-iworks_fleet_person .entry-title svg {
+  display: inline;
+  height: 1em;
+}

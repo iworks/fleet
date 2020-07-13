@@ -17,6 +17,10 @@
 .fleet-results td, .fleet-results th {
   border: 0;
 }
+.fleet-results .boat_id,
+.fleet-results .race {
+  white-space: nowrap;
+}
 .fleet-results .fleet-place-1 td {
   background-color: rgba(255, 215, 0, 0.7);
 }
