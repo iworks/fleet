@@ -1,7 +1,21 @@
+.fleet-results-person {
+  border: 0;
+  border-collapse: collapse;
+}
 .fleet-results-person thead th,
 .fleet-results-person thead td {
   background-color: #040404;
-  color: #040404;
+  color: #fbfbfb;
+  font-weight: 600;
+}
+.fleet-results-person tbody tr:not(.fleet-place-medal):nth-child(odd) td {
+  background: rgba(4, 4, 4, 0.02);
+}
+.fleet-results-person tbody tr:not(.fleet-place-medal):hover td {
+  background: rgba(4, 4, 4, 0.06);
+}
+.fleet-results-person td, .fleet-results-person th {
+  border: 0;
 }
 
 .boat-data svg,
@@ -14,7 +28,7 @@ td.helmsman,
 td.crew,
 td.place,
 td.points {
-  wrap: nowrap;
+  white-space: nowrap;
 }
 
 td.race,

@@ -685,12 +685,18 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 
 			$format = get_option( 'date_format' );
 			foreach ( $regattas as $regatta ) {
-				$dates    = sprintf(
+				$dates   = sprintf(
 					'%s - %s',
 					date_i18n( $format, $regatta->date_start ),
 					date_i18n( $format, $regatta->date_end )
 				);
-				$content .= sprintf( '<tr class="fleet-place-%d">', $regatta->place );
+				$classes = array(
+					sprintf( 'fleet-place-%d', $regatta->place ),
+				);
+				if ( 4 > $regatta->place ) {
+					$classes[] = 'fleet-place-medal';
+				}
+				$content .= sprintf( '<tr class="%s">', esc_attr( implode( ' ', $classes ) ) );
 				$content .= sprintf( '<td class="year" title="%s">%d</td>', esc_attr( $dates ), $regatta->year );
 				$content .= sprintf( '<td class="name"><a href="%s">%s</a></td>', get_permalink( $regatta->post_regata_id ), get_the_title( $regatta->post_regata_id ) );
 				/**
@@ -766,7 +772,13 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			}
 			$content .= '</tr></thead><tbody>';
 			foreach ( $regattas as $regatta ) {
-				$content .= sprintf( '<tr class="fleet-place-%d">', $regatta->place );
+				$classes = array(
+					sprintf( 'fleet-place-%d', $regatta->place ),
+				);
+				if ( 4 > $regatta->place ) {
+					$classes[] = 'fleet-place-medal';
+				}
+				$content .= sprintf( '<tr class="%s">', esc_attr( implode( ' ', $classes ) ) );
 				$content .= sprintf( '<td class="year">%d</td>', $regatta->year );
 				$content .= sprintf( '<td class="name"><a href="%s">%s</a></td>', get_permalink( $regatta->post_regata_id ), get_the_title( $regatta->post_regata_id ) );
 				/**
@@ -1328,7 +1340,13 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		$content .= '<tbody>';
 		$show     = current_user_can( 'manage_options' );
 		foreach ( $regatta as $one ) {
-			$content .= sprintf( '<tr class="fleet-place-%d">', $one->place );
+			$classes = array(
+				sprintf( 'fleet-place-%d', $one->place ),
+			);
+			if ( 4 > $one->place ) {
+				$classes[] = 'fleet-place-medal';
+			}
+			$content .= sprintf( '<tr class="%s">', esc_attr( implode( ' ', $classes ) ) );
 			$content .= sprintf( '<td class="place">%d</td>', $one->place );
 
 			/**

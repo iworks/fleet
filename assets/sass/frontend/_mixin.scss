@@ -9,3 +9,36 @@ $color_place_bronze: transparentize( #cd7f32, $transparentize );
 
 $version: PLUGIN_VERSION;
 
+@mixin table() {
+    border: 0;
+    border-collapse: collapse;
+    thead {
+        th,
+        td
+        {
+            background-color: $dark;
+            color: invert( $dark );
+            font-weight: 600;
+        }
+    }
+    tbody {
+        tr {
+            &:not(.fleet-place-medal) {
+                &:nth-child( odd ) {
+                    td {
+                        background: transparentize( $dark, .98 );
+                    }
+                }
+                &:hover {
+                    td {
+                        background: transparentize( $dark, .94 );
+                    }
+                }
+            }
+        }
+    }
+    td, th {
+        border: 0;
+    }
+}
+

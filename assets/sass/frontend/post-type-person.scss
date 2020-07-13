@@ -1,14 +1,7 @@
 @import "_mixin";
 
 .fleet-results-person {
-    thead {
-        th,
-        td
-        {
-            background-color: $dark;
-            color: complement( $dark );
-        }
-    }
+    @include table;
 }
 
 
@@ -23,8 +16,7 @@ td.place,
 td.points
 {
 
-    wrap:
-    nowrap;
+    white-space: nowrap;
 }
 
 td.race,
