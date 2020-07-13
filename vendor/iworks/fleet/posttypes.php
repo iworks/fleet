@@ -35,7 +35,7 @@ class iworks_fleet_posttypes {
 
 	public function __construct() {
 		$this->options = iworks_fleet_get_options_object();
-		$this->base    = preg_replace( '/iworks.+/', '', __FILE__ );
+		$this->base    = preg_replace( '/\/iworks.+/', '/', __FILE__ );
 		/**
 		 * register
 		 */
