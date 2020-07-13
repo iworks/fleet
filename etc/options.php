@@ -25,6 +25,22 @@ function iworks_fleet_options() {
 				'description' => __( 'Select country or countries if you need to show only boats and sailors from it.', 'fleet' ),
 			),
 			array(
+				'name'              => 'wide_class',
+				'type'              => 'checkbox',
+				'th'                => __( 'Add wide body class', 'fleet' ),
+				'default'           => 0,
+				'sanitize_callback' => 'absint',
+				'classes'           => array( 'switch-button' ),
+			),
+			array(
+				'name'              => 'load_frontend_css',
+				'type'              => 'checkbox',
+				'th'                => __( 'Load frontend CSS', 'fleet' ),
+				'default'           => 1,
+				'sanitize_callback' => 'absint',
+				'classes'           => array( 'switch-button' ),
+			),
+			array(
 				'type'  => 'heading',
 				'label' => __( 'Results', 'fleet' ),
 			),

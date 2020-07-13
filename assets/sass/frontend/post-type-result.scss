@@ -1,0 +1,14 @@
+@import "_mixin";
+
+.fleet-place-1 td {
+    background-color: $color_place_gold;
+}
+.fleet-place-2 td {
+    background-color: $color_place_silver;
+}
+.fleet-place-3 td {
+    background-color: $color_place_bronze;
+}
+.race.race-discard {
+    color: rgba( 0, 0, 0, .3 );
+}

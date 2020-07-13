@@ -1,0 +1,15 @@
+.fleet-place-1 td {
+  background-color: rgba(255, 215, 0, 0.7);
+}
+
+.fleet-place-2 td {
+  background-color: rgba(192, 192, 192, 0.7);
+}
+
+.fleet-place-3 td {
+  background-color: rgba(205, 127, 50, 0.7);
+}
+
+.race.race-discard {
+  color: rgba(0, 0, 0, 0.3);
+}

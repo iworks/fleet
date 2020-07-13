@@ -353,7 +353,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 						$current = $value;
 					}
 				}
-				$tbody .= '<tr>';
+				$tbody .= sprintf( '<tr class="%s">', esc_attr( implode( ' ', get_post_class() ) ) );
 				/**
 				 * start date
 				 */

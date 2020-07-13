@@ -44,10 +44,14 @@ module.exports = function( grunt ) {
 
 		// SASS files to process. Resulting CSS files will be minified as well.
 		css_files_compile: {
-			'{css}admin/post-type-boat.css': '{sass}admin/post-type-boat.scss'
+			'{css}admin/post-type-boat.css': '{sass}admin/post-type-boat.scss',
+			'{css}frontend/post-type-result.css': '{sass}frontend/post-type-result.scss',
+			'{css}frontend/post-type-person.css': '{sass}frontend/post-type-person.scss',
+			'{css}frontend/post-type-boat.css': '{sass}frontend/post-type-boat.scss',
 		},
 		css_files_concat: {
-			'{css}fleet-admin.css': [ '{css}admin/*.css' ]
+			'{css}fleet-admin.css': [ '{css}admin/*.css' ],
+			'{css}fleet.css': [ '{css}frontend/*.css' ]
 		},
 
 		// BUILD branches.

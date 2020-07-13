@@ -1,0 +1,37 @@
+@import "_mixin";
+
+.fleet-results-person {
+    thead {
+        th,
+        td
+        {
+            background-color: $dark;
+            color: complement( $dark );
+        }
+    }
+}
+
+
+.boat-data svg,
+.fleet-results svg {
+    display: inline-block;
+}
+td.boat,
+td.helmsman,
+td.crew,
+td.place,
+td.points
+{
+
+    wrap:
+    nowrap;
+}
+
+td.race,
+td.place,
+td.points
+{
+
+    text-align: right;
+
+}

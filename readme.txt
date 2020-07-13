@@ -48,6 +48,7 @@ There are 3 ways to install this plugin:
 * Improved hull colors choose.
 * Added ability to filter results by year.
 * Added filter `iworks_fleet_result_skip_year_in_title` to avoid prefixing result title by year.
+* Added ability to add base fleet styles.
 
 = 1.2.9 (2020-06-17) =
 * Added MNA Codes see: https://www.sailing.org/raceofficials/eventorganizers/mna_codes.php

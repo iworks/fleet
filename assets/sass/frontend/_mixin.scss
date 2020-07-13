@@ -1,0 +1,11 @@
+
+$dark: #040404;
+
+$transparentize: .3;
+
+$color_place_gold:   transparentize( gold, $transparentize );
+$color_place_silver: transparentize( silver, $transparentize );
+$color_place_bronze: transparentize( #cd7f32, $transparentize );
+
+$version: PLUGIN_VERSION;
+

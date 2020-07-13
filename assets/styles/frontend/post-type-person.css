@@ -1,0 +1,24 @@
+.fleet-results-person thead th,
+.fleet-results-person thead td {
+  background-color: #040404;
+  color: #040404;
+}
+
+.boat-data svg,
+.fleet-results svg {
+  display: inline-block;
+}
+
+td.boat,
+td.helmsman,
+td.crew,
+td.place,
+td.points {
+  wrap: nowrap;
+}
+
+td.race,
+td.place,
+td.points {
+  text-align: right;
+}

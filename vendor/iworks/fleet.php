@@ -33,9 +33,11 @@ class iworks_fleet extends iworks {
 	private $post_type_boat;
 	private $post_type_person;
 	private $post_type_result;
+	protected $options;
 
 	public function __construct() {
 		parent::__construct();
+		$this->options    = iworks_fleet_get_options_object();
 		$this->base       = dirname( dirname( __FILE__ ) );
 		$this->dir        = basename( dirname( $this->base ) );
 		$this->version    = 'PLUGIN_VERSION';
@@ -56,6 +58,8 @@ class iworks_fleet extends iworks {
 		add_action( 'admin_init', array( $this, 'admin_init' ) );
 		add_action( 'init', array( $this, 'register_boat_number' ) );
 		add_action( 'init', array( $this, 'db_install' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'register_styles' ), 0 );
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ) );
 		/**
 		 * shortcodes
 		 */
@@ -373,5 +377,30 @@ class iworks_fleet extends iworks {
 		echo '<style type="text/css">';
 		printf( '.iworks-notice-fleet .iworks-notice-logo{background-image:url(%s);}', esc_url( $logo ) );
 		echo '</style>';
+	}
+
+	/**
+	 * register styles
+	 *
+	 * @since 1.3.0
+	 */
+	public function register_styles() {
+		wp_register_style(
+			$this->options->get_option_name( 'frontend' ),
+			sprintf( plugins_url( '/assets/styles/fleet%s.css', $this->base ), $this->dev ? '' : '.min' ),
+			array(),
+			$this->version
+		);
+	}
+
+	/**
+	 * Enquque styles
+	 *
+	 * @since 1.3.0
+	 */
+	public function enqueue_styles() {
+		if ( $this->options->get_option( 'load_frontend_css' ) ) {
+			wp_enqueue_style( $this->options->get_option_name( 'frontend' ) );
+		}
 	}
 }
