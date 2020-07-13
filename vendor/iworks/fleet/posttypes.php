@@ -41,6 +41,7 @@ class iworks_fleet_posttypes {
 		 */
 		add_action( 'init', array( $this, 'register' ) );
 		add_action( 'init', array( $this, 'register_taxonomy_location' ), 9 );
+		add_filter( 'body_class', array( $this, 'add_wide_body_class' ) );
 		/**
 		 * save post
 		 */
@@ -387,6 +388,20 @@ class iworks_fleet_posttypes {
 			),
 			$data
 		);
+	}
+	/**
+	 * Add wide body class
+	 *
+	 * @since 1.3.0
+	 */
+	public function add_wide_body_class( $classes ) {
+		if ( $this->options->get_option( 'wide_class' ) ) {
+			l( $this->post_type_name );
+			if ( is_singular( $this->post_type_name ) ) {
+				$classes[] = 'template-full-width';
+			}
+		}
+		return $classes;
 	}
 }
 

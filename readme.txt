@@ -42,13 +42,15 @@ There are 3 ways to install this plugin:
 
 == Changelog ==
 
-* Added ability to choose country or countries for whole plugin.
-* Improved results importer.
-* Added boats owners.
-* Improved hull colors choose.
-* Added ability to filter results by year.
-* Added filter `iworks_fleet_result_skip_year_in_title` to avoid prefixing result title by year.
 * Added ability to add base fleet styles.
+* Added ability to add wide body class (compatibility with 2020 theme).
+* Added ability to choose country or countries for whole plugin.
+* Added ability to filter results by year.
+* Added boats owners.
+* Added filter `iworks_fleet_result_skip_year_in_title` to avoid prefixing result title by year.
+* Improved hull colors choose.
+* Improved results importer.
+
 
 = 1.2.9 (2020-06-17) =
 * Added MNA Codes see: https://www.sailing.org/raceofficials/eventorganizers/mna_codes.php
