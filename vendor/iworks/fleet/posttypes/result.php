@@ -737,7 +737,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 				if ( $regatta->helm_id && $regatta->helm_id != $post_id ) {
 					$content .= sprintf( '<td class="helmsman"><a href="%s">%s</a></td>', get_permalink( $regatta->helm_id ), get_the_title( $regatta->helm_id ) );
 				} elseif ( $regatta->helm_id == $post_id ) {
-					$content .= sprintf( '<td class="helmsman current">%s</td>', $regatta->helm_name );
+					$content .= sprintf( '<td class="helmsman current">%s</td>', apply_filters( 'the_title', $regatta->helm_name, $regatta->helm_id ) );
 				} else {
 					$content .= sprintf( '<td class="helmsman">%s</td>', $regatta->helm_name );
 				}
@@ -747,7 +747,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 				if ( $regatta->crew_id && $regatta->crew_id != $post_id ) {
 					$content .= sprintf( '<td class="crew"><a href="%s">%s</a></td>', get_permalink( $regatta->crew_id ), get_the_title( $regatta->crew_id ) );
 				} elseif ( $regatta->crew_id == $post_id ) {
-					$content .= sprintf( '<td class="crew current">%s</td>', $regatta->crew_name );
+					$content .= sprintf( '<td class="crew current">%s</td>', apply_filters( 'the_title', $regatta->crew_name, $regatta->crew_id ) );
 				} else {
 					$content .= sprintf( '<td class="crew">%s</td>', $regatta->crew_name );
 				}

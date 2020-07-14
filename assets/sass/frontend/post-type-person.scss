@@ -1,12 +1,12 @@
 @import "_mixin";
 
-.fleet-results-person {
+.fleet-results-person  {
     @include table;
 }
 
 
 .boat-data svg,
-.fleet-results svg {
+.fleet-results svg  {
     display: inline-block;
 }
 td.boat,
@@ -14,7 +14,7 @@ td.helmsman,
 td.crew,
 td.place,
 td.points
-{
+ {
 
     white-space: nowrap;
 }
@@ -22,17 +22,95 @@ td.points
 td.race,
 td.place,
 td.points
-{
+ {
 
     text-align: right;
 
 }
-body {
-    &.single-iworks_fleet_person {
-        .entry-title {
-            svg {
-                display: inline;
-                height: 1em;
+body  {
+    &.single-iworks_fleet_person  {
+        .entry-title  {
+            .flag  {
+                padding-left: 2em;
+                background:  {
+                    repeat: no-repeat;
+                    size: contain;
+                }
+                &.flag-alg {@include flag(alg)}
+                &.flag-and {@include flag("and")}
+                &.flag-ang {@include flag(ang)}
+                &.flag-ant {@include flag(ant)}
+                &.flag-arg {@include flag(arg)}
+                &.flag-arm {@include flag(arm)}
+                &.flag-aus {@include flag(aus);padding-left: 2.5em}
+                &.flag-aut {@include flag(aut)}
+                &.flag-aze {@include flag(aze)}
+                &.flag-bar {@include flag(bar)}
+                &.flag-bel {@include flag(bel)}
+                &.flag-ber {@include flag(ber)}
+                &.flag-biz {@include flag(biz)}
+                &.flag-blr {@include flag(blr)}
+                &.flag-bra {@include flag(bra)}
+                &.flag-brn {@include flag(brn)}
+                &.flag-bru {@include flag(bru)}
+                &.flag-bul {@include flag(bul)}
+                &.flag-cam {@include flag(cam)}
+                &.flag-can {@include flag(can)}
+                &.flag-chi {@include flag(chi)}
+                &.flag-col {@include flag(col)}
+                &.flag-cro {@include flag(cro)}
+                &.flag-cub {@include flag(cub)}
+                &.flag-den {@include flag(den);padding-left: 1.8em}
+                &.flag-ecu {@include flag(ecu)}
+                &.flag-egy {@include flag(egy)}
+                &.flag-esa {@include flag(esa)}
+                &.flag-est {@include flag(est)}
+                &.flag-fin {@include flag(fin)}
+                &.flag-fra {@include flag(fra)}
+                &.flag-gbr {@include flag(gbr);padding-left: 2.4em}
+                &.flag-ger {@include flag(ger)}
+                &.flag-gre {@include flag(gre)}
+                &.flag-grn {@include flag(grn)}
+                &.flag-gua {@include flag(gua)}
+                &.flag-hkg {@include flag(hkg)}
+                &.flag-hun {@include flag(hun)}
+                &.flag-irl {@include flag(irl)}
+                &.flag-ita {@include flag(ita)}
+                &.flag-jpn {@include flag(jpn)}
+                &.flag-ken {@include flag(ken)}
+                &.flag-lat {@include flag(lat)}
+                &.flag-lib {@include flag(lib)}
+                &.flag-ltu {@include flag(ltu)}
+                &.flag-lux {@include flag(lux)}
+                &.flag-mad {@include flag(mad)}
+                &.flag-mar {@include flag(mar)}
+                &.flag-mas {@include flag(mas)}
+                &.flag-mda {@include flag(mda)}
+                &.flag-mex {@include flag(mex)}
+                &.flag-mlt {@include flag(mlt)}
+                &.flag-mne {@include flag(mne)}
+                &.flag-mon {@include flag(mon)}
+                &.flag-moz {@include flag(moz)}
+                &.flag-mya {@include flag(mya)}
+                &.flag-nor {@include flag(nor)}
+                &.flag-nzl {@include flag(nzl)}
+                &.flag-oma {@include flag(oma)}
+                &.flag-pak {@include flag(pak)}
+                &.flag-pan {@include flag(pan)}
+                &.flag-par {@include flag(par)}
+                &.flag-pol {@include flag(pol)}
+                &.flag-rou {@include flag(rou)}
+                &.flag-rsa {@include flag(rsa)}
+                &.flag-rus {@include flag(rus)}
+                &.flag-sui {@include flag(sui);padding-left: 1.3em}
+                &.flag-swe {@include flag(swe)}
+                &.flag-tan {@include flag(tan)}
+                &.flag-tha {@include flag(tha)}
+                &.flag-uae {@include flag(uae)}
+                &.flag-ukr {@include flag(ukr)}
+                &.flag-usa {@include flag(usa)}
+                &.flag-van {@include flag(van)}
+                &.flag-zim {@include flag(zim)}
             }
         }
     }

@@ -9,6 +9,8 @@ $color_place_bronze: transparentize( #cd7f32, $transparentize );
 
 $version: PLUGIN_VERSION;
 
+$image_root: '../images/';
+
 @mixin table() {
     border: 0;
     border-collapse: collapse;
@@ -42,3 +44,12 @@ $version: PLUGIN_VERSION;
     }
 }
 
+@mixin image( $image ) {
+    image: url(#{$image_root}#{$image}?v=#{$version});
+}
+
+@mixin flag( $flag ) {
+    background: {
+        @include image("flags/#{$flag}.svg");
+    }
+}

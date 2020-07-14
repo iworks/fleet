@@ -742,9 +742,13 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 		}
 	}
 
-	private function get_flag( $post_ID ) {
+	private function get_code( $post_ID ) {
 		$meta_key = $this->options->get_option_name( 'personal_nation' );
-		$code     = get_post_meta( $post_ID, $meta_key, true );
+		return get_post_meta( $post_ID, $meta_key, true );
+	}
+
+	private function get_flag( $post_ID ) {
+		$code = $this->get_code( $post_ID );
 		if ( empty( $code ) ) {
 			return '';
 		}
@@ -771,13 +775,11 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 	public function add_flag_to_single_title( $post_title, $post_ID ) {
 		if ( is_singular( $this->post_type_name ) ) {
 			global $wp_query;
-			if ( $wp_query->queried_object_id === $post_ID ) {
-				$show = $this->options->get_option( 'person_show_flag_on_single' );
-				if ( $show ) {
-					$code = $this->get_flag( $post_ID );
-					if ( ! empty( $code ) ) {
-						return $code . $post_title;
-					}
+			$show = $this->options->get_option( 'person_show_flag_on_single' );
+			if ( $show ) {
+				$code = $this->get_code( $post_ID );
+				if ( ! empty( $code ) ) {
+					return sprintf( '<span class="flag flag-%s">%s</span>', esc_attr( strtolower( $code ) ), $post_title );
 				}
 			} else {
 				return $this->add_flag_to_title( $post_title, $post_ID );
