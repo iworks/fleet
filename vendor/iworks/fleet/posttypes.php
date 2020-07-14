@@ -31,11 +31,16 @@ class iworks_fleet_posttypes {
 	protected $options;
 	protected $fields;
 	protected $base;
-	protected $taxonomy_name_location = 'iworks_fleet_location';
+	protected $taxonomy_name_location  = 'iworks_fleet_location';
+	protected $show_single_person_flag = false;
 
 	public function __construct() {
 		$this->options = iworks_fleet_get_options_object();
 		$this->base    = preg_replace( '/\/iworks.+/', '/', __FILE__ );
+		/**
+		 * show sigle person flag
+		 */
+		$this->show_single_person_flag = $this->options->get_option( 'person_show_flag_on_single' );
 		/**
 		 * register
 		 */

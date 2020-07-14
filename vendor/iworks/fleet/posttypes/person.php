@@ -773,16 +773,13 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 	}
 
 	public function add_flag_to_single_title( $post_title, $post_ID ) {
-		if ( is_singular( $this->post_type_name ) ) {
-			global $wp_query;
-			$show = $this->options->get_option( 'person_show_flag_on_single' );
-			if ( $show ) {
+		if ( $this->show_single_person_flag ) {
+			$post_type = get_post_type( $post_ID );
+			if ( $post_type === $this->post_type_name ) {
 				$code = $this->get_code( $post_ID );
 				if ( ! empty( $code ) ) {
 					return sprintf( '<span class="flag flag-%s">%s</span>', esc_attr( strtolower( $code ) ), $post_title );
 				}
-			} else {
-				return $this->add_flag_to_title( $post_title, $post_ID );
 			}
 		}
 		return $post_title;

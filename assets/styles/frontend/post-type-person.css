@@ -37,237 +37,234 @@ td.points {
   text-align: right;
 }
 
-body.single-iworks_fleet_person .entry-title .flag {
-  padding-left: 2em;
+.flag {
+  padding-left: 2.5em;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: 1.5em auto;
+  background-position: 0 50%;
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-alg {
+.flag.flag-alg {
   background-image: url(../images/flags/alg.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-and {
+.flag.flag-and {
   background-image: url(../images/flags/and.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-ang {
+.flag.flag-ang {
   background-image: url(../images/flags/ang.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-ant {
+.flag.flag-ant {
   background-image: url(../images/flags/ant.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-arg {
+.flag.flag-arg {
   background-image: url(../images/flags/arg.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-arm {
+.flag.flag-arm {
   background-image: url(../images/flags/arm.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-aus {
+.flag.flag-aus {
   background-image: url(../images/flags/aus.svg?v=PLUGIN_VERSION);
-  padding-left: 2.5em;
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-aut {
+.flag.flag-aut {
   background-image: url(../images/flags/aut.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-aze {
+.flag.flag-aze {
   background-image: url(../images/flags/aze.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-bar {
+.flag.flag-bar {
   background-image: url(../images/flags/bar.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-bel {
+.flag.flag-bel {
   background-image: url(../images/flags/bel.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-ber {
+.flag.flag-ber {
   background-image: url(../images/flags/ber.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-biz {
+.flag.flag-biz {
   background-image: url(../images/flags/biz.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-blr {
+.flag.flag-blr {
   background-image: url(../images/flags/blr.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-bra {
+.flag.flag-bra {
   background-image: url(../images/flags/bra.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-brn {
+.flag.flag-brn {
   background-image: url(../images/flags/brn.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-bru {
+.flag.flag-bru {
   background-image: url(../images/flags/bru.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-bul {
+.flag.flag-bul {
   background-image: url(../images/flags/bul.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-cam {
+.flag.flag-cam {
   background-image: url(../images/flags/cam.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-can {
+.flag.flag-can {
   background-image: url(../images/flags/can.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-chi {
+.flag.flag-chi {
   background-image: url(../images/flags/chi.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-col {
+.flag.flag-col {
   background-image: url(../images/flags/col.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-cro {
+.flag.flag-cro {
   background-image: url(../images/flags/cro.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-cub {
+.flag.flag-cub {
   background-image: url(../images/flags/cub.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-den {
+.flag.flag-den {
   background-image: url(../images/flags/den.svg?v=PLUGIN_VERSION);
-  padding-left: 1.8em;
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-ecu {
+.flag.flag-ecu {
   background-image: url(../images/flags/ecu.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-egy {
+.flag.flag-egy {
   background-image: url(../images/flags/egy.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-esa {
+.flag.flag-esa {
   background-image: url(../images/flags/esa.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-est {
+.flag.flag-est {
   background-image: url(../images/flags/est.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-fin {
+.flag.flag-fin {
   background-image: url(../images/flags/fin.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-fra {
+.flag.flag-fra {
   background-image: url(../images/flags/fra.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-gbr {
+.flag.flag-gbr {
   background-image: url(../images/flags/gbr.svg?v=PLUGIN_VERSION);
-  padding-left: 2.4em;
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-ger {
+.flag.flag-ger {
   background-image: url(../images/flags/ger.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-gre {
+.flag.flag-gre {
   background-image: url(../images/flags/gre.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-grn {
+.flag.flag-grn {
   background-image: url(../images/flags/grn.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-gua {
+.flag.flag-gua {
   background-image: url(../images/flags/gua.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-hkg {
+.flag.flag-hkg {
   background-image: url(../images/flags/hkg.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-hun {
+.flag.flag-hun {
   background-image: url(../images/flags/hun.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-irl {
+.flag.flag-irl {
   background-image: url(../images/flags/irl.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-ita {
+.flag.flag-ita {
   background-image: url(../images/flags/ita.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-jpn {
+.flag.flag-jpn {
   background-image: url(../images/flags/jpn.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-ken {
+.flag.flag-ken {
   background-image: url(../images/flags/ken.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-lat {
+.flag.flag-lat {
   background-image: url(../images/flags/lat.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-lib {
+.flag.flag-lib {
   background-image: url(../images/flags/lib.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-ltu {
+.flag.flag-ltu {
   background-image: url(../images/flags/ltu.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-lux {
+.flag.flag-lux {
   background-image: url(../images/flags/lux.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-mad {
+.flag.flag-mad {
   background-image: url(../images/flags/mad.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-mar {
+.flag.flag-mar {
   background-image: url(../images/flags/mar.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-mas {
+.flag.flag-mas {
   background-image: url(../images/flags/mas.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-mda {
+.flag.flag-mda {
   background-image: url(../images/flags/mda.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-mex {
+.flag.flag-mex {
   background-image: url(../images/flags/mex.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-mlt {
+.flag.flag-mlt {
   background-image: url(../images/flags/mlt.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-mne {
+.flag.flag-mne {
   background-image: url(../images/flags/mne.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-mon {
+.flag.flag-mon {
   background-image: url(../images/flags/mon.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-moz {
+.flag.flag-moz {
   background-image: url(../images/flags/moz.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-mya {
+.flag.flag-mya {
   background-image: url(../images/flags/mya.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-nor {
+.flag.flag-nor {
   background-image: url(../images/flags/nor.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-nzl {
+.flag.flag-nzl {
   background-image: url(../images/flags/nzl.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-oma {
+.flag.flag-oma {
   background-image: url(../images/flags/oma.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-pak {
+.flag.flag-pak {
   background-image: url(../images/flags/pak.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-pan {
+.flag.flag-pan {
   background-image: url(../images/flags/pan.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-par {
+.flag.flag-par {
   background-image: url(../images/flags/par.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-pol {
+.flag.flag-pol {
   background-image: url(../images/flags/pol.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-rou {
+.flag.flag-rou {
   background-image: url(../images/flags/rou.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-rsa {
+.flag.flag-rsa {
   background-image: url(../images/flags/rsa.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-rus {
+.flag.flag-rus {
   background-image: url(../images/flags/rus.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-sui {
+.flag.flag-sui {
   background-image: url(../images/flags/sui.svg?v=PLUGIN_VERSION);
-  padding-left: 1.3em;
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-swe {
+.flag.flag-swe {
   background-image: url(../images/flags/swe.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-tan {
+.flag.flag-tan {
   background-image: url(../images/flags/tan.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-tha {
+.flag.flag-tha {
   background-image: url(../images/flags/tha.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-uae {
+.flag.flag-uae {
   background-image: url(../images/flags/uae.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-ukr {
+.flag.flag-ukr {
   background-image: url(../images/flags/ukr.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-usa {
+.flag.flag-usa {
   background-image: url(../images/flags/usa.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-van {
+.flag.flag-van {
   background-image: url(../images/flags/van.svg?v=PLUGIN_VERSION);
 }
-body.single-iworks_fleet_person .entry-title .flag.flag-zim {
+.flag.flag-zim {
   background-image: url(../images/flags/zim.svg?v=PLUGIN_VERSION);
 }

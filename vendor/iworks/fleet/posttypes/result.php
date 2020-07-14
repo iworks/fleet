@@ -697,8 +697,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 				$content .= sprintf( '<th class="points">%s</th>', esc_html__( 'Points', 'fleet' ) );
 			}
 			$content .= '</tr></thead><tbody>';
-
-			$format = get_option( 'date_format' );
+			$format   = get_option( 'date_format' );
 			foreach ( $regattas as $regatta ) {
 				$dates   = sprintf(
 					'%s - %s',
@@ -752,7 +751,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 					$content .= sprintf( '<td class="crew">%s</td>', $regatta->crew_name );
 				}
 				$x        = get_post_meta( $regatta->post_regata_id, $this->options->get_option_name( 'result_number_of_competitors' ), true );
-				$content .= sprintf( '<td class="place">%d (%d)</td>', $regatta->place, $x );
+				$content .= sprintf( '<td class="place">%d <small>(%d)</small></td>', $regatta->place, $x );
 				if ( $this->show_points ) {
 					$content .= sprintf( '<td class="points">%d</td>', $regatta->points );
 				}
@@ -1343,7 +1342,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		$content .= '<tr>';
 		$content .= sprintf( '<td class="place">%s</td>', esc_html__( 'Place', 'fleet' ) );
 		$content .= sprintf( '<td class="boat">%s</td>', esc_html__( 'Boat', 'fleet' ) );
-		$content .= sprintf( '<td class="helm">%s</td>', esc_html__( 'Helm', 'fleet' ) );
+		$content .= sprintf( '<td class="helm">%s</td>', esc_html__( 'Helmsman', 'fleet' ) );
 		$content .= sprintf( '<td class="crew">%s</td>', esc_html__( 'Crew', 'fleet' ) );
 		$number   = intval( get_post_meta( $post_id, 'iworks_fleet_result_number_of_races', true ) );
 		for ( $i = 1; $i <= $number; $i++ ) {
@@ -1391,7 +1390,12 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 				if ( $show ) {
 					$extra = $this->get_extra_data( $one->helm_id );
 				}
-				$content .= sprintf( '<td class="helm_name"><a href="%s">%s</a>%s</td>', get_permalink( $one->helm_id ), $one->helm_name, $extra );
+				$content .= sprintf(
+					'<td class="helm_name"><a href="%s">%s</a>%s</td>',
+					get_permalink( $one->helm_id ),
+					apply_filters( 'the_title', $one->helm_name, $one->helm_id ),
+					$extra
+				);
 			} else {
 				$content .= sprintf( '<td class="helm_name">%s</td>', $one->helm_name );
 			}
@@ -1403,7 +1407,12 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 				if ( $show ) {
 					$extra = $this->get_extra_data( $one->crew_id );
 				}
-				$content .= sprintf( '<td class="crew_name"><a href="%s">%s</a>%s</td>', get_permalink( $one->crew_id ), $one->crew_name, $extra );
+				$content .= sprintf(
+					'<td class="crew_name"><a href="%s">%s</a>%s</td>',
+					get_permalink( $one->crew_id ),
+					apply_filters( 'the_title', $one->crew_name, $one->crew_id ),
+					$extra
+				);
 			} else {
 				$content .= sprintf( '<td class="crew_name">%s</td>', $one->crew_name );
 			}
