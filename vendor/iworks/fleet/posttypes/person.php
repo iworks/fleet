@@ -42,10 +42,6 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 		add_filter( 'international_fleet_posted_on', array( $this, 'get_club' ), 10, 2 );
 		add_filter( 'the_title', array( $this, 'add_flag_to_single_title' ), 10, 2 );
 		/**
-		 * get flag
-		 */
-		add_filter( 'iworks_fleet_person_get_flag', array( $this, 'add_flag_to_title' ), 10, 2 );
-		/**
 		 * change default columns
 		 */
 		add_filter( "manage_{$this->get_name()}_posts_columns", array( $this, 'add_columns' ) );
@@ -436,7 +432,7 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 		return sprintf(
 			'<a href="%s">%s</a>',
 			esc_url( $user['permalink'] ),
-			esc_html( $user['post_title'] )
+			$user['post_title']
 		);
 	}
 
@@ -762,14 +758,6 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 			$content = file_get_contents( $file );
 		}
 		return $content . ' ';
-	}
-
-	public function add_flag_to_title( $content, $post_ID ) {
-		$code = $this->get_flag( $post_ID );
-		if ( ! empty( $code ) ) {
-			$code = preg_replace( '/<svg/', '<svg style="max-width:20px;height:auto;max-height:16px;" ', $code );
-		}
-		return $code . $content;
 	}
 
 	public function add_flag_to_single_title( $post_title, $post_ID ) {

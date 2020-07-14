@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Plugins - Fleet - Development (trunk)\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/fleet\n"
-"POT-Creation-Date: 2020-07-14 07:29:01+00:00\n"
+"POT-Creation-Date: 2020-07-14 08:02:03+00:00\n"
 "PO-Revision-Date: 2019-11-04 14:10+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -41,9 +41,9 @@ msgid "Load frontend CSS"
 msgstr ""
 
 #: etc/options.php:48 vendor/iworks/fleet/posttypes/result.php:239
-#: vendor/iworks/fleet/posttypes/result.php:867
-#: vendor/iworks/fleet/posttypes/result.php:869
-#: vendor/iworks/fleet/posttypes/result.php:1874
+#: vendor/iworks/fleet/posttypes/result.php:866
+#: vendor/iworks/fleet/posttypes/result.php:868
+#: vendor/iworks/fleet/posttypes/result.php:1883
 msgid "Results"
 msgstr "Wyniki"
 
@@ -165,7 +165,7 @@ msgid "Masts Manufaturers"
 msgstr "Producenci masztów"
 
 #: etc/options.php:266 etc/options.php:267
-#: vendor/iworks/fleet/posttypes.php:256
+#: vendor/iworks/fleet/posttypes.php:261
 msgid "Locations"
 msgstr "Lokalizacja"
 
@@ -1376,9 +1376,9 @@ msgstr ""
 #: vendor/iworks/fleet/posttypes/boat.php:146
 #: vendor/iworks/fleet/posttypes/boat.php:588
 #: vendor/iworks/fleet/posttypes/boat.php:1176
-#: vendor/iworks/fleet/posttypes/result.php:1051
-#: vendor/iworks/fleet/posttypes/result.php:1066
-#: vendor/iworks/fleet/posttypes/result.php:1269
+#: vendor/iworks/fleet/posttypes/result.php:1050
+#: vendor/iworks/fleet/posttypes/result.php:1065
+#: vendor/iworks/fleet/posttypes/result.php:1268
 #, fuzzy
 msgid "Location"
 msgstr "Lokalizacja"
@@ -1455,7 +1455,7 @@ msgid "G+"
 msgstr ""
 
 #: vendor/iworks/fleet/posttypes/boat.php:299
-#: vendor/iworks/fleet/posttypes/result.php:865
+#: vendor/iworks/fleet/posttypes/result.php:864
 msgid "5O5"
 msgstr ""
 
@@ -1463,19 +1463,19 @@ msgstr ""
 #: vendor/iworks/fleet/posttypes/boat.php:325
 #: vendor/iworks/fleet/posttypes/result.php:183
 #: vendor/iworks/fleet/posttypes/result.php:692
-#: vendor/iworks/fleet/posttypes/result.php:1345
-#: vendor/iworks/fleet/posttypes/result.php:1871
+#: vendor/iworks/fleet/posttypes/result.php:1344
+#: vendor/iworks/fleet/posttypes/result.php:1880
 msgid "Boat"
 msgstr "Łódka"
 
 #: vendor/iworks/fleet/posttypes/boat.php:302
 #: vendor/iworks/fleet/posttypes/person.php:144
-#: vendor/iworks/fleet/posttypes/result.php:868
+#: vendor/iworks/fleet/posttypes/result.php:867
 msgid "Item Attributes"
 msgstr ""
 
 #: vendor/iworks/fleet/posttypes/boat.php:305
-#: vendor/iworks/fleet/posttypes/result.php:871
+#: vendor/iworks/fleet/posttypes/result.php:870
 #, fuzzy
 msgid "Add New"
 msgstr "Dodaj łódkę"
@@ -1511,71 +1511,71 @@ msgstr ""
 
 #: vendor/iworks/fleet/posttypes/boat.php:312
 #: vendor/iworks/fleet/posttypes/person.php:154
-#: vendor/iworks/fleet/posttypes/result.php:878
+#: vendor/iworks/fleet/posttypes/result.php:877
 msgid "Not found"
 msgstr ""
 
 #: vendor/iworks/fleet/posttypes/boat.php:313
 #: vendor/iworks/fleet/posttypes/person.php:155
-#: vendor/iworks/fleet/posttypes/result.php:879
+#: vendor/iworks/fleet/posttypes/result.php:878
 msgid "Not found in Trash"
 msgstr ""
 
 #: vendor/iworks/fleet/posttypes/boat.php:314
 #: vendor/iworks/fleet/posttypes/person.php:156
-#: vendor/iworks/fleet/posttypes/result.php:880
+#: vendor/iworks/fleet/posttypes/result.php:879
 #, fuzzy
 msgid "Featured Image"
 msgstr "Automatycznie ustaw obrazek wyróżniający."
 
 #: vendor/iworks/fleet/posttypes/boat.php:315
 #: vendor/iworks/fleet/posttypes/person.php:157
-#: vendor/iworks/fleet/posttypes/result.php:881
+#: vendor/iworks/fleet/posttypes/result.php:880
 #, fuzzy
 msgid "Set featured image"
 msgstr "Automatycznie ustaw obrazek wyróżniający."
 
 #: vendor/iworks/fleet/posttypes/boat.php:316
 #: vendor/iworks/fleet/posttypes/person.php:158
-#: vendor/iworks/fleet/posttypes/result.php:882
+#: vendor/iworks/fleet/posttypes/result.php:881
 #, fuzzy
 msgid "Remove featured image"
 msgstr "Automatycznie ustaw obrazek wyróżniający."
 
 #: vendor/iworks/fleet/posttypes/boat.php:317
 #: vendor/iworks/fleet/posttypes/person.php:159
-#: vendor/iworks/fleet/posttypes/result.php:883
+#: vendor/iworks/fleet/posttypes/result.php:882
 #, fuzzy
 msgid "Use as featured image"
 msgstr "Automatycznie ustaw obrazek wyróżniający."
 
 #: vendor/iworks/fleet/posttypes/boat.php:318
 #: vendor/iworks/fleet/posttypes/person.php:160
-#: vendor/iworks/fleet/posttypes/result.php:884
+#: vendor/iworks/fleet/posttypes/result.php:883
 msgid "Insert into item"
 msgstr ""
 
 #: vendor/iworks/fleet/posttypes/boat.php:319
 #: vendor/iworks/fleet/posttypes/person.php:161
-#: vendor/iworks/fleet/posttypes/result.php:885
+#: vendor/iworks/fleet/posttypes/result.php:884
 msgid "Uploaded to this item"
 msgstr ""
 
 #: vendor/iworks/fleet/posttypes/boat.php:320
 #: vendor/iworks/fleet/posttypes/person.php:162
-#: vendor/iworks/fleet/posttypes/result.php:886
+#: vendor/iworks/fleet/posttypes/result.php:885
 msgid "Items list"
 msgstr ""
 
 #: vendor/iworks/fleet/posttypes/boat.php:321
 #: vendor/iworks/fleet/posttypes/person.php:163
-#: vendor/iworks/fleet/posttypes/result.php:887
+#: vendor/iworks/fleet/posttypes/result.php:886
 msgid "Items list navigation"
 msgstr ""
 
 #: vendor/iworks/fleet/posttypes/boat.php:322
 #: vendor/iworks/fleet/posttypes/person.php:164
-#: vendor/iworks/fleet/posttypes/result.php:888
+#: vendor/iworks/fleet/posttypes/result.php:887
 msgid "Filter items list"
 msgstr ""
 
@@ -1618,7 +1618,7 @@ msgstr "Producent kadłuba"
 #: vendor/iworks/fleet/posttypes/boat.php:405
 #: vendor/iworks/fleet/posttypes/boat.php:444
 #: vendor/iworks/fleet/posttypes/person.php:206
-#: vendor/iworks/fleet/posttypes/result.php:928
+#: vendor/iworks/fleet/posttypes/result.php:927
 msgid "Separate items with commas"
 msgstr ""
 
@@ -1633,8 +1633,8 @@ msgstr ""
 #: vendor/iworks/fleet/posttypes/boat.php:407
 #: vendor/iworks/fleet/posttypes/boat.php:446
 #: vendor/iworks/fleet/posttypes/person.php:208
-#: vendor/iworks/fleet/posttypes/result.php:930
-#: vendor/iworks/fleet/posttypes.php:265 vendor/iworks/fleet.php:239
+#: vendor/iworks/fleet/posttypes/result.php:929
+#: vendor/iworks/fleet/posttypes.php:270 vendor/iworks/fleet.php:239
 msgid "Choose from the most used"
 msgstr ""
 
@@ -1652,8 +1652,8 @@ msgstr "Producenci kadłubów"
 #: vendor/iworks/fleet/posttypes/boat.php:410
 #: vendor/iworks/fleet/posttypes/boat.php:449
 #: vendor/iworks/fleet/posttypes/person.php:211
-#: vendor/iworks/fleet/posttypes/result.php:933
-#: vendor/iworks/fleet/posttypes.php:268 vendor/iworks/fleet.php:242
+#: vendor/iworks/fleet/posttypes/result.php:932
+#: vendor/iworks/fleet/posttypes.php:273 vendor/iworks/fleet.php:242
 msgid "Not Found"
 msgstr ""
 
@@ -1661,7 +1661,7 @@ msgstr ""
 #: vendor/iworks/fleet/posttypes/boat.php:411
 #: vendor/iworks/fleet/posttypes/boat.php:450
 #: vendor/iworks/fleet/posttypes/person.php:212
-#: vendor/iworks/fleet/posttypes.php:269 vendor/iworks/fleet.php:243
+#: vendor/iworks/fleet/posttypes.php:274 vendor/iworks/fleet.php:243
 msgid "No items"
 msgstr ""
 
@@ -1800,7 +1800,7 @@ msgstr ""
 #: vendor/iworks/fleet/posttypes/boat.php:584
 #: vendor/iworks/fleet/posttypes/person.php:289
 #: vendor/iworks/fleet/posttypes/result.php:691
-#: vendor/iworks/fleet/posttypes/result.php:781
+#: vendor/iworks/fleet/posttypes/result.php:780
 msgid "Name"
 msgstr ""
 
@@ -1838,7 +1838,8 @@ msgstr ""
 #: vendor/iworks/fleet/posttypes/boat.php:778
 #: vendor/iworks/fleet/posttypes/boat.php:876
 #: vendor/iworks/fleet/posttypes/result.php:693
-#: vendor/iworks/fleet/posttypes/result.php:782
+#: vendor/iworks/fleet/posttypes/result.php:781
+#: vendor/iworks/fleet/posttypes/result.php:1345
 msgid "Helmsman"
 msgstr ""
 
@@ -1847,9 +1848,9 @@ msgstr ""
 #: vendor/iworks/fleet/posttypes/boat.php:877
 #: vendor/iworks/fleet/posttypes/result.php:185
 #: vendor/iworks/fleet/posttypes/result.php:694
-#: vendor/iworks/fleet/posttypes/result.php:783
-#: vendor/iworks/fleet/posttypes/result.php:1347
-#: vendor/iworks/fleet/posttypes/result.php:1873
+#: vendor/iworks/fleet/posttypes/result.php:782
+#: vendor/iworks/fleet/posttypes/result.php:1346
+#: vendor/iworks/fleet/posttypes/result.php:1882
 msgid "Crew"
 msgstr ""
 
@@ -1886,7 +1887,7 @@ msgstr ""
 
 #: vendor/iworks/fleet/posttypes/boat.php:931
 #: vendor/iworks/fleet/posttypes/boat.php:972
-#: vendor/iworks/fleet/posttypes/result.php:984
+#: vendor/iworks/fleet/posttypes/result.php:983
 msgid "Delete"
 msgstr ""
 
@@ -1899,12 +1900,12 @@ msgid "Add a crew"
 msgstr ""
 
 #: vendor/iworks/fleet/posttypes/boat.php:963
-#: vendor/iworks/fleet/posttypes/result.php:975
+#: vendor/iworks/fleet/posttypes/result.php:974
 msgid "Select a helmsman"
 msgstr ""
 
 #: vendor/iworks/fleet/posttypes/boat.php:968
-#: vendor/iworks/fleet/posttypes/result.php:980
+#: vendor/iworks/fleet/posttypes/result.php:979
 msgid "Select a crew"
 msgstr ""
 
@@ -2152,18 +2153,17 @@ msgid "Wind power"
 msgstr ""
 
 #: vendor/iworks/fleet/posttypes/result.php:182
-#: vendor/iworks/fleet/posttypes/result.php:1344
+#: vendor/iworks/fleet/posttypes/result.php:1343
 msgid "Place"
 msgstr ""
 
 #: vendor/iworks/fleet/posttypes/result.php:184
-#: vendor/iworks/fleet/posttypes/result.php:1346
-#: vendor/iworks/fleet/posttypes/result.php:1872
+#: vendor/iworks/fleet/posttypes/result.php:1881
 msgid "Helm"
 msgstr ""
 
 #: vendor/iworks/fleet/posttypes/result.php:190
-#: vendor/iworks/fleet/posttypes/result.php:1352
+#: vendor/iworks/fleet/posttypes/result.php:1351
 msgid "Sum"
 msgstr ""
 
@@ -2200,246 +2200,246 @@ msgid "There is no register regatta for this sailor."
 msgstr ""
 
 #: vendor/iworks/fleet/posttypes/result.php:690
-#: vendor/iworks/fleet/posttypes/result.php:780
-#: vendor/iworks/fleet/posttypes/result.php:1052
-#: vendor/iworks/fleet/posttypes/result.php:1067
+#: vendor/iworks/fleet/posttypes/result.php:779
+#: vendor/iworks/fleet/posttypes/result.php:1051
+#: vendor/iworks/fleet/posttypes/result.php:1066
 msgid "Year"
 msgstr ""
 
 #: vendor/iworks/fleet/posttypes/result.php:695
-#: vendor/iworks/fleet/posttypes/result.php:784
+#: vendor/iworks/fleet/posttypes/result.php:783
 msgid "Place (of)"
 msgstr ""
 
 #: vendor/iworks/fleet/posttypes/result.php:697
-#: vendor/iworks/fleet/posttypes/result.php:786
-#: vendor/iworks/fleet/posttypes/result.php:1875
+#: vendor/iworks/fleet/posttypes/result.php:785
+#: vendor/iworks/fleet/posttypes/result.php:1884
 msgid "Points"
 msgstr ""
 
-#: vendor/iworks/fleet/posttypes/result.php:765
-#: vendor/iworks/fleet/posttypes/result.php:840
+#: vendor/iworks/fleet/posttypes/result.php:764
+#: vendor/iworks/fleet/posttypes/result.php:839
 msgid "Regatta list"
 msgstr ""
 
-#: vendor/iworks/fleet/posttypes/result.php:866
-#: vendor/iworks/fleet/posttypes/result.php:891
+#: vendor/iworks/fleet/posttypes/result.php:865
+#: vendor/iworks/fleet/posttypes/result.php:890
 #, fuzzy
 msgid "Result"
 msgstr "Wyniki"
 
-#: vendor/iworks/fleet/posttypes/result.php:870
+#: vendor/iworks/fleet/posttypes/result.php:869
 #, fuzzy
 msgid "Add New Result"
 msgstr "Dodaj łódkę"
 
-#: vendor/iworks/fleet/posttypes/result.php:872
+#: vendor/iworks/fleet/posttypes/result.php:871
 #, fuzzy
 msgid "New Result"
 msgstr "Wyniki"
 
-#: vendor/iworks/fleet/posttypes/result.php:873
+#: vendor/iworks/fleet/posttypes/result.php:872
 #, fuzzy
 msgid "Edit Result"
 msgstr "Wyniki"
 
-#: vendor/iworks/fleet/posttypes/result.php:874
+#: vendor/iworks/fleet/posttypes/result.php:873
 #, fuzzy
 msgid "Update Result"
 msgstr "Wyniki"
 
-#: vendor/iworks/fleet/posttypes/result.php:875
+#: vendor/iworks/fleet/posttypes/result.php:874
 #, fuzzy
 msgid "View Result"
 msgstr "Wyniki"
 
-#: vendor/iworks/fleet/posttypes/result.php:876
+#: vendor/iworks/fleet/posttypes/result.php:875
 #, fuzzy
 msgid "View Results"
 msgstr "Wyniki"
 
-#: vendor/iworks/fleet/posttypes/result.php:877
+#: vendor/iworks/fleet/posttypes/result.php:876
 #, fuzzy
 msgid "Search Result"
 msgstr "Wyniki"
 
-#: vendor/iworks/fleet/posttypes/result.php:921
+#: vendor/iworks/fleet/posttypes/result.php:920
 #, fuzzy
 msgid "Serie"
 msgstr "Serie"
 
-#: vendor/iworks/fleet/posttypes/result.php:922
+#: vendor/iworks/fleet/posttypes/result.php:921
 #, fuzzy
 msgid "All Series"
 msgstr "Serie"
 
-#: vendor/iworks/fleet/posttypes/result.php:923
+#: vendor/iworks/fleet/posttypes/result.php:922
 msgid "New Serie Name"
 msgstr ""
 
-#: vendor/iworks/fleet/posttypes/result.php:924
+#: vendor/iworks/fleet/posttypes/result.php:923
 #, fuzzy
 msgid "Add New Serie"
 msgstr "Dodaj łódkę"
 
-#: vendor/iworks/fleet/posttypes/result.php:925
+#: vendor/iworks/fleet/posttypes/result.php:924
 #, fuzzy
 msgid "Edit Serie"
 msgstr "Serie"
 
-#: vendor/iworks/fleet/posttypes/result.php:926
+#: vendor/iworks/fleet/posttypes/result.php:925
 msgid "Update Serie"
 msgstr ""
 
-#: vendor/iworks/fleet/posttypes/result.php:927
+#: vendor/iworks/fleet/posttypes/result.php:926
 #, fuzzy
 msgid "View Serie"
 msgstr "Serie"
 
-#: vendor/iworks/fleet/posttypes/result.php:929
+#: vendor/iworks/fleet/posttypes/result.php:928
 msgid "Add or remove series"
 msgstr ""
 
-#: vendor/iworks/fleet/posttypes/result.php:931
+#: vendor/iworks/fleet/posttypes/result.php:930
 #, fuzzy
 msgid "Popular Series"
 msgstr "Serie"
 
-#: vendor/iworks/fleet/posttypes/result.php:932
+#: vendor/iworks/fleet/posttypes/result.php:931
 #, fuzzy
 msgid "Search Series"
 msgstr "Serie"
 
-#: vendor/iworks/fleet/posttypes/result.php:934
+#: vendor/iworks/fleet/posttypes/result.php:933
 #, fuzzy
 msgid "No series"
 msgstr "Serie"
 
-#: vendor/iworks/fleet/posttypes/result.php:935
+#: vendor/iworks/fleet/posttypes/result.php:934
 #, fuzzy
 msgid "Series list"
 msgstr "Serie"
 
-#: vendor/iworks/fleet/posttypes/result.php:936
+#: vendor/iworks/fleet/posttypes/result.php:935
 msgid "Series list navigation"
 msgstr ""
 
-#: vendor/iworks/fleet/posttypes/result.php:962
+#: vendor/iworks/fleet/posttypes/result.php:961
 #, fuzzy
 msgid "Result data"
 msgstr "Wyniki"
 
-#: vendor/iworks/fleet/posttypes/result.php:963
+#: vendor/iworks/fleet/posttypes/result.php:962
 msgid "Races data"
 msgstr ""
 
-#: vendor/iworks/fleet/posttypes/result.php:1311
+#: vendor/iworks/fleet/posttypes/result.php:1310
 #, fuzzy
 msgid "Show meta"
 msgstr "Pokaż punkty"
 
-#: vendor/iworks/fleet/posttypes/result.php:1325
+#: vendor/iworks/fleet/posttypes/result.php:1324
 msgid "There is no race data."
 msgstr ""
 
-#: vendor/iworks/fleet/posttypes/result.php:1339
+#: vendor/iworks/fleet/posttypes/result.php:1338
 msgid "Download"
 msgstr ""
 
-#: vendor/iworks/fleet/posttypes/result.php:1478
+#: vendor/iworks/fleet/posttypes/result.php:1487
 msgid "Edit Sailor - Missing Birth Year"
 msgstr ""
 
-#: vendor/iworks/fleet/posttypes/result.php:1628
+#: vendor/iworks/fleet/posttypes/result.php:1637
 msgid "Ranking"
 msgstr ""
 
-#: vendor/iworks/fleet/posttypes/result.php:1641
+#: vendor/iworks/fleet/posttypes/result.php:1650
 msgid "Please setup year attribute first!"
 msgstr ""
 
-#: vendor/iworks/fleet/posttypes/result.php:1648
+#: vendor/iworks/fleet/posttypes/result.php:1657
 msgid "Please setup serie attribute first!"
 msgstr ""
 
-#: vendor/iworks/fleet/posttypes/result.php:1697
+#: vendor/iworks/fleet/posttypes/result.php:1706
 msgid "Currently we do not have anny results!"
 msgstr ""
 
-#: vendor/iworks/fleet/posttypes/result.php:1870
+#: vendor/iworks/fleet/posttypes/result.php:1879
 msgid "#"
 msgstr ""
 
-#: vendor/iworks/fleet/posttypes/result.php:1887
+#: vendor/iworks/fleet/posttypes/result.php:1896
 msgid "brutto"
 msgstr ""
 
-#: vendor/iworks/fleet/posttypes/result.php:1888
+#: vendor/iworks/fleet/posttypes/result.php:1897
 msgid "netto"
 msgstr ""
 
-#: vendor/iworks/fleet/posttypes.php:257
+#: vendor/iworks/fleet/posttypes.php:262
 #, fuzzy
 msgid "All Locations"
 msgstr "Lokalizacja"
 
-#: vendor/iworks/fleet/posttypes.php:258
+#: vendor/iworks/fleet/posttypes.php:263
 #, fuzzy
 msgid "New Locations Name"
 msgstr "Lokalizacja"
 
-#: vendor/iworks/fleet/posttypes.php:259
+#: vendor/iworks/fleet/posttypes.php:264
 #, fuzzy
 msgid "Add New Locations"
 msgstr "Dodaj łódkę"
 
-#: vendor/iworks/fleet/posttypes.php:260
+#: vendor/iworks/fleet/posttypes.php:265
 #, fuzzy
 msgid "Edit Locations"
 msgstr "Lokalizacja"
 
-#: vendor/iworks/fleet/posttypes.php:261
+#: vendor/iworks/fleet/posttypes.php:266
 #, fuzzy
 msgid "Update Locations"
 msgstr "Lokalizacja"
 
-#: vendor/iworks/fleet/posttypes.php:262
+#: vendor/iworks/fleet/posttypes.php:267
 #, fuzzy
 msgid "View Locations"
 msgstr "Lokalizacja"
 
-#: vendor/iworks/fleet/posttypes.php:263
+#: vendor/iworks/fleet/posttypes.php:268
 msgid "Separate Locations with commas"
 msgstr ""
 
-#: vendor/iworks/fleet/posttypes.php:264
+#: vendor/iworks/fleet/posttypes.php:269
 msgid "Add or remove Locations"
 msgstr ""
 
-#: vendor/iworks/fleet/posttypes.php:266
+#: vendor/iworks/fleet/posttypes.php:271
 #, fuzzy
 msgid "Popular Locations"
 msgstr "Lokalizacja"
 
-#: vendor/iworks/fleet/posttypes.php:267
+#: vendor/iworks/fleet/posttypes.php:272
 #, fuzzy
 msgid "Search Locations"
 msgstr "Lokalizacja"
 
-#: vendor/iworks/fleet/posttypes.php:270
+#: vendor/iworks/fleet/posttypes.php:275
 #, fuzzy
 msgid "Locations list"
 msgstr "Lokalizacja"
 
-#: vendor/iworks/fleet/posttypes.php:271
+#: vendor/iworks/fleet/posttypes.php:276
 msgid "Locations list navigation"
 msgstr ""
 
-#: vendor/iworks/fleet/posttypes.php:371
+#: vendor/iworks/fleet/posttypes.php:376
 msgid "select nation"
 msgstr ""
 
-#: vendor/iworks/fleet/posttypes.php:387
+#: vendor/iworks/fleet/posttypes.php:392
 msgid "select color"
 msgstr ""
 
@@ -2636,7 +2636,7 @@ msgctxt "slug for archive"
 msgid "fleet-persons"
 msgstr "Osoby"
 
-#: vendor/iworks/fleet/posttypes/result.php:905
+#: vendor/iworks/fleet/posttypes/result.php:904
 #, fuzzy
 msgctxt "slug for archive"
 msgid "results"
@@ -2665,13 +2665,13 @@ msgctxt "Taxonomy General Name"
 msgid "Masts Manufacturers"
 msgstr "Producenci masztów"
 
-#: vendor/iworks/fleet/posttypes/result.php:919
+#: vendor/iworks/fleet/posttypes/result.php:918
 #, fuzzy
 msgctxt "Taxonomy General Name"
 msgid "Series"
 msgstr "Serie"
 
-#: vendor/iworks/fleet/posttypes.php:254
+#: vendor/iworks/fleet/posttypes.php:259
 #, fuzzy
 msgctxt "Taxonomy General Name"
 msgid "Locations"
@@ -2700,13 +2700,13 @@ msgctxt "Taxonomy Singular Name"
 msgid "Masts Manufacturer"
 msgstr "Producenci masztów"
 
-#: vendor/iworks/fleet/posttypes/result.php:920
+#: vendor/iworks/fleet/posttypes/result.php:919
 #, fuzzy
 msgctxt "Taxonomy Singular Name"
 msgid "Serie"
 msgstr "Serie"
 
-#: vendor/iworks/fleet/posttypes.php:255
+#: vendor/iworks/fleet/posttypes.php:260
 #, fuzzy
 msgctxt "Taxonomy Singular Name"
 msgid "Locations"
@@ -2768,19 +2768,19 @@ msgctxt "Person name on crews list if it is not set"
 msgid "not set"
 msgstr ""
 
-#: vendor/iworks/fleet/posttypes/result.php:863
+#: vendor/iworks/fleet/posttypes/result.php:862
 #, fuzzy
 msgctxt "Result General Name"
 msgid "Results"
 msgstr "Wyniki"
 
-#: vendor/iworks/fleet/posttypes/result.php:864
+#: vendor/iworks/fleet/posttypes/result.php:863
 #, fuzzy
 msgctxt "Result Singular Name"
 msgid "Result"
 msgstr "Wyniki"
 
-#: vendor/iworks/fleet/posttypes/result.php:911
+#: vendor/iworks/fleet/posttypes/result.php:910
 #, fuzzy
 msgctxt "slug for single result"
 msgid "result"

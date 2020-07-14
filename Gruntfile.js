@@ -320,10 +320,7 @@ module.exports = function( grunt ) {
 					'!README.md',
 					'!composer.json',
 					'!composer.lock',
-					'!stylelint.config.js',
-					'!vendor',
-					'!vendor/*',
-					'!vendor/**'
+					'!stylelint.config.js'
 				],
 				dest: './release/<%= pkg.name %>/',
 				noEmpty: true
