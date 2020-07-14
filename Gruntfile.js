@@ -328,7 +328,7 @@ module.exports = function( grunt ) {
 				dest: './release/<%= pkg.name %>/',
 				noEmpty: true
 			}
-		}
+		},
 
 		// BUILD - Create a zip-version of the plugin.
 		compress: {
@@ -412,7 +412,7 @@ module.exports = function( grunt ) {
 	});
 	// Default task.
 
-	grunt.registerTask( 'default', ['clean:temp', 'jshint', 'concat', 'uglify', 'concat_css', 'sass', 'autoprefixer', 'cssmin' ] );
+	grunt.registerTask( 'default', ['clean', 'jshint', 'concat', 'uglify', 'concat_css', 'sass', 'autoprefixer', 'cssmin' ] );
 	grunt.registerTask( 'build', [ 'release' ]);
 	grunt.registerTask( 'js', ['jshint', 'concat', 'uglify'] );
 	grunt.registerTask( 'css', ['concat_css', 'sass', 'autoprefixer', 'cssmin' ] );
