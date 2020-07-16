@@ -721,13 +721,17 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 					$content .= sprintf(
 						'<a href="%s">%s%s</a>',
 						esc_url( $regatta->boat['url'] ),
-						empty( $regatta->country ) ? '' : $regatta->country . ' ',
+						$this->show_single_boat_flag ? ( empty( $regatta->country ) ? '' : $regatta->country . ' ' ) : '',
 						esc_html( $regatta->boat['post_title'] )
 					);
 				} elseif ( empty( $regatta->country ) && empty( $regatta->boat_id ) ) {
 					$content .= '&ndash;';
 				} else {
-					$content .= sprintf( '%s %s', $regatta->country, $regatta->boat_id );
+					if ( $this->show_single_boat_flag ) {
+						$content .= sprintf( '%s %s', $regatta->country, $regatta->boat_id );
+					} else {
+						$content .= $regatta->boat_id;
+					}
 				}
 				$content .= '</td>';
 				/**
@@ -1364,12 +1368,18 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			/**
 			 * boat
 			 */
-			$content  .= sprintf(
+			$content .= sprintf(
 				'<td class="boat_id country-%s">',
 				esc_attr( strtolower( $one->country ) )
 			);
-			$boat      = $this->get_boat_data_by_number( $one->boat_id );
-			$boat_name = sprintf( '%s %d', $one->country, $one->boat_id );
+			$boat     = $this->get_boat_data_by_number( $one->boat_id );
+			/**
+			 * Boat number
+			 */
+			$boat_name = $one->boat_id;
+			if ( $this->show_single_boat_flag ) {
+				$boat_name = sprintf( '%s %d', $one->country, $one->boat_id );
+			}
 			if ( false === $boat ) {
 				$content .= esc_html( $boat_name );
 			} else {

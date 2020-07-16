@@ -121,6 +121,15 @@ function iworks_fleet_options() {
 				'label' => __( 'Boats', 'fleet' ),
 			),
 			array(
+				'name'              => 'boat_show_flag',
+				'type'              => 'checkbox',
+				'th'                => __( 'Show boat flag', 'fleet' ),
+				'default'           => 0,
+				'description'       => __( 'We recommend to turn off if we show sailors nationality.', 'fleet' ),
+				'sanitize_callback' => 'absint',
+				'classes'           => array( 'switch-button' ),
+			),
+			array(
 				'name'              => 'boat_add_crew_manually',
 				'type'              => 'checkbox',
 				'th'                => __( 'Add crew manually', 'fleet' ),

@@ -50,7 +50,8 @@ There are 3 ways to install this plugin:
 * Added filter `iworks_fleet_result_skip_year_in_title` to avoid prefixing result title by year.
 * Improved hull colors choose.
 * Improved results importer.
-
+* Added sailors nation and display flag.
+* Added ability to show/hide boat country code.
 
 = 1.2.9 (2020-06-17) =
 * Added MNA Codes see: https://www.sailing.org/raceofficials/eventorganizers/mna_codes.php
