@@ -1188,7 +1188,6 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			if ( 0 < $regatta['crew_id'] ) {
 				do_action( 'maybe_add_person_nation', $regatta['crew_id'], $country );
 			}
-
 			/**
 			 * insert
 			 */
@@ -1238,6 +1237,8 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 					case 'q';
 					case 'Q';
 						$race['code'] = 'DSQ';
+					case 'Abandoned':
+						$race['code'] = '-';
 					break;
 				}
 				$race['points'] = preg_replace( '/[^\d^\,^\.]+/', '', $one );
@@ -1364,7 +1365,6 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			}
 			$content .= sprintf( '<tr class="%s">', esc_attr( implode( ' ', $classes ) ) );
 			$content .= sprintf( '<td class="place">%d</td>', $one->place );
-
 			/**
 			 * boat
 			 */
