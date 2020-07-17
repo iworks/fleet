@@ -60,6 +60,10 @@ class iworks_fleet_posttypes {
 		add_action( 'created_' . $this->taxonomy_name_location, array( $this, 'save_google_map_data' ), 10, 2 );
 		add_action( 'edited_' . $this->taxonomy_name_location, array( $this, 'save_google_map_data' ), 10, 2 );
 		add_filter( 'dashboard_glance_items', array( $this, 'dashboard_glance_items' ) );
+		/**
+		 * TwentyTwenty integration
+		 */
+		add_filter( 'twentytwenty_disallowed_post_types_for_meta_output', array( $this, 'twentytwenty_disallowed_post_types_for_meta_output' ) );
 	}
 
 	public function dashboard_glance_items( $elements ) {
@@ -409,6 +413,15 @@ class iworks_fleet_posttypes {
 			}
 		}
 		return $classes;
+	}
+
+	/**
+	 * twentytwenty disallowed post types for meta output
+	 *
+	 */
+	public function twentytwenty_disallowed_post_types_for_meta_output( $post_types ) {
+		$post_types[] = $this->post_type_name;
+		return $post_types;
 	}
 }
 
