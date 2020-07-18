@@ -90,6 +90,11 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		 */
 		add_action( 'international_fleet_content_template_overlay_end', array( $this, 'add_crew_to_boat' ), 10, 1 );
 		/**
+		 * get boat data
+		 */
+		add_filter( 'iworks_fleet_boat_get_flag', array( $this, 'get_flag_filter' ), 10, 2 );
+		add_filter( 'iworks_fleet_boat_get_hull', array( $this, 'get_hull_filter' ), 10, 2 );
+		/**
 		 * replace names to proper
 		 */
 		if ( is_a( $this->options, 'iworks_options' ) ) {
@@ -1549,5 +1554,19 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		}
 		return $content;
 	}
+
+	public function get_flag_filter( $content, $post_ID ) {
+		$meta_key = $this->options->get_option_name( 'boat_nation' );
+		$code     = get_post_meta( $post_ID, $meta_key, true );
+		if ( ! empty( $code ) ) {
+			return sprintf( '<span class="flag flag-%s">%s</span>', esc_attr( strtolower( $code ) ), $content );
+		}
+		return $content;
+	}
+
+	public function get_hull_filter( $content, $post_ID ) {
+		return get_the_term_list( $post_ID, $this->taxonomy_name_manufacturer );
+	}
+
 }
 

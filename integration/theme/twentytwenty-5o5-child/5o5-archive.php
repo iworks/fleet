@@ -1,21 +1,4 @@
-<?php
-/**
- * The main template file
- *
- * This is the most generic template file in a WordPress theme
- * and one of the two required files for a theme (the other being style.css).
- * It is used to display a page when nothing more specific matches a query.
- * E.g., it puts together the home page when no home.php file exists.
- *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
- *
- * @package WordPress
- * @subpackage Twenty_Twenty
- * @since Twenty Twenty 1.0
- */
-
-get_header();
-?>
+<?php get_header(); ?>
 
 <main id="site-content" role="main">
 
@@ -80,16 +63,45 @@ get_header();
 	<div class="post-inner thin ">
 		<div class="entry-content">
 			<table>
+				<thead>
+					<tr>
+		<?php
+		$is_boat   = is_post_type_archive( 'iworks_fleet_boat' );
+		$is_person = is_post_type_archive( 'iworks_fleet_person' );
+		$is_result = is_post_type_archive( 'iworks_fleet_result' );
+
+		if ( $is_boat ) {
+			?>
+	<th><?php esc_html_e( 'Number', 'fleet' ); ?></th>
+	<th><?php esc_html_e( 'Hull', 'fleet' ); ?></th>
+	<th><?php esc_html_e( 'Last known owner', 'fleet' ); ?></th>
+			<?php
+		}
+
+		?>
+					</tr>
+				</thead>
+				<tbody>
 		<?php
 		while ( have_posts() ) {
 			the_post();
 			?>
 <tr <?php post_class(); ?> id="post-<?php the_ID(); ?>">
 			<?php
-			the_title( '<td><a href="' . esc_url( get_permalink() ) . '">', '</a></td>' );
+			if ( $is_boat ) {
+				printf(
+					'<td><a href="%s">%s</a></td>',
+					esc_url( get_permalink() ),
+					apply_filters( 'iworks_fleet_boat_get_flag', get_the_title(), get_the_ID() )
+				);
+				printf( '<td>%s</td>', apply_filters( 'iworks_fleet_boat_get_hull', '', get_the_ID() ) );
+			} else {
+				the_title( '<td><a href="' . esc_url( get_permalink() ) . '">', '</a></td>' );
+			}
 			echo '</tr>';
 		}
 		?>
+				</tbody>
 			</table>
 		</div>
 	</div>
