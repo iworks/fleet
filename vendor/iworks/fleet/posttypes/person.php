@@ -761,6 +761,9 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 	}
 
 	public function add_flag_to_single_title( $post_title, $post_ID ) {
+		if ( is_admin() ) {
+			return $post_title;
+		}
 		if ( $this->show_single_person_flag ) {
 			$post_type = get_post_type( $post_ID );
 			if ( $post_type === $this->post_type_name ) {
