@@ -1178,6 +1178,100 @@ function iworks_fleet_get_contries() {
 	);
 }
 
+function iworks_fleet_get_us_state_codes() {
+	return array(
+		'AL' => __( 'Alabama', 'fleet' ),
+		'AK' => __( 'Alaska', 'fleet' ),
+		'AZ' => __( 'Arizona', 'fleet' ),
+		'AR' => __( 'Arkansas', 'fleet' ),
+		'AA' => __( 'Armed Forces America', 'fleet' ),
+		'AE' => __( 'Armed Forces Europe', 'fleet' ),
+		'AP' => __( 'Armed Forces Pacific', 'fleet' ),
+		'CA' => __( 'California', 'fleet' ),
+		'CO' => __( 'Colorado', 'fleet' ),
+		'CT' => __( 'Connecticut', 'fleet' ),
+		'DE' => __( 'Delaware', 'fleet' ),
+		'DC' => __( 'District of Columbia', 'fleet' ),
+		'FL' => __( 'Florida', 'fleet' ),
+		'GA' => __( 'Georgia', 'fleet' ),
+		'HI' => __( 'Hawaii', 'fleet' ),
+		'ID' => __( 'Idaho', 'fleet' ),
+		'IL' => __( 'Illinois', 'fleet' ),
+		'IN' => __( 'Indiana', 'fleet' ),
+		'IA' => __( 'Iowa', 'fleet' ),
+		'KS' => __( 'Kansas', 'fleet' ),
+		'KY' => __( 'Kentucky', 'fleet' ),
+		'LA' => __( 'Louisiana', 'fleet' ),
+		'ME' => __( 'Maine', 'fleet' ),
+		'MD' => __( 'Maryland', 'fleet' ),
+		'MA' => __( 'Massachusetts', 'fleet' ),
+		'MI' => __( 'Michigan', 'fleet' ),
+		'MN' => __( 'Minnesota', 'fleet' ),
+		'MS' => __( 'Mississippi', 'fleet' ),
+		'MO' => __( 'Missouri', 'fleet' ),
+		'MT' => __( 'Montana', 'fleet' ),
+		'NE' => __( 'Nebraska', 'fleet' ),
+		'NV' => __( 'Nevada', 'fleet' ),
+		'NH' => __( 'New Hampshire', 'fleet' ),
+		'NJ' => __( 'New Jersey', 'fleet' ),
+		'NM' => __( 'New Mexico', 'fleet' ),
+		'NY' => __( 'New York', 'fleet' ),
+		'NC' => __( 'North Carolina', 'fleet' ),
+		'ND' => __( 'North Dakota', 'fleet' ),
+		'OH' => __( 'Ohio', 'fleet' ),
+		'OK' => __( 'Oklahoma', 'fleet' ),
+		'OR' => __( 'Oregon', 'fleet' ),
+		'PA' => __( 'Pennsylvania', 'fleet' ),
+		'RI' => __( 'Rhode Island', 'fleet' ),
+		'SC' => __( 'South Carolina', 'fleet' ),
+		'SD' => __( 'South Dakota', 'fleet' ),
+		'TN' => __( 'Tennessee', 'fleet' ),
+		'TX' => __( 'Texas', 'fleet' ),
+		'UT' => __( 'Utah', 'fleet' ),
+		'VT' => __( 'Vermont', 'fleet' ),
+		'VA' => __( 'Virginia', 'fleet' ),
+		'WA' => __( 'Washington', 'fleet' ),
+		'WV' => __( 'West Virginia', 'fleet' ),
+		'WI' => __( 'Wisconsin', 'fleet' ),
+		'WY' => __( 'Wyoming', 'fleet' ),
+	);
+}
+
+function iworks_fleet_get_canada_provinces_codes() {
+	return array(
+		'AB' => __( 'Alberta', 'fleet' ),
+		'BC' => __( 'British Columbia', 'fleet' ),
+		'MB' => __( 'Manitoba', 'fleet' ),
+		'NB' => __( 'New Brunswick', 'fleet' ),
+		'NL' => __( 'Newfoundland and Labrador', 'fleet' ),
+		'NT' => __( 'Northwest Territories', 'fleet' ),
+		'NS' => __( 'Nova Scotia', 'fleet' ),
+		'NU' => __( 'Nunavut', 'fleet' ),
+		'ON' => __( 'Ontario', 'fleet' ),
+		'PE' => __( 'Prince Edward Island', 'fleet' ),
+		'QC' => __( 'Quebec', 'fleet' ),
+		'SK' => __( 'Saskatchewan', 'fleet' ),
+		'YT' => __( 'Yukon', 'fleet' ),
+	);
+}
+
+function iworks_fleet_get_australia_state_codes() {
+	return array(
+		'NSW' => __( 'New South Wales', 'fleet' ),
+		'NS'  => __( 'New South Wales', 'fleet' ),
+		'NT	' => __( 'Northern Territory', 'fleet' ),
+		'Qld' => __( 'Queensland', 'fleet' ),
+		'QL'  => __( 'Queensland', 'fleet' ),
+		'SA	' => __( 'South Australia', 'fleet' ),
+		'Tas' => __( 'Tasmania', 'fleet' ),
+		'TS'  => __( 'Tasmania', 'fleet' ),
+		'Vic' => __( 'Victoria', 'fleet' ),
+		'VI'  => __( 'Victoria', 'fleet' ),
+		'WA'  => __( 'Western Australia', 'fleet' ),
+	);
+}
+
+
 function iworks_fleet_get_contries_select2() {
 	$c    = iworks_fleet_get_contries();
 	$data = array();
