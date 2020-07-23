@@ -1376,9 +1376,13 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			/**
 			 * Boat number
 			 */
+			$one->boat_id = intval( $one->boat_id );
+			if ( 0 === $one->boat_id ) {
+				$one->boat_id = '&ndash;';
+			}
 			$boat_name = $one->boat_id;
 			if ( $this->show_single_boat_flag ) {
-				$boat_name = sprintf( '%s %d', $one->country, $one->boat_id );
+				$boat_name = sprintf( '%s %s', $one->country, $one->boat_id );
 			}
 			if ( false === $boat ) {
 				$content .= esc_html( $boat_name );
