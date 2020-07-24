@@ -1430,6 +1430,9 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			}
 			if ( isset( $races[ $one->ID ] ) && ! empty( $races[ $one->ID ] ) ) {
 				foreach ( $races[ $one->ID ] as $race_number => $race_points ) {
+					if ( '0' === $race_points ) {
+						$race_points = '&ndash;';
+					}
 					$class    = preg_match( '/\*/', $race_points ) ? 'race-discard' : '';
 					$content .= sprintf(
 						'<td class="race race-%d %s">%s</td>',
@@ -1439,7 +1442,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 					);
 				}
 			}
-			$content .= sprintf( '<td class="points">%d</td>', $one->points );
+			$content .= sprintf( '<td class="points">%s</td>', '0' === $one->points ? '&ndash;' : $one->points );
 			$content .= '</tr>';
 		}
 		$content .= '<tbody>';
