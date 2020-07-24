@@ -214,7 +214,7 @@ function iworks_fleet_options() {
 					add_query_arg(
 						array(
 							'taxonomy'  => 'iworks_fleet_serie',
-							'post_type' => 'iworks_fleet_result',
+							'post_type' => 'iworks_fleet_person',
 						),
 						'edit-tags.php'
 					)
