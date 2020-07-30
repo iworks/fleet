@@ -158,8 +158,23 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		/**
 		 * import
 		 */
-
 		add_action( 'iworks_fleet_result_import_data', array( $this, 'import_data' ), 10, 2 );
+		add_filter( 'wp_localize_script_fleet_admin', array( $this, 'add_import_js_messages' ) );
+	}
+
+	/**
+	 * Add messages
+	 *
+	 */
+	public function add_import_js_messages( $array ) {
+		if ( ! isset( $array['messages'] ) ) {
+			$array['messages'] = array();
+		}
+		if ( ! isset( $array['messages']['result'] ) ) {
+			$array['messages']['result'] = array();
+		}
+		$array['messages']['result']['choose_file_first'] = esc_html__( 'Please select some file first!', 'fleet' );
+		return $array;
 	}
 
 	/**
@@ -995,9 +1010,11 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 	}
 
 	public function races( $post ) {
+		echo '<span class="spinner" style="display:none"></span>';
 		echo '<input type="file" name="file" id="file_fleet_races"/>';
 		wp_nonce_field( 'upload-races', __CLASS__ );
-		echo '<button>import</button>';
+		printf( '<button>%s</button>', esc_html__( 'Import regatta results!', 'fleet' ) );
+		printf( '<p class="description">%s</p>', esc_html__( 'CSV file with fields: Nation, Boat, Helm. Crew(s), Club, R1, R..n, any-fileds, netto points, place.', 'fleet' ) );
 	}
 
 	/**
