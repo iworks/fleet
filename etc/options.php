@@ -19,7 +19,7 @@ function iworks_fleet_options() {
 			array(
 				'name'        => 'country',
 				'type'        => 'select2',
-				'th'          => __( 'Country', 'sierotki' ),
+				'th'          => __( 'Country', 'fleet' ),
 				'options'     => iworks_fleet_get_contries_select2(),
 				'multiple'    => true,
 				'description' => __( 'Select country or countries if you need to show only boats and sailors from it.', 'fleet' ),
@@ -54,6 +54,38 @@ function iworks_fleet_options() {
 				'default'           => 0,
 				'sanitize_callback' => 'absint',
 				'classes'           => array( 'switch-button' ),
+			),
+			array(
+				'name'              => 'results_show_trophy',
+				'type'              => 'checkbox',
+				'th'                => __( 'Show trophy', 'fleet' ),
+				'default'           => 0,
+				'sanitize_callback' => 'absint',
+				'classes'           => array( 'switch-button' ),
+			),
+			array(
+				'name'        => 'results_serie_trophy_world',
+				'type'        => 'select',
+				'th'          => __( 'World Serie', 'fleet' ),
+				'options'     => iworks_fleet_get_series(),
+				'multiple'    => true,
+				'description' => __( 'Select World serie to show trophy', 'fleet' ),
+			),
+			array(
+				'name'        => 'results_serie_trophy_continental',
+				'type'        => 'select',
+				'th'          => __( 'Continental Serie', 'fleet' ),
+				'options'     => iworks_fleet_get_series(),
+				'multiple'    => true,
+				'description' => __( 'Select continental serie to show trophy', 'fleet' ),
+			),
+			array(
+				'name'        => 'results_serie_trophy_national',
+				'type'        => 'select',
+				'th'          => __( 'National Serie', 'fleet' ),
+				'options'     => iworks_fleet_get_series(),
+				'multiple'    => true,
+				'description' => __( 'Select national serie to show trophy', 'fleet' ),
 			),
 			/**
 			 * Persons
@@ -109,6 +141,14 @@ function iworks_fleet_options() {
 				'type'              => 'checkbox',
 				'th'                => __( 'Show flag', 'fleet' ),
 				'description'       => __( 'Show country flag before person on single person page.', 'fleet' ),
+				'default'           => 0,
+				'sanitize_callback' => 'absint',
+				'classes'           => array( 'switch-button' ),
+			),
+			array(
+				'name'              => 'person_show_trophy',
+				'type'              => 'checkbox',
+				'th'                => __( 'Show trophy', 'fleet' ),
 				'default'           => 0,
 				'sanitize_callback' => 'absint',
 				'classes'           => array( 'switch-button' ),
@@ -184,6 +224,14 @@ function iworks_fleet_options() {
 				'type'              => 'checkbox',
 				'th'                => __( 'Auto add feature image', 'fleet' ),
 				'description'       => __( 'Automagicaly add feature image, if there is some taged with boat number.', 'fleet' ),
+				'default'           => 0,
+				'sanitize_callback' => 'absint',
+				'classes'           => array( 'switch-button' ),
+			),
+			array(
+				'name'              => 'boat_show_trophy',
+				'type'              => 'checkbox',
+				'th'                => __( 'Show trophy', 'fleet' ),
 				'default'           => 0,
 				'sanitize_callback' => 'absint',
 				'classes'           => array( 'switch-button' ),
@@ -1431,6 +1479,10 @@ function iworks_fleet_get_contries_select2() {
 	}
 	asort( $data );
 	return $data;
+}
+
+function iworks_fleet_get_series() {
+	return apply_filters( 'iworks_fleet_get_series', array() );
 }
 
 

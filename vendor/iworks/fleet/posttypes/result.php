@@ -128,6 +128,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		add_filter( 'iworks_fleet_result_sailor_regata_list', array( $this, 'regatta_list_by_sailor_id' ), 10, 2 );
 		add_filter( 'iworks_fleet_result_boat_regatta_list', array( $this, 'regatta_list_by_boat_id' ), 10, 2 );
 		add_filter( 'the_title', array( $this, 'add_year_to_title' ), 10, 2 );
+		add_filter( 'iworks_fleet_result_sailor_trophies', array( $this, 'get_trophies_by_sailor_id' ), 10, 2 );
 		/**
 		 * save custom slug
 		 */
@@ -160,6 +161,133 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		 */
 		add_action( 'iworks_fleet_result_import_data', array( $this, 'import_data' ), 10, 2 );
 		add_filter( 'wp_localize_script_fleet_admin', array( $this, 'add_import_js_messages' ) );
+	}
+
+	public function get_trophies_by_sailor_id( $content, $sailor_id ) {
+		global $wpdb;
+		$cache_key = $this->options->get_option_name( 'trophies_' . $sailor_id );
+		$cache     = get_transient( $cache_key );
+		if ( ! empty( $cache ) ) {
+			$content .= $cache;
+			return $content;
+		}
+		$table_name_regatta = $wpdb->prefix . 'fleet_regatta';
+		$query              = $wpdb->prepare(
+			"SELECT post_regata_id, year, place FROM {$table_name_regatta} where ( helm_id = %d or crew_id = %d ) and place < 4 order by year",
+			$sailor_id,
+			$sailor_id
+		);
+		$regatta            = $wpdb->get_results( $query );
+		if ( empty( $regatta ) ) {
+			return $content;
+		}
+		/**
+		 * ids
+		 */
+		$year = array();
+		$ids  = array();
+		foreach ( $regatta as $one ) {
+			$ids[]                        = $one->post_regata_id;
+			$year[ $one->post_regata_id ] = array(
+				'place' => $one->place,
+				'year'  => $one->year,
+			);
+		}
+		if ( empty( $ids ) ) {
+			return $content;
+		}
+		/**
+		 * series
+		 */
+		$series = array();
+		$names  = array( 'world', ' continental', 'national' );
+		foreach ( $names as $one ) {
+			$serie = $this->options->get_option( 'results_serie_trophy_' . $one );
+			if ( ! empty( $serie ) ) {
+				$series[ $one ] = $serie;
+			}
+		}
+		if ( empty( $series ) ) {
+			return $content;
+		}
+		$trophies = array();
+		$args     = array(
+			'post_type'      => $this->post_type_name,
+			'posts_per_page' => -1,
+			'tax_query'      => array(
+				array(
+					'taxonomy' => $this->taxonomy_name_serie,
+					'terms'    => array_values( $series ),
+				),
+			),
+			'post__in'       => $ids,
+			'fields'         => 'ids',
+		);
+		/**
+		 * WP_Query
+		 */
+		$the_query = new WP_Query( $args );
+		if ( empty( $the_query->posts ) ) {
+			return $content;
+		}
+		remove_filter( 'the_title', array( $this, 'add_year_to_title' ), 10, 2 );
+		foreach ( $the_query->posts as $post_id ) {
+			$type = '';
+			foreach ( $series as $serie => $term_id ) {
+				if ( has_term( $term_id, $this->taxonomy_name_serie, $post_id ) ) {
+					$type = $serie;
+				}
+			}
+			if ( empty( $type ) ) {
+				continue;
+			}
+			$trophies[] = array(
+				'type'    => $type,
+				'place'   => $year[ $post_id ]['place'],
+				'year'    => $year[ $post_id ]['year'],
+				// 'url' => get_permalink( $post_id ),
+				'post_id' => $post_id,
+				'title'   => get_the_title( $post_id ),
+			);
+		}
+		add_filter( 'the_title', array( $this, 'add_year_to_title' ), 10, 2 );
+		if ( empty( $trophies ) ) {
+			return $content;
+		}
+		$cache  = '';
+		$cache .= '<div class="iworks-fleet-trophies">';
+		$cache .= sprintf( '<h2>%s</h2>', esc_html__( 'Trophies', 'fleet' ) );
+		$cache .= '<ul>';
+		foreach ( $trophies as $one ) {
+			$cache .= sprintf( '<li class="fleet-type-%s fleet-place-%d">', esc_attr( $one['type'] ), $one['place'] );
+			$cache .= sprintf(
+				'<a href="#fleet-regatta-%d" title="%s">',
+				esc_attr( $one['post_id'] ),
+				esc_attr( $one['title'] )
+			);
+			$cache .= '<span class="trophy"></span>';
+			$cache .= sprintf( '<span class="year">%d</span>', $one['year'] );
+			$cache .= '</a></li>';
+		}
+		$cache .= '</ul>';
+		$cache .= '</div>';
+		set_transient( $cache_key, $cache, DAY_IN_SECONDS );
+		return $content . $cache;
+	}
+
+
+	public function filter_get_series_array( $series ) {
+		$terms = get_terms(
+			$this->taxonomy_name_serie,
+			array(
+				'taxonomy'   => $this->taxonomy_name_serie,
+				'hide_empty' => false,
+			)
+		);
+		foreach ( $terms as $one ) {
+			$series[ $one->term_id ] = $one->name;
+		}
+		return $series;
 	}
 
 	/**
@@ -694,6 +822,11 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 	}
 
 	public function regatta_list_by_sailor_id( $content, $sailor_id ) {
+		$cache_key = $this->options->get_option_name( 'regatta_' . $sailor_id );
+		$cache     = get_transient( $cache_key );
+		if ( ! empty( $cache ) ) {
+			return $cache;
+		}
 		if ( empty( $content ) ) {
 			$content = __( 'There is no register regatta for this sailor.', 'fleet' );
 		}
@@ -725,7 +858,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 				if ( 4 > $regatta->place ) {
 					$classes[] = 'fleet-place-medal';
 				}
-				$content .= sprintf( '<tr class="%s">', esc_attr( implode( ' ', $classes ) ) );
+				$content .= sprintf( '<tr class="%s" id="fleet-regatta-%d">', esc_attr( implode( ' ', $classes ) ), esc_attr( $regatta->post_regata_id ) );
 				$content .= sprintf( '<td class="year" title="%s">%d</td>', esc_attr( $dates ), $regatta->year );
 				$content .= sprintf( '<td class="name"><a href="%s">%s</a></td>', get_permalink( $regatta->post_regata_id ), get_the_title( $regatta->post_regata_id ) );
 				/**
@@ -743,9 +876,9 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 					$content .= '&ndash;';
 				} else {
 					if ( $this->show_single_boat_flag ) {
-						$content .= sprintf( '%s %s', $regatta->country, $regatta->boat_id );
+						$content .= sprintf( '%s %s', $regatta->country, abs( $regatta->boat_id ) );
 					} else {
-						$content .= $regatta->boat_id;
+						$content .= abs( $regatta->boat_id );
 					}
 				}
 				$content .= '</td>';
@@ -783,6 +916,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			esc_html__( 'Regatta list', 'fleet' ),
 			$content
 		);
+		set_transient( $cache_key, $content, DAY_IN_SECONDS );
 		return $content;
 	}
 
@@ -965,6 +1099,10 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			),
 		);
 		register_taxonomy( $this->taxonomy_name_serie, array( $this->post_type_name ), $args );
+		/**
+		 * Series
+		 */
+		add_filter( 'iworks_fleet_get_series', array( $this, 'filter_get_series_array' ) );
 	}
 
 	public function save_post_meta( $post_id, $post, $update ) {
@@ -1159,7 +1297,15 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		foreach ( $data as $row ) {
 			$country = '';
 			$boat    = array_shift( $row );
-			if ( preg_match( '/^\?(\d+)$/', $boat, $matches ) ) {
+			if ( preg_match( '/^[A-Z]+$/', $boat ) ) {
+				$country = $boat;
+				$boat    = array_shift( $row );
+				$boat_id = intval( $boat );
+				if ( ! preg_match( '/^\d+$/', $boat ) ) {
+					$boat_id *= -1;
+				}
+				l( [ $country, $boat_id ] );
+			} elseif ( preg_match( '/^\?(\d+)$/', $boat, $matches ) ) {
 				$boat_id = intval( $matches[1] );
 			} elseif ( preg_match( '/^([a-zA-Z\/]+)[ \-\t]*(\d+)$/', $boat, $matches ) ) {
 				$country = $matches[1];
@@ -1399,7 +1545,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			}
 			$boat_name = $one->boat_id;
 			if ( $this->show_single_boat_flag ) {
-				$boat_name = sprintf( '%s %s', $one->country, $one->boat_id );
+				$boat_name = sprintf( '%s %s', $one->country, abs( $one->boat_id ) );
 			}
 			if ( false === $boat ) {
 				$content .= esc_html( $boat_name );

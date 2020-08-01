@@ -470,6 +470,14 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 		}
 		$post_id = get_the_ID();
 		/**
+		 * trophies!
+		 */
+		if ( is_main_query() ) {
+			$show     = $this->options->get_option( 'person_show_trophy' );
+			$trophies = apply_filters( 'iworks_fleet_result_sailor_trophies', '', $post_id );
+			$content  = $trophies . $content;
+		}
+		/**
 		 * add social media
 		 */
 		$content .= $this->social_media( $post_id );

@@ -53,3 +53,49 @@ $image_root: '../images/';
         @include image("flags/#{$flag}.svg");
     }
 }
+
+@mixin trophy( $trophy ) {
+    background: {
+        @include image("trophies/#{$trophy}.svg");
+    }
+}
+
+@mixin radius($radius) {
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    border-radius: $radius;
+}
+
+@mixin boxshadow($shadow) {
+    -webkit-box-shadow: $shadow;
+    -moz-box-shadow: $shadow;
+    box-shadow: $shadow;
+}
+
+@mixin reset() {
+    display: inline;
+    position: static;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    left: auto;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    background-color: transparent;
+    line-height: 1.2;
+    list-style: none;
+    font: {
+        size: 100%;
+        style: normal;
+        weight: normal;
+    }
+    @include boxshadow(none);
+    @include radius(0);
+}
+
+@mixin random_border_color() {
+    border: 1px solid rgb(random(255),random(255),random(255));
+}
+
