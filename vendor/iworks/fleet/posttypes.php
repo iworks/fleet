@@ -35,6 +35,11 @@ class iworks_fleet_posttypes {
 	protected $show_single_person_flag = false;
 	protected $show_single_boat_flag   = false;
 
+	/**
+	 * Trophies Names
+	 */
+	protected $trophies_names = array();
+
 
 	public function __construct() {
 		$this->options = iworks_fleet_get_options_object();
@@ -44,6 +49,15 @@ class iworks_fleet_posttypes {
 		 */
 		$this->show_single_person_flag = $this->options->get_option( 'person_show_flag_on_single' );
 		$this->show_single_boat_flag   = $this->options->get_option( 'boat_show_flag' );
+		/**
+		 * Trophies names
+		 */
+
+		$this->trophies_names = array(
+			'world'       => __( 'World', 'fleet' ),
+			'continental' => __( 'Continental', 'fleet' ),
+			'national'    => __( 'National', 'fleet' ),
+		);
 		/**
 		 * register
 		 */

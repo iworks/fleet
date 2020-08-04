@@ -200,8 +200,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		 * series
 		 */
 		$series = array();
-		$names  = array( 'world', ' continental', 'national' );
-		foreach ( $names as $one ) {
+		foreach ( $this->trophies_names as $one => $label ) {
 			$serie = $this->options->get_option( 'results_serie_trophy_' . $one );
 			if ( ! empty( $serie ) ) {
 				$series[ $one ] = $serie;
@@ -257,19 +256,35 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		$cache  = '';
 		$cache .= '<div class="iworks-fleet-trophies">';
 		$cache .= sprintf( '<h2>%s</h2>', esc_html__( 'Trophies', 'fleet' ) );
-		$cache .= '<ul>';
-		foreach ( $trophies as $one ) {
-			$cache .= sprintf( '<li class="fleet-type-%s fleet-place-%d">', esc_attr( $one['type'] ), $one['place'] );
-			$cache .= sprintf(
-				'<a href="#fleet-regatta-%d" title="%s">',
-				esc_attr( $one['post_id'] ),
-				esc_attr( $one['title'] )
-			);
-			$cache .= '<span class="trophy"></span>';
-			$cache .= sprintf( '<span class="year">%d</span>', $one['year'] );
-			$cache .= '</a></li>';
+		$cache .= '<table>';
+		foreach ( $this->trophies_names as $trophy_key => $trophy_label ) {
+			$trophy_content = '';
+			foreach ( $trophies as $one ) {
+				if ( $trophy_key !== $one['type'] ) {
+					continue;
+				}
+				$trophy_content .= sprintf( '<li class="fleet-type-%s fleet-place-%d">', esc_attr( $one['type'] ), $one['place'] );
+				$trophy_content .= sprintf(
+					'<a href="#fleet-regatta-%d" title="%s">',
+					esc_attr( $one['post_id'] ),
+					esc_attr( $one['title'] )
+				);
+				$trophy_content .= '<span class="trophy"></span>';
+				$trophy_content .= sprintf( '<span class="year">%d</span>', $one['year'] );
+				$trophy_content .= '</a></li>';
+			}
+			if ( $trophy_content ) {
+				$cache .= sprintf(
+					'<tr class="iworks-fleet-trophy iworks-fleet-trophy-%s">',
+					esc_attr( $trophy_key )
+				);
+				$cache .= '<tr>';
+				$cache .= sprintf( '<td>%s</td>', $trophy_label );
+				$cache .= sprintf( '<td><ul>%s</ul></td>', $trophy_content );
+				$cache .= '</tr>';
+			}
 		}
-		$cache .= '</ul>';
+		$cache .= '<table>';
 		$cache .= '</div>';
 		set_transient( $cache_key, $cache, DAY_IN_SECONDS );
 		return $content . $cache;

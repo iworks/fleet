@@ -39,6 +39,21 @@
   color: rgba(0, 0, 0, 0.3);
 }
 
+.iworks-fleet-trophies td:first-child {
+  white-space: nowrap;
+  font-weight: 700;
+}
+@media screen and (max-width: 599px) {
+  .iworks-fleet-trophies thead {
+    display: none;
+  }
+  .iworks-fleet-trophies td {
+    display: block !important;
+  }
+  .iworks-fleet-trophies td:first-child {
+    text-align: center;
+  }
+}
 .iworks-fleet-trophies ul {
   display: inline;
   position: static;
@@ -60,6 +75,8 @@
   border-radius: 0;
   display: -ms-flexbox;
   display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 .iworks-fleet-trophies ul li {
   padding: 0;
@@ -67,6 +84,7 @@
 }
 .iworks-fleet-trophies ul li a {
   text-decoration: none;
+  white-space: nowrap;
 }
 .iworks-fleet-trophies ul li span {
   display: block;

@@ -37,14 +37,33 @@
 }
 
 .iworks-fleet-trophies {
+    td {
+        &:first-child {
+            white-space: nowrap;
+            font-weight: 700;
+        }
+    }
+    @media screen and ( max-width: 599px ) {
+        thead {
+            display: none;
+        }
+        td {
+            display: block !important;
+            &:first-child {
+                text-align: center;
+            }
+        }
+    }
     ul {
         @include reset;
         display: flex;
+        flex-wrap: wrap;
         li {
             padding: 0;
             margin: 0 5px;
             a {
                 text-decoration: none;
+                white-space: nowrap;
             }
             span {
                 display: block;
