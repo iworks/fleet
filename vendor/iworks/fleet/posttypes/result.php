@@ -356,16 +356,18 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		}
 	}
 
-	public function shortcode_list_helper_table_start( $serie_show_image ) {
+	public function shortcode_list_helper_table_start( $serie_show_image, $serie_show_location_country ) {
 		$content  = '<table class="fleet-results fleet-results-list">';
 		$content .= '<thead>';
 		$content .= '<tr>';
 		$content .= sprintf( '<th class="dates">%s</th>', esc_attr__( 'Dates', 'fleet' ) );
 		if ( $serie_show_image ) {
-			$content .= sprintf( '<th class="Serie">%s</th>', '&nbsp' );
+			$content .= sprintf( '<th class="serie">%s</th>', '&nbsp' );
 		}
 		$content .= sprintf( '<th class="title">%s</th>', esc_attr__( 'Title', 'fleet' ) );
-		$content .= sprintf( '<th class="area">%s</th>', esc_attr__( 'Area', 'fleet' ) );
+		if ( $serie_show_location_country ) {
+			$content .= sprintf( '<th class="area">%s</th>', esc_attr__( 'Area', 'fleet' ) );
+		}
 		$content .= sprintf( '<th class="races">%s</th>', esc_attr__( 'Races', 'fleet' ) );
 		$content .= sprintf( '<th class="teams">%s</th>', esc_attr__( 'Teams', 'fleet' ) );
 		$content .= '</tr>';
@@ -385,6 +387,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 				'year_show'    => 'on',
 				'serie_show'   => 'off',
 				'country_show' => 'off',
+				'country'      => $this->options->get_option( 'results_show_country' ) ? 'on' : 'off',
 				'order'        => 'DESC',
 			),
 			$atts,
@@ -393,11 +396,12 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		/**
 		 * boolean params
 		 */
-		$show_area    = preg_match( '/^(on|yes|1)$/i', $atts['area_show'] );
-		$show_country = preg_match( '/^(on|yes|1)$/i', $atts['country_show'] );
-		$show_serie   = preg_match( '/^(on|yes|1)$/i', $atts['serie_show'] );
-		$show_title   = preg_match( '/^(on|yes|1)$/i', $atts['title_show'] );
-		$show_year    = preg_match( '/^(on|yes|1)$/i', $atts['year_show'] );
+		$show_area             = preg_match( '/^(on|yes|1)$/i', $atts['area_show'] );
+		$show_country          = preg_match( '/^(on|yes|1)$/i', $atts['country_show'] );
+		$show_serie            = preg_match( '/^(on|yes|1)$/i', $atts['serie_show'] );
+		$show_title            = preg_match( '/^(on|yes|1)$/i', $atts['title_show'] );
+		$show_year             = preg_match( '/^(on|yes|1)$/i', $atts['year_show'] );
+		$show_location_country = preg_match( '/^(on|yes|1)$/i', $atts['country'] );
 		/**
 		 * content
 		 */
@@ -488,7 +492,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		if ( $the_query->have_posts() ) {
 			remove_filter( 'the_title', array( $this, 'add_year_to_title' ), 10, 2 );
 			if ( ! $by_year ) {
-				$content .= $this->shortcode_list_helper_table_start( $serie_show_image );
+				$content .= $this->shortcode_list_helper_table_start( $serie_show_image, $show_location_country );
 			}
 			$current     = 0;
 			$rows        = '';
@@ -506,7 +510,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 								$rows     = '';
 							}
 							$content .= sprintf( '<h2>%s</h2>', $value );
-							$content .= $this->shortcode_list_helper_table_start( $serie_show_image );
+							$content .= $this->shortcode_list_helper_table_start( $serie_show_image, $show_location_country );
 						}
 						$current = $value;
 					}
@@ -561,9 +565,14 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 					get_permalink(),
 					get_the_title()
 				);
-				$terms  = get_the_term_list( get_the_ID(), $this->taxonomy_name_location );
-				$tbody .= sprintf( '<td class="area">%s</td>', $terms );
-				$check  = $this->has_races( get_the_ID() );
+				/**
+				 * country
+				 */
+				if ( $show_location_country ) {
+					$terms  = get_the_term_list( get_the_ID(), $this->taxonomy_name_location );
+					$tbody .= sprintf( '<td class="area">%s</td>', $terms );
+				}
+				$check = $this->has_races( get_the_ID() );
 				if ( $check ) {
 					$tbody .= $this->get_td( 'number_of_races', get_the_ID() );
 					$tbody .= $this->get_td( 'number_of_competitors', get_the_ID() );

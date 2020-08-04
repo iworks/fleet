@@ -64,6 +64,14 @@ function iworks_fleet_options() {
 				'classes'           => array( 'switch-button' ),
 			),
 			array(
+				'name'              => 'results_show_country',
+				'type'              => 'checkbox',
+				'th'                => __( 'Show Country', 'fleet' ),
+				'default'           => 1,
+				'sanitize_callback' => 'absint',
+				'classes'           => array( 'switch-button' ),
+			),
+			array(
 				'name'        => 'results_serie_trophy_world',
 				'type'        => 'select',
 				'th'          => __( 'World Serie', 'fleet' ),
