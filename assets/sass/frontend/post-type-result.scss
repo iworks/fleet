@@ -9,6 +9,11 @@
         white-space: nowrap;
     }
 
+    .number-of-races,
+    .number-of-competitors {
+        text-align: right;
+    }
+
     .fleet-place-1 {
         td {
             background-color: $color_place_gold;

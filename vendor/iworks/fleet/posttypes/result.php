@@ -394,6 +394,14 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			'fleet_results_list'
 		);
 		/**
+		 * cache
+		 */
+		$cache_key = $this->options->get_option_name( __FUNCTION__ . '_' . md5( serialize( $atts ) ) );
+		$cache     = $this->get_cache( $cache_key );
+		if ( false !== $cache ) {
+			return $cache;
+		}
+		/**
 		 * boolean params
 		 */
 		$show_area             = preg_match( '/^(on|yes|1)$/i', $atts['area_show'] );
@@ -607,6 +615,10 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		if ( $content ) {
 			$content = sprintf( '<div class="fleet-results">%s</content>', $content );
 		}
+		/**
+		 * Cache
+		 */
+		$this->set_cache( $content, $cache_key );
 		return $content;
 	}
 

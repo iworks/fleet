@@ -293,6 +293,10 @@ td.points {
 .fleet-results .year {
   white-space: nowrap;
 }
+.fleet-results .number-of-races,
+.fleet-results .number-of-competitors {
+  text-align: right;
+}
 .fleet-results .fleet-place-1 td {
   background-color: rgba(255, 215, 0, 0.7);
 }
