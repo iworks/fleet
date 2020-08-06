@@ -1,2 +1,15 @@
 @import "_mixin";
 
+.boat-social {
+    .iworks-fleet-boat-social-media {
+        @include reset;
+        display: flex;
+        a {
+            text-decoration: none;
+            &:hover {
+                opacity: .6;
+            }
+        }
+    }
+}
+

@@ -96,7 +96,6 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 				'facebook'  => array( 'label' => __( 'Facebook', 'fleet' ) ),
 				'twitter'   => array( 'label' => __( 'Twitter', 'fleet' ) ),
 				'instagram' => array( 'label' => __( 'Instagram', 'fleet' ) ),
-				'gplus'     => array( 'label' => __( 'G+', 'fleet' ) ),
 				'endomondo' => array( 'label' => __( 'Endomondo', 'fleet' ) ),
 				'skype'     => array( 'label' => __( 'Skype', 'fleet' ) ),
 			),

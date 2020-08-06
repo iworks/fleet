@@ -177,7 +177,6 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 				'facebook'  => array( 'label' => __( 'Facebook', 'fleet' ) ),
 				'twitter'   => array( 'label' => __( 'Twitter', 'fleet' ) ),
 				'instagram' => array( 'label' => __( 'Instagram', 'fleet' ) ),
-				'gplus'     => array( 'label' => __( 'G+', 'fleet' ) ),
 			),
 		);
 		/**
@@ -655,6 +654,7 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 						);
 						break;
 					case 'social':
+						$social_content = '';
 						foreach ( $this->fields['social'] as $social_key => $social ) {
 							if ( 'website' == $social_key ) {
 								continue;
@@ -664,11 +664,27 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 							if ( empty( $social_value ) ) {
 								continue;
 							}
-							$value .= sprintf(
-								'<a href="%s"><span class="dashicons dashicons-%s"></span></a>',
-								$social_value,
-								$social_key
+							if ( false === filter_var( $social_value, FILTER_VALIDATE_URL ) ) {
+								switch ( $social_key ) {
+									case 'facebook':
+										$social_value = sprintf( 'https://facebook.com/%s', $social_value );
+										break;
+									case 'instagram':
+										$social_value = sprintf( 'https://www.instagram.com/%s', $social_value );
+										break;
+									case 'twitter':
+										$social_value = sprintf( 'https://twitter.com/%s', $social_value );
+										break;
+								}
+							}
+							$social_content .= sprintf(
+								'<li><a href="%s" target="_blank"><span class="dashicons dashicons-%s"></span></a></li>',
+								esc_url( $social_value ),
+								esc_attr( $social_key )
 							);
+						}
+						if ( ! empty( $social_content ) ) {
+							$value .= sprintf( '<ul class="iworks-fleet-boat-social-media">%s</ul>', $social_content );
 						}
 						break;
 				}

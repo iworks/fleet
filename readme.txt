@@ -55,6 +55,7 @@ There are 3 ways to install this plugin:
 * Improved compatibility with TwentyTwenty Theme.
 * Improved hull colors choose.
 * Improved results importer.
+* Improved "Social Media" section.
 
 = 1.2.9 (2020-06-17) =
 * Added MNA Codes see: https://www.sailing.org/raceofficials/eventorganizers/mna_codes.php
