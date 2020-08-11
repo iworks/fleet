@@ -1351,19 +1351,19 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 				$boat_id = intval( array_shift( $row ) );
 			} else {
 				$boat_id = intval( $boat );
-				$country = trim( preg_replace( '/\d+/', '', $boat ) );
+				$country = $this->data_trim( preg_replace( '/\d+/', '', $boat ) );
 			}
 			/**
 			 * helm & crew
 			 */
-			$h    = $helm    = trim( array_shift( $row ) );
-			$crew = trim( array_shift( $row ) );
-			$helm = trim( apply_filters( 'iworks_fleet_result_upload_helm', $helm, $crew ) );
-			$crew = trim( apply_filters( 'iworks_fleet_result_upload_crew', $crew, $h ) );
+			$h    = $helm    = $this->data_trim( array_shift( $row ) );
+			$crew = $this->data_trim( array_shift( $row ) );
+			$helm = $this->data_trim( apply_filters( 'iworks_fleet_result_upload_helm', $helm, $crew ) );
+			$crew = $this->data_trim( apply_filters( 'iworks_fleet_result_upload_crew', $crew, $h ) );
 			/**
 			 * club
 			 */
-			$club    = trim( array_shift( $row ) );
+			$club    = $this->data_trim( array_shift( $row ) );
 			$place   = intval( array_pop( $row ) );
 			$points  = intval( array_pop( $row ) );
 			$regatta = array(
@@ -1411,7 +1411,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 					'regata_id'      => $regatta_id,
 					'number'         => $number++,
 				);
-				$one  = trim( $one );
+				$one  = $this->data_trim( $one );
 				if (
 					preg_match( '/\*/', $one )
 					|| preg_match( '/^\‑/', $one )
@@ -1480,7 +1480,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 				sprintf( 'fleet-results-%s', $key ),
 			);
 			$name    = $this->options->get_option_name( 'result_' . $key );
-			$value   = trim( get_post_meta( $post_id, $name, true ) );
+			$value   = $this->data_trim( get_post_meta( $post_id, $name, true ) );
 			if ( empty( $value ) ) {
 				continue;
 			}

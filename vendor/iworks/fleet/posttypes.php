@@ -40,10 +40,16 @@ class iworks_fleet_posttypes {
 	 */
 	protected $trophies_names = array();
 
+	/**
+	 * Debug
+	 */
+
+	protected $debug = false;
 
 	public function __construct() {
 		$this->options = iworks_fleet_get_options_object();
 		$this->base    = preg_replace( '/\/iworks.+/', '/', __FILE__ );
+		$this->debug   = defined( 'WP_DEBUG' ) && WP_DEBUG;
 		/**
 		 * show sigle person flag
 		 */
@@ -323,6 +329,9 @@ class iworks_fleet_posttypes {
 	}
 
 	protected function get_cache( $key ) {
+		if ( $this->debug ) {
+			return;
+		}
 		$cache = get_transient( $key );
 		return $cache;
 	}
@@ -436,6 +445,15 @@ class iworks_fleet_posttypes {
 	public function twentytwenty_disallowed_post_types_for_meta_output( $post_types ) {
 		$post_types[] = $this->post_type_name;
 		return $post_types;
+	}
+
+	/**
+	 * TRIM
+	 */
+	protected function data_trim( $data ) {
+		$data = preg_replace( '/ /', ' ', $data );
+		$data = preg_replace( '/[ \t\r\n]+/', ' ', $data );
+		return trim( $data );
 	}
 }
 
