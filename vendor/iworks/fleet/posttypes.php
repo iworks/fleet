@@ -330,7 +330,7 @@ class iworks_fleet_posttypes {
 
 	protected function get_cache( $key ) {
 		if ( $this->debug ) {
-			return;
+			return false;
 		}
 		$cache = get_transient( $key );
 		return $cache;
