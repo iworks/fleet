@@ -84,6 +84,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		 */
 		$this->fields = array(
 			'result' => array(
+				'english'              => array( 'label' => __( 'English name', 'fleet' ) ),
 				'location'              => array( 'label' => __( 'Area', 'fleet' ) ),
 				'organizer'             => array( 'label' => __( 'Organizer', 'fleet' ) ),
 				'secretary'             => array( 'label' => __( 'Secretary', 'fleet' ) ),
@@ -166,7 +167,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 	public function get_trophies_by_sailor_id( $content, $sailor_id ) {
 		global $wpdb;
 		$cache_key = $this->options->get_option_name( 'trophies_' . $sailor_id );
-		$cache     = get_transient( $cache_key );
+		$cache     = $this->get_cache( $cache_key );
 		if ( ! empty( $cache ) ) {
 			$content .= $cache;
 			return $content;
@@ -696,6 +697,10 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 					isset( $query->query[ $this->taxonomy_name_serie ] )
 					&& ! empty( $query->query[ $this->taxonomy_name_serie ] )
 				)
+				|| (
+					isset( $query->query[ $this->taxonomy_name_location ] )
+					&& ! empty( $query->query[ $this->taxonomy_name_location ] )
+				)
 			)
 		) {
 			$query->set( 'meta_key', $this->options->get_option_name( 'result_date_start' ) );
@@ -859,7 +864,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 
 	public function regatta_list_by_sailor_id( $content, $sailor_id ) {
 		$cache_key = $this->options->get_option_name( 'regatta_' . $sailor_id );
-		$cache     = get_transient( $cache_key );
+		$cache     = $this->get_cache( $cache_key );
 		if ( ! empty( $cache ) ) {
 			return $cache;
 		}
@@ -1310,7 +1315,6 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		wp_send_json_success();
 	}
 
-
 	public function import_data( $post_id, $data ) {
 		global $wpdb, $iworks_fleet;
 		$table_name_regatta      = $wpdb->prefix . 'fleet_regatta';
@@ -1554,20 +1558,29 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		$content .= '</tr>';
 		$content .= '</thead>';
 		$content .= '<tbody>';
-		$show     = current_user_can( 'manage_options' );
-		foreach ( $regatta as $one ) {
+        $show     = current_user_can( 'manage_options' );
+        $at_the_end = '';
+        foreach ( $regatta as $one ) {
+
+            $one_content = '';
+
+
 			$classes = array(
 				sprintf( 'fleet-place-%d', $one->place ),
 			);
 			if ( 4 > $one->place ) {
 				$classes[] = 'fleet-place-medal';
 			}
-			$content .= sprintf( '<tr class="%s">', esc_attr( implode( ' ', $classes ) ) );
-			$content .= sprintf( '<td class="place">%d</td>', $one->place );
+            $one_content .= sprintf( '<tr class="%s">', esc_attr( implode( ' ', $classes ) ) );
+            if ( 0 < $one->place ) {
+                $one_content .= sprintf( '<td class="place">%d</td>', $one->place );
+            } else {
+                $one_content .= '<td class="place place-tda"><small>TDA</small></td>';
+            }
 			/**
 			 * boat
 			 */
-			$content .= sprintf(
+			$one_content .= sprintf(
 				'<td class="boat_id country-%s">',
 				esc_attr( strtolower( $one->country ) )
 			);
@@ -1584,15 +1597,15 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 				$boat_name = sprintf( '%s %s', $one->country, abs( $one->boat_id ) );
 			}
 			if ( false === $boat ) {
-				$content .= esc_html( $boat_name );
+				$one_content .= esc_html( $boat_name );
 			} else {
-				$content .= sprintf(
+				$one_content .= sprintf(
 					'<a href="%s">%s</a>',
 					esc_url( $boat['url'] ),
 					esc_html( $boat_name )
 				);
 			}
-			$content .= '</td>';
+			$one_content .= '</td>';
 			/**
 			 * helmsman
 			 */
@@ -1601,14 +1614,14 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 				if ( $show ) {
 					$extra = $this->get_extra_data( $one->helm_id );
 				}
-				$content .= sprintf(
+				$one_content .= sprintf(
 					'<td class="helm_name"><a href="%s">%s</a>%s</td>',
 					get_permalink( $one->helm_id ),
 					apply_filters( 'the_title', $one->helm_name, $one->helm_id ),
 					$extra
 				);
 			} else {
-				$content .= sprintf( '<td class="helm_name">%s</td>', $one->helm_name );
+				$one_content .= sprintf( '<td class="helm_name">%s</td>', $one->helm_name );
 			}
 			/**
 			 * crew
@@ -1618,14 +1631,14 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 				if ( $show ) {
 					$extra = $this->get_extra_data( $one->crew_id );
 				}
-				$content .= sprintf(
+				$one_content .= sprintf(
 					'<td class="crew_name"><a href="%s">%s</a>%s</td>',
 					get_permalink( $one->crew_id ),
 					apply_filters( 'the_title', $one->crew_name, $one->crew_id ),
 					$extra
 				);
 			} else {
-				$content .= sprintf( '<td class="crew_name">%s</td>', $one->crew_name );
+				$one_content .= sprintf( '<td class="crew_name">%s</td>', $one->crew_name );
 			}
 			if ( isset( $races[ $one->ID ] ) && ! empty( $races[ $one->ID ] ) ) {
 				foreach ( $races[ $one->ID ] as $race_number => $race_points ) {
@@ -1633,7 +1646,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 						$race_points = '&ndash;';
 					}
 					$class    = preg_match( '/\*/', $race_points ) ? 'race-discard' : '';
-					$content .= sprintf(
+					$one_content .= sprintf(
 						'<td class="race race-%d %s">%s</td>',
 						esc_attr( $race_number ),
 						esc_attr( $class ),
@@ -1641,9 +1654,15 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 					);
 				}
 			}
-			$content .= sprintf( '<td class="points">%s</td>', '0' === $one->points ? '&ndash;' : $one->points );
-			$content .= '</tr>';
-		}
+			$one_content .= sprintf( '<td class="points">%s</td>', '0' === $one->points ? '&ndash;' : $one->points );
+            $one_content .= '</tr>';
+            if ( 0 < $one->place ) {
+                $content .= $one_content;
+            } else {
+                $at_the_end .= $one_content;
+            }
+        }
+        $content .= $at_the_end;
 		$content .= '<tbody>';
 		$content .= '</table>';
 		return $content;
