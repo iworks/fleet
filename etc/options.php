@@ -95,6 +95,14 @@ function iworks_fleet_options() {
 				'multiple'    => true,
 				'description' => __( 'Select national serie to show trophy', 'fleet' ),
 			),
+			array(
+				'name'              => 'result_show_download_link',
+				'type'              => 'checkbox',
+				'th'                => __( 'Allow download CSV', 'fleet' ),
+				'default'           => 1,
+				'sanitize_callback' => 'absint',
+				'classes'           => array( 'switch-button' ),
+			),
 			/**
 			 * Persons
 			 */
@@ -158,6 +166,14 @@ function iworks_fleet_options() {
 				'type'              => 'checkbox',
 				'th'                => __( 'Show trophy', 'fleet' ),
 				'default'           => 0,
+				'sanitize_callback' => 'absint',
+				'classes'           => array( 'switch-button' ),
+			),
+			array(
+				'name'              => 'person_show_download_link',
+				'type'              => 'checkbox',
+				'th'                => __( 'Allow download CSV', 'fleet' ),
+				'default'           => 1,
 				'sanitize_callback' => 'absint',
 				'classes'           => array( 'switch-button' ),
 			),
@@ -241,6 +257,14 @@ function iworks_fleet_options() {
 				'type'              => 'checkbox',
 				'th'                => __( 'Show trophy', 'fleet' ),
 				'default'           => 0,
+				'sanitize_callback' => 'absint',
+				'classes'           => array( 'switch-button' ),
+			),
+			array(
+				'name'              => 'boat_show_download_link',
+				'type'              => 'checkbox',
+				'th'                => __( 'Allow download CSV', 'fleet' ),
+				'default'           => 1,
 				'sanitize_callback' => 'absint',
 				'classes'           => array( 'switch-button' ),
 			),

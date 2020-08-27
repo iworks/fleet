@@ -84,7 +84,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		 */
 		$this->fields = array(
 			'result' => array(
-				'english'              => array( 'label' => __( 'English name', 'fleet' ) ),
+				'english'               => array( 'label' => __( 'English name', 'fleet' ) ),
 				'location'              => array( 'label' => __( 'Area', 'fleet' ) ),
 				'organizer'             => array( 'label' => __( 'Organizer', 'fleet' ) ),
 				'secretary'             => array( 'label' => __( 'Secretary', 'fleet' ) ),
@@ -326,18 +326,111 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 	 */
 	public function download() {
 		global $wpdb;
-		if ( ! is_singular( $this->post_type_name ) ) {
+		$action = filter_input( INPUT_GET, 'fleet', FILTER_SANITIZE_STRING );
+		$nonce  = filter_input( INPUT_GET, '_wpnonce', FILTER_SANITIZE_STRING );
+		if ( ! wp_verify_nonce( $nonce, get_the_ID() ) ) {
 			return;
 		}
-		$action = filter_input( INPUT_GET, 'fleet', FILTER_SANITIZE_STRING );
+		/**
+		 * Start produce file
+		 */
+		$open_file = false;
+		if ( 'download' === $action ) {
+			global $iworks_fleet;
+			if ( is_singular( $this->post_type_name ) ) {
+				if ( $this->options->get_option( 'result_show_download_link' ) ) {
+					$open_file = true;
+					$action    = 'result';
+				}
+			} elseif ( is_singular( $iworks_fleet->get_post_type_name( 'person' ) ) ) {
+				if ( $this->options->get_option( 'person_show_download_link' ) ) {
+					$open_file = true;
+					$action    = 'person';
+				}
+			} elseif ( is_singular( $iworks_fleet->get_post_type_name( 'boat' ) ) ) {
+				if ( $this->options->get_option( 'boat_show_download_link' ) ) {
+					$open_file = true;
+					$action    = 'boat';
+				}
+			}
+		}
+		/**
+		 * open file or return
+		 */
+		if ( $open_file ) {
+			$file = sprintf(
+				'%s.csv',
+				sanitize_title(
+					sprintf(
+						'%s-%s-%s',
+						date( 'Y-m-d-h-i' ),
+						$action,
+						get_the_title()
+					)
+				)
+			);
+			header( 'Content-Type: text/csv' );
+			header( 'Content-Disposition: attachment; filename=' . $file );
+			$out = fopen( 'php://output', 'w' );
+		} else {
+			return;
+		}
+		/**
+		 * init of variables
+		 */
+		$row    = array();
+		$format = 'Y-m-d';
+		/**
+		 * get data
+		 */
 		switch ( $action ) {
-			case 'download':
-				$file = sanitize_title( get_the_title() ) . '.csv';
-				header( 'Content-Type: text/csv' );
-				header( 'Content-Disposition: attachment; filename=' . $file );
-				$out     = fopen( 'php://output', 'w' );
+			/**
+			 * Person or boat
+			 */
+			case 'person':
+			case 'boat':
+				$regattas = array();
+				switch ( $action ) {
+					case 'boat':
+						$regattas = $this->get_list_by_boat_id( get_the_ID() );
+						break;
+					case 'person':
+						$regattas = $this->get_list_by_sailor_id( get_the_ID() );
+						break;
+				}
+				if ( empty( $regattas ) ) {
+					return;
+				}
+				$row[] = __( 'Date start', 'fleet' );
+				$row[] = __( 'Date end', 'fleet' );
+				$row[] = __( 'Name', 'fleet' );
+				$row[] = __( 'Boat', 'fleet' );
+				$row[] = __( 'Helmsman', 'fleet' );
+				$row[] = __( 'Crew', 'fleet' );
+				$row[] = __( 'Place', 'fleet' );
+				$row[] = __( 'Number of competitors', 'fleet' );
+				$row[] = __( 'Points', 'fleet' );
+				fputcsv( $out, $row );
+				foreach ( $regattas as $regatta ) {
+					$row   = array();
+					$row[] = date_i18n( $format, $regatta->date_start );
+					$row[] = date_i18n( $format, $regatta->date_end );
+					$row[] = get_the_title( $regatta->post_regata_id );
+					$row[] = $regatta->boat_id;
+					$row[] = $regatta->helm_name;
+					$row[] = $regatta->crew_name;
+					$row[] = $regatta->place;
+					$row[] = get_post_meta( $regatta->post_regata_id, $this->options->get_option_name( 'result_number_of_competitors' ), true );
+					$row[] = $regatta->points;
+					fputcsv( $out, $row );
+				}
+				break;
+
+			/**
+			 * CSV of a Event
+			 */
+			case 'result':
 				$post_id = get_the_ID();
-				$row     = array();
 				$row[]   = __( 'Place', 'fleet' );
 				$row[]   = __( 'Boat', 'fleet' );
 				$row[]   = __( 'Helm', 'fleet' );
@@ -367,9 +460,11 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 					$row[] = $one->points;
 					fputcsv( $out, $row );
 				}
-				fclose( $out );
-				exit;
+			default:
+				return;
 		}
+		fclose( $out );
+		exit;
 	}
 
 	public function shortcode_list_helper_table_start( $serie_show_image, $serie_show_location_country ) {
@@ -875,7 +970,24 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		$regattas = $this->get_list_by_sailor_id( $sailor_id );
 		$post_id  = get_the_ID();
 		if ( ! empty( $regattas ) ) {
-			$content  = '<table class="fleet-results"><thead><tr>';
+			$content = '';
+			/**
+			 * CSV link
+			 */
+			if ( $this->options->get_option( 'person_show_download_link' ) ) {
+				$args     = array(
+					'fleet'    => 'download',
+					'format'   => 'csv',
+					'_wpnonce' => wp_create_nonce( $post_id ),
+				);
+				$url      = add_query_arg( $args );
+				$content .= sprintf(
+					'<div class="fleet-results-get"><a href="%s" class="fleet-results-csv">%s</a></div>',
+					$url,
+					__( 'Download', 'fleet' )
+				);
+			}
+			$content .= '<table class="fleet-results"><thead><tr>';
 			$content .= sprintf( '<th class="year">%s</th>', esc_html__( 'Year', 'fleet' ) );
 			$content .= sprintf( '<th class="name">%s</th>', esc_html__( 'Name', 'fleet' ) );
 			$content .= sprintf( '<th class="boat">%s</th>', esc_html__( 'Boat', 'fleet' ) );
@@ -969,7 +1081,24 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		}
 		$post_id = get_the_ID();
 		if ( ! empty( $regattas ) ) {
-			$content  = '<table class="fleet-results"><thead><tr>';
+			$content = '';
+			/**
+			 * CSV link
+			 */
+			if ( $this->options->get_option( 'boat_show_download_link' ) ) {
+				$args     = array(
+					'fleet'    => 'download',
+					'format'   => 'csv',
+					'_wpnonce' => wp_create_nonce( $post_id ),
+				);
+				$url      = add_query_arg( $args );
+				$content .= sprintf(
+					'<div class="fleet-results-get"><a href="%s" class="fleet-results-csv">%s</a></div>',
+					$url,
+					__( 'Download', 'fleet' )
+				);
+			}
+			$content .= '<table class="fleet-results"><thead><tr>';
 			$content .= sprintf( '<th class="year">%s</th>', esc_html__( 'Year', 'fleet' ) );
 			$content .= sprintf( '<th class="name">%s</th>', esc_html__( 'Name', 'fleet' ) );
 			$content .= sprintf( '<th class="helmsman">%s</th>', esc_html__( 'Helmsman', 'fleet' ) );
@@ -1533,16 +1662,19 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		/**
 		 * CSV link
 		 */
-		$args     = array(
-			'fleet'  => 'download',
-			'format' => 'csv',
-		);
-		$url      = add_query_arg( $args );
-		$content .= sprintf(
-			'<div class="fleet-results-get"><a href="%s" class="fleet-results-csv">%s</a></div>',
-			$url,
-			__( 'Download', 'fleet' )
-		);
+		if ( $this->options->get_option( 'result_show_download_link' ) ) {
+			$args     = array(
+				'fleet'    => 'download',
+				'format'   => 'csv',
+				'_wpnonce' => wp_create_nonce( $post_id ),
+			);
+			$url      = add_query_arg( $args );
+			$content .= sprintf(
+				'<div class="fleet-results-get"><a href="%s" class="fleet-results-csv">%s</a></div>',
+				$url,
+				__( 'Download', 'fleet' )
+			);
+		}
 		$content .= '<table class="fleet-results fleet-results-person">';
 		$content .= '<thead>';
 		$content .= '<tr>';
@@ -1554,16 +1686,15 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		for ( $i = 1; $i <= $number; $i++ ) {
 			$content .= sprintf( '<td class="race race-%d">%d</td>', $i, $i );
 		}
-		$content .= sprintf( '<td class="sum">%s</td>', esc_html__( 'Sum', 'fleet' ) );
-		$content .= '</tr>';
-		$content .= '</thead>';
-		$content .= '<tbody>';
-        $show     = current_user_can( 'manage_options' );
-        $at_the_end = '';
-        foreach ( $regatta as $one ) {
+		$content   .= sprintf( '<td class="sum">%s</td>', esc_html__( 'Sum', 'fleet' ) );
+		$content   .= '</tr>';
+		$content   .= '</thead>';
+		$content   .= '<tbody>';
+		$show       = current_user_can( 'manage_options' );
+		$at_the_end = '';
+		foreach ( $regatta as $one ) {
 
-            $one_content = '';
-
+			$one_content = '';
 
 			$classes = array(
 				sprintf( 'fleet-place-%d', $one->place ),
@@ -1571,12 +1702,12 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			if ( 4 > $one->place ) {
 				$classes[] = 'fleet-place-medal';
 			}
-            $one_content .= sprintf( '<tr class="%s">', esc_attr( implode( ' ', $classes ) ) );
-            if ( 0 < $one->place ) {
-                $one_content .= sprintf( '<td class="place">%d</td>', $one->place );
-            } else {
-                $one_content .= '<td class="place place-tda"><small>TDA</small></td>';
-            }
+			$one_content .= sprintf( '<tr class="%s">', esc_attr( implode( ' ', $classes ) ) );
+			if ( 0 < $one->place ) {
+				$one_content .= sprintf( '<td class="place">%d</td>', $one->place );
+			} else {
+				$one_content .= '<td class="place place-tda"><small>TDA</small></td>';
+			}
 			/**
 			 * boat
 			 */
@@ -1584,7 +1715,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 				'<td class="boat_id country-%s">',
 				esc_attr( strtolower( $one->country ) )
 			);
-			$boat     = $this->get_boat_data_by_number( $one->boat_id );
+			$boat         = $this->get_boat_data_by_number( $one->boat_id );
 			/**
 			 * Boat number
 			 */
@@ -1645,7 +1776,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 					if ( '0' === $race_points ) {
 						$race_points = '&ndash;';
 					}
-					$class    = preg_match( '/\*/', $race_points ) ? 'race-discard' : '';
+					$class        = preg_match( '/\*/', $race_points ) ? 'race-discard' : '';
 					$one_content .= sprintf(
 						'<td class="race race-%d %s">%s</td>',
 						esc_attr( $race_number ),
@@ -1655,14 +1786,14 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 				}
 			}
 			$one_content .= sprintf( '<td class="points">%s</td>', '0' === $one->points ? '&ndash;' : $one->points );
-            $one_content .= '</tr>';
-            if ( 0 < $one->place ) {
-                $content .= $one_content;
-            } else {
-                $at_the_end .= $one_content;
-            }
-        }
-        $content .= $at_the_end;
+			$one_content .= '</tr>';
+			if ( 0 < $one->place ) {
+				$content .= $one_content;
+			} else {
+				$at_the_end .= $one_content;
+			}
+		}
+		$content .= $at_the_end;
 		$content .= '<tbody>';
 		$content .= '</table>';
 		return $content;

@@ -47,6 +47,8 @@ There are 3 ways to install this plugin:
 * Added ability to choose country or countries for whole plugin.
 * Added ability to filter results by year.
 * Added ability to show/hide boat country code.
+* Added ability to export sailor results.
+* Added ability to export boat results.
 * Added boats owners.
 * Added child theme for TwentyTwenty Theme.
 * Added filter `iworks_fleet_result_skip_year_in_title` to avoid prefixing result title by year.
