@@ -42,6 +42,7 @@ There are 3 ways to install this plugin:
 
 == Changelog ==
 
+* Added ability to show English version of regatta title.
 * Added ability to add base fleet styles.
 * Added ability to add wide body class (compatibility with 2020 theme).
 * Added ability to choose country or countries for whole plugin.

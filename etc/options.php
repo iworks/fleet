@@ -103,6 +103,15 @@ function iworks_fleet_options() {
 				'sanitize_callback' => 'absint',
 				'classes'           => array( 'switch-button' ),
 			),
+			array(
+				'name'              => 'result_show_english_title',
+				'type'              => 'checkbox',
+				'th'                => __( 'Show English', 'fleet' ),
+				'default'           => 1,
+				'sanitize_callback' => 'absint',
+				'classes'           => array( 'switch-button' ),
+				'description'       => __( 'Allow to show English title on a list.', 'fleet' ),
+			),
 			/**
 			 * Persons
 			 */

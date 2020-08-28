@@ -490,16 +490,17 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 	public function shortcode_list( $atts ) {
 		$atts = shortcode_atts(
 			array(
-				'year'         => date( 'Y' ),
-				'serie'        => null,
-				'title'        => __( 'Results', 'fleet' ),
-				'title_show'   => 'on',
-				'area_show'    => 'on',
-				'year_show'    => 'on',
-				'serie_show'   => 'off',
-				'country_show' => 'off',
-				'country'      => $this->options->get_option( 'results_show_country' ) ? 'on' : 'off',
-				'order'        => 'DESC',
+				'year'               => date( 'Y' ),
+				'serie'              => null,
+				'title'              => __( 'Results', 'fleet' ),
+				'title_show'         => 'on',
+				'area_show'          => 'on',
+				'year_show'          => 'on',
+				'serie_show'         => 'off',
+				'country_show'       => 'off',
+				'country'            => $this->options->get_option( 'results_show_country' ) ? 'on' : 'off',
+				'order'              => 'DESC',
+				'show_english_title' => $this->options->get_option( 'result_show_english_title' ) ? 'on' : 'off',
 			),
 			$atts,
 			'fleet_results_list'
@@ -521,6 +522,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		$show_title            = preg_match( '/^(on|yes|1)$/i', $atts['title_show'] );
 		$show_year             = preg_match( '/^(on|yes|1)$/i', $atts['year_show'] );
 		$show_location_country = preg_match( '/^(on|yes|1)$/i', $atts['country'] );
+		$show_english_title    = preg_match( '/^(on|yes|1)$/i', $atts['show_english_title'] );
 		/**
 		 * content
 		 */
@@ -650,8 +652,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 					$terms = wp_get_post_terms( get_the_ID(), $this->taxonomy_name_serie );
 					foreach ( $terms as $term ) {
 						if ( ! isset( $serie_image[ $term->term_id ] ) ) {
-							$image_id = get_term_meta( $term->term_id, 'image', true );
-
+							$image_id                      = get_term_meta( $term->term_id, 'image', true );
 							$serie_image[ $term->term_id ] = array( 'id' => $image_id );
 							if ( ! empty( $image_id ) ) {
 								$serie_image[ $term->term_id ]['url']   = get_term_link( $term->term_id );
@@ -661,7 +662,6 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 						if ( empty( $serie_image[ $term->term_id ]['id'] ) ) {
 							continue;
 						}
-
 						$t[] = sprintf(
 							'<a href="%s"><img src="%s" alt="%s" title="%s" width="24" height="24" /></a>',
 							$serie_image[ $term->term_id ]['url'],
@@ -679,10 +679,22 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 				/**
 				 * title
 				 */
+				$title = get_the_title();
+				$en    = '';
+				if ( $show_english_title ) {
+					$en = get_post_meta( get_the_ID(), $this->options->get_option_name( 'result_english' ), true );
+					if ( ! empty( $en ) ) {
+						$en = sprintf(
+							'<br /><small class="fleet-en-name">%s</small>',
+							$en
+						);
+					}
+				}
 				$tbody .= sprintf(
-					'<td class="title"><a href="%s">%s</a></td>',
+					'<td class="title"><a href="%s">%s</a>%s</td>',
 					get_permalink(),
-					get_the_title()
+					$title,
+					$en
 				);
 				/**
 				 * country
