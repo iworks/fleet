@@ -55,6 +55,7 @@ There are 3 ways to install this plugin:
 * Added filter `iworks_fleet_result_skip_year_in_title` to avoid prefixing result title by year.
 * Added sailors nation and display flag.
 * Added trophies list.
+* Added ability to create custom column name for races.
 * Improved compatibility with TwentyTwenty Theme.
 * Improved hull colors choose.
 * Improved results importer.

@@ -107,6 +107,11 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 				),
 				'wind_direction'        => array( 'label' => __( 'Wind direction', 'fleet' ) ),
 				'wind_power'            => array( 'label' => __( 'Wind power', 'fleet' ) ),
+				'columns'               => array(
+					'label'       => __( 'Custom columns name', 'fleet' ),
+					'type'        => 'textarea',
+					'description' => __( 'Add one column per line if you want to have custom race column header.', 'fleet' ),
+				),
 			),
 		);
 		/**
@@ -1618,7 +1623,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		}
 		$format = get_option( 'date_format' );
 		foreach ( $this->fields['result'] as $key => $data ) {
-			if ( preg_match( '/^wind/', $key ) ) {
+			if ( preg_match( '/^(wind|columns)/', $key ) ) {
 				continue;
 			}
 			$classes = array(
@@ -1695,8 +1700,22 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		$content .= sprintf( '<td class="helm">%s</td>', esc_html__( 'Helmsman', 'fleet' ) );
 		$content .= sprintf( '<td class="crew">%s</td>', esc_html__( 'Crew', 'fleet' ) );
 		$number   = intval( get_post_meta( $post_id, 'iworks_fleet_result_number_of_races', true ) );
-		for ( $i = 1; $i <= $number; $i++ ) {
-			$content .= sprintf( '<td class="race race-%d">%d</td>', $i, $i );
+		/**
+		 * custom race columens
+		 */
+		$columns  = array();
+		$meta_key = $this->options->get_option_name( 'result_columns' );
+		$value    = get_post_meta( $post_id, $meta_key, true );
+		if ( ! empty( $value ) ) {
+			$columns = preg_split( '/[\n\r;]+/', $value );
+		}
+		for ( $i = 0; $i < $number; $i++ ) {
+			$race_number = $i + 1;
+			if ( isset( $columns[ $i ] ) && ! empty( $columns[ $i ] ) ) {
+				$content .= sprintf( '<td class="race race-%d">%s</td>', $race_number, esc_html( $columns[ $i ] ) );
+			} else {
+				$content .= sprintf( '<td class="race race-%d">%d</td>', $race_number, $race_number );
+			}
 		}
 		$content   .= sprintf( '<td class="sum">%s</td>', esc_html__( 'Sum', 'fleet' ) );
 		$content   .= '</tr>';
@@ -1718,7 +1737,10 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			if ( 0 < $one->place ) {
 				$one_content .= sprintf( '<td class="place">%d</td>', $one->place );
 			} else {
-				$one_content .= '<td class="place place-tda"><small>TDA</small></td>';
+				$one_content .= sprintf(
+					'<td class="place place-tda"><small>%s</small></td>',
+					empty( $one->place ) ? '?' : 'TDA'
+				);
 			}
 			/**
 			 * boat
