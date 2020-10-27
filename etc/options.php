@@ -1380,10 +1380,11 @@ function iworks_fleet_get_contries() {
 			'group'  => 'G',
 		),
 		array(
-			'nation' => __( 'Zimbabwe', 'fleet' ),
-			'en'     => 'Zimbabwe',
-			'code'   => 'ZIM',
-			'group'  => 'Q',
+			'nation'   => __( 'Zimbabwe', 'fleet' ),
+			'en'       => 'Zimbabwe',
+			'code'     => 'ZIM',
+			'group'    => 'Q',
+			'code_old' => 'KR',
 		),
 		array(
 			'nation' => __( 'Great Britain', 'fleet' ),
