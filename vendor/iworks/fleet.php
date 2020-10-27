@@ -61,6 +61,12 @@ class iworks_fleet extends iworks {
 		add_action( 'wp_enqueue_scripts', array( $this, 'register_styles' ), 0 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ) );
 		/**
+		 * custom theme
+		 */
+		// add_action( 'after_setup_theme', array( $this, 'after_setup_theme' ), 0 );
+		// add_action( 'init', array( $this, 'register_theme_directory' ) );
+		// add_filter( 'theme_root_uri', array( $this, 'theme_root_uri'), 10, 3 );
+		/**
 		 * shortcodes
 		 */
 		add_shortcode( 'fleet_stats', array( $this, 'stats' ) );
@@ -403,4 +409,26 @@ class iworks_fleet extends iworks {
 			wp_enqueue_style( $this->options->get_option_name( 'frontend' ) );
 		}
 	}
+
+	/**
+	 * register_theme_directory
+	 *
+	 * @since 1.3.0
+	 *
+	 */
+	public function register_theme_directory() {
+		register_theme_directory( dirname( $this->base ) . '/integration/themes' );
+	}
+
+	public function after_setup_theme() {
+		$theme = wp_get_theme();
+		if ( 'twentytwenty-5o5-child' !== $theme->get( 'Name' ) ) {
+			return;
+		}
+	}
+
+	public function theme_root_uri( $theme_root_uri, $siteurl, $stylesheet_or_template ) {
+		return $theme_root_uri;
+	}
+
 }
