@@ -1384,7 +1384,7 @@ function iworks_fleet_get_contries() {
 			'en'       => 'Zimbabwe',
 			'code'     => 'ZIM',
 			'group'    => 'Q',
-			'code_old' => 'KR',
+			'code_old' => [ 'KR', 'ZB' ],
 		),
 		array(
 			'nation' => __( 'Great Britain', 'fleet' ),

@@ -167,6 +167,11 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		 */
 		add_action( 'iworks_fleet_result_import_data', array( $this, 'import_data' ), 10, 2 );
 		add_filter( 'wp_localize_script_fleet_admin', array( $this, 'add_import_js_messages' ) );
+		/**
+		 * add month & year archive
+		 */
+		add_action( 'init', array( $this, 'add_rewrite_rules' ), 11 );
+		add_filter( 'get_the_archive_title', array( $this, 'get_the_archive_title' ), 10, 3 );
 	}
 
 	public function get_trophies_by_sailor_id( $content, $sailor_id ) {
@@ -764,8 +769,16 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		}
 		$year = filter_input( INPUT_GET, 'iworks_fleet_result_year', FILTER_VALIDATE_INT );
 		if ( empty( $year ) ) {
+			$year = get_query_var( 'year' );
+			if ( ! empty( $year ) ) {
+				$query->set( 'year', null );
+			}
+		}
+		if ( empty( $year ) ) {
 			return;
 		}
+		$query->set( 'nopaging', true );
+		$query->set( 'iworks_fleet_result_year', $year );
 		$query->set(
 			'meta_query',
 			array(
@@ -2383,4 +2396,40 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		return $content;
 	}
 
+	/**
+	 * add year & month archive
+	 *
+	 * @since 1.3.0
+	 */
+	public function add_rewrite_rules() {
+		add_rewrite_rule(
+			sprintf( '%s/([0-9]{4})/([0-9]{1,2})/?$', _x( 'results', 'rewrite rule handler for results', 'fleet' ) ),
+			sprintf( 'index.php?post_type=%s&year=$matches[1]&monthnum=$matches[2]', $this->post_type_name ),
+			'top'
+		);
+		add_rewrite_rule(
+			sprintf( '%s/([0-9]{4})/?$', _x( 'results', 'rewrite rule handler for results', 'fleet' ) ),
+			sprintf( 'index.php?post_type=%s&year=$matches[1]', $this->post_type_name ),
+			'top'
+		);
+	}
+
+	/**
+	 * handle year title archive
+	 *
+	 * @since 1.3.0
+	 */
+	public function get_the_archive_title( $title, $original_title, $prefix ) {
+		if ( ! is_archive( $this->post_type_name ) ) {
+			return $title;
+		}
+		if ( ! is_year() ) {
+			return $title;
+		}
+		$year = get_query_var( 'iworks_fleet_result_year' );
+		if ( empty( $year ) ) {
+			return $title;
+		}
+		return sprintf( __( 'Year: %s', 'fleet' ), sprintf( '<span>%d</span>', $year ) );
+	}
 }
