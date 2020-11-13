@@ -118,15 +118,25 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 			'crew'   => array(),
 			'boat'   => array(
 				'nation'               => array(
-					'label' => __( 'Current nation', 'fleet' ),
-					'type'  => 'select2',
-					'args'  => array(
+					'label'   => __( 'Current nation', 'fleet' ),
+					'type'    => 'select2',
+					'args'    => array(
 						'options' => $this->get_nations(),
 					),
+					'twitter' => 'yes',
 				),
-				'build_year'           => array( 'label' => __( 'Year of building', 'fleet' ) ),
-				'hull_number'          => array( 'label' => __( 'Hull number', 'fleet' ) ),
-				'name'                 => array( 'label' => __( 'Boat name', 'fleet' ) ),
+				'build_year'           => array(
+					'label'   => __( 'Year of building', 'fleet' ),
+					'twitter' => 'yes',
+				),
+				'hull_number'          => array(
+					'label'   => __( 'Hull number', 'fleet' ),
+					'twitter' => 'yes',
+				),
+				'name'                 => array(
+					'label'   => __( 'Boat name', 'fleet' ),
+					'twitter' => 'yes',
+				),
 				'color_top'            => array(
 					'label' => __( 'Color top', 'fleet' ),
 					'type'  => 'select2',
@@ -168,8 +178,9 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 					),
 				),
 				'first_certified_date' => array(
-					'type'  => 'date',
-					'label' => __( 'First Certified', 'fleet' ),
+					'type'    => 'date',
+					'label'   => __( 'First Certified', 'fleet' ),
+					'twitter' => 'yes',
 				),
 			),
 			'social' => array(
@@ -1584,5 +1595,16 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		return get_the_term_list( $post_ID, $this->taxonomy_name_manufacturer );
 	}
 
+	/**
+	 * Add OpenGraph data.
+	 *
+	 * @since 1.3.0
+	 */
+	public function og_array( $og ) {
+		if ( is_singular( $this->post_type_name ) ) {
+			return $this->og_array_add( $og, 'boat' );
+		}
+		return $og;
+	}
 }
 

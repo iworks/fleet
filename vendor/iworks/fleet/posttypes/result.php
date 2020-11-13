@@ -84,26 +84,36 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		 */
 		$this->fields = array(
 			'result' => array(
-				'english'               => array( 'label' => __( 'English name', 'fleet' ) ),
-				'location'              => array( 'label' => __( 'Area', 'fleet' ) ),
+				'english'               => array(
+					'label'   => __( 'English name', 'fleet' ),
+					'twitter' => 'yes',
+				),
+				'location'              => array(
+					'label'   => __( 'Area', 'fleet' ),
+					'twitter' => 'yes',
+				),
 				'organizer'             => array( 'label' => __( 'Organizer', 'fleet' ) ),
 				'secretary'             => array( 'label' => __( 'Secretary', 'fleet' ) ),
 				'arbiter'               => array( 'label' => __( 'Arbiter', 'fleet' ) ),
 				'date_start'            => array(
-					'type'  => 'date',
-					'label' => __( 'Event start', 'fleet' ),
+					'type'    => 'date',
+					'label'   => __( 'Event start', 'fleet' ),
+					'twitter' => 'yes',
 				),
 				'date_end'              => array(
-					'type'  => 'date',
-					'label' => __( 'Event end', 'fleet' ),
+					'type'    => 'date',
+					'label'   => __( 'Event end', 'fleet' ),
+					'twitter' => 'yes',
 				),
 				'number_of_races'       => array(
-					'type'  => 'number',
-					'label' => __( 'Number of races', 'fleet' ),
+					'type'    => 'number',
+					'label'   => __( 'Number of races', 'fleet' ),
+					'twitter' => 'yes',
 				),
 				'number_of_competitors' => array(
-					'type'  => 'number',
-					'label' => __( 'Number of competitors', 'fleet' ),
+					'type'    => 'number',
+					'label'   => __( 'Number of competitors', 'fleet' ),
+					'twitter' => 'yes',
 				),
 				'wind_direction'        => array( 'label' => __( 'Wind direction', 'fleet' ) ),
 				'wind_power'            => array( 'label' => __( 'Wind power', 'fleet' ) ),
@@ -1503,7 +1513,6 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 				if ( ! preg_match( '/^\d+$/', $boat ) ) {
 					$boat_id *= -1;
 				}
-				l( [ $country, $boat_id ] );
 			} elseif ( preg_match( '/^\?(\d+)$/', $boat, $matches ) ) {
 				$boat_id = intval( $matches[1] );
 			} elseif ( preg_match( '/^([a-zA-Z\/]+)[ \-\t]*(\d+)$/', $boat, $matches ) ) {
@@ -1590,6 +1599,8 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 				switch ( $race['code'] ) {
 					case 's';
 					case 'S';
+					case 'n';
+					case 'N';
 						$race['code'] = 'DNS';
 					break;
 					case 'f';
@@ -1598,7 +1609,12 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 					break;
 					case 'q';
 					case 'Q';
+					case 'd';
+					case 'D';
 						$race['code'] = 'DSQ';
+					case 'r';
+					case 'R';
+						$race['code'] = 'RET';
 					case 'Abandoned':
 						$race['code'] = '-';
 					break;
@@ -2431,5 +2447,17 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			return $title;
 		}
 		return sprintf( __( 'Year: %s', 'fleet' ), sprintf( '<span>%d</span>', $year ) );
+	}
+
+	/**
+	 * Add OpenGraph data.
+	 *
+	 * @since 1.3.0
+	 */
+	public function og_array( $og ) {
+		if ( is_singular( $this->post_type_name ) ) {
+			return $this->og_array_add( $og, 'result' );
+		}
+		return $og;
 	}
 }

@@ -58,12 +58,15 @@ class iworks_fleet_posttypes {
 		/**
 		 * Trophies names
 		 */
-
 		$this->trophies_names = array(
 			'world'       => __( 'World', 'fleet' ),
 			'continental' => __( 'Continental', 'fleet' ),
 			'national'    => __( 'National', 'fleet' ),
 		);
+		/**
+		 * OpenGraph
+		 */
+		add_filter( 'og_array', array( $this, 'og_array' ) );
 		/**
 		 * register
 		 */
@@ -454,6 +457,41 @@ class iworks_fleet_posttypes {
 		$data = preg_replace( '/ /', ' ', $data );
 		$data = preg_replace( '/[ \t\r\n]+/', ' ', $data );
 		return trim( $data );
+	}
+
+	/**
+	 * OpenGraph integration with OG plugin.
+	 *
+	 * @since 1.3.0
+	 */
+	protected function og_array_add( $og, $type ) {
+		$counter = 1;
+		$format  = get_option( 'date_format' );
+		foreach ( $this->fields[ $type ] as $key => $data ) {
+			if ( ! isset( $data['twitter'] ) ) {
+				continue;
+			}
+			if ( 'yes' !== $data['twitter'] ) {
+				continue;
+			}
+			$name  = $this->options->get_option_name( $type . '_' . $key );
+			$value = get_post_meta( get_the_ID(), $name, true );
+			if ( empty( $value ) ) {
+				continue;
+			}
+			switch ( $key ) {
+				case 'date_start':
+				case 'date_end':
+					$value = date_i18n( $format, $value );
+			}
+			if ( ! isset( $og['twitter'] ) ) {
+				$og['twitter'] = array();
+			}
+			$og['twitter'][ 'label' . $counter ] = $data['label'];
+			$og['twitter'][ 'data' . $counter ]  = $value;
+			$counter++;
+		}
+		return $og;
 	}
 }
 

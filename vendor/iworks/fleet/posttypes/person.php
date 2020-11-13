@@ -79,13 +79,17 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 		$this->fields = array(
 			'personal' => array(
 				'nation'     => array(
-					'label' => __( 'Nation', 'fleet' ),
-					'type'  => 'select2',
-					'args'  => array(
+					'label'   => __( 'Nation', 'fleet' ),
+					'type'    => 'select2',
+					'args'    => array(
 						'options' => $this->get_nations(),
 					),
+					'twitter' => 'yes',
 				),
-				'birth_year' => array( 'label' => __( 'Birth Year', 'fleet' ) ),
+				'birth_year' => array(
+					'label'   => __( 'Birth Year', 'fleet' ),
+					'twitter' => 'yes',
+				),
 				'birth_date' => array(
 					'type'  => 'date',
 					'label' => __( 'Birth Date', 'fleet' ),
@@ -781,6 +785,18 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 			}
 		}
 		return $post_title;
+	}
+
+	/**
+	 * Add OpenGraph data.
+	 *
+	 * @since 1.3.0
+	 */
+	public function og_array( $og ) {
+		if ( is_singular( $this->post_type_name ) ) {
+			return $this->og_array_add( $og, 'personal', 'person' );
+		}
+		return $og;
 	}
 }
 
