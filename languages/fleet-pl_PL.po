@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: Plugins - Fleet - Stable (latest release)\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/fleet\n"
 "POT-Creation-Date: 2020-07-15 19:17:55+00:00\n"
-"PO-Revision-Date: 2020-07-15 21:33+0200\n"
+"PO-Revision-Date: 2020-11-25 11:11+0100\n"
 "Last-Translator: Marcin Pietrzak <marcin@iworks.pl>\n"
 "Language-Team: \n"
 "Language: pl\n"
@@ -1393,7 +1393,7 @@ msgstr "Materiał kadłuba"
 
 #: vendor/iworks/fleet/posttypes/boat.php:152
 msgid "--- select hull material ---"
-msgstr ""
+msgstr "- wybierz materiał kadłuba -"
 
 #: vendor/iworks/fleet/posttypes/boat.php:153
 msgid "Mixed"
@@ -2180,7 +2180,7 @@ msgstr "Zespoły"
 
 #: vendor/iworks/fleet/posttypes/result.php:430
 msgid "No race results."
-msgstr "Brak wyników"
+msgstr "Brak wyników biegów."
 
 #: vendor/iworks/fleet/posttypes/result.php:450
 msgid "There is no results."
@@ -2362,7 +2362,6 @@ msgid "Currently we do not have anny results!"
 msgstr ""
 
 #: vendor/iworks/fleet/posttypes/result.php:1877
-#, fuzzy
 msgid "#"
 msgstr "nr"
 
@@ -2626,16 +2625,14 @@ msgid "fleet-boats"
 msgstr ""
 
 #: vendor/iworks/fleet/posttypes/person.php:177
-#, fuzzy
 msgctxt "slug for archive"
 msgid "fleet-persons"
-msgstr "Osoby"
+msgstr "zeglarz"
 
 #: vendor/iworks/fleet/posttypes/result.php:902
-#, fuzzy
 msgctxt "slug for archive"
 msgid "results"
-msgstr "Wyniki"
+msgstr "wyniki"
 
 #: vendor/iworks/fleet/posttypes/boat.php:348
 msgctxt "slug for single boat"
@@ -2715,7 +2712,7 @@ msgstr ""
 #: vendor/iworks/fleet/posttypes/boat.php:592
 msgctxt "Custom taxonomies separator."
 msgid ", "
-msgstr ""
+msgstr ", "
 
 #: vendor/iworks/fleet/posttypes/boat.php:671
 msgctxt "value of boat"
@@ -2776,10 +2773,9 @@ msgid "Result"
 msgstr "Wyniki"
 
 #: vendor/iworks/fleet/posttypes/result.php:908
-#, fuzzy
 msgctxt "slug for single result"
 msgid "result"
-msgstr "Wyniki"
+msgstr "wynik"
 
 #: vendor/iworks/fleet.php:257
 msgctxt "slug for images"

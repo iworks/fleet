@@ -305,7 +305,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 				$cache .= '</tr>';
 			}
 		}
-		$cache .= '<table>';
+		$cache .= '</table>';
 		$cache .= '</div>';
 		set_transient( $cache_key, $cache, DAY_IN_SECONDS );
 		return $content . $cache;
@@ -445,7 +445,6 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 					fputcsv( $out, $row );
 				}
 				break;
-
 			/**
 			 * CSV of a Event
 			 */
@@ -1505,6 +1504,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		$number_of_races = intval( get_post_meta( $post_id, $name, true ) );
 		foreach ( $data as $row ) {
 			$country = '';
+			$boat_id = null;
 			$boat    = array_shift( $row );
 			if ( preg_match( '/^[A-Z]+$/', $boat ) ) {
 				$country = $boat;
@@ -1532,6 +1532,13 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			$crew = $this->data_trim( array_shift( $row ) );
 			$helm = $this->data_trim( apply_filters( 'iworks_fleet_result_upload_helm', $helm, $crew ) );
 			$crew = $this->data_trim( apply_filters( 'iworks_fleet_result_upload_crew', $crew, $h ) );
+			/**
+			 * ( helm or crew ) && $boat_id
+			 */
+			if ( is_integer( $boat_id ) && 0 < $boat_id ) {
+				$helm = $this->data_trim( apply_filters( 'iworks_fleet_result_upload_person_with_boat', $helm, $boat_id ) );
+				$crew = $this->data_trim( apply_filters( 'iworks_fleet_result_upload_person_with_boat', $crew, $boat_id ) );
+			}
 			/**
 			 * club
 			 */

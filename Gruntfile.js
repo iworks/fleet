@@ -83,7 +83,7 @@ module.exports = function( grunt ) {
 					'!node_modules/**',
 					'!lib/**',
 					'!docs/**',
-					'!release/**',
+					'release/**',
 					'!Gruntfile.js',
 					'!package-lock.json',
 					'!build/**',
