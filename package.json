@@ -31,6 +31,7 @@
         "grunt-contrib-sass": "^1.0.0",
         "grunt-contrib-uglify": "^2.0.0",
         "grunt-contrib-watch": "^1.1.0",
+        "grunt-eslint": "^23",
         "grunt-exec": "^0.4.6",
         "grunt-git": ">1.0.0",
         "grunt-jsvalidate": "^0.2.2",

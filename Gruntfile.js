@@ -387,6 +387,10 @@ module.exports = function( grunt ) {
 			}
 		},
 
+        eslint: {
+            target: conf.js_files_concat['assets/scripts/admin/fleet.js']
+        },
+
 	} );
 
 	// Test task.
@@ -411,7 +415,7 @@ module.exports = function( grunt ) {
 
 	grunt.registerTask( 'default', ['clean', 'jshint', 'concat', 'uglify', 'concat_css', 'sass', 'autoprefixer', 'cssmin' ] );
 	grunt.registerTask( 'build', [ 'release' ]);
-	grunt.registerTask( 'js', ['jshint', 'concat', 'uglify'] );
+	grunt.registerTask( 'js', ['jshint', 'eslint', 'concat', 'uglify'] );
 	grunt.registerTask( 'css', ['concat_css', 'sass', 'autoprefixer', 'cssmin' ] );
 	grunt.registerTask( 'i18n', ['makepot', 'po2mo' ] );
 	//grunt.registerTask( 'test', ['phpunit', 'jshint'] );

@@ -11,7 +11,7 @@ jQuery( document ).ready(function($) {
             });
             if ( ! is_file ) {
                 window.alert( iworks_fleet.messages.result.choose_file_first );
-                return
+                return;
             }
             data.append( 'action', 'iworks_fleet_upload_races' );
             data.append( 'id', $('#post_ID' ).val() );
