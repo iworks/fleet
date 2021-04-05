@@ -42,20 +42,22 @@ There are 3 ways to install this plugin:
 
 == Changelog ==
 
-* Added ability to show English version of regatta title.
 * Added ability to add base fleet styles.
 * Added ability to add wide body class (compatibility with 2020 theme).
 * Added ability to choose country or countries for whole plugin.
-* Added ability to filter results by year.
-* Added ability to show/hide boat country code.
-* Added ability to export sailor results.
+* Added ability to create custom column name for races.
 * Added ability to export boat results.
+* Added ability to export sailor results.
+* Added ability to filter results by year.
+* Added ability to show English version of regatta title.
+* Added ability to show/hide boat country code.
 * Added boats owners.
 * Added child theme for TwentyTwenty Theme.
+* Added filter `iworks_fleet_result_serie_regatta_list'.
 * Added filter `iworks_fleet_result_skip_year_in_title` to avoid prefixing result title by year.
 * Added sailors nation and display flag.
+* Added shortcode `fleet_regattas_list_years` to produce results years list.
 * Added trophies list.
-* Added ability to create custom column name for races.
 * Improved compatibility with TwentyTwenty Theme.
 * Improved hull colors choose.
 * Improved results importer.

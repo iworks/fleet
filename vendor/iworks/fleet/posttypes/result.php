@@ -56,6 +56,11 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 	 */
 	private $boat_post_type;
 
+	/**
+	 * Last result exception
+	 */
+	private $get_last_results_html_ids = array();
+
 	public function __construct() {
 		parent::__construct();
 		/**
@@ -143,6 +148,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		 */
 		add_filter( 'iworks_fleet_result_sailor_regata_list', array( $this, 'regatta_list_by_sailor_id' ), 10, 2 );
 		add_filter( 'iworks_fleet_result_boat_regatta_list', array( $this, 'regatta_list_by_boat_id' ), 10, 2 );
+		add_filter( 'iworks_fleet_result_serie_regatta_list', array( $this, 'filter_regatta_list_by_serie_slug' ), 10, 3 );
 		add_filter( 'the_title', array( $this, 'add_year_to_title' ), 10, 2 );
 		add_filter( 'iworks_fleet_result_sailor_trophies', array( $this, 'get_trophies_by_sailor_id' ), 10, 2 );
 		/**
@@ -159,6 +165,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		 */
 		add_shortcode( 'fleet_regattas_list', array( $this, 'shortcode_list' ) );
 		add_shortcode( 'fleet_ranking', array( $this, 'shortcode_ranking' ) );
+		add_shortcode( 'fleet_regattas_list_years', array( $this, 'shortcode_years_links' ) );
 		/**
 		 * sort next/previous links by title
 		 */
@@ -2467,4 +2474,107 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		}
 		return $og;
 	}
+
+	public function filter_regatta_list_by_serie_slug( $content, $serie_slug, $number_of_items ) {
+		$args = array(
+			'post_type'      => $this->post_type_name,
+			'posts_per_page' => $number_of_items,
+			'tax_query'      => array(
+				array(
+					'taxonomy' => $this->taxonomy_name_serie,
+					'field'    => 'slug',
+					'terms'    => $serie_slug,
+				),
+			),
+			'meta_query'     => array(
+				array(
+					'key'       => $this->options->get_option_name( 'result_date_start' ),
+					'value_num' => 0,
+					'compare'   => '>',
+				),
+			),
+			'orderby'        => 'meta_value_num',
+			'post__not_in'   => $this->get_last_results_html_ids,
+		);
+		if ( '::last' === $serie_slug ) {
+			unset( $args['meta_query'], $args['orderby'], $args['tax_query'] );
+		}
+		$the_query = new WP_Query( $args );
+		if ( ! $the_query->have_posts() ) {
+			return $content;
+		}
+		$content .= sprintf(
+			'<div class="results results-serie-%s">',
+			esc_attr( $serie_slug )
+		);
+		if ( '::last' === $serie_slug ) {
+			unset( $args['meta_query'], $args['orderby'], $args['tax_query'] );
+			$content .= sprintf(
+				'<h2>%s</h2>',
+				esc_html__( 'Last added', 'fleet' )
+			);
+		} else {
+			$term     = get_term_by( 'slug', $serie_slug, $this->taxonomy_name_serie );
+			$content .= sprintf(
+				'<h2>%s</h2>',
+				esc_html( $term->name )
+			);
+		}
+		$content .= '<ul>';
+		while ( $the_query->have_posts() ) {
+			$the_query->the_post();
+			$this->get_last_results_html_ids[] = get_the_ID();
+			$content                          .= sprintf(
+				'<li class="%s"><a href="%s">%s</a></li>',
+				esc_attr( implode( ' ', get_post_class() ) ),
+				get_permalink(),
+				get_the_title()
+			);
+		}
+		$content .= '</ul>';
+		$content .= '</div>';
+		wp_reset_postdata();
+		/**
+		 * Cache
+		 */
+		// $this->set_cache( $content, $cache_key );
+		return $content;
+	}
+
+	public function shortcode_years_links( $content, $atts ) {
+		global $wpdb;
+		$sql   = sprintf(
+			'select substring( date_add(from_unixtime(0), interval meta_value second), 1, 4 ) from %s where meta_key = %%s and meta_value is not null group by 1 order by 1 desc',
+			$wpdb->postmeta
+		);
+		$query = $wpdb->prepare(
+			$sql,
+			$this->options->get_option_name( 'result_date_start' )
+		);
+		$years = $wpdb->get_col( $query );
+		if ( empty( $years ) ) {
+			return $content;
+		}
+		$content .= sprintf(
+			'<div class="results results-years-list">',
+			esc_attr( $serie_slug )
+		);
+		$content .= sprintf(
+			'<h2>%s</h2>',
+			esc_html__( 'Regatta results by year', 'fleet' )
+		);
+		$content .= '<ul>';
+		foreach ( $years as $year ) {
+			$content .= sprintf(
+				'<li class="result-year-%1$d"><a href="%2$s/%1$d">%3$d</a></li>',
+				esc_attr( $year ),
+				esc_attr( _x( 'results', 'rewrite rule handler for results', 'fleet' ) ),
+				esc_html( $year )
+			);
+		}
+		$content .= '</ul>';
+		$content .= '</div>';
+		return $content;
+	}
+
 }
