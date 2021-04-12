@@ -708,13 +708,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 				$title = get_the_title();
 				$en    = '';
 				if ( $show_english_title ) {
-					$en = get_post_meta( get_the_ID(), $this->options->get_option_name( 'result_english' ), true );
-					if ( ! empty( $en ) ) {
-						$en = sprintf(
-							'<br /><small class="fleet-en-name">%s</small>',
-							$en
-						);
-					}
+					$en = $this->get_en_name( get_the_ID() );
 				}
 				$tbody .= sprintf(
 					'<td class="title"><a href="%s">%s</a>%s</td>',
@@ -1767,10 +1761,8 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		$show       = current_user_can( 'manage_options' );
 		$at_the_end = '';
 		foreach ( $regatta as $one ) {
-
 			$one_content = '';
-
-			$classes = array(
+			$classes     = array(
 				sprintf( 'fleet-place-%d', $one->place ),
 			);
 			if ( 4 > $one->place ) {
@@ -1801,7 +1793,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 				$one->boat_id = '&ndash;';
 			}
 			$boat_name = $one->boat_id;
-			if ( $this->show_single_boat_flag ) {
+			if ( $this->show_single_boat_lag ) {
 				$boat_name = sprintf( '%s %s', $one->country, abs( $one->boat_id ) );
 			}
 			if ( false === $boat ) {
@@ -1921,7 +1913,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		$extra = '';
 		$name  = $this->options->get_option_name( 'personal_birth_year' );
 		$year  = get_post_meta( $user_id, $name, true );
-		if ( empty( $year ) ) {
+		if ( apply_filters( 'iworks_fleet_show_sailor_edit_year_link', false ) && empty( $year ) ) {
 			$extra .= sprintf(
 				' <a href="%s" class="fleet-missing-data fleet-missing-data-year" title="%s">EY</a>',
 				get_edit_post_link( $user_id ),
@@ -2475,10 +2467,23 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		return $og;
 	}
 
-	public function filter_regatta_list_by_serie_slug( $content, $serie_slug, $number_of_items ) {
+	public function filter_regatta_list_by_serie_slug( $content, $serie_slug, $options ) {
+		$options = wp_parse_args(
+			$options,
+			array(
+				'posts_per_page' => 5,
+				'show_flags'     => false,
+				'show_english'   => false,
+				'show_more'      => false,
+				'group_by_year'  => true,
+			)
+		);
+		if ( $options['show_english'] ) {
+			$options['show_english'] = $this->options->get_option( 'result_show_english_title' );
+		}
 		$args = array(
 			'post_type'      => $this->post_type_name,
-			'posts_per_page' => $number_of_items,
+			'posts_per_page' => $options['posts_per_page'],
 			'tax_query'      => array(
 				array(
 					'taxonomy' => $this->taxonomy_name_serie,
@@ -2520,20 +2525,68 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 				esc_html( $term->name )
 			);
 		}
-		$content .= '<ul>';
+		$year_last = 0;
+		if ( $options['group_by_year'] ) {
+			remove_filter( 'the_title', array( $this, 'add_year_to_title' ), 10, 2 );
+		}
+		$open = false;
 		while ( $the_query->have_posts() ) {
 			$the_query->the_post();
+			if ( $options['group_by_year'] ) {
+				$year = $this->get_year( get_the_ID() );
+				if ( $year_last !== $year ) {
+					$year_last = $year;
+					if ( $open ) {
+						$content .= '</ul>';
+						$open     = false;
+					}
+					$content .= sprintf( '<h3>%d</h3>', $year );
+				}
+			}
+			if ( ! $open ) {
+				$open     = true;
+				$content .= '<ul>';
+			}
 			$this->get_last_results_html_ids[] = get_the_ID();
-			$content                          .= sprintf(
+			$title                             = get_the_title();
+			if ( $options['show_english'] ) {
+				$title .= $this->get_en_name( get_the_ID() );
+			}
+			$content .= sprintf(
 				'<li class="%s"><a href="%s">%s</a></li>',
 				esc_attr( implode( ' ', get_post_class() ) ),
 				get_permalink(),
-				get_the_title()
+				$title
 			);
 		}
-		$content .= '</ul>';
+		if ( $open ) {
+			$content .= '</ul>';
+		}
+		/**
+		 * more link
+		 */
+		if ( $options['show_more'] ) {
+			$term = get_term_by( 'slug', $serie_slug, $this->taxonomy_name_serie );
+			if ( is_a( $term, 'WP_Term' ) ) {
+				$content .= sprintf(
+					'<p class="more more-%s"><a href="%s">%s</a></p>',
+					esc_attr( $serie_slug ),
+					get_term_link( $serie_slug, $this->taxonomy_name_serie ),
+					sprintf(
+						_x( 'Show more: %s', 'all of taxonomy link title', 'fleet' ),
+						$term->name
+					)
+				);
+			};
+		}
 		$content .= '</div>';
 		wp_reset_postdata();
+		/**
+		 * year
+		 */
+		if ( $options['group_by_year'] ) {
+			add_filter( 'the_title', array( $this, 'add_year_to_title' ), 10, 2 );
+		}
 		/**
 		 * Cache
 		 */
@@ -2555,10 +2608,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		if ( empty( $years ) ) {
 			return $content;
 		}
-		$content .= sprintf(
-			'<div class="results results-years-list">',
-			esc_attr( $serie_slug )
-		);
+		$content .= '<div class="results results-years-list">';
 		$content .= sprintf(
 			'<h2>%s</h2>',
 			esc_html__( 'Regatta results by year', 'fleet' )
@@ -2577,4 +2627,14 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		return $content;
 	}
 
+	private function get_en_name( $post_ID ) {
+		$en = get_post_meta( $post_ID, $this->options->get_option_name( 'result_english' ), true );
+		if ( empty( $en ) ) {
+			return '';
+		}
+		return sprintf(
+			'<br /><small class="fleet-en-name">%s</small>',
+			$en
+		);
+	}
 }
