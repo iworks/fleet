@@ -1793,7 +1793,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 				$one->boat_id = '&ndash;';
 			}
 			$boat_name = $one->boat_id;
-			if ( $this->show_single_boat_lag ) {
+			if ( $this->show_single_boat_flag ) {
 				$boat_name = sprintf( '%s %s', $one->country, abs( $one->boat_id ) );
 			}
 			if ( false === $boat ) {
