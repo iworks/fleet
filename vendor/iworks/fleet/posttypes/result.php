@@ -166,6 +166,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		add_shortcode( 'fleet_regattas_list', array( $this, 'shortcode_list' ) );
 		add_shortcode( 'fleet_ranking', array( $this, 'shortcode_ranking' ) );
 		add_shortcode( 'fleet_regattas_list_years', array( $this, 'shortcode_years_links' ) );
+		add_shortcode( 'fleet_regattas_list_countries', array( $this, 'shortcode_countries_links' ) );
 		/**
 		 * sort next/previous links by title
 		 */
@@ -2636,5 +2637,34 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			'<br /><small class="fleet-en-name">%s</small>',
 			$en
 		);
+	}
+
+	public function shortcode_countries_links( $content, $atts ) {
+		$terms = get_terms(
+			array(
+				'taxonomy'   => $this->taxonomy_name_location,
+				'hide_empty' => false,
+			)
+		);
+		if ( empty( $terms ) ) {
+			return $content;
+		}
+		$content .= '<div class="results results-countries-list">';
+		$content .= sprintf(
+			'<h2>%s</h2>',
+			esc_html__( 'Regatta results by country', 'fleet' )
+		);
+		$content .= '<ul>';
+		foreach ( $terms as $term ) {
+			$content .= sprintf(
+				'<li class="result-country-%1$d"><a href="%2$s">%3$s</a></li>',
+				esc_attr( $term->slug ),
+				get_term_link( $term ),
+				esc_html( $term->name )
+			);
+		}
+		$content .= '</ul>';
+		$content .= '</div>';
+		return $content;
 	}
 }
