@@ -55,9 +55,10 @@ There are 3 ways to install this plugin:
 * Added child theme for TwentyTwenty Theme.
 * Added filter `iworks_fleet_result_serie_regatta_list'.
 * Added filter `iworks_fleet_result_skip_year_in_title` to avoid prefixing result title by year.
+* Added rel="alternate nofollow" to CVS links.
 * Added sailors nation and display flag.
-* Added shortcode `fleet_regattas_list_years` to produce results years list.
 * Added shortcode `fleet_regattas_list_countries` to produce results countries list.
+* Added shortcode `fleet_regattas_list_years` to produce results years list.
 * Added trophies list.
 * Improved compatibility with TwentyTwenty Theme.
 * Improved hull colors choose.

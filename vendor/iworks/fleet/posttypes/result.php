@@ -1023,7 +1023,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 				);
 				$url      = add_query_arg( $args );
 				$content .= sprintf(
-					'<div class="fleet-results-get"><a href="%s" class="fleet-results-csv">%s</a></div>',
+					'<div class="fleet-results-get"><a href="%s" rel="alternate nofollow" class="fleet-results-csv">%s</a></div>',
 					$url,
 					__( 'Download', 'fleet' )
 				);
