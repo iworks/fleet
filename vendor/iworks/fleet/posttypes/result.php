@@ -147,6 +147,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		 * content filters
 		 */
 		add_filter( 'iworks_fleet_result_sailor_regata_list', array( $this, 'regatta_list_by_sailor_id' ), 10, 2 );
+		add_filter( 'iworks_fleet_result_sailor_last_regatta', array( $this, 'filter_get_last_regatta_by_sailor_id' ), 10, 2 );
 		add_filter( 'iworks_fleet_result_boat_regatta_list', array( $this, 'regatta_list_by_boat_id' ), 10, 2 );
 		add_filter( 'iworks_fleet_result_serie_regatta_list', array( $this, 'filter_regatta_list_by_serie_slug' ), 10, 3 );
 		add_filter( 'the_title', array( $this, 'add_year_to_title' ), 10, 2 );
@@ -403,6 +404,10 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		} else {
 			return;
 		}
+		/**
+		 * do not add year to title
+		 */
+		remove_filter( 'the_title', array( $this, 'add_year_to_title' ), 10, 2 );
 		/**
 		 * init of variables
 		 */
@@ -925,6 +930,58 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		return $this->add_results_metadata( $wpdb->get_results( $sql ) );
 	}
 
+	/**
+	 * get last recorded regatta filter
+	 *
+	 * @since 2.0.0
+	 *
+	 * @param string $content
+	 * @param integer $sailor_id sailor id
+	 */
+	public function filter_get_last_regatta_by_sailor_id( $content, $sailor_id ) {
+		$sailor_id = intval( $sailor_id );
+		if ( 1 > $sailor_id ) {
+			return $content;
+		}
+		global $wpdb;
+		$table_name_regatta = $wpdb->prefix . 'fleet_regatta';
+		$sql                = $wpdb->prepare(
+			"select * from {$table_name_regatta} where helm_id = %d or crew_id = %d order by date, year desc limit 1",
+			$sailor_id,
+			$sailor_id
+		);
+		$data               = $this->add_results_metadata( $wpdb->get_results( $sql ) );
+		if ( empty( $data ) ) {
+			return $content;
+		}
+		$data = $data[0];
+		add_filter( 'iworks_fleet_result_skip_year_in_title', '__return_true' );
+		if ( intval( $data->helm_id ) === $sailor_id ) {
+			$content .= sprintf(
+				__( 'As a helmsman in %1$s in the %2$s on %3$s', 'fleet' ),
+				$this->get_year_link( $data->year ),
+				sprintf( '<a href="%s">%s</a>', get_permalink( $data->post_regata_id ), get_the_title( $data->post_regata_id ) ),
+				$data->boat_id
+			);
+		} elseif ( intval( $data->crew_id ) === $sailor_id ) {
+			$content .= sprintf(
+				__( 'As a crew in %1$s in the %2$s on %3$s', 'fleet' ),
+				$this->get_year_link( $data->year ),
+				sprintf( '<a href="%s">%s</a>', get_permalink( $data->post_regata_id ), get_the_title( $data->post_regata_id ) ),
+				$data->boat_id
+			);
+		} else {
+			$content .= sprintf(
+				__( 'In %1$s in the %2$s on %3$s', 'fleet' ),
+				$this->get_year_link( $data->year ),
+				sprintf( '<a href="%s">%s</a>', get_permalink( $data->post_regata_id ), get_the_title( $data->post_regata_id ) ),
+				$data->boat_id
+			);
+		}
+		remove_filter( 'iworks_fleet_result_skip_year_in_title', '__return_true' );
+		return $content;
+	}
+
 	private function add_results_metadata( $regattas ) {
 		if ( empty( $regattas ) ) {
 			return $regattas;
@@ -1134,7 +1191,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 				);
 				$url      = add_query_arg( $args );
 				$content .= sprintf(
-					'<div class="fleet-results-get"><a href="%s" class="fleet-results-csv">%s</a></div>',
+					'<div class="fleet-results-get"><a href="%s" rel="alternate nofollow" class="fleet-results-csv">%s</a></div>',
 					$url,
 					__( 'Download', 'fleet' )
 				);
@@ -1725,7 +1782,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			);
 			$url      = add_query_arg( $args );
 			$content .= sprintf(
-				'<div class="fleet-results-get"><a href="%s" class="fleet-results-csv">%s</a></div>',
+				'<div class="fleet-results-get"><a href="%s" rel="alternate nofollow" class="fleet-results-csv">%s</a></div>',
 				$url,
 				__( 'Download', 'fleet' )
 			);
@@ -2617,10 +2674,9 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		$content .= '<ul>';
 		foreach ( $years as $year ) {
 			$content .= sprintf(
-				'<li class="result-year-%1$d"><a href="%2$s/%1$d">%3$d</a></li>',
+				'<li class="result-year-%d">%s</li>',
 				esc_attr( $year ),
-				esc_attr( _x( 'results', 'rewrite rule handler for results', 'fleet' ) ),
-				esc_html( $year )
+				$this->get_year_link( $year )
 			);
 		}
 		$content .= '</ul>';
@@ -2657,7 +2713,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		$content .= '<ul>';
 		foreach ( $terms as $term ) {
 			$content .= sprintf(
-				'<li class="result-country-%1$d"><a href="%2$s">%3$s</a></li>',
+				'<li class="result-country-%1$s"><a href="%2$s">%3$s</a></li>',
 				esc_attr( $term->slug ),
 				get_term_link( $term ),
 				esc_html( $term->name )
@@ -2666,5 +2722,24 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		$content .= '</ul>';
 		$content .= '</div>';
 		return $content;
+	}
+
+	/**
+	 * get year link
+	 *
+	 * @since 2.0.0
+	 */
+	public function get_year_link( $year ) {
+		$y = intval( $year );
+		if ( 1 > $y ) {
+			return $year;
+		}
+		$year = $y;
+		return sprintf(
+			'<a href="/%2$s/%1$d">%3$d</a>',
+			esc_attr( $year ),
+			esc_attr( _x( 'results', 'rewrite rule handler for results', 'fleet' ) ),
+			esc_html( $year )
+		);
 	}
 }

@@ -94,6 +94,7 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		 */
 		add_filter( 'iworks_fleet_boat_get_flag', array( $this, 'get_flag_filter' ), 10, 2 );
 		add_filter( 'iworks_fleet_boat_get_hull', array( $this, 'get_hull_filter' ), 10, 2 );
+		add_filter( 'iworks_fleet_boat_get_last_owner', array( $this, 'filter_get_last_owner' ), 10, 2 );
 		/**
 		 * replace names to proper
 		 */
@@ -110,7 +111,7 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		/**
 		 * get owner boats
 		 */
-		add_filter( 'iworks_fleet_boat_get_by_owner_id', array( $this, 'get_content_table_by_owner_id' ), 10, 2 );
+		add_filter( 'iworks_fleet_boat_get_by_owner_id', array( $this, 'get_content_table_by_owner_id' ), 10, 3 );
 		/**
 		 * fields
 		 */
@@ -1550,7 +1551,20 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		}
 	}
 
-	public function get_content_table_by_owner_id( $content, $owner_id ) {
+	/**
+	 * get list of boats by post ID filter
+	 *
+	 * @since 1.2
+	 * @since 2.0 array $atts Settings
+	 */
+	public function get_content_table_by_owner_id( $content, $owner_id, $atts ) {
+		$settings  = wp_parse_args(
+			array(
+				'show_title' => true,
+				'separator'  => ', ',
+			),
+			$atts
+		);
 		$args      = array(
 			'post_type'      => $this->post_type_name,
 			'posts_per_page' => -1,
@@ -1570,11 +1584,15 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 			}
 			if ( ! empty( $list ) ) {
 				ksort( $list );
-				$content .= sprintf(
-					'<p>%s: %s</p>',
-					esc_html__( 'Boats list', 'fleet' ),
-					implode( ', ', $list )
-				);
+				if ( $attr['show_title'] ) {
+					$content .= sprintf(
+						'<p>%s: %s</p>',
+						esc_html__( 'Boats list', 'fleet' ),
+						implode( $attr['separator'], $list )
+					);
+				} else {
+					$content .= implode( $attr['separator'], $list );
+				}
 			}
 			/* Restore original Post Data */
 			wp_reset_postdata();
@@ -1605,6 +1623,51 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 			return $this->og_array_add( $og, 'boat' );
 		}
 		return $og;
+	}
+
+	private function filter_get_last_owner_helper( $one ) {
+		if ( ! isset( $one['users_ids'] ) ) {
+			return;
+		}
+		if ( ! is_array( $one['users_ids'] ) ) {
+			return;
+		}
+		global $iworks_fleet;
+		$t = array();
+		foreach ( $one['users_ids'] as $user_ID ) {
+			$name = $iworks_fleet->get_person_name( $user_ID );
+			if ( ! empty( $name ) ) {
+				$t[] = sprintf(
+					'<a href="%s">%s</a>',
+					get_permalink( $user_ID ),
+					$name
+				);
+			}
+		}
+		$t = array_filter( $t );
+		if ( empty( $t ) ) {
+			return;
+		}
+		return implode( _x( ' ', 'user list separator', 'fleet' ), $t );
+	}
+
+	public function filter_get_last_owner( $content, $post_ID ) {
+		$data = get_post_meta( $post_ID, $this->owners_field_name, true );
+		if ( is_array( $data ) ) {
+			foreach ( $data as $one ) {
+				if ( isset( $one['current'] ) ) {
+					$t = $this->filter_get_last_owner_helper( $one );
+					if ( ! empty( $t ) ) {
+						return $t;
+					}
+				}
+			}
+			$t = $this->filter_get_last_owner_helper( $data[ sizeof( $data ) - 1 ] );
+			if ( ! empty( $t ) ) {
+				return $t;
+			}
+		}
+		return $content;
 	}
 }
 

@@ -42,6 +42,7 @@ There are 3 ways to install this plugin:
 
 == Changelog ==
 
+* Added `$settings` param into `iworks_fleet_boat_get_by_owner_id` filter.
 * Added ability to add base fleet styles.
 * Added ability to add wide body class (compatibility with 2020 theme).
 * Added ability to choose country or countries for whole plugin.
@@ -64,6 +65,7 @@ There are 3 ways to install this plugin:
 * Improved hull colors choose.
 * Improved results importer.
 * Improved "Social Media" section.
+* Removed Endomondo integration.
 
 = 1.2.9 (2020-06-17) =
 * Added MNA Codes see: https://www.sailing.org/raceofficials/eventorganizers/mna_codes.php

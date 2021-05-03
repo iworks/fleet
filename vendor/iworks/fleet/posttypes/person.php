@@ -487,7 +487,7 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 		/**
 		 * regatta
 		 */
-		$content .= apply_filters( 'iworks_fleet_result_sailor_regata_list', '', $post_id );
+		$content .= apply_filters( 'iworks_fleet_result_sailor_regata_list', '', $post_id, array() );
 		/**
 		 * add boats
 		 */
@@ -529,14 +529,6 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 				}
 				wp_reset_query();
 			}
-		}
-		/**
-		 * Endomondo
-		 */
-		$name  = $this->options->get_option_name( 'social_endomondo' );
-		$value = get_post_meta( $post_id, $name, true );
-		if ( ! empty( $value ) ) {
-			$content .= sprintf( '<iframe src="https://www.endomondo.com/embed/user/summary?id=%d&sport=12&measure=0&zone=Gp0100_SAR&width=400&height=217" width="400" height="217" frameborder="0" scrolling="no" ></iframe>', $value );
 		}
 		return $content;
 	}
@@ -598,7 +590,7 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 		/**
 		 * boats
 		 */
-		return $content = apply_filters( 'iworks_fleet_boat_get_by_owner_id', $content, $post_id );
+		return $content = apply_filters( 'iworks_fleet_boat_get_by_owner_id', $content, $post_id, array() );
 	}
 
 	private function boats( $post_id ) {
