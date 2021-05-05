@@ -2,9 +2,10 @@
 Contributors: iworks
 Donate link: http://iworks.pl/donate/fleet.php
 Tags: fleet, result, boat, crew, team
-Requires at least: 3.9
-Tested up to: 5.4
+Requires at least: 5.0
+Tested up to: 5.7
 Stable tag: PLUGIN_VERSION
+Requires PHP: 7.2
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -42,6 +43,7 @@ There are 3 ways to install this plugin:
 
 == Changelog ==
 
+= 2.0.0 (2020-05-05) =
 * Added `$settings` param into `iworks_fleet_boat_get_by_owner_id` filter.
 * Added ability to add base fleet styles.
 * Added ability to add wide body class (compatibility with 2020 theme).
