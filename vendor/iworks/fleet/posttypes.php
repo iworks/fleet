@@ -43,8 +43,14 @@ class iworks_fleet_posttypes {
 	/**
 	 * Debug
 	 */
-
 	protected $debug = false;
+
+	/**
+	 * MNA country codes array
+	 *
+	 * @since 2.0.1
+	 */
+	private $mna_codes = array();
 
 	public function __construct() {
 		$this->options = iworks_fleet_get_options_object();
@@ -388,13 +394,25 @@ class iworks_fleet_posttypes {
 	}
 
 	/**
+	 * cache MNA codes
+	 *
+	 * @since 2.0.1
+	 */
+	private function get_mna_codes() {
+		if ( empty( $this->mna_codes ) ) {
+			$this->mna_codes = $this->options->get_group( 'mna_codes' );
+		}
+		return $this->mna_codes;
+	}
+
+	/**
 	 * Get nations list from config
 	 *
 	 * @since 1.3.0
 	 */
 	protected function get_nations() {
 		$data      = array();
-		$mna_codes = $this->options->get_group( 'mna_codes' );
+		$mna_codes = $this->get_mna_codes();
 		if ( ! empty( $mna_codes ) ) {
 			foreach ( $mna_codes as $code ) {
 				if ( empty( $code['code'] ) ) {
@@ -410,6 +428,29 @@ class iworks_fleet_posttypes {
 			),
 			$data
 		);
+	}
+
+	/**
+	 * get country code by name
+	 *
+	 * @since 2.0.1
+	 */
+	protected function get_country_code_by_country_name( $name ) {
+		$mna_codes = $this->get_mna_codes();
+		switch ( $name ) {
+			case 'UK':
+				$name = 'Great Britain';
+				break;
+		}
+		foreach ( $mna_codes as $one ) {
+			if ( isset( $one['nation'] ) && $one['nation'] === $name ) {
+				return $one['code'];
+			}
+			if ( isset( $one['en'] ) && $one['en'] === $name ) {
+				return $one['code'];
+			}
+		}
+		return new WP_Error( 'missing-mna-code', __( 'Missing MNA county code.', 'fleet' ) );
 	}
 
 	/**

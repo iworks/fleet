@@ -155,6 +155,9 @@ td.points {
 .flag.flag-esa {
   background-image: url(../images/flags/esa.svg?v=PLUGIN_VERSION);
 }
+.flag.flag-esp {
+  background-image: url(../images/flags/esp.svg?v=PLUGIN_VERSION);
+}
 .flag.flag-est {
   background-image: url(../images/flags/est.svg?v=PLUGIN_VERSION);
 }
@@ -239,6 +242,9 @@ td.points {
 .flag.flag-mya {
   background-image: url(../images/flags/mya.svg?v=PLUGIN_VERSION);
 }
+.flag.flag-ned {
+  background-image: url(../images/flags/ned.svg?v=PLUGIN_VERSION);
+}
 .flag.flag-nor {
   background-image: url(../images/flags/nor.svg?v=PLUGIN_VERSION);
 }
@@ -259,6 +265,9 @@ td.points {
 }
 .flag.flag-pol {
   background-image: url(../images/flags/pol.svg?v=PLUGIN_VERSION);
+}
+.flag.flag-por {
+  background-image: url(../images/flags/por.svg?v=PLUGIN_VERSION);
 }
 .flag.flag-rou {
   background-image: url(../images/flags/rou.svg?v=PLUGIN_VERSION);
@@ -425,4 +434,29 @@ td.points {
 }
 .iworks-fleet-trophies ul li.fleet-type-national.fleet-place-3 .trophy {
   background-image: url(../images/trophies/national-bronze.svg?v=PLUGIN_VERSION);
+}
+
+body.post-type-archive .results-countries-list ul {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+body.post-type-archive .results-countries-list ul li {
+  padding: 0;
+  margin: 5px;
+}
+body.post-type-archive .results-countries-list ul a {
+  display: block;
+  overflow: hidden;
+  text-indent: -999em;
+  width: 36px;
+  height: 24px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: 50%;
+}
+body.post-type-archive .results-countries-list ul a:hover {
+  background-color: transparent;
+  opacity: .7;
 }

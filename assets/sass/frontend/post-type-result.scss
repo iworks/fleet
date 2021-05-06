@@ -138,4 +138,34 @@
         }
     }
 }
+body {
+    &.post-type-archive {
+        .results-countries-list {
+            ul {
+                display: flex;
+                flex-wrap: wrap;
+                li {
+                    padding: 0;
+                    margin: 5px;
+                }
+                a {
+                    display: block;
+                    overflow: hidden;
+                    text-indent: -999em;
+                    width: 36px;
+                    height: 24px;
+                    background: {
+                        repeat: no-repeat;
+                        size: contain;
+                        position: 50%
+                    }
+                    &:hover {
+                        background-color: transparent;
+                        opacity: .7;
+                    }
+                }
+            }
+        }
+    }
+}
 

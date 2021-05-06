@@ -128,3 +128,28 @@
 .iworks-fleet-trophies ul li.fleet-type-national.fleet-place-3 .trophy {
   background-image: url(../images/trophies/national-bronze.svg?v=PLUGIN_VERSION);
 }
+
+body.post-type-archive .results-countries-list ul {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+body.post-type-archive .results-countries-list ul li {
+  padding: 0;
+  margin: 5px;
+}
+body.post-type-archive .results-countries-list ul a {
+  display: block;
+  overflow: hidden;
+  text-indent: -999em;
+  width: 36px;
+  height: 24px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: 50%;
+}
+body.post-type-archive .results-countries-list ul a:hover {
+  background-color: transparent;
+  opacity: .7;
+}

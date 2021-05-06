@@ -2695,7 +2695,14 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		);
 	}
 
-	public function shortcode_countries_links( $content, $atts ) {
+	public function shortcode_countries_links( $atts, $content = '' ) {
+		$attr  = wp_parse_args(
+			$atts,
+			array(
+				'title' => 1,
+				'flags' => 0,
+			)
+		);
 		$terms = get_terms(
 			array(
 				'taxonomy'   => $this->taxonomy_name_location,
@@ -2706,17 +2713,29 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			return $content;
 		}
 		$content .= '<div class="results results-countries-list">';
-		$content .= sprintf(
-			'<h2>%s</h2>',
-			esc_html__( 'Regatta results by country', 'fleet' )
-		);
-		$content .= '<ul>';
-		foreach ( $terms as $term ) {
+		if ( 0 < intval( $attr['title'] ) ) {
 			$content .= sprintf(
-				'<li class="result-country-%1$s"><a href="%2$s">%3$s</a></li>',
+				'<h2>%s</h2>',
+				esc_html__( 'Regatta results by country', 'fleet' )
+			);
+		}
+		$mna_codes = $this->options->get_group( 'mna_codes' );
+		$content  .= '<ul>';
+		foreach ( $terms as $term ) {
+			$classes = array();
+			if ( 0 < $attr['flags'] ) {
+				$classes[] = 'flag';
+				$mna_code  = $this->get_country_code_by_country_name( $term->name );
+				if ( ! is_wp_error( $mna_code ) && is_string( $mna_code ) && ! empty( $mna_code ) ) {
+					$classes[] = sprintf( 'flag-%s', strtolower( $mna_code ) );
+				}
+			}
+			$content .= sprintf(
+				'<li class="result-country-%1$s"><a href="%2$s" class="%4$s">%3$s</a></li>',
 				esc_attr( $term->slug ),
 				get_term_link( $term ),
-				esc_html( $term->name )
+				esc_html( $term->name ),
+				esc_attr( implode( ' ', $classes ) )
 			);
 		}
 		$content .= '</ul>';

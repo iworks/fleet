@@ -127,6 +127,9 @@ td.points {
 .flag.flag-esa {
   background-image: url(../images/flags/esa.svg?v=PLUGIN_VERSION);
 }
+.flag.flag-esp {
+  background-image: url(../images/flags/esp.svg?v=PLUGIN_VERSION);
+}
 .flag.flag-est {
   background-image: url(../images/flags/est.svg?v=PLUGIN_VERSION);
 }
@@ -211,6 +214,9 @@ td.points {
 .flag.flag-mya {
   background-image: url(../images/flags/mya.svg?v=PLUGIN_VERSION);
 }
+.flag.flag-ned {
+  background-image: url(../images/flags/ned.svg?v=PLUGIN_VERSION);
+}
 .flag.flag-nor {
   background-image: url(../images/flags/nor.svg?v=PLUGIN_VERSION);
 }
@@ -231,6 +237,9 @@ td.points {
 }
 .flag.flag-pol {
   background-image: url(../images/flags/pol.svg?v=PLUGIN_VERSION);
+}
+.flag.flag-por {
+  background-image: url(../images/flags/por.svg?v=PLUGIN_VERSION);
 }
 .flag.flag-rou {
   background-image: url(../images/flags/rou.svg?v=PLUGIN_VERSION);
