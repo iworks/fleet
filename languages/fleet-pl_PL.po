@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Plugins - Fleet - Stable (latest release)\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/fleet\n"
-"POT-Creation-Date: 2021-05-13 08:04:37+00:00\n"
+"POT-Creation-Date: 2021-05-13 08:07:45+00:00\n"
 "PO-Revision-Date: 2021-04-29 17:17+0200\n"
 "Last-Translator: Marcin Pietrzak <marcin@iworks.pl>\n"
 "Language-Team: \n"
@@ -24,7 +24,7 @@ msgstr "Konfiguracja"
 msgid "General"
 msgstr "Ustawienia główne"
 
-#: etc/options.php:22 includes/iworks/options/options.php:1613
+#: etc/options.php:22 includes/iworks/options/options.php:1631
 msgid "Country"
 msgstr "Kraj"
 
@@ -2980,55 +2980,55 @@ msgstr ""
 msgid "Delete image"
 msgstr ""
 
-#: includes/iworks/options/options.php:808
+#: includes/iworks/options/options.php:826
 msgid "Save Changes"
 msgstr ""
 
-#: includes/iworks/options/options.php:1614
+#: includes/iworks/options/options.php:1632
 msgid "City"
 msgstr "Miasto"
 
-#: includes/iworks/options/options.php:1615
+#: includes/iworks/options/options.php:1633
 msgid "Street"
 msgstr ""
 
-#: includes/iworks/options/options.php:1616
+#: includes/iworks/options/options.php:1634
 msgid "ZIP code"
 msgstr "Kod pocztowy"
 
-#: includes/iworks/options/options.php:1765
+#: includes/iworks/options/options.php:1783
 msgid "OFF"
 msgstr ""
 
-#: includes/iworks/options/options.php:1766
+#: includes/iworks/options/options.php:1784
 msgid "ON"
 msgstr ""
 
-#: includes/iworks/rate/rate.php:365
+#: includes/iworks/rate/rate.php:373
 msgid ""
-"Hey %s, you've been using %s for a while now, and we hope you're happy with "
-"it."
+"Hey %1$s, you've been using %2$s for a while now, and we hope you're happy "
+"with it."
 msgstr ""
 
-#: includes/iworks/rate/rate.php:365
+#: includes/iworks/rate/rate.php:373
 msgid ""
 "We've spent countless hours developing this free plugin for you, and we "
 "would really appreciate it if you dropped us a quick rating!"
 msgstr ""
 
-#: includes/iworks/rate/rate.php:380
+#: includes/iworks/rate/rate.php:388
 msgid "Thanks :)"
 msgstr ""
 
-#: includes/iworks/rate/rate.php:383
+#: includes/iworks/rate/rate.php:391
 msgid "Rate %s"
 msgstr ""
 
-#: includes/iworks/rate/rate.php:387
+#: includes/iworks/rate/rate.php:396
 msgid "Saving"
 msgstr ""
 
-#: includes/iworks/rate/rate.php:388
+#: includes/iworks/rate/rate.php:397
 msgid "No thanks"
 msgstr ""
 
