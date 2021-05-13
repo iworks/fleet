@@ -36,14 +36,14 @@ if ( ! defined( 'WPINC' ) ) {
  */
 define( 'IWORKS_FLEET_VERSION', 'PLUGIN_VERSION' );
 define( 'IWORKS_FLEET_PREFIX', 'iworks_fleet_' );
-$base   = dirname( __FILE__ );
-$vendor = $base . '/vendor';
+$base     = dirname( __FILE__ );
+$includes = $base . '/includes';
 
 /**
  * require: Iworksfleet Class
  */
 if ( ! class_exists( 'iworks_fleet' ) ) {
-	require_once $vendor . '/iworks/fleet.php';
+	require_once $includes . '/iworks/fleet.php';
 }
 /**
  * configuration
@@ -53,7 +53,7 @@ require_once $base . '/etc/options.php';
  * require: IworksOptions Class
  */
 if ( ! class_exists( 'iworks_options' ) ) {
-	require_once $vendor . '/iworks/options/options.php';
+	require_once $includes . '/iworks/options/options.php';
 }
 
 /**
@@ -112,7 +112,7 @@ register_deactivation_hook( __FILE__, 'iworks_fleet_deactivate' );
 /**
  * Ask for vote
  */
-include_once dirname( __FILE__ ) . '/vendor/iworks/rate/rate.php';
+include_once $includes . '//iworks/rate/rate.php';
 do_action(
 	'iworks-register-plugin',
 	plugin_basename( __FILE__ ),

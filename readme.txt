@@ -43,10 +43,13 @@ There are 3 ways to install this plugin:
 
 == Changelog ==
 
+= 2.0.2 (2020-xx-xx) =
+* Renamed directory `vendor` into `includes`.
+* Updated iWorks Options to 2.6.9
+
 = 2.0.1 (2020-05-06) =
 * Added missing flags: ESP, NED, POR.
 * Added params `title` and `flags` into `fleet_regattas_list_countries` shortcode.
-
 
 = 2.0.0 (2020-05-05) =
 * Added `$settings` param into `iworks_fleet_boat_get_by_owner_id` filter.
