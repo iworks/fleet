@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Fleet Manager Base PLUGIN_VERSION\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/fleet\n"
-"POT-Creation-Date: 2021-05-13 08:07:45+00:00\n"
+"POT-Creation-Date: 2021-05-16 09:12:05+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -53,7 +53,7 @@ msgstr ""
 #: etc/options.php:48 includes/iworks/fleet/posttypes/result.php:527
 #: includes/iworks/fleet/posttypes/result.php:1285
 #: includes/iworks/fleet/posttypes/result.php:1287
-#: includes/iworks/fleet/posttypes/result.php:2374
+#: includes/iworks/fleet/posttypes/result.php:2377
 msgid "Results"
 msgstr ""
 
@@ -1727,7 +1727,7 @@ msgstr ""
 #: includes/iworks/fleet/posttypes/boat.php:1208
 #: includes/iworks/fleet/posttypes/result.php:1475
 #: includes/iworks/fleet/posttypes/result.php:1490
-#: includes/iworks/fleet/posttypes/result.php:1715
+#: includes/iworks/fleet/posttypes/result.php:1718
 msgid "Location"
 msgstr ""
 
@@ -1806,8 +1806,8 @@ msgstr ""
 #: includes/iworks/fleet/posttypes/result.php:440
 #: includes/iworks/fleet/posttypes/result.php:467
 #: includes/iworks/fleet/posttypes/result.php:1091
-#: includes/iworks/fleet/posttypes/result.php:1794
-#: includes/iworks/fleet/posttypes/result.php:2371
+#: includes/iworks/fleet/posttypes/result.php:1797
+#: includes/iworks/fleet/posttypes/result.php:2374
 msgid "Boat"
 msgstr ""
 
@@ -2138,7 +2138,7 @@ msgstr ""
 #: includes/iworks/fleet/posttypes/result.php:441
 #: includes/iworks/fleet/posttypes/result.php:1092
 #: includes/iworks/fleet/posttypes/result.php:1202
-#: includes/iworks/fleet/posttypes/result.php:1795
+#: includes/iworks/fleet/posttypes/result.php:1798
 msgid "Helmsman"
 msgstr ""
 
@@ -2149,8 +2149,8 @@ msgstr ""
 #: includes/iworks/fleet/posttypes/result.php:469
 #: includes/iworks/fleet/posttypes/result.php:1093
 #: includes/iworks/fleet/posttypes/result.php:1203
-#: includes/iworks/fleet/posttypes/result.php:1796
-#: includes/iworks/fleet/posttypes/result.php:2373
+#: includes/iworks/fleet/posttypes/result.php:1799
+#: includes/iworks/fleet/posttypes/result.php:2376
 msgid "Crew"
 msgstr ""
 
@@ -2467,24 +2467,24 @@ msgstr ""
 
 #: includes/iworks/fleet/posttypes/result.php:443
 #: includes/iworks/fleet/posttypes/result.php:466
-#: includes/iworks/fleet/posttypes/result.php:1793
+#: includes/iworks/fleet/posttypes/result.php:1796
 msgid "Place"
 msgstr ""
 
 #: includes/iworks/fleet/posttypes/result.php:445
 #: includes/iworks/fleet/posttypes/result.php:1096
 #: includes/iworks/fleet/posttypes/result.php:1206
-#: includes/iworks/fleet/posttypes/result.php:2375
+#: includes/iworks/fleet/posttypes/result.php:2378
 msgid "Points"
 msgstr ""
 
 #: includes/iworks/fleet/posttypes/result.php:468
-#: includes/iworks/fleet/posttypes/result.php:2372
+#: includes/iworks/fleet/posttypes/result.php:2375
 msgid "Helm"
 msgstr ""
 
 #: includes/iworks/fleet/posttypes/result.php:474
-#: includes/iworks/fleet/posttypes/result.php:1815
+#: includes/iworks/fleet/posttypes/result.php:1818
 msgid "Sum"
 msgstr ""
 
@@ -2534,7 +2534,7 @@ msgstr ""
 
 #: includes/iworks/fleet/posttypes/result.php:1085
 #: includes/iworks/fleet/posttypes/result.php:1196
-#: includes/iworks/fleet/posttypes/result.php:1787
+#: includes/iworks/fleet/posttypes/result.php:1790
 msgid "Download"
 msgstr ""
 
@@ -2658,59 +2658,59 @@ msgid ""
 "any-fileds, netto points, place."
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:1757
+#: includes/iworks/fleet/posttypes/result.php:1760
 msgid "Show meta"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:1771
+#: includes/iworks/fleet/posttypes/result.php:1774
 msgid "There is no race data."
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:1978
+#: includes/iworks/fleet/posttypes/result.php:1981
 msgid "Edit Sailor - Missing Birth Year"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:2128
+#: includes/iworks/fleet/posttypes/result.php:2131
 msgid "Ranking"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:2141
+#: includes/iworks/fleet/posttypes/result.php:2144
 msgid "Please setup year attribute first!"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:2148
+#: includes/iworks/fleet/posttypes/result.php:2151
 msgid "Please setup serie attribute first!"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:2197
+#: includes/iworks/fleet/posttypes/result.php:2200
 msgid "Currently we do not have anny results!"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:2370
+#: includes/iworks/fleet/posttypes/result.php:2373
 msgid "#"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:2387
+#: includes/iworks/fleet/posttypes/result.php:2390
 msgid "brutto"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:2388
+#: includes/iworks/fleet/posttypes/result.php:2391
 msgid "netto"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:2513
+#: includes/iworks/fleet/posttypes/result.php:2516
 msgid "Year: %s"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:2577
+#: includes/iworks/fleet/posttypes/result.php:2580
 msgid "Last added"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:2672
+#: includes/iworks/fleet/posttypes/result.php:2675
 msgid "Regatta results by year"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:2719
+#: includes/iworks/fleet/posttypes/result.php:2722
 msgid "Regatta results by country"
 msgstr ""
 
@@ -3144,14 +3144,14 @@ msgctxt "slug for single result"
 msgid "result"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:2486
-#: includes/iworks/fleet/posttypes/result.php:2491
-#: includes/iworks/fleet/posttypes/result.php:2760
+#: includes/iworks/fleet/posttypes/result.php:2489
+#: includes/iworks/fleet/posttypes/result.php:2494
+#: includes/iworks/fleet/posttypes/result.php:2763
 msgctxt "rewrite rule handler for results"
 msgid "results"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:2634
+#: includes/iworks/fleet/posttypes/result.php:2637
 msgctxt "all of taxonomy link title"
 msgid "Show more: %s"
 msgstr ""
