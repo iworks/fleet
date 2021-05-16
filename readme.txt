@@ -43,9 +43,10 @@ There are 3 ways to install this plugin:
 
 == Changelog ==
 
-= 2.0.2 (2020-xx-xx) =
+= 2.0.2 (2020-04-16) =
+* Fixed race code status.
 * Renamed directory `vendor` into `includes`.
-* Updated iWorks Options to 2.6.9
+* Updated iWorks Options to 2.6.9.
 
 = 2.0.1 (2020-05-06) =
 * Added missing flags: ESP, NED, POR.

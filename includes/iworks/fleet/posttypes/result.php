@@ -1663,27 +1663,30 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 				$one          = preg_replace( '/\*/', '', $one );
 				$race['code'] = preg_replace( '/[^a-z]+/i', '', $one );
 				switch ( $race['code'] ) {
-					case 's';
-					case 'S';
-					case 'n';
-					case 'N';
+					case 's':
+					case 'S':
+					case 'n':
+					case 'N':
 						$race['code'] = 'DNS';
-					break;
-					case 'f';
-					case 'F';
+						break;
+					case 'f':
+					case 'F':
+					case 'NP':
 						$race['code'] = 'DNF';
-					break;
-					case 'q';
-					case 'Q';
-					case 'd';
-					case 'D';
+						break;
+					case 'q':
+					case 'Q':
+					case 'd':
+					case 'D':
+					case 'DQ':
 						$race['code'] = 'DSQ';
-					case 'r';
-					case 'R';
+					case 'r':
+					case 'R':
+					case 'AB':
 						$race['code'] = 'RET';
 					case 'Abandoned':
 						$race['code'] = '-';
-					break;
+						break;
 				}
 				$race['points'] = preg_replace( '/[^\d^\,^\.]+/', '', $one );
 				$wpdb->insert( $table_name_regatta_race, $race );
