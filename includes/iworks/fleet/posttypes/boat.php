@@ -1561,7 +1561,7 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		$settings  = wp_parse_args(
 			array(
 				'show_title' => true,
-				'separator'  => ', ',
+				'separator'  => 'ul-list',
 			),
 			$atts
 		);
@@ -1583,15 +1583,29 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 				);
 			}
 			if ( ! empty( $list ) ) {
+				$boat_list = '';
 				ksort( $list );
+				if ( 'ul-list' === $settings['separator'] ) {
+					$boat_list .= '<ul class="iworks-fleet-owner-boats-list">';
+					foreach ( $list as $boat => $boat_link ) {
+						$boat_list .= sprintf(
+							'<li class="iworks-fleet-boat iworks-fleet-boat-%d">%s</li>',
+							$boat,
+							$boat_link
+						);
+					}
+					$boat_list .= '</ul>';
+				} else {
+					$boat_list = implode( $settings['separator'], $list );
+				}
 				if ( $attr['show_title'] ) {
 					$content .= sprintf(
 						'<p>%s: %s</p>',
 						esc_html__( 'Boats list', 'fleet' ),
-						implode( $attr['separator'], $list )
+						$boat_list
 					);
 				} else {
-					$content .= implode( $attr['separator'], $list );
+					$content .= $boat_list;
 				}
 			}
 			/* Restore original Post Data */

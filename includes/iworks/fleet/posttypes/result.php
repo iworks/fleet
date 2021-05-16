@@ -1680,12 +1680,12 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 					case 'D':
 					case 'DQ':
 						$race['code'] = 'DSQ';
+						break;
 					case 'r':
 					case 'R':
 					case 'AB':
-						$race['code'] = 'RET';
 					case 'Abandoned':
-						$race['code'] = '-';
+						$race['code'] = 'RET';
 						break;
 				}
 				$race['points'] = preg_replace( '/[^\d^\,^\.]+/', '', $one );

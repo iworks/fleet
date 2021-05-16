@@ -49,6 +49,7 @@ There are 3 ways to install this plugin:
 * Fixed race code status.
 * Renamed directory `vendor` into `includes`.
 * Updated iWorks Options to 2.6.9.
+* Improved ovner boat list.
 
 = 2.0.1 (2021-05-06) =
 * Added missing flags: ESP, NED, POR.
