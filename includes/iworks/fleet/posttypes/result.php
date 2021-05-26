@@ -125,7 +125,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 				'columns'               => array(
 					'label'       => __( 'Custom columns name', 'fleet' ),
 					'type'        => 'textarea',
-					'description' => __( 'Add one column per line if you want to have custom race column header.', 'fleet' ),
+					'description' => __( 'Add one column per line if you want to have a custom race column header.', 'fleet' ),
 				),
 			),
 		);
