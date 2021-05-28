@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Plugins - Fleet - Stable (latest release)\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/fleet\n"
-"POT-Creation-Date: 2021-05-16 09:12:05+00:00\n"
+"POT-Creation-Date: 2021-05-28 17:02:05+00:00\n"
 "PO-Revision-Date: 2021-04-29 17:17+0200\n"
 "Last-Translator: Marcin Pietrzak <marcin@iworks.pl>\n"
 "Language-Team: \n"
@@ -45,7 +45,7 @@ msgstr ""
 #: etc/options.php:48 includes/iworks/fleet/posttypes/result.php:527
 #: includes/iworks/fleet/posttypes/result.php:1285
 #: includes/iworks/fleet/posttypes/result.php:1287
-#: includes/iworks/fleet/posttypes/result.php:2377
+#: includes/iworks/fleet/posttypes/result.php:2388
 msgid "Results"
 msgstr "Wyniki"
 
@@ -1825,7 +1825,7 @@ msgstr "5O5"
 #: includes/iworks/fleet/posttypes/result.php:467
 #: includes/iworks/fleet/posttypes/result.php:1091
 #: includes/iworks/fleet/posttypes/result.php:1797
-#: includes/iworks/fleet/posttypes/result.php:2374
+#: includes/iworks/fleet/posttypes/result.php:2385
 msgid "Boat"
 msgstr "Łódka"
 
@@ -2211,7 +2211,7 @@ msgstr "Sternik"
 #: includes/iworks/fleet/posttypes/result.php:1093
 #: includes/iworks/fleet/posttypes/result.php:1203
 #: includes/iworks/fleet/posttypes/result.php:1799
-#: includes/iworks/fleet/posttypes/result.php:2376
+#: includes/iworks/fleet/posttypes/result.php:2387
 msgid "Crew"
 msgstr "Załogant"
 
@@ -2307,7 +2307,7 @@ msgstr ""
 msgid "Boat Number"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/boat.php:1590
+#: includes/iworks/fleet/posttypes/boat.php:1604
 msgid "Boats list"
 msgstr "Lista łódek"
 
@@ -2518,7 +2518,8 @@ msgid "Custom columns name"
 msgstr ""
 
 #: includes/iworks/fleet/posttypes/result.php:128
-msgid "Add one column per line if you want to have custom race column header."
+msgid ""
+"Add one column per line if you want to have a custom race column header."
 msgstr ""
 
 #: includes/iworks/fleet/posttypes/result.php:288
@@ -2548,12 +2549,12 @@ msgstr "Miejsce"
 #: includes/iworks/fleet/posttypes/result.php:445
 #: includes/iworks/fleet/posttypes/result.php:1096
 #: includes/iworks/fleet/posttypes/result.php:1206
-#: includes/iworks/fleet/posttypes/result.php:2378
+#: includes/iworks/fleet/posttypes/result.php:2389
 msgid "Points"
 msgstr "Punkty"
 
 #: includes/iworks/fleet/posttypes/result.php:468
-#: includes/iworks/fleet/posttypes/result.php:2375
+#: includes/iworks/fleet/posttypes/result.php:2386
 msgid "Helm"
 msgstr "Sternik"
 
@@ -2760,52 +2761,52 @@ msgstr "Pokaż punkty"
 msgid "There is no race data."
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:1981
+#: includes/iworks/fleet/posttypes/result.php:1994
 msgid "Edit Sailor - Missing Birth Year"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:2131
+#: includes/iworks/fleet/posttypes/result.php:2144
 msgid "Ranking"
 msgstr "Ranking"
 
-#: includes/iworks/fleet/posttypes/result.php:2144
+#: includes/iworks/fleet/posttypes/result.php:2157
 msgid "Please setup year attribute first!"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:2151
+#: includes/iworks/fleet/posttypes/result.php:2164
 msgid "Please setup serie attribute first!"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:2200
+#: includes/iworks/fleet/posttypes/result.php:2213
 msgid "Currently we do not have anny results!"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:2373
+#: includes/iworks/fleet/posttypes/result.php:2384
 msgid "#"
 msgstr "nr"
 
-#: includes/iworks/fleet/posttypes/result.php:2390
+#: includes/iworks/fleet/posttypes/result.php:2401
 msgid "brutto"
 msgstr "brutto"
 
-#: includes/iworks/fleet/posttypes/result.php:2391
+#: includes/iworks/fleet/posttypes/result.php:2402
 msgid "netto"
 msgstr "netto"
 
-#: includes/iworks/fleet/posttypes/result.php:2516
+#: includes/iworks/fleet/posttypes/result.php:2527
 #, fuzzy
 msgid "Year: %s"
 msgstr "Rok"
 
-#: includes/iworks/fleet/posttypes/result.php:2580
+#: includes/iworks/fleet/posttypes/result.php:2595
 msgid "Last added"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:2675
+#: includes/iworks/fleet/posttypes/result.php:2707
 msgid "Regatta results by year"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:2722
+#: includes/iworks/fleet/posttypes/result.php:2754
 msgid "Regatta results by country"
 msgstr ""
 
@@ -3004,31 +3005,35 @@ msgstr ""
 msgid "ON"
 msgstr ""
 
-#: includes/iworks/rate/rate.php:373
+#: includes/iworks/rate/rate.php:162
+msgid "Plugin ID can not be empty."
+msgstr ""
+
+#: includes/iworks/rate/rate.php:355
 msgid ""
 "Hey %1$s, you've been using %2$s for a while now, and we hope you're happy "
 "with it."
 msgstr ""
 
-#: includes/iworks/rate/rate.php:373
+#: includes/iworks/rate/rate.php:355
 msgid ""
 "We've spent countless hours developing this free plugin for you, and we "
 "would really appreciate it if you dropped us a quick rating!"
 msgstr ""
 
-#: includes/iworks/rate/rate.php:388
+#: includes/iworks/rate/rate.php:369
 msgid "Thanks :)"
 msgstr ""
 
-#: includes/iworks/rate/rate.php:391
+#: includes/iworks/rate/rate.php:372
 msgid "Rate %s"
 msgstr ""
 
-#: includes/iworks/rate/rate.php:396
+#: includes/iworks/rate/rate.php:377
 msgid "Saving"
 msgstr ""
 
-#: includes/iworks/rate/rate.php:397
+#: includes/iworks/rate/rate.php:378
 msgid "No thanks"
 msgstr ""
 
@@ -3216,7 +3221,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: includes/iworks/fleet/posttypes/boat.php:1651
+#: includes/iworks/fleet/posttypes/boat.php:1665
 #, fuzzy
 msgctxt "user list separator"
 msgid " "
@@ -3272,15 +3277,15 @@ msgctxt "slug for single result"
 msgid "result"
 msgstr "wynik"
 
-#: includes/iworks/fleet/posttypes/result.php:2489
-#: includes/iworks/fleet/posttypes/result.php:2494
-#: includes/iworks/fleet/posttypes/result.php:2763
+#: includes/iworks/fleet/posttypes/result.php:2500
+#: includes/iworks/fleet/posttypes/result.php:2505
+#: includes/iworks/fleet/posttypes/result.php:2795
 #, fuzzy
 msgctxt "rewrite rule handler for results"
 msgid "results"
 msgstr "wyniki"
 
-#: includes/iworks/fleet/posttypes/result.php:2637
+#: includes/iworks/fleet/posttypes/result.php:2666
 #, fuzzy
 msgctxt "all of taxonomy link title"
 msgid "Show more: %s"
