@@ -1951,22 +1951,35 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		return date_i18n( $format, $value );
 	}
 
-	private function get_td( $name, $post_id ) {
+	/**
+	 * separate from get_td() to allow multple usage.
+	 */
+	private function get_meta_value( $name, $post_id ) {
 		if ( empty( $post_id ) ) {
 			$post_id = get_the_ID();
 		}
 		if ( empty( $post_id ) ) {
-			return '-';
+			return '&ndash;';
+		}
+		if ( empty( $post_id ) ) {
+			$post_id = get_the_ID();
+		}
+		if ( empty( $post_id ) ) {
+			return '&ndash;';
 		}
 		$meta_key = $this->options->get_option_name( 'result_' . $name );
 		$value    = get_post_meta( get_the_ID(), $meta_key, true );
 		if ( empty( $value ) ) {
-			$value = '-';
+			return '&ndash;';
 		}
+		return $value;
+	}
+
+	private function get_td( $name, $post_id ) {
 		return sprintf(
 			'<td class="%s">%s</td>',
 			esc_attr( preg_replace( '/_/', '-', $name ) ),
-			esc_html( $value )
+			esc_html( $this->get_meta_value( $name, $post_id ) )
 		);
 	}
 
@@ -2228,10 +2241,8 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			$query   = $wpdb->prepare( "SELECT * FROM {$table_name_regatta} where post_regata_id = %d order by place", $post_id );
 			$results = $wpdb->get_results( $query );
 			foreach ( $results as $one ) {
-
 				$x = array( $one->boat_id, $one->helm_id, $one->crew_id );
 				sort( $x );
-
 				$keys = array(
 					implode( $x, '-' ),
 					sprintf( 'b%dp%d', $one->boat_id, $one->helm_id ),
@@ -2537,6 +2548,8 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 				'show_english'   => false,
 				'show_more'      => false,
 				'group_by_year'  => true,
+				'output'         => 'html',
+				'order'          => 'DESC',
 			)
 		);
 		if ( $options['show_english'] ) {
@@ -2561,6 +2574,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			),
 			'orderby'        => 'meta_value_num',
 			'post__not_in'   => $this->get_last_results_html_ids,
+			'order'          => $options['order'],
 		);
 		if ( '::last' === $serie_slug ) {
 			unset( $args['meta_query'], $args['orderby'], $args['tax_query'] );
@@ -2569,6 +2583,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		if ( ! $the_query->have_posts() ) {
 			return $content;
 		}
+		$rows     = array();
 		$content .= sprintf(
 			'<div class="results results-serie-%s">',
 			esc_attr( $serie_slug )
@@ -2593,32 +2608,46 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		$open = false;
 		while ( $the_query->have_posts() ) {
 			$the_query->the_post();
-			if ( $options['group_by_year'] ) {
-				$year = $this->get_year( get_the_ID() );
-				if ( $year_last !== $year ) {
-					$year_last = $year;
-					if ( $open ) {
-						$content .= '</ul>';
-						$open     = false;
+			if ( 'raw' === $options['output'] ) {
+				$rows[] = array(
+					'ID'                    => get_the_ID(),
+					'year'                  => $this->get_year( get_the_ID() ),
+					'title'                 => get_the_title(),
+					'title_en'              => $this->get_en_name( get_the_ID() ),
+					'permalink'             => get_permalink(),
+					'location'              => get_the_terms( get_the_ID(), $this->taxonomy_name_location ),
+					'organizer'             => $this->get_meta_value( 'organizer', get_the_ID() ),
+					'number_of_races'       => intval( $this->get_meta_value( 'number_of_races', get_the_ID() ) ),
+					'number_of_competitors' => intval( $this->get_meta_value( 'number_of_competitors', get_the_ID() ) ),
+				);
+			} else {
+				if ( $options['group_by_year'] ) {
+					$year = $this->get_year( get_the_ID() );
+					if ( $year_last !== $year ) {
+						$year_last = $year;
+						if ( $open ) {
+							$content .= '</ul>';
+							$open     = false;
+						}
+						$content .= sprintf( '<h3>%d</h3>', $year );
 					}
-					$content .= sprintf( '<h3>%d</h3>', $year );
 				}
+				if ( ! $open ) {
+					$open     = true;
+					$content .= '<ul>';
+				}
+				$this->get_last_results_html_ids[] = get_the_ID();
+				$title                             = get_the_title();
+				if ( $options['show_english'] ) {
+					$title .= $this->get_en_name( get_the_ID() );
+				}
+				$content .= sprintf(
+					'<li class="%s"><a href="%s">%s</a></li>',
+					esc_attr( implode( ' ', get_post_class() ) ),
+					get_permalink(),
+					$title
+				);
 			}
-			if ( ! $open ) {
-				$open     = true;
-				$content .= '<ul>';
-			}
-			$this->get_last_results_html_ids[] = get_the_ID();
-			$title                             = get_the_title();
-			if ( $options['show_english'] ) {
-				$title .= $this->get_en_name( get_the_ID() );
-			}
-			$content .= sprintf(
-				'<li class="%s"><a href="%s">%s</a></li>',
-				esc_attr( implode( ' ', get_post_class() ) ),
-				get_permalink(),
-				$title
-			);
 		}
 		if ( $open ) {
 			$content .= '</ul>';
@@ -2652,6 +2681,9 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		 * Cache
 		 */
 		// $this->set_cache( $content, $cache_key );
+		if ( 'raw' === $options['output'] ) {
+			return $rows;
+		}
 		return $content;
 	}
 

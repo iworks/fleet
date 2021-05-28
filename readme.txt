@@ -45,6 +45,7 @@ There are 3 ways to install this plugin:
 
 = 2.0.3 (2021-xx-xx) =
 * Updated iWorks Rate to 1.0.3.
+* Improved filter `iworks_fleet_result_serie_regatta_list` by new config options: `output` - default html works like it was, and `raw` to return array of data instead of HTML string.
 
 = 2.0.2 (2021-05-16) =
 * Fixed race code status.
