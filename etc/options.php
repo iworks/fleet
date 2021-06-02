@@ -179,6 +179,14 @@ function iworks_fleet_options() {
 				'classes'           => array( 'switch-button' ),
 			),
 			array(
+				'name'              => 'person_show_sailor_id',
+				'type'              => 'checkbox',
+				'th'                => __( 'Show link to World Sailin with Sailor ID', 'fleet' ),
+				'default'           => 0,
+				'sanitize_callback' => 'absint',
+				'classes'           => array( 'switch-button' ),
+			),
+			array(
 				'name'              => 'person_show_download_link',
 				'type'              => 'checkbox',
 				'th'                => __( 'Allow download CSV', 'fleet' ),
@@ -533,7 +541,15 @@ function iworks_fleet_options() {
 		'#ffff00' => __( 'Yellow', 'fleet' ),
 		'#9acd32' => __( 'Yellow Green', 'fleet' ),
 	);
-
+	/**
+	 * turn off pages
+	 */
+	$taxonomies = get_option( 'iworks_fleet_boat_taxonomies' );
+	foreach ( array( 'hull', 'sail', 'mast' ) as $key ) {
+		if ( ! is_array( $taxonomies ) || empty( $taxonomies ) || ! isset( $taxonomies[ $key ] ) ) {
+			unset( $iworks_fleet_options['index']['pages'][ $key ] );
+		}
+	}
 	return $iworks_fleet_options;
 }
 
@@ -1384,7 +1400,7 @@ function iworks_fleet_get_contries() {
 			'en'       => 'Zimbabwe',
 			'code'     => 'ZIM',
 			'group'    => 'Q',
-			'code_old' => [ 'KR', 'ZB' ],
+			'code_old' => array( 'KR', 'ZB' ),
 		),
 		array(
 			'nation' => __( 'Great Britain', 'fleet' ),

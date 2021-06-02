@@ -307,9 +307,9 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		/**
 		 * taxonomies configuration
 		 */
-		$taxonomies   = $this->options->get_option( 'boat_taxonomies' );
-		$show_in_menu = add_query_arg( 'post_type', $iworks_fleet->get_post_type_name( 'person' ), 'edit.php' );
-		$labels       = array(
+		$taxonomies            = $this->options->get_option( 'boat_taxonomies' );
+		$show_in_menu          = add_query_arg( 'post_type', $iworks_fleet->get_post_type_name( 'person' ), 'edit.php' );
+		$labels                = array(
 			'name'                  => _x( 'Boats', 'Boat General Name', 'fleet' ),
 			'singular_name'         => _x( 'Boat', 'Boat Singular Name', 'fleet' ),
 			'menu_name'             => __( '5O5', 'fleet' ),
@@ -337,16 +337,27 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 			'items_list_navigation' => __( 'Items list navigation', 'fleet' ),
 			'filter_items_list'     => __( 'Filter items list', 'fleet' ),
 		);
-		$args         = array(
+		$fleet_boat_taxonomies = array(
+			$this->taxonomy_name_location,
+		);
+		foreach ( $taxonomies as $key => $value ) {
+			switch ( $key ) {
+				case 'hull':
+					$fleet_boat_taxonomies[] = $this->taxonomy_name_manufacturer;
+					break;
+				case 'sails':
+					$fleet_boat_taxonomies[] = $this->taxonomy_name_sails;
+					break;
+				case 'mast':
+					$fleet_boat_taxonomies[] = $this->taxonomy_name_mast;
+					break;
+			}
+		}
+		$args = array(
 			'label'                => __( 'Boat', 'fleet' ),
 			'labels'               => $labels,
 			'supports'             => array( 'title', 'editor', 'thumbnail', 'revision' ),
-			'taxonomies'           => array(
-				$this->taxonomy_name_manufacturer,
-				$this->taxonomy_name_sails,
-				$this->taxonomy_name_mast,
-				$this->taxonomy_name_location,
-			),
+			'taxonomies'           => $fleet_boat_taxonomies,
 			'hierarchical'         => false,
 			'public'               => true,
 			'show_ui'              => true,

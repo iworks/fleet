@@ -44,6 +44,8 @@ There are 3 ways to install this plugin:
 == Changelog ==
 
 = 2.0.4 (2021-xx-xx) =
+* Fixed taxonomies admin pages when are turned off.
+* Added World Sailing Sailor ID.
 
 = 2.0.3 (2021-05-28) =
 * Updated iWorks Rate to 1.0.3.

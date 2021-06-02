@@ -78,6 +78,9 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 		 */
 		$this->fields = array(
 			'personal' => array(
+				'sailor_id'  => array(
+					'label' => __( 'World Sailing Sailor ID', 'fleet' ),
+				),
 				'nation'     => array(
 					'label'   => __( 'Nation', 'fleet' ),
 					'type'    => 'select2',
