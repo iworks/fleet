@@ -340,7 +340,7 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		$fleet_boat_taxonomies = array(
 			$this->taxonomy_name_location,
 		);
-		foreach ( $taxonomies as $key => $value ) {
+		foreach ( $fleet_boat_taxonomies as $key => $value ) {
 			switch ( $key ) {
 				case 'hull':
 					$fleet_boat_taxonomies[] = $this->taxonomy_name_manufacturer;
