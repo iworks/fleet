@@ -33,6 +33,7 @@ class iworks_fleet extends iworks {
 	private $post_type_boat;
 	private $post_type_person;
 	private $post_type_result;
+	private $blocks;
 	protected $options;
 
 	public function __construct() {
@@ -52,6 +53,11 @@ class iworks_fleet extends iworks {
 			$value        = sprintf( 'post_type_%s', $post_type );
 			$this->$value = new $class();
 		}
+		/**
+		 * blocks
+		 */
+		include_once $this->base . '/iworks/fleet/class-iworks-fleet-blocks.php';
+		$this->blocks = new iworks_fleet_blocks( $this );
 		/**
 		 * admin init
 		 */

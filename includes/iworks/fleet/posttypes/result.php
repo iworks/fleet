@@ -61,6 +61,13 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 	 */
 	private $get_last_results_html_ids = array();
 
+	/**
+	 * suppress filter pre get posts limit to year
+	 *
+	 * @since 2.0.4
+	 */
+	private $suppress_filter_pre_get_posts_limit_to_year = false;
+
 	public function __construct() {
 		parent::__construct();
 		/**
@@ -83,7 +90,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		/**
 		 * download results
 		 */
-		add_action( 'template_redirect', array( $this, 'download' ) );
+		add_action( 'plugins_loaded', array( $this, 'download' ), PHP_INT_MAX );
 		/**
 		 * fields
 		 */
@@ -354,56 +361,88 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 	 * allow to download results
 	 */
 	public function download() {
-		global $wpdb;
-		$action = filter_input( INPUT_GET, 'fleet', FILTER_SANITIZE_STRING );
-		$nonce  = filter_input( INPUT_GET, '_wpnonce', FILTER_SANITIZE_STRING );
-		if ( ! wp_verify_nonce( $nonce, get_the_ID() ) ) {
+		global $wpdb, $iworks_fleet;
+		$action  = filter_input( INPUT_GET, 'fleet', FILTER_SANITIZE_STRING );
+		$nonce   = filter_input( INPUT_GET, '_wpnonce', FILTER_SANITIZE_STRING );
+		$type    = filter_input( INPUT_GET, 'type', FILTER_SANITIZE_STRING );
+		$post_id = intval( filter_input( INPUT_GET, 'id', FILTER_VALIDATE_INT ) );
+		/**
+		 * check input data
+		 */
+		if ( empty( $action ) || 'download' !== $action ) {
+			return;
+		}
+		if ( empty( $type ) ) {
+			return;
+		}
+		if ( empty( $post_id ) || 1 > $post_id ) {
+			return;
+		}
+		if ( ! wp_verify_nonce( $nonce, $post_id ) ) {
 			return;
 		}
 		/**
-		 * Start produce file
+		 * check post type & settings
 		 */
-		$open_file = false;
-		if ( 'download' === $action ) {
-			global $iworks_fleet;
-			if ( is_singular( $this->post_type_name ) ) {
-				if ( $this->options->get_option( 'result_show_download_link' ) ) {
-					$open_file = true;
-					$action    = 'result';
-				}
-			} elseif ( is_singular( $iworks_fleet->get_post_type_name( 'person' ) ) ) {
-				if ( $this->options->get_option( 'person_show_download_link' ) ) {
-					$open_file = true;
-					$action    = 'person';
-				}
-			} elseif ( is_singular( $iworks_fleet->get_post_type_name( 'boat' ) ) ) {
-				if ( $this->options->get_option( 'boat_show_download_link' ) ) {
-					$open_file = true;
-					$action    = 'boat';
-				}
-			}
+		switch ( get_post_type( $post_id ) ) {
+			case $this->post_type_name:
+				$open_file = $this->options->get_option( 'result_show_download_link' );
+				$action    = 'regatta';
+				break;
+			case $iworks_fleet->get_post_type_name( 'person' ):
+				$open_file = $this->options->get_option( 'person_show_download_link' );
+				$action    = 'person';
+				break;
+			case $iworks_fleet->get_post_type_name( 'boat' ):
+				$open_file = $this->options->get_option( 'boat_show_download_link' );
+				$action    = 'boat';
+				break;
+			default:
+				return;
 		}
 		/**
-		 * open file or return
+		 * Check there is anything to show
 		 */
-		if ( $open_file ) {
-			$file = sprintf(
-				'%s.csv',
-				sanitize_title(
-					sprintf(
-						'%s-%s-%s',
-						date( 'Y-m-d-h-i' ),
-						$action,
-						get_the_title()
-					)
+		$regattas = array();
+		switch ( get_post_type( $post_id ) ) {
+			case $iworks_fleet->get_post_type_name( 'person' ):
+				$regattas = $this->get_list_by_sailor_id( $post_id );
+				l( $regattas );
+				if ( empty( $regattas ) ) {
+					return;
+				}
+				break;
+			case $iworks_fleet->get_post_type_name( 'boat' ):
+				$regattas = $this->get_list_by_boat_id( $post_id );
+				if ( empty( $regattas ) ) {
+					return;
+				}
+				break;
+		}
+
+		/**
+		 * return if no file
+		 */
+		if ( false === $open_file ) {
+			return;
+		}
+		/**
+		 * file
+		 */
+		$file = sprintf(
+			'%s.csv',
+			sanitize_title(
+				sprintf(
+					'%s-%s-%s',
+					date( 'Y-m-d-h-i' ),
+					$action,
+					get_the_title( $post_id )
 				)
-			);
-			header( 'Content-Type: text/csv' );
-			header( 'Content-Disposition: attachment; filename=' . $file );
-			$out = fopen( 'php://output', 'w' );
-		} else {
-			return;
-		}
+			)
+		);
+		header( 'Content-Type: text/csv' );
+		header( 'Content-Disposition: attachment; filename=' . $file );
+		$out = fopen( 'php://output', 'w' );
 		/**
 		 * do not add year to title
 		 */
@@ -416,24 +455,12 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		/**
 		 * get data
 		 */
-		switch ( $action ) {
+		switch ( get_post_type( $post_id ) ) {
 			/**
 			 * Person or boat
 			 */
-			case 'person':
-			case 'boat':
-				$regattas = array();
-				switch ( $action ) {
-					case 'boat':
-						$regattas = $this->get_list_by_boat_id( get_the_ID() );
-						break;
-					case 'person':
-						$regattas = $this->get_list_by_sailor_id( get_the_ID() );
-						break;
-				}
-				if ( empty( $regattas ) ) {
-					return;
-				}
+			case $iworks_fleet->get_post_type_name( 'person' ):
+			case $iworks_fleet->get_post_type_name( 'boat' ):
 				$row[] = __( 'Date start', 'fleet' );
 				$row[] = __( 'Date end', 'fleet' );
 				$row[] = __( 'Name', 'fleet' );
@@ -461,13 +488,12 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			/**
 			 * CSV of a Event
 			 */
-			case 'result':
-				$post_id = get_the_ID();
-				$row[]   = __( 'Place', 'fleet' );
-				$row[]   = __( 'Boat', 'fleet' );
-				$row[]   = __( 'Helm', 'fleet' );
-				$row[]   = __( 'Crew', 'fleet' );
-				$number  = intval( get_post_meta( $post_id, 'iworks_fleet_result_number_of_races', true ) );
+			case $this->post_type_name:
+				$row[]  = __( 'Place', 'fleet' );
+				$row[]  = __( 'Boat', 'fleet' );
+				$row[]  = __( 'Helm', 'fleet' );
+				$row[]  = __( 'Crew', 'fleet' );
+				$number = intval( get_post_meta( $post_id, 'iworks_fleet_result_number_of_races', true ) );
 				for ( $i = 1; $i <= $number; $i++ ) {
 					$row[] = 'R' . $i;
 				}
@@ -492,6 +518,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 					$row[] = $one->points;
 					fputcsv( $out, $row );
 				}
+				break;
 			default:
 				return;
 		}
@@ -777,6 +804,9 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 	 * @since 1.3.0
 	 */
 	public function pre_get_posts_limit_to_year( $query ) {
+		if ( true === apply_filters( 'suppress_filter_pre_get_posts_limit_to_year', $this->suppress_filter_pre_get_posts_limit_to_year ) ) {
+			return;
+		}
 		if ( ! isset( $query->query['post_type'] ) ) {
 			return;
 		}
@@ -813,7 +843,6 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 				),
 			)
 		);
-
 	}
 
 	public function change_order( $query ) {
@@ -927,6 +956,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			$sailor_id,
 			$sailor_id
 		);
+		$this->suppress_filter_pre_get_posts_limit_to_year = true;
 		return $this->add_results_metadata( $wpdb->get_results( $sql ) );
 	}
 
@@ -999,9 +1029,10 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			$ref[ $regatta->post_regata_id ] = $i++;
 		}
 		$args  = array(
-			'post_type' => $this->post_type_name,
-			'post__in'  => $ids,
-			'fields'    => 'ids',
+			'post_type'        => $this->post_type_name,
+			'post__in'         => $ids,
+			'fields'           => 'ids',
+			'suppress_filters' => true,
 		);
 		$query = new WP_Query( $args );
 		/**
@@ -1074,6 +1105,8 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			 */
 			if ( $this->options->get_option( 'person_show_download_link' ) ) {
 				$args     = array(
+					'id'       => get_the_ID(),
+					'type'     => 'person',
 					'fleet'    => 'download',
 					'format'   => 'csv',
 					'_wpnonce' => wp_create_nonce( $post_id ),
@@ -1185,6 +1218,8 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			 */
 			if ( $this->options->get_option( 'boat_show_download_link' ) ) {
 				$args     = array(
+					'id'       => get_the_ID(),
+					'type'     => 'boat',
 					'fleet'    => 'download',
 					'format'   => 'csv',
 					'_wpnonce' => wp_create_nonce( $post_id ),
@@ -1779,6 +1814,8 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		 */
 		if ( $this->options->get_option( 'result_show_download_link' ) ) {
 			$args     = array(
+				'id'       => get_the_ID(),
+				'type'     => 'result',
 				'fleet'    => 'download',
 				'format'   => 'csv',
 				'_wpnonce' => wp_create_nonce( $post_id ),

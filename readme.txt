@@ -46,6 +46,8 @@ There are 3 ways to install this plugin:
 = 2.0.4 (2021-xx-xx) =
 * Fixed taxonomies admin pages when are turned off.
 * Added World Sailing Sailor ID.
+* Fixed export CSV files.
+* Added filter `suppress_filter_pre_get_posts_limit_to_year` to turn off year limitation.
 
 = 2.0.3 (2021-05-28) =
 * Updated iWorks Rate to 1.0.3.
