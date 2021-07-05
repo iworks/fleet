@@ -2727,14 +2727,14 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 	public function shortcode_years_links( $content, $atts ) {
 		global $wpdb;
 		$sql   = sprintf(
-			'select substring( date_add(from_unixtime(0), interval meta_value second), 1, 4 ) from %s where meta_key = %%s and meta_value is not null group by 1 order by 1 desc',
+			'select substring( date_add(from_unixtime(0), interval meta_value second), 1, 4 ) as year, count(*) as counter from %s where meta_key = %%s and meta_value is not null group by 1 order by 1 desc',
 			$wpdb->postmeta
 		);
 		$query = $wpdb->prepare(
 			$sql,
 			$this->options->get_option_name( 'result_date_start' )
 		);
-		$years = $wpdb->get_col( $query );
+		$years = $wpdb->get_results( $query );
 		if ( empty( $years ) ) {
 			return $content;
 		}
@@ -2744,11 +2744,20 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			esc_html__( 'Regatta results by year', 'fleet' )
 		);
 		$content .= '<ul>';
-		foreach ( $years as $year ) {
+		foreach ( $years as $one ) {
 			$content .= sprintf(
-				'<li class="result-year-%d">%s</li>',
-				esc_attr( $year ),
-				$this->get_year_link( $year )
+				'<li class="result-year-%d" title="%s">%s</li>',
+				esc_attr( $one->year ),
+				sprintf(
+					_n(
+						'Number of result: %d',
+						'Number of results: %d',
+						$one->counter,
+						'fleet'
+					),
+					$one->counter
+				),
+				$this->get_year_link( $one->year )
 			);
 		}
 		$content .= '</ul>';
@@ -2820,17 +2829,26 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 	 *
 	 * @since 2.0.0
 	 */
-	public function get_year_link( $year ) {
+	public function get_year_link( $year, $counter = 0 ) {
 		$y = intval( $year );
 		if ( 1 > $y ) {
 			return $year;
 		}
 		$year = $y;
+		if ( 0 < intval( $counter ) ) {
+			return sprintf(
+				'<a href="/%2$s/%1$d"><span>%3$d <small>(%4$d)</small></span></a>',
+				esc_attr( $year ),
+				esc_attr( _x( 'results', 'rewrite rule handler for results', 'fleet' ) ),
+				esc_html( $year ),
+				$counter
+			);
+		}
 		return sprintf(
 			'<a href="/%2$s/%1$d">%3$d</a>',
 			esc_attr( $year ),
 			esc_attr( _x( 'results', 'rewrite rule handler for results', 'fleet' ) ),
-			esc_html( $year )
+			esc_html( $year ),
 		);
 	}
 }
