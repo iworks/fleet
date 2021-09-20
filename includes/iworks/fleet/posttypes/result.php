@@ -2679,7 +2679,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 					$title .= $this->get_en_name( get_the_ID() );
 				}
 				$content .= sprintf(
-					'<li class="%s"><a href="%s">%s</a></li>',
+					'<li class="%s"><a href="%s"><span>%s</span></a></li>',
 					esc_attr( implode( ' ', get_post_class() ) ),
 					get_permalink(),
 					$title
