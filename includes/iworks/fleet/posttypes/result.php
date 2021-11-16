@@ -277,6 +277,9 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			if ( empty( $type ) ) {
 				continue;
 			}
+			if ( 1 > intval( $year[ $post_id ]['place'] ) ) {
+				continue;
+			}
 			$trophies[] = array(
 				'type'    => $type,
 				'place'   => $year[ $post_id ]['place'],
