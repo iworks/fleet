@@ -56,8 +56,8 @@ class iworks_fleet extends iworks {
 		/**
 		 * blocks
 		 */
-		include_once $this->base . '/iworks/fleet/class-iworks-fleet-blocks.php';
-		$this->blocks = new iworks_fleet_blocks( $this );
+		// include_once $this->base . '/iworks/fleet/class-iworks-fleet-blocks.php';
+		// $this->blocks = new iworks_fleet_blocks( $this );
 		/**
 		 * admin init
 		 */
@@ -83,9 +83,11 @@ class iworks_fleet extends iworks {
 		 */
 		add_filter( 'upload_mimes', array( $this, 'add_mime_types' ) );
 		/**
-		 * iWorks Rate integration
+		 * iWorks Rate integration - change logo for rate
+		 *
+		 * @since 2.0.6
 		 */
-		add_action( 'iworks_rate_css', array( $this, 'iworks_rate_css' ) );
+		add_filter( 'iworks_rate_notice_logo_style', array( $this, 'filter_plugin_logo' ), 10, 2 );
 	}
 
 	/**
@@ -380,18 +382,6 @@ class iworks_fleet extends iworks {
 	}
 
 	/**
-	 * Change logo for "rate" message.
-	 *
-	 * @since 2.6.6
-	 */
-	public function iworks_rate_css() {
-		$logo = plugin_dir_url( dirname( dirname( __FILE__ ) ) ) . 'assets/images/logo.svg';
-		echo '<style type="text/css">';
-		printf( '.iworks-notice-fleet .iworks-notice-logo{background-image:url(%s);}', esc_url( $logo ) );
-		echo '</style>';
-	}
-
-	/**
 	 * register styles
 	 *
 	 * @since 1.3.0
@@ -437,4 +427,21 @@ class iworks_fleet extends iworks {
 		return $theme_root_uri;
 	}
 
+	/**
+	 * Plugin logo for rate messages
+	 *
+	 * @since 2.0.6
+	 *
+	 * @param string $logo Logo, can be empty.
+	 * @param object $plugin Plugin basic data.
+	 */
+	public function filter_plugin_logo( $logo, $plugin ) {
+		if ( is_object( $plugin ) ) {
+			$plugin = (array) $plugin;
+		}
+		if ( 'fleet' === $plugin['slug'] ) {
+			return plugin_dir_url( dirname( dirname( __FILE__ ) ) ) . '/assets/images/logo.svg';
+		}
+		return $logo;
+	}
 }

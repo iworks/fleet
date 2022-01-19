@@ -43,7 +43,7 @@ $includes = $base . '/includes';
  * require: Iworksfleet Class
  */
 if ( ! class_exists( 'iworks_fleet' ) ) {
-	require_once $includes . '/iworks/fleet.php';
+	require_once $includes . '/iworks/class-iworks-fleet.php';
 }
 /**
  * configuration
@@ -76,6 +76,9 @@ function iworks_fleet_get_options_object() {
 	$iworks_fleet_options = new iworks_options();
 	$iworks_fleet_options->set_option_function_name( 'iworks_fleet_options' );
 	$iworks_fleet_options->set_option_prefix( IWORKS_FLEET_PREFIX );
+	if ( method_exists( $iworks_fleet_options, 'set_plugin' ) ) {
+		$iworks_fleet_options->set_plugin( basename( __FILE__ ) );
+	}
 	return $iworks_fleet_options;
 }
 

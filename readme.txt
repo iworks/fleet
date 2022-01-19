@@ -3,7 +3,7 @@ Contributors: iworks
 Donate link: http://iworks.pl/donate/fleet.php
 Tags: fleet, result, boat, crew, team
 Requires at least: 5.0
-Tested up to: 5.7
+Tested up to: 5.9
 Stable tag: PLUGIN_VERSION
 Requires PHP: 7.2
 License: GPLv3 or later
@@ -43,11 +43,16 @@ There are 3 ways to install this plugin:
 
 == Changelog ==
 
-= 2.0.4 (2021-xx-xx) =
-* Fixed taxonomies admin pages when are turned off.
+= 2.0.5 (2022-01-20) =
+* Updated iWorks Options to 2.7.3.
+* Updated iWorks Rate to 2.0.6.
+
+= 2.0.4 (2021-11-16) =
+* Added filter `suppress_filter_pre_get_posts_limit_to_year` to turn off year limitation.
 * Added World Sailing Sailor ID.
 * Fixed export CSV files.
-* Added filter `suppress_filter_pre_get_posts_limit_to_year` to turn off year limitation.
+* Fixed taxonomies admin pages when are turned off.
+* Fixed trophies if there was no place.
 
 = 2.0.3 (2021-05-28) =
 * Updated iWorks Rate to 1.0.3.
@@ -57,7 +62,7 @@ There are 3 ways to install this plugin:
 * Fixed race code status.
 * Renamed directory `vendor` into `includes`.
 * Updated iWorks Options to 2.6.9.
-* Improved ovner boat list.
+* Improved owner boat list.
 
 = 2.0.1 (2021-05-06) =
 * Added missing flags: ESP, NED, POR.
