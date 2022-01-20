@@ -44,7 +44,7 @@ There are 3 ways to install this plugin:
 == Changelog ==
 
 = 2.0.5 (2022-01-20) =
-* Updated iWorks Options to 2.7.3.
+* Updated iWorks Options to 2.8.0.
 * Updated iWorks Rate to 2.0.6.
 
 = 2.0.4 (2021-11-16) =
