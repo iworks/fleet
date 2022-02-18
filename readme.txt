@@ -1,15 +1,15 @@
-=== Fleet ===
+=== PLUGIN_TITLE ===
 Contributors: iworks
 Donate link: http://iworks.pl/donate/fleet.php
-Tags: fleet, result, boat, crew, team
-Requires at least: 5.0
+Tags: fleet, result, boat, crew, team, sport, sailing
+Requires at least: PLUGIN_REQUIRES_WORDPRESS
 Tested up to: 5.9
 Stable tag: PLUGIN_VERSION
 Requires PHP: 7.2
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-The sailboat manager makes it possible to manage boats, sailors, regattas and their results.
+PLUGIN_TAGLINE
 
 == Description ==
 
@@ -43,7 +43,7 @@ There are 3 ways to install this plugin:
 
 == Changelog ==
 
-= x.x.x (xxxx-xx-xx) =
+= 2.0.6 (2022-02-18) =
 * Updated iWorks Options to 2.8.1.
 * Updated iWorks Rate to 2.1.0.
 
