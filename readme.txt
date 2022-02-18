@@ -43,6 +43,10 @@ There are 3 ways to install this plugin:
 
 == Changelog ==
 
+= x.x.x (xxxx-xx-xx) =
+* Updated iWorks Options to 2.8.1.
+* Updated iWorks Rate to 2.1.0.
+
 = 2.0.5 (2022-01-20) =
 * Updated iWorks Options to 2.8.0.
 * Updated iWorks Rate to 2.0.6.
