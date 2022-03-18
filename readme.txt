@@ -1,6 +1,6 @@
 === PLUGIN_TITLE ===
 Contributors: iworks
-Donate link: http://iworks.pl/donate/fleet.php
+Donate link: https://ko-fi.com/iworks?utm_source=simple-revision-control&utm_medium=readme-donate
 Tags: fleet, result, boat, crew, team, sport, sailing
 Requires at least: PLUGIN_REQUIRES_WORDPRESS
 Tested up to: 5.9
@@ -42,6 +42,9 @@ There are 3 ways to install this plugin:
 == Screenshots ==
 
 == Changelog ==
+
+= 2.0.7 (2022-03-18) =
+* Added filter country + year.
 
 = 2.0.6 (2022-02-18) =
 * Updated iWorks Options to 2.8.1.

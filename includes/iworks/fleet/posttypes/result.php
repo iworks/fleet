@@ -1134,11 +1134,17 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			$content .= '</tr></thead><tbody>';
 			$format   = get_option( 'date_format' );
 			foreach ( $regattas as $regatta ) {
-				$dates   = sprintf(
-					'%s - %s',
-					date_i18n( $format, $regatta->date_start ),
-					date_i18n( $format, $regatta->date_end )
-				);
+				$dates = '';
+				if (
+					isset( $regatta->date_start )
+					&& isset( $regatta->date_end )
+				) {
+					$dates = sprintf(
+						'%s - %s',
+						date_i18n( $format, $regatta->date_start ),
+						date_i18n( $format, $regatta->date_end )
+					);
+				}
 				$classes = array(
 					sprintf( 'fleet-place-%d', $regatta->place ),
 				);
@@ -1895,7 +1901,11 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			}
 			$boat_name = $one->boat_id;
 			if ( $this->show_single_boat_flag ) {
-				$boat_name = sprintf( '%s %s', $one->country, abs( $one->boat_id ) );
+				if ( '&ndash;' === $one->boat_id ) {
+					$boat_name = sprintf( '%s', $one->country );
+				} else {
+					$boat_name = sprintf( '%s %s', $one->country, abs( $one->boat_id ) );
+				}
 			}
 			if ( false === $boat ) {
 				$one_content .= esc_html( $boat_name );
@@ -2546,6 +2556,11 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			sprintf( 'index.php?post_type=%s&year=$matches[1]', $this->post_type_name ),
 			'top'
 		);
+		add_rewrite_rule(
+			'results/([0-9]{4})/([^/]+)/?$',
+			'index.php?post_type=iworks_fleet_result&year=$matches[1]&iworks_fleet_location=$matches[2]',
+			'top'
+		);
 	}
 
 	/**
@@ -2564,7 +2579,24 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		if ( empty( $year ) ) {
 			return $title;
 		}
-		return sprintf( __( 'Year: %s', 'fleet' ), sprintf( '<span>%d</span>', $year ) );
+		$title   = sprintf(
+			__( 'Year: %s', 'fleet' ),
+			sprintf( '<span>%d</span>', $year )
+		);
+		$country = get_query_var( 'iworks_fleet_location' );
+		if ( empty( $country ) ) {
+			return $title;
+		}
+		$term = get_term_by( 'slug', $country, 'iworks_fleet_location' );
+		if ( is_a( $term, 'WP_Term' ) ) {
+			return sprintf(
+				'%s: %s',
+				$term->name,
+				sprintf( '<span>%d</span>', $year )
+			);
+		}
+		return $title;
+
 	}
 
 	/**
@@ -2780,19 +2812,25 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 	}
 
 	public function shortcode_countries_links( $atts, $content = '' ) {
-		$attr  = wp_parse_args(
+		$attr = wp_parse_args(
 			$atts,
 			array(
 				'title' => 1,
 				'flags' => 0,
+				'year'  => 0,
 			)
 		);
-		$terms = get_terms(
-			array(
-				'taxonomy'   => $this->taxonomy_name_location,
-				'hide_empty' => false,
-			)
+		$args = array(
+			'taxonomy'   => $this->taxonomy_name_location,
+			'hide_empty' => false,
 		);
+		if ( 0 < intval( $attr['year'] ) ) {
+			$object_ids = $this->get_regatta_by_year( $attr['year'] );
+			if ( ! empty( $object_ids ) ) {
+				$args['object_ids'] = $object_ids;
+			}
+		}
+		$terms = get_terms( $args );
 		if ( empty( $terms ) ) {
 			return $content;
 		}
@@ -2814,10 +2852,18 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 					$classes[] = sprintf( 'flag-%s', strtolower( $mna_code ) );
 				}
 			}
+			$link = get_term_link( $term );
+			if ( 0 < intval( $attr['year'] ) ) {
+				$link = sprintf(
+					'/results/%d/%s',
+					$attr['year'],
+					$term->slug
+				);
+			}
 			$content .= sprintf(
 				'<li class="result-country-%1$s"><a href="%2$s" class="%4$s">%3$s</a></li>',
 				esc_attr( $term->slug ),
-				get_term_link( $term ),
+				$link,
 				esc_html( $term->name ),
 				esc_attr( implode( ' ', $classes ) )
 			);
@@ -2853,5 +2899,15 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			esc_attr( _x( 'results', 'rewrite rule handler for results', 'fleet' ) ),
 			esc_html( $year ),
 		);
+	}
+
+	private function get_regatta_by_year( $year ) {
+		global $wpdb;
+		$table_name_regatta = $wpdb->prefix . 'fleet_regatta';
+		$query              = $wpdb->prepare(
+			"SELECT distinct post_regata_id FROM {$table_name_regatta} where year = %d",
+			$year
+		);
+		return $wpdb->get_col( $query );
 	}
 }

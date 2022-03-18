@@ -1609,7 +1609,7 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 				} else {
 					$boat_list = implode( $settings['separator'], $list );
 				}
-				if ( $attr['show_title'] ) {
+				if ( isset( $attr['show_title'] ) && $attr['show_title'] ) {
 					$content .= sprintf(
 						'<p>%s: %s</p>',
 						esc_html__( 'Boats list', 'fleet' ),
