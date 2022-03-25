@@ -185,7 +185,6 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 			'publicly_queryable'   => true,
 			'capability_type'      => 'page',
 			'menu_icon'            => 'dashicons-sos',
-			'menu_icon'            => plugins_url( '/assets/images/persons.svg', $this->base ),
 			'register_meta_box_cb' => array( $this, 'register_meta_boxes' ),
 			'rewrite'              => array(
 				'slug' => _x( 'fleet-person', 'slug for single person', 'fleet' ),

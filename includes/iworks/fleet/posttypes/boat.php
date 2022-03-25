@@ -369,7 +369,6 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 			'exclude_from_search'  => false,
 			'publicly_queryable'   => true,
 			'capability_type'      => 'page',
-			'menu_icon'            => plugins_url( '/assets/images/boat.svg', $this->base ),
 			'register_meta_box_cb' => array( $this, 'register_meta_boxes' ),
 			'rewrite'              => array(
 				'slug' => _x( 'fleet-boat', 'slug for single boat', 'fleet' ),
