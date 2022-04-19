@@ -534,5 +534,44 @@ class iworks_fleet_posttypes {
 		}
 		return $og;
 	}
+
+	public function save_google_map_data( $term_id, $tt_id ) {
+		$location   = $this->get_location_array( array(), $term_id );
+		$meta_value = $this->google_get_one( implode( ', ', $location ) );
+		delete_term_meta( $term_id, 'google' );
+		add_term_meta( $term_id, 'google', $meta_value, true );
+	}
+
+	private function get_location_array( $location, $term_id ) {
+		$term       = get_term( $term_id, $this->taxonomy_name_location );
+		$location[] = $term->name;
+		if ( 0 != $term->parent ) {
+			return $this->get_location_array( $location, $term->parent );
+		}
+		return $location;
+	}
+
+	private function google_get_one( $url, $encoded = false ) {
+		$data = array();
+		if ( ! $encoded ) {
+			$url = urlencode( $url );
+		}
+		$args                 = array(
+			'address' => $url,
+			'sensor'  => 'false',
+		);
+		$google_maps_data_url = add_query_arg( $args, 'http://maps.google.com/maps/api/geocode/json' );
+		$response             = wp_remote_get( $google_maps_data_url );
+		if ( is_array( $response ) ) {
+			$data = json_decode( $response['body'] );
+			if ( 'OK' == $data->status && count( $data->results ) ) {
+				$data = $data->results[0];
+				$data = json_decode( json_encode( $data ), true );
+			}
+		}
+		return $data;
+	}
+
+
 }
 
