@@ -1463,8 +1463,8 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		if ( ! isset( $_POST[ $this->owners_field_name ] ) ) {
 			return;
 		}
-		$first   = filter_input( INPUT_POST, $this->owners_field_name . '_first', FILTER_SANITIZE_STRING );
-		$current = filter_input( INPUT_POST, $this->owners_field_name . '_current', FILTER_SANITIZE_STRING );
+		$first   = filter_input( INPUT_POST, $this->owners_field_name . '_first', FILTER_DEFAULT );
+		$current = filter_input( INPUT_POST, $this->owners_field_name . '_current', FILTER_DEFAULT );
 		$owners  = array();
 		delete_post_meta( $post_id, $this->owners_field_name );
 		delete_post_meta( $post_id, $this->owners_index_field_name );
@@ -1481,7 +1481,7 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 					}
 				}
 			} else {
-				$organization = filter_var( $value['organization'], FILTER_SANITIZE_STRING );
+				$organization = filter_var( $value['organization'], FILTER_DEFAULT );
 			}
 			$owner = wp_parse_args(
 				array(

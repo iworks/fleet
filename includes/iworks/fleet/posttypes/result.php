@@ -365,9 +365,9 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 	 */
 	public function download() {
 		global $wpdb, $iworks_fleet;
-		$action  = filter_input( INPUT_GET, 'fleet', FILTER_SANITIZE_STRING );
-		$nonce   = filter_input( INPUT_GET, '_wpnonce', FILTER_SANITIZE_STRING );
-		$type    = filter_input( INPUT_GET, 'type', FILTER_SANITIZE_STRING );
+		$action  = filter_input( INPUT_GET, 'fleet', FILTER_DEFAULT );
+		$nonce   = filter_input( INPUT_GET, '_wpnonce', FILTER_DEFAULT );
+		$type    = filter_input( INPUT_GET, 'type', FILTER_DEFAULT );
 		$post_id = intval( filter_input( INPUT_GET, 'id', FILTER_VALIDATE_INT ) );
 		/**
 		 * check input data
