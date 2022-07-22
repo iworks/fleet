@@ -43,6 +43,10 @@ There are 3 ways to install this plugin:
 
 == Changelog ==
 
+= 2.0.9 (2022-07-22) =
+* Changed series names to avoid translations issues.
+* Updated iWorks Options to 2.8.3.
+
 = 2.0.8 (2022-03-23) =
 * Added icons for custom posts types to allow show it in [PWA — easy way to Progressive Web App](https://wordpress.org/plugins/iworks-pwa/) plugin as PWA Shortcodes.
 

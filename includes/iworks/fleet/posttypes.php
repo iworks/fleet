@@ -65,9 +65,9 @@ class iworks_fleet_posttypes {
 		 * Trophies names
 		 */
 		$this->trophies_names = array(
-			'world'       => __( 'World', 'fleet' ),
-			'continental' => __( 'Continental', 'fleet' ),
-			'national'    => __( 'National', 'fleet' ),
+			'world'       => __( 'World Champ', 'fleet' ),
+			'continental' => __( 'Continental Championship', 'fleet' ),
+			'national'    => __( 'National Championship', 'fleet' ),
 		);
 		/**
 		 * OpenGraph
