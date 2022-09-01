@@ -41,7 +41,7 @@ module.exports = function( grunt ) {
         },
 
         plugin_dir: '',
-        plugin_file: 'og.php',
+        plugin_file: 'fleet.php',
 
         // Regex patterns to exclude from transation.
         translation: {
@@ -54,7 +54,7 @@ module.exports = function( grunt ) {
                 'tests/.*',		// Unit testing.
             ],
             pot_dir: 'languages/', // With trailing slash.
-            textdomain: 'og',
+            textdomain: 'fleet',
         }
     };
 
