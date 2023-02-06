@@ -43,6 +43,10 @@ There are 3 ways to install this plugin:
 
 == Changelog ==
 
+= 2.1.1 (2023-02-06) =
+
+* The special result row class has been added.
+
 = 2.1.0 (2022-09-01) =
 * Updated iWorks Rate to 2.1.1.
 * Changed some strings to improve translations.

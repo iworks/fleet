@@ -1146,6 +1146,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 					);
 				}
 				$classes = array(
+					'fleet-place-row',
 					sprintf( 'fleet-place-%d', $regatta->place ),
 				);
 				if ( 4 > $regatta->place ) {
@@ -1252,6 +1253,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			$content .= '</tr></thead><tbody>';
 			foreach ( $regattas as $regatta ) {
 				$classes = array(
+					'fleet-place-row',
 					sprintf( 'fleet-place-%d', $regatta->place ),
 				);
 				if ( 4 > $regatta->place ) {
@@ -1870,6 +1872,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		foreach ( $regatta as $one ) {
 			$one_content = '';
 			$classes     = array(
+				'fleet-place-row',
 				sprintf( 'fleet-place-%d', $one->place ),
 			);
 			if ( 4 > $one->place ) {
