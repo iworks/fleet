@@ -43,6 +43,11 @@ There are 3 ways to install this plugin:
 
 == Changelog ==
 
+= 2.1.2 (2023-06-05) =
+
+* The added date will be saved from now on.
+* Added the ability to show a graph with sailors' results.
+
 = 2.1.1 (2023-02-06) =
 
 * The special result row class has been added.

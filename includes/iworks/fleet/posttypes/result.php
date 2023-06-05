@@ -92,6 +92,10 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		 */
 		add_action( 'plugins_loaded', array( $this, 'download' ), PHP_INT_MAX );
 		/**
+		 * insert post
+		 */
+		add_action( 'wp_insert_post', array( $this, 'save_added_date' ), 10, 3 );
+		/**
 		 * fields
 		 */
 		$this->fields = array(
@@ -159,6 +163,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		add_filter( 'iworks_fleet_result_serie_regatta_list', array( $this, 'filter_regatta_list_by_serie_slug' ), 10, 3 );
 		add_filter( 'the_title', array( $this, 'add_year_to_title' ), 10, 2 );
 		add_filter( 'iworks_fleet_result_sailor_trophies', array( $this, 'get_trophies_by_sailor_id' ), 10, 2 );
+		add_filter( 'iworks_fleet_result_sailor_places', array( $this, 'get_places_by_sailor_id' ), 10, 2 );
 		/**
 		 * save custom slug
 		 */
@@ -2912,5 +2917,82 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			$year
 		);
 		return $wpdb->get_col( $query );
+	}
+
+	/**
+	 * save added date
+	 *
+	 * @since 2.1.2
+	 */
+	public function save_added_date( $post_id, $post, $update ) {
+		if ( $this->post_type_name !== get_post_type( $post_id ) ) {
+			return;
+		}
+		$name  = $this->options->get_option_name( 'result_date_added' );
+		$value = get_post_meta( $post_id, $name, true );
+		if ( ! empty( $value ) ) {
+			return;
+		}
+		$result = add_post_meta( $post_id, $name, time(), true );
+		if ( $result ) {
+			return;
+		}
+		update_post_meta( $post_id, $name, time() );
+	}
+
+	/**
+	 * build places chart
+	 *
+	 * @since 2.1.2
+	 */
+	public function get_places_by_sailor_id( $content, $sailor_id ) {
+		global $wpdb;
+		$cache_key = $this->options->get_option_name( 'places_' . $sailor_id );
+		$cache     = $this->get_cache( $cache_key );
+		if ( ! empty( $cache ) ) {
+			$content .= $cache;
+			return $content;
+		}
+		$table_name_regatta = $wpdb->prefix . 'fleet_regatta';
+		$query              = $wpdb->prepare(
+			"select place from {$table_name_regatta} where helm_id = %d or crew_id = %d order by date, year",
+			$sailor_id,
+			$sailor_id
+		);
+		$places             = $wpdb->get_col( $query );
+		if ( empty( $places ) ) {
+			return $content;
+		}
+		$width  = 500;
+		$step   = $width / ( count( $places ) - 1 );
+		$height = 100;
+		$max    = max( $places );
+		$cache  = '<section class="iworks-fleet-person-places">';
+		$cache .= sprintf( '<h3 class="iworks-fleet-person-places-title">%s</h3>', esc_html__( 'Places', 'fleet' ) );
+		$cache .= sprintf(
+			'<svg viewBox="0 0 %d %d" class="iworks-fleet-person-places-chart">',
+			$width,
+			$height
+		);
+		$stroke = 1;
+		$cache .= sprintf(
+			'<polyline fill="none" stroke="#0074d9" stroke-width="%d" points="',
+			$stroke
+		);
+		$i      = 0;
+		foreach ( $places as $one ) {
+			$y      = $stroke + $one / $max * ( $height - 2 * $stroke );
+			$cache .= sprintf(
+				'%d,%d%s',
+				$i++ * $step,
+				$y,
+				PHP_EOL
+			);
+		}
+		$cache .= '"/>';
+		$cache .= '</svg>';
+		$cache .= '</section>';
+		set_transient( $cache_key, $cache, DAY_IN_SECONDS );
+		return $content . $cache;
 	}
 }

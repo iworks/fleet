@@ -130,7 +130,7 @@ function iworks_fleet_options() {
 			array(
 				'name'              => 'person_show_boats_table',
 				'type'              => 'checkbox',
-				'th'                => __( 'Show boats table', 'fleet' ),
+				'th'                => __( 'Show Boats Table', 'fleet' ),
 				'default'           => 0,
 				'sanitize_callback' => 'absint',
 				'classes'           => array( 'switch-button' ),
@@ -138,7 +138,15 @@ function iworks_fleet_options() {
 			array(
 				'name'              => 'person_show_boats_owned_table',
 				'type'              => 'checkbox',
-				'th'                => __( 'Show boat owned on person details page', 'fleet' ),
+				'th'                => __( 'Show Boat Owned', 'fleet' ),
+				'default'           => 0,
+				'sanitize_callback' => 'absint',
+				'classes'           => array( 'switch-button' ),
+			),
+			array(
+				'name'              => 'person_show_places_chart',
+				'type'              => 'checkbox',
+				'th'                => __( 'Show Places Chart', 'fleet' ),
 				'default'           => 0,
 				'sanitize_callback' => 'absint',
 				'classes'           => array( 'switch-button' ),

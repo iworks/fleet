@@ -533,6 +533,14 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 				wp_reset_query();
 			}
 		}
+		/**
+		 * places stats
+		 *
+		 * @since 2.1.2
+		 */
+		if ( $this->options->get_option( 'person_show_places_chart' ) ) {
+			$content = apply_filters( 'iworks_fleet_result_sailor_places', $content, $post_id );
+		}
 		return $content;
 	}
 
