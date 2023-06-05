@@ -2968,7 +2968,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		$height = 100;
 		$max    = max( $places );
 		$cache  = '<section class="iworks-fleet-person-places">';
-		$cache .= sprintf( '<h3 class="iworks-fleet-person-places-title">%s</h3>', esc_html__( 'Places', 'fleet' ) );
+		$cache .= sprintf( '<h2 class="iworks-fleet-person-places-title">%s</h2>', esc_html__( 'Places', 'fleet' ) );
 		$cache .= sprintf(
 			'<svg viewBox="0 0 %d %d" class="iworks-fleet-person-places-chart">',
 			$width,
