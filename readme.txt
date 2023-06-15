@@ -43,6 +43,10 @@ There are 3 ways to install this plugin:
 
 == Changelog ==
 
+= 2.1.2 (2023-06-15) =
+
+* Division by zero issue has been removed.
+
 = 2.1.2 (2023-06-05) =
 
 * The added date will be saved from now on.

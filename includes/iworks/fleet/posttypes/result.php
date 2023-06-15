@@ -2963,6 +2963,9 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		if ( empty( $places ) ) {
 			return $content;
 		}
+		if ( 2 > count( $places ) ) {
+			return $content;
+		}
 		$width  = 500;
 		$step   = $width / ( count( $places ) - 1 );
 		$height = 100;
