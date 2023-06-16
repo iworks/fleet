@@ -3,9 +3,9 @@ Contributors: iworks
 Donate link: https://ko-fi.com/iworks?utm_source=simple-revision-control&utm_medium=readme-donate
 Tags: fleet, result, boat, crew, team, sport, sailing
 Requires at least: PLUGIN_REQUIRES_WORDPRESS
-Tested up to: 6.1
+Tested up to: PLUGIN_TESTED_WORDPRESS
 Stable tag: PLUGIN_VERSION
-Requires PHP: 7.2
+Requires PHP: PLUGIN_REQUIRES_PHP
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -43,11 +43,11 @@ There are 3 ways to install this plugin:
 
 == Changelog ==
 
-= 2.1.3 (2023-06-16) =
+= 2.1.4 (2023-06-16) =
 
 * The statistics module has been added.
 
-= 2.1.2 (2023-06-15) =
+= 2.1.3 (2023-06-15) =
 
 * Division by zero issue has been removed.
 
