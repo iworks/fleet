@@ -34,6 +34,7 @@ class iworks_fleet_posttypes {
 	protected $taxonomy_name_location  = 'iworks_fleet_location';
 	protected $show_single_person_flag = false;
 	protected $show_single_boat_flag   = false;
+	protected $labels                  = array();
 
 	/**
 	 * Trophies Names
@@ -93,6 +94,10 @@ class iworks_fleet_posttypes {
 		 * TwentyTwenty integration
 		 */
 		add_filter( 'twentytwenty_disallowed_post_types_for_meta_output', array( $this, 'twentytwenty_disallowed_post_types_for_meta_output' ) );
+		/**
+		 * stats
+		 */
+		add_filter( 'int505_archive_stats_table_row', array( $this, 'filter_int505_archive_stats_table_row' ) );
 	}
 
 	public function dashboard_glance_items( $elements ) {
@@ -572,6 +577,24 @@ class iworks_fleet_posttypes {
 		return $data;
 	}
 
+	public function filter_int505_archive_stats_table_row( $content ) {
+		$content .= sprintf(
+			'<li class="fleet-stats-row fleet-stats-row-%s">',
+			esc_attr( $this->post_type_name )
+		);
+		$content .= sprintf(
+			'<span class="fleet-stats-row-title"><a href="%s">%s</a></span>',
+			get_post_type_archive_link( $this->post_type_name ),
+			esc_html( $this->labels['name'] )
+		);
+		$content .= ' &#8212; ';
+		$content .= sprintf(
+			'<span class="fleet-stats-row-value">%d</td>',
+			wp_count_posts( $this->post_type_name )->publish
+		);
+		$content .= '</tr>';
+		return $content;
+	}
 
 }
 

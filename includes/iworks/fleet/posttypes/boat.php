@@ -309,7 +309,7 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		 */
 		$taxonomies            = $this->options->get_option( 'boat_taxonomies' );
 		$show_in_menu          = add_query_arg( 'post_type', $iworks_fleet->get_post_type_name( 'person' ), 'edit.php' );
-		$labels                = array(
+		$this->labels          = array(
 			'name'                  => _x( 'Boats', 'Boat General Name', 'fleet' ),
 			'singular_name'         => _x( 'Boat', 'Boat Singular Name', 'fleet' ),
 			'menu_name'             => __( '5O5', 'fleet' ),
@@ -355,7 +355,7 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		}
 		$args = array(
 			'label'                => __( 'Boat', 'fleet' ),
-			'labels'               => $labels,
+			'labels'               => $this->labels,
 			'supports'             => array( 'title', 'editor', 'thumbnail', 'revision' ),
 			'taxonomies'           => $fleet_boat_taxonomies,
 			'hierarchical'         => false,

@@ -136,8 +136,8 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 	}
 
 	public function register() {
-		$parent = true;
-		$labels = array(
+		$parent       = true;
+		$this->labels = array(
 			'name'                  => _x( 'Persons', 'Person General Name', 'fleet' ),
 			'singular_name'         => _x( 'Person', 'Person Singular Name', 'fleet' ),
 			'menu_name'             => __( 'Fleet', 'fleet' ),
@@ -165,9 +165,9 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 			'items_list_navigation' => __( 'Items list navigation', 'fleet' ),
 			'filter_items_list'     => __( 'Filter items list', 'fleet' ),
 		);
-		$args   = array(
+		$args         = array(
 			'label'                => __( 'person', 'fleet' ),
-			'labels'               => $labels,
+			'labels'               => $this->labels,
 			'supports'             => array( 'title', 'editor', 'thumbnail', 'revision' ),
 			'taxonomies'           => array(
 				$this->taxonomy_name_club,
@@ -190,7 +190,7 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 				'slug' => _x( 'fleet-person', 'slug for single person', 'fleet' ),
 			),
 		);
-		$args   = apply_filters( 'fleet_register_person_post_type_args', $args );
+		$args         = apply_filters( 'fleet_register_person_post_type_args', $args );
 		register_post_type( $this->post_type_name, $args );
 		/**
 		 * person hull club Taxonomy.

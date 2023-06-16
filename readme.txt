@@ -43,6 +43,10 @@ There are 3 ways to install this plugin:
 
 == Changelog ==
 
+= 2.1.3 (2023-06-16) =
+
+* The statistics module has been added.
+
 = 2.1.2 (2023-06-15) =
 
 * Division by zero issue has been removed.
