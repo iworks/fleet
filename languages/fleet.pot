@@ -1,14 +1,14 @@
-# Copyright (C) 2022 AUTHOR_NAME
+# Copyright (C) 2023 AUTHOR_NAME
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
 "Project-Id-Version: Fleet Manager Base PLUGIN_VERSION\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/fleet\n"
-"POT-Creation-Date: 2022-09-01 05:02:27+00:00\n"
+"POT-Creation-Date: 2023-06-30 10:36:55+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2022-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2023-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: en\n"
@@ -32,7 +32,7 @@ msgstr ""
 msgid "General"
 msgstr ""
 
-#: etc/options.php:22 includes/iworks/options/options.php:1645
+#: etc/options.php:22 includes/iworks/options/options.php:1652
 msgid "Country"
 msgstr ""
 
@@ -50,10 +50,10 @@ msgstr ""
 msgid "Load frontend CSS"
 msgstr ""
 
-#: etc/options.php:48 includes/iworks/fleet/posttypes/result.php:557
-#: includes/iworks/fleet/posttypes/result.php:1329
-#: includes/iworks/fleet/posttypes/result.php:1331
-#: includes/iworks/fleet/posttypes/result.php:2438
+#: etc/options.php:48 includes/iworks/fleet/posttypes/result.php:562
+#: includes/iworks/fleet/posttypes/result.php:1336
+#: includes/iworks/fleet/posttypes/result.php:1338
+#: includes/iworks/fleet/posttypes/result.php:2446
 msgid "Results"
 msgstr ""
 
@@ -61,7 +61,7 @@ msgstr ""
 msgid "Show points"
 msgstr ""
 
-#: etc/options.php:61 etc/options.php:176 etc/options.php:275
+#: etc/options.php:61 etc/options.php:184 etc/options.php:283
 msgid "Show trophy"
 msgstr ""
 
@@ -93,7 +93,7 @@ msgstr ""
 msgid "Select national serie to show trophy"
 msgstr ""
 
-#: etc/options.php:101 etc/options.php:192 etc/options.php:283
+#: etc/options.php:101 etc/options.php:200 etc/options.php:291
 msgid "Allow download CSV"
 msgstr ""
 
@@ -115,1580 +115,1584 @@ msgid "Show social media links"
 msgstr ""
 
 #: etc/options.php:133
-msgid "Show boats table"
+msgid "Show Boats Table"
 msgstr ""
 
 #: etc/options.php:141
-msgid "Show boat owned on person details page"
+msgid "Show Boat Owned"
 msgstr ""
 
 #: etc/options.php:149
+msgid "Show Places Chart"
+msgstr ""
+
+#: etc/options.php:157
 msgid "Tag to person"
 msgstr ""
 
-#: etc/options.php:150
+#: etc/options.php:158
 msgid "Replace person tag by fleet person."
 msgstr ""
 
-#: etc/options.php:158
+#: etc/options.php:166
 msgid "Add posts list"
 msgstr ""
 
-#: etc/options.php:159
+#: etc/options.php:167
 msgid "Add posts list to person with matching tag."
 msgstr ""
 
-#: etc/options.php:167
+#: etc/options.php:175
 msgid "Show flag"
 msgstr ""
 
-#: etc/options.php:168
+#: etc/options.php:176
 msgid "Show country flag before person on single person page."
 msgstr ""
 
-#: etc/options.php:184
+#: etc/options.php:192
 msgid "Show link to World Sailin with Sailor ID"
 msgstr ""
 
-#: etc/options.php:202 includes/iworks/fleet/posttypes/boat.php:317
+#: etc/options.php:210 includes/iworks/fleet/posttypes/boat.php:317
 #: includes/iworks/fleet/posttypes/boat.php:319
 msgid "Boats"
 msgstr ""
 
-#: etc/options.php:207
+#: etc/options.php:215
 msgid "Show boat flag"
 msgstr ""
 
-#: etc/options.php:209
+#: etc/options.php:217
 msgid "We recommend to turn off if we show sailors nationality."
 msgstr ""
 
-#: etc/options.php:216
+#: etc/options.php:224
 msgid "Add crew manually"
 msgstr ""
 
-#: etc/options.php:224
+#: etc/options.php:232
 msgid "Add extra data"
 msgstr ""
 
-#: etc/options.php:232
+#: etc/options.php:240
 msgid "Add boat social media"
 msgstr ""
 
-#: etc/options.php:240
+#: etc/options.php:248
 msgid "Add boat owners"
 msgstr ""
 
-#: etc/options.php:248
+#: etc/options.php:256
 msgid "Show boat owners on boat details page"
 msgstr ""
 
-#: etc/options.php:256
+#: etc/options.php:264
 msgid "Boat taxonomies"
 msgstr ""
 
-#: etc/options.php:258
+#: etc/options.php:266
 msgid "Sail manufacturer"
 msgstr ""
 
-#: etc/options.php:259 includes/iworks/fleet/posttypes/boat.php:613
+#: etc/options.php:267 includes/iworks/fleet/posttypes/boat.php:613
 msgid "Mast manufacturer"
 msgstr ""
 
-#: etc/options.php:260 includes/iworks/fleet/posttypes/boat.php:606
+#: etc/options.php:268 includes/iworks/fleet/posttypes/boat.php:606
 msgid "Hull manufacturer"
 msgstr ""
 
-#: etc/options.php:266
+#: etc/options.php:274
 msgid "Auto add feature image"
 msgstr ""
 
-#: etc/options.php:267
+#: etc/options.php:275
 msgid "Automagicaly add feature image, if there is some taged with boat number."
 msgstr ""
 
-#: etc/options.php:294 includes/iworks/fleet/posttypes/boat.php:320
+#: etc/options.php:302 includes/iworks/fleet/posttypes/boat.php:320
 msgid "Add New Boat"
 msgstr ""
 
-#: etc/options.php:308 etc/options.php:309
+#: etc/options.php:316 etc/options.php:317
 msgid "Series"
 msgstr ""
 
-#: etc/options.php:324 etc/options.php:325
+#: etc/options.php:332 etc/options.php:333
 msgid "Hulls Manufaturers"
 msgstr ""
 
-#: etc/options.php:340 etc/options.php:341
+#: etc/options.php:348 etc/options.php:349
 msgid "Sails Manufaturers"
 msgstr ""
 
-#: etc/options.php:356 etc/options.php:357
+#: etc/options.php:364 etc/options.php:365
 msgid "Masts Manufaturers"
 msgstr ""
 
-#: etc/options.php:372 etc/options.php:373
-#: includes/iworks/fleet/posttypes.php:297
+#: etc/options.php:380 etc/options.php:381
+#: includes/iworks/fleet/posttypes.php:302
 msgid "Locations"
 msgstr ""
 
-#: etc/options.php:395
+#: etc/options.php:403
 msgid "Alice Blue"
 msgstr ""
 
-#: etc/options.php:396
+#: etc/options.php:404
 msgid "Antique White"
 msgstr ""
 
-#: etc/options.php:397
+#: etc/options.php:405
 msgid "Aqua"
 msgstr ""
 
-#: etc/options.php:398
+#: etc/options.php:406
 msgid "Aquamarine"
 msgstr ""
 
-#: etc/options.php:399
+#: etc/options.php:407
 msgid "Azure"
 msgstr ""
 
-#: etc/options.php:400
+#: etc/options.php:408
 msgid "Beige"
 msgstr ""
 
-#: etc/options.php:401
+#: etc/options.php:409
 msgid "Bisque"
 msgstr ""
 
-#: etc/options.php:402
+#: etc/options.php:410
 msgid "Black"
 msgstr ""
 
-#: etc/options.php:403
+#: etc/options.php:411
 msgid "Blanched Almond"
 msgstr ""
 
-#: etc/options.php:404
+#: etc/options.php:412
 msgid "Blue"
 msgstr ""
 
-#: etc/options.php:405
+#: etc/options.php:413
 msgid "Blue Violet"
 msgstr ""
 
-#: etc/options.php:406
+#: etc/options.php:414
 msgid "Brown"
 msgstr ""
 
-#: etc/options.php:407
+#: etc/options.php:415
 msgid "Burly Wood"
 msgstr ""
 
-#: etc/options.php:408
+#: etc/options.php:416
 msgid "Cadet Blue"
 msgstr ""
 
-#: etc/options.php:409
+#: etc/options.php:417
 msgid "Chartreuse"
 msgstr ""
 
-#: etc/options.php:410
+#: etc/options.php:418
 msgid "Chocolate"
 msgstr ""
 
-#: etc/options.php:411
+#: etc/options.php:419
 msgid "Coral"
 msgstr ""
 
-#: etc/options.php:412
+#: etc/options.php:420
 msgid "Cornflower Blue"
 msgstr ""
 
-#: etc/options.php:413
+#: etc/options.php:421
 msgid "Cornsilk"
 msgstr ""
 
-#: etc/options.php:414
+#: etc/options.php:422
 msgid "Crimson"
 msgstr ""
 
-#: etc/options.php:415
+#: etc/options.php:423
 msgid "Cyan"
 msgstr ""
 
-#: etc/options.php:416
+#: etc/options.php:424
 msgid "Dark Blue"
 msgstr ""
 
-#: etc/options.php:417
+#: etc/options.php:425
 msgid "Dark Cyan"
 msgstr ""
 
-#: etc/options.php:418
+#: etc/options.php:426
 msgid "Dark Golden Rod"
 msgstr ""
 
-#: etc/options.php:419
+#: etc/options.php:427
 msgid "Dark Gray"
 msgstr ""
 
-#: etc/options.php:420
+#: etc/options.php:428
 msgid "Dark Grey"
 msgstr ""
 
-#: etc/options.php:421
+#: etc/options.php:429
 msgid "Dark Green"
 msgstr ""
 
-#: etc/options.php:422
+#: etc/options.php:430
 msgid "Dark Khaki"
 msgstr ""
 
-#: etc/options.php:423
+#: etc/options.php:431
 msgid "Dark Magenta"
 msgstr ""
 
-#: etc/options.php:424
+#: etc/options.php:432
 msgid "Dark Olive Green"
 msgstr ""
 
-#: etc/options.php:425
+#: etc/options.php:433
 msgid "Dark Orange"
 msgstr ""
 
-#: etc/options.php:426
+#: etc/options.php:434
 msgid "Dark Orchid"
 msgstr ""
 
-#: etc/options.php:427
+#: etc/options.php:435
 msgid "Dark Red"
 msgstr ""
 
-#: etc/options.php:428
+#: etc/options.php:436
 msgid "Dark Salmon"
 msgstr ""
 
-#: etc/options.php:429
+#: etc/options.php:437
 msgid "Dark Sea Green"
 msgstr ""
 
-#: etc/options.php:430
+#: etc/options.php:438
 msgid "Dark Slate Blue"
 msgstr ""
 
-#: etc/options.php:431
+#: etc/options.php:439
 msgid "Dark Slate Gray"
 msgstr ""
 
-#: etc/options.php:432
+#: etc/options.php:440
 msgid "Dark Slate Grey"
 msgstr ""
 
-#: etc/options.php:433
+#: etc/options.php:441
 msgid "Dark Turquoise"
 msgstr ""
 
-#: etc/options.php:434
+#: etc/options.php:442
 msgid "Dark Violet"
 msgstr ""
 
-#: etc/options.php:435
+#: etc/options.php:443
 msgid "Deep Pink"
 msgstr ""
 
-#: etc/options.php:436
+#: etc/options.php:444
 msgid "Deep Sky Blue"
 msgstr ""
 
-#: etc/options.php:437
+#: etc/options.php:445
 msgid "Dim Gray"
 msgstr ""
 
-#: etc/options.php:438
+#: etc/options.php:446
 msgid "Dim Grey"
 msgstr ""
 
-#: etc/options.php:439
+#: etc/options.php:447
 msgid "Dodger Blue"
 msgstr ""
 
-#: etc/options.php:440
+#: etc/options.php:448
 msgid "Fire Brick"
 msgstr ""
 
-#: etc/options.php:441
+#: etc/options.php:449
 msgid "Floral White"
 msgstr ""
 
-#: etc/options.php:442
+#: etc/options.php:450
 msgid "Forest Green"
 msgstr ""
 
-#: etc/options.php:443
+#: etc/options.php:451
 msgid "Fuchsia"
 msgstr ""
 
-#: etc/options.php:444
+#: etc/options.php:452
 msgid "Gainsboro"
 msgstr ""
 
-#: etc/options.php:445
+#: etc/options.php:453
 msgid "Ghost White"
 msgstr ""
 
-#: etc/options.php:446
+#: etc/options.php:454
 msgid "Gold"
 msgstr ""
 
-#: etc/options.php:447
+#: etc/options.php:455
 msgid "Golden Rod"
 msgstr ""
 
-#: etc/options.php:448
+#: etc/options.php:456
 msgid "Gray"
 msgstr ""
 
-#: etc/options.php:449
+#: etc/options.php:457
 msgid "Grey"
 msgstr ""
 
-#: etc/options.php:450
+#: etc/options.php:458
 msgid "Green"
 msgstr ""
 
-#: etc/options.php:451
+#: etc/options.php:459
 msgid "Green Yellow"
 msgstr ""
 
-#: etc/options.php:452
+#: etc/options.php:460
 msgid "Honey Dew"
 msgstr ""
 
-#: etc/options.php:453
+#: etc/options.php:461
 msgid "Hot Pink"
 msgstr ""
 
-#: etc/options.php:454
+#: etc/options.php:462
 msgid "Indian Red"
 msgstr ""
 
-#: etc/options.php:455
+#: etc/options.php:463
 msgid "Indigo"
 msgstr ""
 
-#: etc/options.php:456
+#: etc/options.php:464
 msgid "Ivory"
 msgstr ""
 
-#: etc/options.php:457
+#: etc/options.php:465
 msgid "Khaki"
 msgstr ""
 
-#: etc/options.php:458
+#: etc/options.php:466
 msgid "Lavender"
 msgstr ""
 
-#: etc/options.php:459
+#: etc/options.php:467
 msgid "Lavender Blush"
 msgstr ""
 
-#: etc/options.php:460
+#: etc/options.php:468
 msgid "Lawn Green"
 msgstr ""
 
-#: etc/options.php:461
+#: etc/options.php:469
 msgid "Lemon Chiffon"
 msgstr ""
 
-#: etc/options.php:462
+#: etc/options.php:470
 msgid "Light Blue"
 msgstr ""
 
-#: etc/options.php:463
+#: etc/options.php:471
 msgid "Light Coral"
 msgstr ""
 
-#: etc/options.php:464
+#: etc/options.php:472
 msgid "Light Cyan"
 msgstr ""
 
-#: etc/options.php:465
+#: etc/options.php:473
 msgid "Light Golden Rod Yellow"
 msgstr ""
 
-#: etc/options.php:466
+#: etc/options.php:474
 msgid "Light Gray"
 msgstr ""
 
-#: etc/options.php:467
+#: etc/options.php:475
 msgid "Light Grey"
 msgstr ""
 
-#: etc/options.php:468
+#: etc/options.php:476
 msgid "Light Green"
 msgstr ""
 
-#: etc/options.php:469
+#: etc/options.php:477
 msgid "Light Pink"
 msgstr ""
 
-#: etc/options.php:470
+#: etc/options.php:478
 msgid "Light Salmon"
 msgstr ""
 
-#: etc/options.php:471
+#: etc/options.php:479
 msgid "Light Sea Green"
 msgstr ""
 
-#: etc/options.php:472
+#: etc/options.php:480
 msgid "Light Sky Blue"
 msgstr ""
 
-#: etc/options.php:473
+#: etc/options.php:481
 msgid "Light Slate Gray"
 msgstr ""
 
-#: etc/options.php:474
+#: etc/options.php:482
 msgid "Light Slate Grey"
 msgstr ""
 
-#: etc/options.php:475
+#: etc/options.php:483
 msgid "Light Steel Blue"
 msgstr ""
 
-#: etc/options.php:476
+#: etc/options.php:484
 msgid "Light Yellow"
 msgstr ""
 
-#: etc/options.php:477
+#: etc/options.php:485
 msgid "Lime"
 msgstr ""
 
-#: etc/options.php:478
+#: etc/options.php:486
 msgid "Lime Green"
 msgstr ""
 
-#: etc/options.php:479
+#: etc/options.php:487
 msgid "Linen"
 msgstr ""
 
-#: etc/options.php:480
+#: etc/options.php:488
 msgid "Magenta"
 msgstr ""
 
-#: etc/options.php:481
+#: etc/options.php:489
 msgid "Maroon"
 msgstr ""
 
-#: etc/options.php:482
+#: etc/options.php:490
 msgid "Medium Aqua Marine"
 msgstr ""
 
-#: etc/options.php:483
+#: etc/options.php:491
 msgid "Medium Blue"
 msgstr ""
 
-#: etc/options.php:484
+#: etc/options.php:492
 msgid "Medium Orchid"
 msgstr ""
 
-#: etc/options.php:485
+#: etc/options.php:493
 msgid "Medium Purple"
 msgstr ""
 
-#: etc/options.php:486
+#: etc/options.php:494
 msgid "Medium Sea Green"
 msgstr ""
 
-#: etc/options.php:487
+#: etc/options.php:495
 msgid "Medium Slate Blue"
 msgstr ""
 
-#: etc/options.php:488
+#: etc/options.php:496
 msgid "Medium Spring Green"
 msgstr ""
 
-#: etc/options.php:489
+#: etc/options.php:497
 msgid "Medium Turquoise"
 msgstr ""
 
-#: etc/options.php:490
+#: etc/options.php:498
 msgid "Medium Violet Red"
 msgstr ""
 
-#: etc/options.php:491
+#: etc/options.php:499
 msgid "Midnight Blue"
 msgstr ""
 
-#: etc/options.php:492
+#: etc/options.php:500
 msgid "Mint Cream"
 msgstr ""
 
-#: etc/options.php:493
+#: etc/options.php:501
 msgid "Misty Rose"
 msgstr ""
 
-#: etc/options.php:494
+#: etc/options.php:502
 msgid "Moccasin"
 msgstr ""
 
-#: etc/options.php:495
+#: etc/options.php:503
 msgid "Navajo White"
 msgstr ""
 
-#: etc/options.php:496
+#: etc/options.php:504
 msgid "Navy"
 msgstr ""
 
-#: etc/options.php:497
+#: etc/options.php:505
 msgid "Old Lace"
 msgstr ""
 
-#: etc/options.php:498
+#: etc/options.php:506
 msgid "Olive"
 msgstr ""
 
-#: etc/options.php:499
+#: etc/options.php:507
 msgid "Olive Drab"
 msgstr ""
 
-#: etc/options.php:500
+#: etc/options.php:508
 msgid "Orange"
 msgstr ""
 
-#: etc/options.php:501
+#: etc/options.php:509
 msgid "Orange Red"
 msgstr ""
 
-#: etc/options.php:502
+#: etc/options.php:510
 msgid "Orchid"
 msgstr ""
 
-#: etc/options.php:503
+#: etc/options.php:511
 msgid "Pale Golden Rod"
 msgstr ""
 
-#: etc/options.php:504
+#: etc/options.php:512
 msgid "Pale Green"
 msgstr ""
 
-#: etc/options.php:505
+#: etc/options.php:513
 msgid "Pale Turquoise"
 msgstr ""
 
-#: etc/options.php:506
+#: etc/options.php:514
 msgid "Pale Violet Red"
 msgstr ""
 
-#: etc/options.php:507
+#: etc/options.php:515
 msgid "Papaya Whip"
 msgstr ""
 
-#: etc/options.php:508
+#: etc/options.php:516
 msgid "Peach Puff"
 msgstr ""
 
-#: etc/options.php:509 etc/options.php:661
+#: etc/options.php:517 etc/options.php:669
 msgid "Peru"
 msgstr ""
 
-#: etc/options.php:510
+#: etc/options.php:518
 msgid "Pink"
 msgstr ""
 
-#: etc/options.php:511
+#: etc/options.php:519
 msgid "Plum"
 msgstr ""
 
-#: etc/options.php:512
+#: etc/options.php:520
 msgid "Powder Blue"
 msgstr ""
 
-#: etc/options.php:513
+#: etc/options.php:521
 msgid "Purple"
 msgstr ""
 
-#: etc/options.php:514
+#: etc/options.php:522
 msgid "Rebecca Purple"
 msgstr ""
 
-#: etc/options.php:515
+#: etc/options.php:523
 msgid "Red"
 msgstr ""
 
-#: etc/options.php:516
+#: etc/options.php:524
 msgid "Rosy Brown"
 msgstr ""
 
-#: etc/options.php:517
+#: etc/options.php:525
 msgid "Royal Blue"
 msgstr ""
 
-#: etc/options.php:518
+#: etc/options.php:526
 msgid "Saddle Brown"
 msgstr ""
 
-#: etc/options.php:519
+#: etc/options.php:527
 msgid "Salmon"
 msgstr ""
 
-#: etc/options.php:520
+#: etc/options.php:528
 msgid "Sandy Brown"
 msgstr ""
 
-#: etc/options.php:521
+#: etc/options.php:529
 msgid "Sea Green"
 msgstr ""
 
-#: etc/options.php:522
+#: etc/options.php:530
 msgid "Sea Shell"
 msgstr ""
 
-#: etc/options.php:523
+#: etc/options.php:531
 msgid "Sienna"
 msgstr ""
 
-#: etc/options.php:524
+#: etc/options.php:532
 msgid "Silver"
 msgstr ""
 
-#: etc/options.php:525
+#: etc/options.php:533
 msgid "Sky Blue"
 msgstr ""
 
-#: etc/options.php:526
+#: etc/options.php:534
 msgid "Slate Blue"
 msgstr ""
 
-#: etc/options.php:527
+#: etc/options.php:535
 msgid "Slate Gray"
 msgstr ""
 
-#: etc/options.php:528
+#: etc/options.php:536
 msgid "Slate Grey"
 msgstr ""
 
-#: etc/options.php:529
+#: etc/options.php:537
 msgid "Snow"
 msgstr ""
 
-#: etc/options.php:530
+#: etc/options.php:538
 msgid "Spring Green"
 msgstr ""
 
-#: etc/options.php:531
+#: etc/options.php:539
 msgid "Steel Blue"
 msgstr ""
 
-#: etc/options.php:532
+#: etc/options.php:540
 msgid "Tan"
 msgstr ""
 
-#: etc/options.php:533
+#: etc/options.php:541
 msgid "Teal"
 msgstr ""
 
-#: etc/options.php:534
+#: etc/options.php:542
 msgid "Thistle"
 msgstr ""
 
-#: etc/options.php:535
+#: etc/options.php:543
 msgid "Tomato"
 msgstr ""
 
-#: etc/options.php:536
+#: etc/options.php:544
 msgid "Turquoise"
 msgstr ""
 
-#: etc/options.php:537
+#: etc/options.php:545
 msgid "Violet"
 msgstr ""
 
-#: etc/options.php:538
+#: etc/options.php:546
 msgid "Wheat"
 msgstr ""
 
-#: etc/options.php:539
+#: etc/options.php:547
 msgid "White"
 msgstr ""
 
-#: etc/options.php:540
+#: etc/options.php:548
 msgid "White Smoke"
 msgstr ""
 
-#: etc/options.php:541
+#: etc/options.php:549
 msgid "Yellow"
 msgstr ""
 
-#: etc/options.php:542
+#: etc/options.php:550
 msgid "Yellow Green"
 msgstr ""
 
-#: etc/options.php:559
+#: etc/options.php:567
 msgid "Algeria"
 msgstr ""
 
-#: etc/options.php:565
+#: etc/options.php:573
 msgid "Finland"
 msgstr ""
 
-#: etc/options.php:571
+#: etc/options.php:579
 msgid "Pakistan"
 msgstr ""
 
-#: etc/options.php:577
+#: etc/options.php:585
 msgid "American Samoa"
 msgstr ""
 
-#: etc/options.php:583
+#: etc/options.php:591
 msgid "Grenada"
 msgstr ""
 
-#: etc/options.php:589
+#: etc/options.php:597
 msgid "Palestine"
 msgstr ""
 
-#: etc/options.php:595
+#: etc/options.php:603
 msgid "Andorra"
 msgstr ""
 
-#: etc/options.php:601
+#: etc/options.php:609
 msgid "Guam"
 msgstr ""
 
-#: etc/options.php:607
+#: etc/options.php:615
 msgid "Panama"
 msgstr ""
 
-#: etc/options.php:613
+#: etc/options.php:621
 msgid "Angola"
 msgstr ""
 
-#: etc/options.php:619
+#: etc/options.php:627
 msgid "Guatemala"
 msgstr ""
 
-#: etc/options.php:625
+#: etc/options.php:633
 msgid "Papua New Guinea"
 msgstr ""
 
-#: etc/options.php:631
+#: etc/options.php:639
 msgid "Antigua"
 msgstr ""
 
-#: etc/options.php:637
+#: etc/options.php:645
 msgid "Hong Kong, China"
 msgstr ""
 
-#: etc/options.php:643
+#: etc/options.php:651
 msgid "Paraguay"
 msgstr ""
 
-#: etc/options.php:649
+#: etc/options.php:657
 msgid "Argentina"
 msgstr ""
 
-#: etc/options.php:655
+#: etc/options.php:663
 msgid "Hungary"
 msgstr ""
 
-#: etc/options.php:667
+#: etc/options.php:675
 msgid "Armenia"
 msgstr ""
 
-#: etc/options.php:673
+#: etc/options.php:681
 msgid "Iceland"
 msgstr ""
 
-#: etc/options.php:679
+#: etc/options.php:687
 msgid "Philippines"
 msgstr ""
 
-#: etc/options.php:685
+#: etc/options.php:693
 msgid "Aruba"
 msgstr ""
 
-#: etc/options.php:691
+#: etc/options.php:699
 msgid "India"
 msgstr ""
 
-#: etc/options.php:697
+#: etc/options.php:705
 msgid "Poland"
 msgstr ""
 
-#: etc/options.php:703
+#: etc/options.php:711
 msgid "Australia"
 msgstr ""
 
-#: etc/options.php:709
+#: etc/options.php:717
 msgid "Indonesia"
 msgstr ""
 
-#: etc/options.php:715
+#: etc/options.php:723
 msgid "Portugal"
 msgstr ""
 
-#: etc/options.php:721
+#: etc/options.php:729
 msgid "Austria"
 msgstr ""
 
-#: etc/options.php:727
+#: etc/options.php:735
 msgid "Iran"
 msgstr ""
 
-#: etc/options.php:733
+#: etc/options.php:741
 msgid "Puerto Rico"
 msgstr ""
 
-#: etc/options.php:739
+#: etc/options.php:747
 msgid "Azerbaijan"
 msgstr ""
 
-#: etc/options.php:745
+#: etc/options.php:753
 msgid "Iraq"
 msgstr ""
 
-#: etc/options.php:751
+#: etc/options.php:759
 msgid "Qatar"
 msgstr ""
 
-#: etc/options.php:757
+#: etc/options.php:765
 msgid "Bahamas"
 msgstr ""
 
-#: etc/options.php:763
+#: etc/options.php:771
 msgid "Ireland"
 msgstr ""
 
-#: etc/options.php:769
+#: etc/options.php:777
 msgid "Romania"
 msgstr ""
 
-#: etc/options.php:775
+#: etc/options.php:783
 msgid "Bahrain"
 msgstr ""
 
-#: etc/options.php:781
+#: etc/options.php:789
 msgid "Israel"
 msgstr ""
 
-#: etc/options.php:787
+#: etc/options.php:795
 msgid "Russia"
 msgstr ""
 
-#: etc/options.php:793
+#: etc/options.php:801
 msgid "Barbados"
 msgstr ""
 
-#: etc/options.php:799
+#: etc/options.php:807
 msgid "Italy"
 msgstr ""
 
-#: etc/options.php:805
+#: etc/options.php:813
 msgid "Samoa"
 msgstr ""
 
-#: etc/options.php:811
+#: etc/options.php:819
 msgid "Belarus"
 msgstr ""
 
-#: etc/options.php:817
+#: etc/options.php:825
 msgid "Jamaica"
 msgstr ""
 
-#: etc/options.php:823
+#: etc/options.php:831
 msgid "San Marino"
 msgstr ""
 
-#: etc/options.php:829
+#: etc/options.php:837
 msgid "Belize"
 msgstr ""
 
-#: etc/options.php:835
+#: etc/options.php:843
 msgid "Japan"
 msgstr ""
 
-#: etc/options.php:841
+#: etc/options.php:849
 msgid "Senegal"
 msgstr ""
 
-#: etc/options.php:847
+#: etc/options.php:855
 msgid "Belgium"
 msgstr ""
 
-#: etc/options.php:853
+#: etc/options.php:861
 msgid "Kazakhstan"
 msgstr ""
 
-#: etc/options.php:859
+#: etc/options.php:867
 msgid "Serbia"
 msgstr ""
 
-#: etc/options.php:865
+#: etc/options.php:873
 msgid "Bermuda"
 msgstr ""
 
-#: etc/options.php:871
+#: etc/options.php:879
 msgid "Kenya"
 msgstr ""
 
-#: etc/options.php:877
+#: etc/options.php:885
 msgid "Seychelles"
 msgstr ""
 
-#: etc/options.php:883
+#: etc/options.php:891
 msgid "Botswana"
 msgstr ""
 
-#: etc/options.php:889
+#: etc/options.php:897
 msgid "Korea"
 msgstr ""
 
-#: etc/options.php:895
+#: etc/options.php:903
 msgid "Singapore"
 msgstr ""
 
-#: etc/options.php:901
+#: etc/options.php:909
 msgid "Brazil"
 msgstr ""
 
-#: etc/options.php:907
+#: etc/options.php:915
 msgid "Kosovo"
 msgstr ""
 
-#: etc/options.php:913
+#: etc/options.php:921
 msgid "Slovak Republic"
 msgstr ""
 
-#: etc/options.php:919
+#: etc/options.php:927
 msgid "British Virgin Islands"
 msgstr ""
 
-#: etc/options.php:925
+#: etc/options.php:933
 msgid "Kyrgyzstan"
 msgstr ""
 
-#: etc/options.php:931
+#: etc/options.php:939
 msgid "Slovenia"
 msgstr ""
 
-#: etc/options.php:937
+#: etc/options.php:945
 msgid "Brunei"
 msgstr ""
 
-#: etc/options.php:943
+#: etc/options.php:951
 msgid "DPR Korea"
 msgstr ""
 
-#: etc/options.php:949
+#: etc/options.php:957
 msgid "South Africa"
 msgstr ""
 
-#: etc/options.php:955
+#: etc/options.php:963
 msgid "Bulgaria"
 msgstr ""
 
-#: etc/options.php:961
+#: etc/options.php:969
 msgid "Kuwait"
 msgstr ""
 
-#: etc/options.php:967
+#: etc/options.php:975
 msgid "Spain"
 msgstr ""
 
-#: etc/options.php:973
+#: etc/options.php:981
 msgid "Cambodia"
 msgstr ""
 
-#: etc/options.php:979
+#: etc/options.php:987
 msgid "Latvia"
 msgstr ""
 
-#: etc/options.php:985
+#: etc/options.php:993
 msgid "Sri Lanka"
 msgstr ""
 
-#: etc/options.php:991
+#: etc/options.php:999
 msgid "Canada"
 msgstr ""
 
-#: etc/options.php:997
+#: etc/options.php:1005
 msgid "Lebanon"
 msgstr ""
 
-#: etc/options.php:1003
+#: etc/options.php:1011
 msgid "St Kitts and Nevis"
 msgstr ""
 
-#: etc/options.php:1009
+#: etc/options.php:1017
 msgid "Cayman Islands"
 msgstr ""
 
-#: etc/options.php:1015
+#: etc/options.php:1023
 msgid "Libya"
 msgstr ""
 
-#: etc/options.php:1021
+#: etc/options.php:1029
 msgid "St Lucia"
 msgstr ""
 
-#: etc/options.php:1027
+#: etc/options.php:1035
 msgid "Chile"
 msgstr ""
 
-#: etc/options.php:1033
+#: etc/options.php:1041
 msgid "Liechtenstein"
 msgstr ""
 
-#: etc/options.php:1039
+#: etc/options.php:1047
 msgid "Sudan"
 msgstr ""
 
-#: etc/options.php:1045
+#: etc/options.php:1053
 msgid "China, PR"
 msgstr ""
 
-#: etc/options.php:1051
+#: etc/options.php:1059
 msgid "Lithuania"
 msgstr ""
 
-#: etc/options.php:1057
+#: etc/options.php:1065
 msgid "Sweden"
 msgstr ""
 
-#: etc/options.php:1063
+#: etc/options.php:1071
 msgid "Chinese Taipei"
 msgstr ""
 
-#: etc/options.php:1069
+#: etc/options.php:1077
 msgid "Luxembourg"
 msgstr ""
 
-#: etc/options.php:1075
+#: etc/options.php:1083
 msgid "Switzerland"
 msgstr ""
 
-#: etc/options.php:1081
+#: etc/options.php:1089
 msgid "Colombia"
 msgstr ""
 
-#: etc/options.php:1087
+#: etc/options.php:1095
 msgid "Macau"
 msgstr ""
 
-#: etc/options.php:1093
+#: etc/options.php:1101
 msgid "Tahiti"
 msgstr ""
 
-#: etc/options.php:1099
+#: etc/options.php:1107
 msgid "Cook Islands"
 msgstr ""
 
-#: etc/options.php:1105
+#: etc/options.php:1113
 msgid "Madagascar"
 msgstr ""
 
-#: etc/options.php:1111
+#: etc/options.php:1119
 msgid "Tanzania"
 msgstr ""
 
-#: etc/options.php:1117
+#: etc/options.php:1125
 msgid "Croatia"
 msgstr ""
 
-#: etc/options.php:1123
+#: etc/options.php:1131
 msgid "Malaysia"
 msgstr ""
 
-#: etc/options.php:1129
+#: etc/options.php:1137
 msgid "Thailand"
 msgstr ""
 
-#: etc/options.php:1135
+#: etc/options.php:1143
 msgid "Cuba"
 msgstr ""
 
-#: etc/options.php:1141
+#: etc/options.php:1149
 msgid "Malta"
 msgstr ""
 
-#: etc/options.php:1147
+#: etc/options.php:1155
 msgid "Timor Leste"
 msgstr ""
 
-#: etc/options.php:1153
+#: etc/options.php:1161
 msgid "Cyprus"
 msgstr ""
 
-#: etc/options.php:1159
+#: etc/options.php:1167
 msgid "Mauritius"
 msgstr ""
 
-#: etc/options.php:1165
+#: etc/options.php:1173
 msgid "Trinidad & Tobago"
 msgstr ""
 
-#: etc/options.php:1171
+#: etc/options.php:1179
 msgid "Czech Republic"
 msgstr ""
 
-#: etc/options.php:1177
+#: etc/options.php:1185
 msgid "Mexico"
 msgstr ""
 
-#: etc/options.php:1183
+#: etc/options.php:1191
 msgid "Tunisia"
 msgstr ""
 
-#: etc/options.php:1189
+#: etc/options.php:1197
 msgid "Denmark"
 msgstr ""
 
-#: etc/options.php:1195
+#: etc/options.php:1203
 msgid "Moldova"
 msgstr ""
 
-#: etc/options.php:1201
+#: etc/options.php:1209
 msgid "Turkey"
 msgstr ""
 
-#: etc/options.php:1207
+#: etc/options.php:1215
 msgid "Djibouti"
 msgstr ""
 
-#: etc/options.php:1213
+#: etc/options.php:1221
 msgid "Monaco"
 msgstr ""
 
-#: etc/options.php:1219
+#: etc/options.php:1227
 msgid "Turks and Caicos"
 msgstr ""
 
-#: etc/options.php:1225
+#: etc/options.php:1233
 msgid "Dominican Republic"
 msgstr ""
 
-#: etc/options.php:1231
+#: etc/options.php:1239
 msgid "Morocco"
 msgstr ""
 
-#: etc/options.php:1237
+#: etc/options.php:1245
 msgid "Uganda"
 msgstr ""
 
-#: etc/options.php:1243
+#: etc/options.php:1251
 msgid "Ecuador"
 msgstr ""
 
-#: etc/options.php:1249
+#: etc/options.php:1257
 msgid "Montenegro"
 msgstr ""
 
-#: etc/options.php:1255
+#: etc/options.php:1263
 msgid "Ukraine"
 msgstr ""
 
-#: etc/options.php:1261
+#: etc/options.php:1269
 msgid "Egypt"
 msgstr ""
 
-#: etc/options.php:1267
+#: etc/options.php:1275
 msgid "Montserrat"
 msgstr ""
 
-#: etc/options.php:1273
+#: etc/options.php:1281
 msgid "United Arab Emirates"
 msgstr ""
 
-#: etc/options.php:1279
+#: etc/options.php:1287
 msgid "El Salvador"
 msgstr ""
 
-#: etc/options.php:1285
+#: etc/options.php:1293
 msgid "Mozambique"
 msgstr ""
 
-#: etc/options.php:1291
+#: etc/options.php:1299
 msgid "United States of America"
 msgstr ""
 
-#: etc/options.php:1297
+#: etc/options.php:1305
 msgid "Estonia"
 msgstr ""
 
-#: etc/options.php:1303
+#: etc/options.php:1311
 msgid "Myanmar"
 msgstr ""
 
-#: etc/options.php:1309
+#: etc/options.php:1317
 msgid "Uruguay"
 msgstr ""
 
-#: etc/options.php:1315
+#: etc/options.php:1323
 msgid "Fiji"
 msgstr ""
 
-#: etc/options.php:1321
+#: etc/options.php:1329
 msgid "Namibia"
 msgstr ""
 
-#: etc/options.php:1327
+#: etc/options.php:1335
 msgid "US Virgin Islands"
 msgstr ""
 
-#: etc/options.php:1333
+#: etc/options.php:1341
 msgid "France"
 msgstr ""
 
-#: etc/options.php:1339
+#: etc/options.php:1347
 msgid "Netherlands"
 msgstr ""
 
-#: etc/options.php:1345
+#: etc/options.php:1353
 msgid "Vanuatu"
 msgstr ""
 
-#: etc/options.php:1351
+#: etc/options.php:1359
 msgid "FYRO Macedonia"
 msgstr ""
 
-#: etc/options.php:1357
+#: etc/options.php:1365
 msgid "Netherland Antilles (Curacao and St Maarten)"
 msgstr ""
 
-#: etc/options.php:1363
+#: etc/options.php:1371
 msgid "Venezuela"
 msgstr ""
 
-#: etc/options.php:1369 etc/options.php:1447
+#: etc/options.php:1377 etc/options.php:1455
 msgid "Georgia"
 msgstr ""
 
-#: etc/options.php:1375
+#: etc/options.php:1383
 msgid "New Zealand"
 msgstr ""
 
-#: etc/options.php:1381
+#: etc/options.php:1389
 msgid "Vietnam"
 msgstr ""
 
-#: etc/options.php:1387
+#: etc/options.php:1395
 msgid "Germany"
 msgstr ""
 
-#: etc/options.php:1393
+#: etc/options.php:1401
 msgid "Nigeria"
 msgstr ""
 
-#: etc/options.php:1399
+#: etc/options.php:1407
 msgid "Zimbabwe"
 msgstr ""
 
-#: etc/options.php:1406
+#: etc/options.php:1414
 msgid "Great Britain"
 msgstr ""
 
-#: etc/options.php:1412
+#: etc/options.php:1420
 msgid "Norway"
 msgstr ""
 
-#: etc/options.php:1418
+#: etc/options.php:1426
 msgid "Greece"
 msgstr ""
 
-#: etc/options.php:1424
+#: etc/options.php:1432
 msgid "Oman"
 msgstr ""
 
-#: etc/options.php:1434
+#: etc/options.php:1442
 msgid "Alabama"
 msgstr ""
 
-#: etc/options.php:1435
+#: etc/options.php:1443
 msgid "Alaska"
 msgstr ""
 
-#: etc/options.php:1436
+#: etc/options.php:1444
 msgid "Arizona"
 msgstr ""
 
-#: etc/options.php:1437
+#: etc/options.php:1445
 msgid "Arkansas"
 msgstr ""
 
-#: etc/options.php:1438
+#: etc/options.php:1446
 msgid "Armed Forces America"
 msgstr ""
 
-#: etc/options.php:1439
+#: etc/options.php:1447
 msgid "Armed Forces Europe"
 msgstr ""
 
-#: etc/options.php:1440
+#: etc/options.php:1448
 msgid "Armed Forces Pacific"
 msgstr ""
 
-#: etc/options.php:1441
+#: etc/options.php:1449
 msgid "California"
 msgstr ""
 
-#: etc/options.php:1442
+#: etc/options.php:1450
 msgid "Colorado"
 msgstr ""
 
-#: etc/options.php:1443
+#: etc/options.php:1451
 msgid "Connecticut"
 msgstr ""
 
-#: etc/options.php:1444
+#: etc/options.php:1452
 msgid "Delaware"
 msgstr ""
 
-#: etc/options.php:1445
+#: etc/options.php:1453
 msgid "District of Columbia"
 msgstr ""
 
-#: etc/options.php:1446
+#: etc/options.php:1454
 msgid "Florida"
 msgstr ""
 
-#: etc/options.php:1448
+#: etc/options.php:1456
 msgid "Hawaii"
 msgstr ""
 
-#: etc/options.php:1449
+#: etc/options.php:1457
 msgid "Idaho"
 msgstr ""
 
-#: etc/options.php:1450
+#: etc/options.php:1458
 msgid "Illinois"
 msgstr ""
 
-#: etc/options.php:1451
+#: etc/options.php:1459
 msgid "Indiana"
 msgstr ""
 
-#: etc/options.php:1452
+#: etc/options.php:1460
 msgid "Iowa"
 msgstr ""
 
-#: etc/options.php:1453
+#: etc/options.php:1461
 msgid "Kansas"
 msgstr ""
 
-#: etc/options.php:1454
+#: etc/options.php:1462
 msgid "Kentucky"
 msgstr ""
 
-#: etc/options.php:1455
+#: etc/options.php:1463
 msgid "Louisiana"
 msgstr ""
 
-#: etc/options.php:1456
+#: etc/options.php:1464
 msgid "Maine"
 msgstr ""
 
-#: etc/options.php:1457
+#: etc/options.php:1465
 msgid "Maryland"
 msgstr ""
 
-#: etc/options.php:1458
+#: etc/options.php:1466
 msgid "Massachusetts"
 msgstr ""
 
-#: etc/options.php:1459
+#: etc/options.php:1467
 msgid "Michigan"
 msgstr ""
 
-#: etc/options.php:1460
+#: etc/options.php:1468
 msgid "Minnesota"
 msgstr ""
 
-#: etc/options.php:1461
+#: etc/options.php:1469
 msgid "Mississippi"
 msgstr ""
 
-#: etc/options.php:1462
+#: etc/options.php:1470
 msgid "Missouri"
 msgstr ""
 
-#: etc/options.php:1463
+#: etc/options.php:1471
 msgid "Montana"
 msgstr ""
 
-#: etc/options.php:1464
+#: etc/options.php:1472
 msgid "Nebraska"
 msgstr ""
 
-#: etc/options.php:1465
+#: etc/options.php:1473
 msgid "Nevada"
 msgstr ""
 
-#: etc/options.php:1466
+#: etc/options.php:1474
 msgid "New Hampshire"
 msgstr ""
 
-#: etc/options.php:1467
+#: etc/options.php:1475
 msgid "New Jersey"
 msgstr ""
 
-#: etc/options.php:1468
+#: etc/options.php:1476
 msgid "New Mexico"
 msgstr ""
 
-#: etc/options.php:1469
+#: etc/options.php:1477
 msgid "New York"
 msgstr ""
 
-#: etc/options.php:1470
+#: etc/options.php:1478
 msgid "North Carolina"
 msgstr ""
 
-#: etc/options.php:1471
+#: etc/options.php:1479
 msgid "North Dakota"
 msgstr ""
 
-#: etc/options.php:1472
+#: etc/options.php:1480
 msgid "Ohio"
 msgstr ""
 
-#: etc/options.php:1473
+#: etc/options.php:1481
 msgid "Oklahoma"
 msgstr ""
 
-#: etc/options.php:1474
+#: etc/options.php:1482
 msgid "Oregon"
 msgstr ""
 
-#: etc/options.php:1475
+#: etc/options.php:1483
 msgid "Pennsylvania"
 msgstr ""
 
-#: etc/options.php:1476
+#: etc/options.php:1484
 msgid "Rhode Island"
 msgstr ""
 
-#: etc/options.php:1477
+#: etc/options.php:1485
 msgid "South Carolina"
 msgstr ""
 
-#: etc/options.php:1478
+#: etc/options.php:1486
 msgid "South Dakota"
 msgstr ""
 
-#: etc/options.php:1479
+#: etc/options.php:1487
 msgid "Tennessee"
 msgstr ""
 
-#: etc/options.php:1480
+#: etc/options.php:1488
 msgid "Texas"
 msgstr ""
 
-#: etc/options.php:1481
+#: etc/options.php:1489
 msgid "Utah"
 msgstr ""
 
-#: etc/options.php:1482
+#: etc/options.php:1490
 msgid "Vermont"
 msgstr ""
 
-#: etc/options.php:1483
+#: etc/options.php:1491
 msgid "Virginia"
 msgstr ""
 
-#: etc/options.php:1484
+#: etc/options.php:1492
 msgid "Washington"
 msgstr ""
 
-#: etc/options.php:1485
+#: etc/options.php:1493
 msgid "West Virginia"
 msgstr ""
 
-#: etc/options.php:1486
+#: etc/options.php:1494
 msgid "Wisconsin"
 msgstr ""
 
-#: etc/options.php:1487
+#: etc/options.php:1495
 msgid "Wyoming"
 msgstr ""
 
-#: etc/options.php:1493
+#: etc/options.php:1501
 msgid "Alberta"
 msgstr ""
 
-#: etc/options.php:1494
+#: etc/options.php:1502
 msgid "British Columbia"
 msgstr ""
 
-#: etc/options.php:1495
+#: etc/options.php:1503
 msgid "Manitoba"
 msgstr ""
 
-#: etc/options.php:1496
+#: etc/options.php:1504
 msgid "New Brunswick"
 msgstr ""
 
-#: etc/options.php:1497
+#: etc/options.php:1505
 msgid "Newfoundland and Labrador"
 msgstr ""
 
-#: etc/options.php:1498
+#: etc/options.php:1506
 msgid "Northwest Territories"
 msgstr ""
 
-#: etc/options.php:1499
+#: etc/options.php:1507
 msgid "Nova Scotia"
 msgstr ""
 
-#: etc/options.php:1500
+#: etc/options.php:1508
 msgid "Nunavut"
 msgstr ""
 
-#: etc/options.php:1501
+#: etc/options.php:1509
 msgid "Ontario"
 msgstr ""
 
-#: etc/options.php:1502
+#: etc/options.php:1510
 msgid "Prince Edward Island"
 msgstr ""
 
-#: etc/options.php:1503
+#: etc/options.php:1511
 msgid "Quebec"
 msgstr ""
 
-#: etc/options.php:1504
+#: etc/options.php:1512
 msgid "Saskatchewan"
 msgstr ""
 
-#: etc/options.php:1505
+#: etc/options.php:1513
 msgid "Yukon"
 msgstr ""
 
-#: etc/options.php:1511 etc/options.php:1512
+#: etc/options.php:1519 etc/options.php:1520
 msgid "New South Wales"
 msgstr ""
 
-#: etc/options.php:1513
+#: etc/options.php:1521
 msgid "Northern Territory"
 msgstr ""
 
-#: etc/options.php:1514 etc/options.php:1515
+#: etc/options.php:1522 etc/options.php:1523
 msgid "Queensland"
 msgstr ""
 
-#: etc/options.php:1516
+#: etc/options.php:1524
 msgid "South Australia"
 msgstr ""
 
-#: etc/options.php:1517 etc/options.php:1518
+#: etc/options.php:1525 etc/options.php:1526
 msgid "Tasmania"
 msgstr ""
 
-#: etc/options.php:1519 etc/options.php:1520
+#: etc/options.php:1527 etc/options.php:1528
 msgid "Victoria"
 msgstr ""
 
-#: etc/options.php:1521
+#: etc/options.php:1529
 msgid "Western Australia"
 msgstr ""
 
@@ -1767,8 +1771,8 @@ msgstr ""
 #: includes/iworks/fleet/posttypes/boat.php:433
 #: includes/iworks/fleet/posttypes/boat.php:472
 #: includes/iworks/fleet/posttypes/person.php:210
-#: includes/iworks/fleet/posttypes/result.php:1392
-#: includes/iworks/fleet/posttypes.php:306
+#: includes/iworks/fleet/posttypes/result.php:1399
+#: includes/iworks/fleet/posttypes.php:311
 msgid "Choose from the most used"
 msgstr ""
 
@@ -1785,8 +1789,8 @@ msgstr ""
 #: includes/iworks/fleet/posttypes/boat.php:436
 #: includes/iworks/fleet/posttypes/boat.php:475
 #: includes/iworks/fleet/posttypes/person.php:213
-#: includes/iworks/fleet/posttypes/result.php:1395
-#: includes/iworks/fleet/posttypes.php:309
+#: includes/iworks/fleet/posttypes/result.php:1402
+#: includes/iworks/fleet/posttypes.php:314
 msgid "Not Found"
 msgstr ""
 
@@ -1855,9 +1859,9 @@ msgstr ""
 #: includes/iworks/fleet/posttypes/boat.php:162
 #: includes/iworks/fleet/posttypes/boat.php:614
 #: includes/iworks/fleet/posttypes/boat.php:1218
-#: includes/iworks/fleet/posttypes/result.php:1519
-#: includes/iworks/fleet/posttypes/result.php:1534
-#: includes/iworks/fleet/posttypes/result.php:1762
+#: includes/iworks/fleet/posttypes/result.php:1526
+#: includes/iworks/fleet/posttypes/result.php:1541
+#: includes/iworks/fleet/posttypes/result.php:1769
 msgid "Location"
 msgstr ""
 
@@ -1927,28 +1931,28 @@ msgid "Instagram"
 msgstr ""
 
 #: includes/iworks/fleet/posttypes/boat.php:315
-#: includes/iworks/fleet/posttypes/result.php:1327
+#: includes/iworks/fleet/posttypes/result.php:1334
 msgid "5O5"
 msgstr ""
 
 #: includes/iworks/fleet/posttypes/boat.php:316
 #: includes/iworks/fleet/posttypes/boat.php:357
-#: includes/iworks/fleet/posttypes/result.php:470
-#: includes/iworks/fleet/posttypes/result.php:496
-#: includes/iworks/fleet/posttypes/result.php:1127
-#: includes/iworks/fleet/posttypes/result.php:1843
-#: includes/iworks/fleet/posttypes/result.php:2435
+#: includes/iworks/fleet/posttypes/result.php:475
+#: includes/iworks/fleet/posttypes/result.php:501
+#: includes/iworks/fleet/posttypes/result.php:1132
+#: includes/iworks/fleet/posttypes/result.php:1850
+#: includes/iworks/fleet/posttypes/result.php:2443
 msgid "Boat"
 msgstr ""
 
 #: includes/iworks/fleet/posttypes/boat.php:318
 #: includes/iworks/fleet/posttypes/person.php:146
-#: includes/iworks/fleet/posttypes/result.php:1330
+#: includes/iworks/fleet/posttypes/result.php:1337
 msgid "Item Attributes"
 msgstr ""
 
 #: includes/iworks/fleet/posttypes/boat.php:321
-#: includes/iworks/fleet/posttypes/result.php:1333
+#: includes/iworks/fleet/posttypes/result.php:1340
 msgid "Add New"
 msgstr ""
 
@@ -1978,67 +1982,67 @@ msgstr ""
 
 #: includes/iworks/fleet/posttypes/boat.php:328
 #: includes/iworks/fleet/posttypes/person.php:156
-#: includes/iworks/fleet/posttypes/result.php:1340
+#: includes/iworks/fleet/posttypes/result.php:1347
 msgid "Not found"
 msgstr ""
 
 #: includes/iworks/fleet/posttypes/boat.php:329
 #: includes/iworks/fleet/posttypes/person.php:157
-#: includes/iworks/fleet/posttypes/result.php:1341
+#: includes/iworks/fleet/posttypes/result.php:1348
 msgid "Not found in Trash"
 msgstr ""
 
 #: includes/iworks/fleet/posttypes/boat.php:330
 #: includes/iworks/fleet/posttypes/person.php:158
-#: includes/iworks/fleet/posttypes/result.php:1342
+#: includes/iworks/fleet/posttypes/result.php:1349
 msgid "Featured Image"
 msgstr ""
 
 #: includes/iworks/fleet/posttypes/boat.php:331
 #: includes/iworks/fleet/posttypes/person.php:159
-#: includes/iworks/fleet/posttypes/result.php:1343
+#: includes/iworks/fleet/posttypes/result.php:1350
 msgid "Set featured image"
 msgstr ""
 
 #: includes/iworks/fleet/posttypes/boat.php:332
 #: includes/iworks/fleet/posttypes/person.php:160
-#: includes/iworks/fleet/posttypes/result.php:1344
+#: includes/iworks/fleet/posttypes/result.php:1351
 msgid "Remove featured image"
 msgstr ""
 
 #: includes/iworks/fleet/posttypes/boat.php:333
 #: includes/iworks/fleet/posttypes/person.php:161
-#: includes/iworks/fleet/posttypes/result.php:1345
+#: includes/iworks/fleet/posttypes/result.php:1352
 msgid "Use as featured image"
 msgstr ""
 
 #: includes/iworks/fleet/posttypes/boat.php:334
 #: includes/iworks/fleet/posttypes/person.php:162
-#: includes/iworks/fleet/posttypes/result.php:1346
+#: includes/iworks/fleet/posttypes/result.php:1353
 msgid "Insert into item"
 msgstr ""
 
 #: includes/iworks/fleet/posttypes/boat.php:335
 #: includes/iworks/fleet/posttypes/person.php:163
-#: includes/iworks/fleet/posttypes/result.php:1347
+#: includes/iworks/fleet/posttypes/result.php:1354
 msgid "Uploaded to this item"
 msgstr ""
 
 #: includes/iworks/fleet/posttypes/boat.php:336
 #: includes/iworks/fleet/posttypes/person.php:164
-#: includes/iworks/fleet/posttypes/result.php:1348
+#: includes/iworks/fleet/posttypes/result.php:1355
 msgid "Items list"
 msgstr ""
 
 #: includes/iworks/fleet/posttypes/boat.php:337
 #: includes/iworks/fleet/posttypes/person.php:165
-#: includes/iworks/fleet/posttypes/result.php:1349
+#: includes/iworks/fleet/posttypes/result.php:1356
 msgid "Items list navigation"
 msgstr ""
 
 #: includes/iworks/fleet/posttypes/boat.php:338
 #: includes/iworks/fleet/posttypes/person.php:166
-#: includes/iworks/fleet/posttypes/result.php:1350
+#: includes/iworks/fleet/posttypes/result.php:1357
 msgid "Filter items list"
 msgstr ""
 
@@ -2074,7 +2078,7 @@ msgstr ""
 #: includes/iworks/fleet/posttypes/boat.php:431
 #: includes/iworks/fleet/posttypes/boat.php:470
 #: includes/iworks/fleet/posttypes/person.php:208
-#: includes/iworks/fleet/posttypes/result.php:1390
+#: includes/iworks/fleet/posttypes/result.php:1397
 msgid "Separate items with commas"
 msgstr ""
 
@@ -2203,9 +2207,9 @@ msgstr ""
 
 #: includes/iworks/fleet/posttypes/boat.php:610
 #: includes/iworks/fleet/posttypes/person.php:291
-#: includes/iworks/fleet/posttypes/result.php:469
-#: includes/iworks/fleet/posttypes/result.php:1126
-#: includes/iworks/fleet/posttypes/result.php:1245
+#: includes/iworks/fleet/posttypes/result.php:474
+#: includes/iworks/fleet/posttypes/result.php:1131
+#: includes/iworks/fleet/posttypes/result.php:1251
 msgid "Name"
 msgstr ""
 
@@ -2239,22 +2243,22 @@ msgstr ""
 #: includes/iworks/fleet/posttypes/boat.php:805
 #: includes/iworks/fleet/posttypes/boat.php:820
 #: includes/iworks/fleet/posttypes/boat.php:918
-#: includes/iworks/fleet/posttypes/result.php:471
-#: includes/iworks/fleet/posttypes/result.php:1128
-#: includes/iworks/fleet/posttypes/result.php:1246
-#: includes/iworks/fleet/posttypes/result.php:1844
+#: includes/iworks/fleet/posttypes/result.php:476
+#: includes/iworks/fleet/posttypes/result.php:1133
+#: includes/iworks/fleet/posttypes/result.php:1252
+#: includes/iworks/fleet/posttypes/result.php:1851
 msgid "Helmsman"
 msgstr ""
 
 #: includes/iworks/fleet/posttypes/boat.php:807
 #: includes/iworks/fleet/posttypes/boat.php:821
 #: includes/iworks/fleet/posttypes/boat.php:919
-#: includes/iworks/fleet/posttypes/result.php:472
-#: includes/iworks/fleet/posttypes/result.php:498
-#: includes/iworks/fleet/posttypes/result.php:1129
-#: includes/iworks/fleet/posttypes/result.php:1247
-#: includes/iworks/fleet/posttypes/result.php:1845
-#: includes/iworks/fleet/posttypes/result.php:2437
+#: includes/iworks/fleet/posttypes/result.php:477
+#: includes/iworks/fleet/posttypes/result.php:503
+#: includes/iworks/fleet/posttypes/result.php:1134
+#: includes/iworks/fleet/posttypes/result.php:1253
+#: includes/iworks/fleet/posttypes/result.php:1852
+#: includes/iworks/fleet/posttypes/result.php:2445
 msgid "Crew"
 msgstr ""
 
@@ -2289,7 +2293,7 @@ msgstr ""
 
 #: includes/iworks/fleet/posttypes/boat.php:973
 #: includes/iworks/fleet/posttypes/boat.php:1014
-#: includes/iworks/fleet/posttypes/result.php:1450
+#: includes/iworks/fleet/posttypes/result.php:1457
 msgid "Delete"
 msgstr ""
 
@@ -2302,12 +2306,12 @@ msgid "Add a crew"
 msgstr ""
 
 #: includes/iworks/fleet/posttypes/boat.php:1005
-#: includes/iworks/fleet/posttypes/result.php:1441
+#: includes/iworks/fleet/posttypes/result.php:1448
 msgid "Select a helmsman"
 msgstr ""
 
 #: includes/iworks/fleet/posttypes/boat.php:1010
-#: includes/iworks/fleet/posttypes/result.php:1446
+#: includes/iworks/fleet/posttypes/result.php:1453
 msgid "Select a crew"
 msgstr ""
 
@@ -2479,461 +2483,465 @@ msgstr ""
 msgid "Read more about sailor"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/person.php:632
+#: includes/iworks/fleet/posttypes/person.php:640
 msgid "Sail on %s as helmsman."
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/person.php:639
+#: includes/iworks/fleet/posttypes/person.php:647
 msgid "Sail on %s as crew."
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/person.php:655
+#: includes/iworks/fleet/posttypes/person.php:663
 msgid "Sailed on %s as helmsman."
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/person.php:666
+#: includes/iworks/fleet/posttypes/person.php:674
 msgid "Sailed on %s as crew."
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/person.php:673
+#: includes/iworks/fleet/posttypes/person.php:681
 msgid "Sail or sailed"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:100
+#: includes/iworks/fleet/posttypes/result.php:104
 msgid "English name"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:104
-#: includes/iworks/fleet/posttypes/result.php:542
+#: includes/iworks/fleet/posttypes/result.php:108
+#: includes/iworks/fleet/posttypes/result.php:547
 msgid "Area"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:107
+#: includes/iworks/fleet/posttypes/result.php:111
 msgid "Organizer"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:108
+#: includes/iworks/fleet/posttypes/result.php:112
 msgid "Secretary"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:109
+#: includes/iworks/fleet/posttypes/result.php:113
 msgid "Arbiter"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:112
+#: includes/iworks/fleet/posttypes/result.php:116
 msgid "Event start"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:117
+#: includes/iworks/fleet/posttypes/result.php:121
 msgid "Event end"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:122
+#: includes/iworks/fleet/posttypes/result.php:126
 msgid "Number of races"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:127
-#: includes/iworks/fleet/posttypes/result.php:474
+#: includes/iworks/fleet/posttypes/result.php:131
+#: includes/iworks/fleet/posttypes/result.php:479
 msgid "Number of competitors"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:130
+#: includes/iworks/fleet/posttypes/result.php:134
 msgid "Wind direction"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:131
+#: includes/iworks/fleet/posttypes/result.php:135
 msgid "Wind power"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:133
+#: includes/iworks/fleet/posttypes/result.php:137
 msgid "Custom columns name"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:135
+#: includes/iworks/fleet/posttypes/result.php:139
 msgid "Add one column per line if you want to have a custom race column header."
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:298
+#: includes/iworks/fleet/posttypes/result.php:303
 msgid "Trophies"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:359
+#: includes/iworks/fleet/posttypes/result.php:364
 msgid "Please select some file first!"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:467
+#: includes/iworks/fleet/posttypes/result.php:472
 msgid "Date start"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:468
+#: includes/iworks/fleet/posttypes/result.php:473
 msgid "Date end"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:473
-#: includes/iworks/fleet/posttypes/result.php:495
-#: includes/iworks/fleet/posttypes/result.php:1842
+#: includes/iworks/fleet/posttypes/result.php:478
+#: includes/iworks/fleet/posttypes/result.php:500
+#: includes/iworks/fleet/posttypes/result.php:1849
 msgid "Place"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:475
-#: includes/iworks/fleet/posttypes/result.php:1132
-#: includes/iworks/fleet/posttypes/result.php:1250
-#: includes/iworks/fleet/posttypes/result.php:2439
+#: includes/iworks/fleet/posttypes/result.php:480
+#: includes/iworks/fleet/posttypes/result.php:1137
+#: includes/iworks/fleet/posttypes/result.php:1256
+#: includes/iworks/fleet/posttypes/result.php:2447
 msgid "Points"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:497
-#: includes/iworks/fleet/posttypes/result.php:2436
+#: includes/iworks/fleet/posttypes/result.php:502
+#: includes/iworks/fleet/posttypes/result.php:2444
 msgid "Helm"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:503
-#: includes/iworks/fleet/posttypes/result.php:1864
+#: includes/iworks/fleet/posttypes/result.php:508
+#: includes/iworks/fleet/posttypes/result.php:1871
 msgid "Sum"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:536
+#: includes/iworks/fleet/posttypes/result.php:541
 msgid "Dates"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:540
+#: includes/iworks/fleet/posttypes/result.php:545
 msgid "Title"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:544
+#: includes/iworks/fleet/posttypes/result.php:549
 msgid "Races"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:545
+#: includes/iworks/fleet/posttypes/result.php:550
 msgid "Teams"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:769
+#: includes/iworks/fleet/posttypes/result.php:774
 msgid "No race results."
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:789
+#: includes/iworks/fleet/posttypes/result.php:794
 msgid "There is no results."
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:908
+#: includes/iworks/fleet/posttypes/result.php:913
 msgid "Start date is not set."
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:994
+#: includes/iworks/fleet/posttypes/result.php:999
 msgid "As a helmsman in %1$s in the %2$s on %3$s"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:1001
+#: includes/iworks/fleet/posttypes/result.php:1006
 msgid "As a crew in %1$s in the %2$s on %3$s"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:1008
+#: includes/iworks/fleet/posttypes/result.php:1013
 msgid "In %1$s in the %2$s on %3$s"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:1099
+#: includes/iworks/fleet/posttypes/result.php:1104
 msgid "There is no register regatta for this sailor."
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:1121
-#: includes/iworks/fleet/posttypes/result.php:1240
-#: includes/iworks/fleet/posttypes/result.php:1836
+#: includes/iworks/fleet/posttypes/result.php:1126
+#: includes/iworks/fleet/posttypes/result.php:1246
+#: includes/iworks/fleet/posttypes/result.php:1843
 msgid "Download"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:1125
-#: includes/iworks/fleet/posttypes/result.php:1244
-#: includes/iworks/fleet/posttypes/result.php:1520
-#: includes/iworks/fleet/posttypes/result.php:1535
+#: includes/iworks/fleet/posttypes/result.php:1130
+#: includes/iworks/fleet/posttypes/result.php:1250
+#: includes/iworks/fleet/posttypes/result.php:1527
+#: includes/iworks/fleet/posttypes/result.php:1542
 msgid "Year"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:1130
-#: includes/iworks/fleet/posttypes/result.php:1248
+#: includes/iworks/fleet/posttypes/result.php:1135
+#: includes/iworks/fleet/posttypes/result.php:1254
 msgid "Place (of)"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:1209
-#: includes/iworks/fleet/posttypes/result.php:1302
+#: includes/iworks/fleet/posttypes/result.php:1215
+#: includes/iworks/fleet/posttypes/result.php:1309
 msgid "Regatta list"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:1328
-#: includes/iworks/fleet/posttypes/result.php:1353
+#: includes/iworks/fleet/posttypes/result.php:1335
+#: includes/iworks/fleet/posttypes/result.php:1360
 msgid "Result"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:1332
+#: includes/iworks/fleet/posttypes/result.php:1339
 msgid "Add New Result"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:1334
+#: includes/iworks/fleet/posttypes/result.php:1341
 msgid "New Result"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:1335
+#: includes/iworks/fleet/posttypes/result.php:1342
 msgid "Edit Result"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:1336
+#: includes/iworks/fleet/posttypes/result.php:1343
 msgid "Update Result"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:1337
+#: includes/iworks/fleet/posttypes/result.php:1344
 msgid "View Result"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:1338
+#: includes/iworks/fleet/posttypes/result.php:1345
 msgid "View Results"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:1339
+#: includes/iworks/fleet/posttypes/result.php:1346
 msgid "Search Result"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:1383
+#: includes/iworks/fleet/posttypes/result.php:1390
 msgid "Serie"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:1384
+#: includes/iworks/fleet/posttypes/result.php:1391
 msgid "All Series"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:1385
+#: includes/iworks/fleet/posttypes/result.php:1392
 msgid "New Serie Name"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:1386
+#: includes/iworks/fleet/posttypes/result.php:1393
 msgid "Add New Serie"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:1387
+#: includes/iworks/fleet/posttypes/result.php:1394
 msgid "Edit Serie"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:1388
+#: includes/iworks/fleet/posttypes/result.php:1395
 msgid "Update Serie"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:1389
+#: includes/iworks/fleet/posttypes/result.php:1396
 msgid "View Serie"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:1391
+#: includes/iworks/fleet/posttypes/result.php:1398
 msgid "Add or remove series"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:1393
+#: includes/iworks/fleet/posttypes/result.php:1400
 msgid "Popular Series"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:1394
+#: includes/iworks/fleet/posttypes/result.php:1401
 msgid "Search Series"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:1396
+#: includes/iworks/fleet/posttypes/result.php:1403
 msgid "No series"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:1397
+#: includes/iworks/fleet/posttypes/result.php:1404
 msgid "Series list"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:1398
+#: includes/iworks/fleet/posttypes/result.php:1405
 msgid "Series list navigation"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:1428
+#: includes/iworks/fleet/posttypes/result.php:1435
 msgid "Result data"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:1429
+#: includes/iworks/fleet/posttypes/result.php:1436
 msgid "Races data"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:1466
+#: includes/iworks/fleet/posttypes/result.php:1473
 msgid "Import regatta results!"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:1467
+#: includes/iworks/fleet/posttypes/result.php:1474
 msgid ""
 "CSV file with fields: Nation, Boat, Helm. Crew(s), Club, R1, R..n, "
 "any-fileds, netto points, place."
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:1804
+#: includes/iworks/fleet/posttypes/result.php:1811
 msgid "Show meta"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:1818
+#: includes/iworks/fleet/posttypes/result.php:1825
 msgid "There is no race data."
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:2044
+#: includes/iworks/fleet/posttypes/result.php:2052
 msgid "Edit Sailor - Missing Birth Year"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:2194
+#: includes/iworks/fleet/posttypes/result.php:2202
 msgid "Ranking"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:2207
+#: includes/iworks/fleet/posttypes/result.php:2215
 msgid "Please setup year attribute first!"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:2214
+#: includes/iworks/fleet/posttypes/result.php:2222
 msgid "Please setup serie attribute first!"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:2263
+#: includes/iworks/fleet/posttypes/result.php:2271
 msgid "Currently we do not have anny results!"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:2434
+#: includes/iworks/fleet/posttypes/result.php:2442
 msgid "#"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:2451
+#: includes/iworks/fleet/posttypes/result.php:2459
 msgid "brutto"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:2452
+#: includes/iworks/fleet/posttypes/result.php:2460
 msgid "netto"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:2583
+#: includes/iworks/fleet/posttypes/result.php:2591
 msgid "Year: %s"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:2667
+#: includes/iworks/fleet/posttypes/result.php:2675
 msgid "Last added"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:2779
+#: includes/iworks/fleet/posttypes/result.php:2787
 msgid "Regatta results by year"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:2787
+#: includes/iworks/fleet/posttypes/result.php:2795
 msgid "Number of result: %d"
 msgid_plural "Number of results: %d"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/iworks/fleet/posttypes/result.php:2841
+#: includes/iworks/fleet/posttypes/result.php:2849
 msgid "Regatta results by country"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes.php:68
-msgid "World Champ"
+#: includes/iworks/fleet/posttypes/result.php:2974
+msgid "Places"
 msgstr ""
 
 #: includes/iworks/fleet/posttypes.php:69
-msgid "Continental Championship"
+msgid "World Champ"
 msgstr ""
 
 #: includes/iworks/fleet/posttypes.php:70
+msgid "Continental Championship"
+msgstr ""
+
+#: includes/iworks/fleet/posttypes.php:71
 msgid "National Championship"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes.php:298
+#: includes/iworks/fleet/posttypes.php:303
 msgid "All Locations"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes.php:299
+#: includes/iworks/fleet/posttypes.php:304
 msgid "New Location Name"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes.php:300
+#: includes/iworks/fleet/posttypes.php:305
 msgid "Add New Location"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes.php:301
+#: includes/iworks/fleet/posttypes.php:306
 msgid "Edit Location"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes.php:302
+#: includes/iworks/fleet/posttypes.php:307
 msgid "Update Location"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes.php:303
+#: includes/iworks/fleet/posttypes.php:308
 msgid "View Location"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes.php:304
+#: includes/iworks/fleet/posttypes.php:309
 msgid "Separate Locations with commas"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes.php:305
+#: includes/iworks/fleet/posttypes.php:310
 msgid "Add or remove Locations"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes.php:307
+#: includes/iworks/fleet/posttypes.php:312
 msgid "Popular Locations"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes.php:308
+#: includes/iworks/fleet/posttypes.php:313
 msgid "Search Locations"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes.php:310
+#: includes/iworks/fleet/posttypes.php:315
 msgid "No Locations"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes.php:311
+#: includes/iworks/fleet/posttypes.php:316
 msgid "Locations list"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes.php:312
+#: includes/iworks/fleet/posttypes.php:317
 msgid "Locations list navigation"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes.php:427
+#: includes/iworks/fleet/posttypes.php:432
 msgid "select nation"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes.php:453
+#: includes/iworks/fleet/posttypes.php:458
 msgid "Missing MNA county code."
 msgstr ""
 
-#: includes/iworks/fleet/posttypes.php:466
+#: includes/iworks/fleet/posttypes.php:471
 msgid "select color"
 msgstr ""
 
-#: includes/iworks/options/options.php:251
+#: includes/iworks/options/options.php:258
 msgid "An error occurred while getting the configuration."
 msgstr ""
 
-#: includes/iworks/options/options.php:754
-#: includes/iworks/options/options.php:1751
+#: includes/iworks/options/options.php:761
+#: includes/iworks/options/options.php:1758
 msgid "Select Image"
 msgstr ""
 
-#: includes/iworks/options/options.php:759
+#: includes/iworks/options/options.php:766
 msgid "Delete image"
 msgstr ""
 
-#: includes/iworks/options/options.php:845
+#: includes/iworks/options/options.php:852
 msgid "Save Changes"
 msgstr ""
 
-#: includes/iworks/options/options.php:1646
+#: includes/iworks/options/options.php:1653
 msgid "City"
 msgstr ""
 
-#: includes/iworks/options/options.php:1647
+#: includes/iworks/options/options.php:1654
 msgid "Street"
 msgstr ""
 
-#: includes/iworks/options/options.php:1648
+#: includes/iworks/options/options.php:1655
 msgid "ZIP code"
 msgstr ""
 
-#: includes/iworks/options/options.php:1804
+#: includes/iworks/options/options.php:1811
 msgid "OFF"
 msgstr ""
 
-#: includes/iworks/options/options.php:1805
+#: includes/iworks/options/options.php:1812
 msgid "ON"
 msgstr ""
 
@@ -3106,12 +3114,12 @@ msgctxt "Taxonomy General Name"
 msgid "Masts Manufacturers"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:1381
+#: includes/iworks/fleet/posttypes/result.php:1388
 msgctxt "Taxonomy General Name"
 msgid "Series"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes.php:295
+#: includes/iworks/fleet/posttypes.php:300
 msgctxt "Taxonomy General Name"
 msgid "Locations"
 msgstr ""
@@ -3136,12 +3144,12 @@ msgctxt "Taxonomy Singular Name"
 msgid "Masts Manufacturer"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:1382
+#: includes/iworks/fleet/posttypes/result.php:1389
 msgctxt "Taxonomy Singular Name"
 msgid "Serie"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes.php:296
+#: includes/iworks/fleet/posttypes.php:301
 msgctxt "Taxonomy Singular Name"
 msgid "Location"
 msgstr ""
@@ -3181,7 +3189,7 @@ msgctxt "slug for archive"
 msgid "fleet-persons"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:1367
+#: includes/iworks/fleet/posttypes/result.php:1374
 msgctxt "slug for archive"
 msgid "results"
 msgstr ""
@@ -3244,30 +3252,30 @@ msgctxt "Person name on crews list if it is not set"
 msgid "not set"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:1325
+#: includes/iworks/fleet/posttypes/result.php:1332
 msgctxt "Result General Name"
 msgid "Results"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:1326
+#: includes/iworks/fleet/posttypes/result.php:1333
 msgctxt "Result Singular Name"
 msgid "Result"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:1373
+#: includes/iworks/fleet/posttypes/result.php:1380
 msgctxt "slug for single result"
 msgid "result"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:2550
-#: includes/iworks/fleet/posttypes/result.php:2555
-#: includes/iworks/fleet/posttypes/result.php:2891
+#: includes/iworks/fleet/posttypes/result.php:2558
+#: includes/iworks/fleet/posttypes/result.php:2563
 #: includes/iworks/fleet/posttypes/result.php:2899
+#: includes/iworks/fleet/posttypes/result.php:2907
 msgctxt "rewrite rule handler for results"
 msgid "results"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/result.php:2738
+#: includes/iworks/fleet/posttypes/result.php:2746
 msgctxt "all of taxonomy link title"
 msgid "Show more: %s"
 msgstr ""
