@@ -589,10 +589,10 @@ class iworks_fleet_posttypes {
 		);
 		$content .= ' &#8212; ';
 		$content .= sprintf(
-			'<span class="fleet-stats-row-value">%d</td>',
+			'<span class="fleet-stats-row-value">%d</span>',
 			wp_count_posts( $this->post_type_name )->publish
 		);
-		$content .= '</tr>';
+		$content .= '</li>';
 		return $content;
 	}
 

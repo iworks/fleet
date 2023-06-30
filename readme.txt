@@ -43,6 +43,13 @@ There are 3 ways to install this plugin:
 
 == Changelog ==
 
+= 2.1.5 (2023-06-30) =
+
+* The [iWorks Options](https://github.com/iworks/wordpress-options-class) module has been updated to 2.8.5.
+* The [iWorks Rate](https://github.com/iworks/iworks-rate) module has been updated to 2.1.2.
+* The statistics HTML has been fixed.
+* Unnecessary trailing slashes have been removed.
+
 = 2.1.4 (2023-06-16) =
 
 * The statistics module has been added.

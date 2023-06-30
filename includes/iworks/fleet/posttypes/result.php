@@ -2537,7 +2537,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 				continue;
 			}
 			if ( ! empty( $content ) ) {
-				$content .= '<br />';
+				$content .= '<br>';
 			}
 			$content .= sprintf(
 				'<a href="%s">%s</a>',
@@ -2814,7 +2814,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			return '';
 		}
 		return sprintf(
-			'<br /><small class="fleet-en-name">%s</small>',
+			'<br><small class="fleet-en-name">%s</small>',
 			$en
 		);
 	}
