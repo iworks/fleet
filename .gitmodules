@@ -1,6 +1,6 @@
-[submodule "vendor/iworks/options"]
+[submodule "includes/iworks/options"]
 	path = includes/iworks/options
 	url = git@github.com:iworks/wordpress-options-class.git
-[submodule "vendor/iworks/rate"]
+[submodule "includes/iworks/rate"]
 	path = includes/iworks/rate
 	url = git@github.com:iworks/iworks-rate.git
