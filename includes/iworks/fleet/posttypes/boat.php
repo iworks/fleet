@@ -206,6 +206,12 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		 */
 		add_shortcode( 'fleet_boats_list', array( $this, 'shortcode_list' ) );
 		add_shortcode( 'boat', array( $this, 'shortcode_boat' ) );
+		/**
+		 * OG Plugin Integration
+		 *
+		 * @since 2.1.6
+		 */
+		add_filter( 'og_image_value', array( $this, 'filter_og_image_value_maybe_use_manufacturer_logo' ) );
 	}
 
 	public function shortcode_list( $atts ) {
@@ -1655,6 +1661,17 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 			}
 		}
 		return $content;
+	}
+
+	/**
+	 * OG Plugin Integration: add Manufacturer Logo
+	 *
+	 * @since 2.1.6
+	 */
+	public function filter_og_image_value_maybe_use_manufacturer_logo( $data ) {
+		if ( is_singular( $this->post_type_name ) ) {
+		}
+		return $data;
 	}
 }
 
