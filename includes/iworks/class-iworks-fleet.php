@@ -36,6 +36,13 @@ class iworks_fleet extends iworks {
 	private $blocks;
 	protected $options;
 
+	/**
+	 * integrations objects
+	 *
+	 * @since 2.1.6
+	 */
+	private $objects = array();
+
 	public function __construct() {
 		parent::__construct();
 		$this->options    = iworks_fleet_get_options_object();
@@ -66,6 +73,7 @@ class iworks_fleet extends iworks {
 		add_action( 'init', array( $this, 'db_install' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'register_styles' ), 0 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ) );
+		add_action( 'plugins_loaded', array( $this, 'action_plugins_loaded' ) );
 		/**
 		 * custom theme
 		 */
@@ -443,5 +451,29 @@ class iworks_fleet extends iworks {
 			return plugin_dir_url( dirname( dirname( __FILE__ ) ) ) . '/assets/images/logo.svg';
 		}
 		return $logo;
+	}
+
+	/**
+	 * load integrations
+	 *
+	 * @since 2.1.6
+	 */
+	public function action_plugins_loaded() {
+		$dir = dirname( __FILE__ ) . '/fleet';
+		/**
+		 * og
+		 *
+		 * @since 2.1.6
+		 */
+		if ( class_exists( 'iWorks_OpenGraph' ) ) {
+			include_once $dir . '/integration/class-iworks-fleet-integration-og.php';
+			$this->objects['og'] = new iworks_fleet_integration_og();
+		}
+		/**
+		 * fleet loaded action
+		 *
+		 * @since 2.1.6
+		 */
+		do_action( 'fleet/loaded' );
 	}
 }

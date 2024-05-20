@@ -64,6 +64,12 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		add_filter( 'international_fleet_posted_on', array( $this, 'get_manufacturer' ), 10, 2 );
 		add_filter( 'posts_orderby', array( $this, 'posts_orderby_post_title' ), 10, 2 );
 		/**
+		 * get taxonomy Manufacturer
+		 *
+		 * @since 2.1.6
+		 */
+		add_filter( 'fleet/boat/get_manufacturer', array( $this, 'filter_get_manufacturer' ), 10, 2 );
+		/**
 		 * save post
 		 */
 		add_action( 'save_post', array( $this, 'add_thumbnail' ), 10, 3 );
@@ -1319,12 +1325,34 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		return $orderby;
 	}
 
+	/**
+	 * get terms by boad id
+	 *
+	 * @since 2.1.6
+	 */
+	public function get_manufacturers_list_by_post_id( $post_id ) {
+		return wp_get_post_terms( $post_id, $this->taxonomy_name_manufacturer );
+	}
+
+	/**
+	 * filter array to get terms
+	 *
+	 * @since 2,1.6
+	 */
+	public function filter_get_manufacturer( $terms, $post_id ) {
+		$valid_post_type = $this->check_post_type_by_id( $post_id );
+		if ( ! $valid_post_type ) {
+			return $content;
+		}
+		return $this->get_manufacturers_list_by_post_id( $post_id );
+	}
+
 	public function get_manufacturer( $content, $post_id ) {
 		$valid_post_type = $this->check_post_type_by_id( $post_id );
 		if ( ! $valid_post_type ) {
 			return $content;
 		}
-		$terms = wp_get_post_terms( $post_id, $this->taxonomy_name_manufacturer );
+		$terms = $this->get_manufacturers_list_by_post_id( $post_id );
 		$t     = array();
 		foreach ( $terms as $term ) {
 			$t[] = $term->name;
