@@ -1,7 +1,7 @@
 === PLUGIN_TITLE ===
 Contributors: iworks
 Donate link: https://ko-fi.com/iworks?utm_source=simple-revision-control&utm_medium=readme-donate
-Tags: fleet, result, boat, crew, team, sport, sailing
+Tags: fleet, result, team, sport, sailing
 Requires at least: PLUGIN_REQUIRES_WORDPRESS
 Tested up to: PLUGIN_TESTED_WORDPRESS
 Stable tag: PLUGIN_VERSION
@@ -43,9 +43,11 @@ There are 3 ways to install this plugin:
 
 == Changelog ==
 
-= 2.1.6 (2023-12-xx) =
-* The [iWorks Options](https://github.com/iworks/wordpress-options-class) module has been updated to 2.8.9.
-* The [iWorks Rate](https://github.com/iworks/iworks-rate) module has been updated to 2.1.5.
+= 2.1.6 (2024-05-20) =
+* The [OG — Better Share on Social Media Plugin](https://wordpress.org/plugins/og/) has been added.
+* The class for single race has been added.
+* The [iWorks Options](https://github.com/iworks/wordpress-options-class) module has been updated to 2.9.2.
+* The [iWorks Rate](https://github.com/iworks/iworks-rate) module has been updated to 2.1.9.
 
 = 2.1.5 (2023-06-30) =
 

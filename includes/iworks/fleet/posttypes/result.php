@@ -1964,11 +1964,22 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 					if ( '0' === $race_points ) {
 						$race_points = '&ndash;';
 					}
-					$class        = preg_match( '/\*/', $race_points ) ? 'race-discard' : '';
+					$classes = array(
+						'race',
+						sprintf( 'race-%d', $race_number ),
+					);
+					if ( preg_match( '/\*/', $race_points ) ) {
+						$classes[] = 'race-discard';
+					}
+					if ( intval( $race_points ) > 0 && intval( $race_points ) < 4 ) {
+						$classes[] = sprintf(
+							'race-result-%d',
+							intval( $race_points )
+						);
+					}
 					$one_content .= sprintf(
-						'<td class="race race-%d %s">%s</td>',
-						esc_attr( $race_number ),
-						esc_attr( $class ),
+						'<td class="%s">%s</td>',
+						esc_attr( implode( ' ', $classes ) ),
 						$race_points
 					);
 				}
