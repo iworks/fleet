@@ -3,7 +3,7 @@
     "title": "Fleet Manager",
     "tagline": "The sailboat manager makes it possible to manage boats, sailors, regattas and their results.",
     "description": "The sailboat manager makes it possible to manage boats, sailors, regattas and their results.",
-    "version": "2.1.5",
+    "version": "2.1.6",
     "homepage": "http://iworks.pl/en/plugins/fleet/",
     "author": [
         {
@@ -14,10 +14,10 @@
     ],
     "requires": {
         "WordPress": "5.0",
-        "PHP": "7.4"
+        "PHP": "8.0"
     },
     "tested": {
-        "WordPress": "6.2"
+        "WordPress": "6.5"
     },
     "devDependencies": {
         "grunt": "^1",
