@@ -43,6 +43,9 @@ There are 3 ways to install this plugin:
 
 == Changelog ==
 
+= 2.1.6 (2024-06-21) =
+* The "fleet_regattas_list_years" shortcode function params have been fixed. It has wrong order.
+
 = 2.1.6 (2024-05-20) =
 * The [OG — Better Share on Social Media Plugin](https://wordpress.org/plugins/og/) has been added.
 * The class for single race has been added.

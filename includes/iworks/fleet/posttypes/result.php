@@ -2778,7 +2778,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		return $content;
 	}
 
-	public function shortcode_years_links( $content, $atts ) {
+	public function shortcode_years_links( $atts, $content = '' ) {
 		global $wpdb;
 		$sql   = sprintf(
 			'select substring( date_add(from_unixtime(0), interval meta_value second), 1, 4 ) as year, count(*) as counter from %s where meta_key = %%s and meta_value is not null group by 1 order by 1 desc',
