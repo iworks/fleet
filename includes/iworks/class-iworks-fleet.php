@@ -33,6 +33,7 @@ class iworks_fleet extends iworks {
 	private $post_type_boat;
 	private $post_type_person;
 	private $post_type_result;
+	private $post_type_ranking;
 	private $blocks;
 	protected $options;
 
@@ -41,7 +42,7 @@ class iworks_fleet extends iworks {
 	 *
 	 * @since 2.1.6
 	 */
-	private $objects = array();
+	protected $objects = array();
 
 	public function __construct() {
 		parent::__construct();
@@ -53,9 +54,9 @@ class iworks_fleet extends iworks {
 		/**
 		 * post_types
 		 */
-		$post_types = array( 'boat', 'person', 'result' );
+		$post_types = array( 'boat', 'person', 'result', 'ranking' );
 		foreach ( $post_types as $post_type ) {
-			include_once $this->base . '/iworks/fleet/posttypes/' . $post_type . '.php';
+			include_once $this->base . '/iworks/fleet/posttypes/class-iworks-fleet-posttypes-' . $post_type . '.php';
 			$class        = sprintf( 'iworks_fleet_posttypes_%s', $post_type );
 			$value        = sprintf( 'post_type_%s', $post_type );
 			$this->$value = new $class();

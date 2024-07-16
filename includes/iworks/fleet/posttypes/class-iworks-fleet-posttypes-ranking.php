@@ -22,7 +22,7 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-if ( class_exists( 'iworks_fleet_posttypes_person' ) ) {
+if ( class_exists( 'iworks_fleet_posttypes_ranking' ) ) {
 	return;
 }
 
@@ -30,7 +30,7 @@ require_once( dirname( dirname( __FILE__ ) ) . '/posttypes.php' );
 
 class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 
-	protected $post_type_name     = 'iworks_fleet_ranking';
+	protected $post_type_name = 'iworks_fleet_ranking';
 
 	public function __construct() {
 		parent::__construct();
@@ -43,7 +43,7 @@ class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 		 * fields
 		 */
 		$this->fields = array(
-			'personal' => array(
+			'ranking' => array(
 				'sailor_id'  => array(
 					'label' => __( 'World Sailing Sailor ID', 'fleet' ),
 				),
@@ -64,18 +64,6 @@ class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 					'label' => __( 'Birth Date', 'fleet' ),
 				),
 			),
-			'social'   => array(
-				'website'   => array( 'label' => __( 'Website', 'fleet' ) ),
-				'facebook'  => array( 'label' => __( 'Facebook', 'fleet' ) ),
-				'twitter'   => array( 'label' => __( 'Twitter', 'fleet' ) ),
-				'instagram' => array( 'label' => __( 'Instagram', 'fleet' ) ),
-				'endomondo' => array( 'label' => __( 'Endomondo', 'fleet' ) ),
-				'skype'     => array( 'label' => __( 'Skype', 'fleet' ) ),
-			),
-			'contact'  => array(
-				'mobile' => array( 'label' => __( 'Mobile', 'fleet' ) ),
-				'email'  => array( 'label' => __( 'E-mail', 'fleet' ) ),
-			),
 		);
 		/**
 		 * add class to metaboxes
@@ -87,10 +75,6 @@ class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 			$key = sprintf( 'postbox_classes_%s_%s', $this->get_name(), $name );
 			add_filter( $key, array( $this, 'add_defult_class_to_postbox' ) );
 		}
-		/**
-		 * Change tag link to person
-		 */
-		add_filter( 'term_link', array( $this, 'change_tag_link_to_person_link' ), 10, 3 );
 	}
 
 	/**
@@ -102,7 +86,14 @@ class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 	}
 
 	public function register() {
-		$parent       = true;
+		/**
+		 * Check iworks_options object
+		 */
+		if ( ! is_a( $this->options, 'iworks_options' ) ) {
+			return;
+		}
+		global $iworks_fleet;
+		$show_in_menu = add_query_arg( 'post_type', $iworks_fleet->get_post_type_name( 'person' ), 'edit.php' );
 		$this->labels = array(
 			'name'                  => _x( 'Rankings', 'Ranking General Name', 'fleet' ),
 			'singular_name'         => _x( 'Ranking', 'Ranking Singular Name', 'fleet' ),
@@ -118,7 +109,7 @@ class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 			'update_item'           => __( 'Update Ranking', 'fleet' ),
 			'view_item'             => __( 'View Ranking', 'fleet' ),
 			'view_items'            => __( 'View Rankings', 'fleet' ),
-			'search_items'          => __( 'Search person', 'fleet' ),
+			'search_items'          => __( 'Search ranking', 'fleet' ),
 			'not_found'             => __( 'Not found', 'fleet' ),
 			'not_found_in_trash'    => __( 'Not found in Trash', 'fleet' ),
 			'featured_image'        => __( 'Featured Image', 'fleet' ),
@@ -132,69 +123,27 @@ class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 			'filter_items_list'     => __( 'Filter items list', 'fleet' ),
 		);
 		$args         = array(
-			'label'                => __( 'person', 'fleet' ),
+			'label'                => __( 'ranking', 'fleet' ),
 			'labels'               => $this->labels,
 			'supports'             => array( 'title', 'editor', 'thumbnail', 'revision' ),
-			'taxonomies'           => array(
-				$this->taxonomy_name_club,
-				$this->taxonomy_name_location,
-			),
 			'hierarchical'         => false,
 			'public'               => true,
 			'show_ui'              => true,
-			'show_in_menu'         => $parent,
-			'show_in_admin_bar'    => true,
-			'show_in_nav_menus'    => true,
+			'show_in_menu'         => $show_in_menu,
+			'show_in_admin_bar'    => false,
+			'show_in_nav_menus'    => false,
 			'can_export'           => true,
-			'has_archive'          => _x( 'fleet-persons', 'slug for archive', 'fleet' ),
+			'has_archive'          => false,
 			'exclude_from_search'  => false,
-			'publicly_queryable'   => true,
+			'publicly_queryable'   => false,
 			'capability_type'      => 'page',
-			'menu_icon'            => 'dashicons-sos',
 			'register_meta_box_cb' => array( $this, 'register_meta_boxes' ),
 			'rewrite'              => array(
-				'slug' => _x( 'fleet-person', 'slug for single person', 'fleet' ),
+				'slug' => _x( 'fleet-ranking', 'slug for single ranking', 'fleet' ),
 			),
 		);
-		$args         = apply_filters( 'fleet_register_person_post_type_args', $args );
+		$args         = apply_filters( 'fleet_register_ranking_post_type_args', $args );
 		register_post_type( $this->post_type_name, $args );
-		/**
-		 * person hull club Taxonomy.
-		 */
-		$labels = array(
-			'name'                       => _x( 'Clubs', 'Club General Name', 'fleet' ),
-			'singular_name'              => _x( 'Club', 'Club Singular Name', 'fleet' ),
-			'menu_name'                  => __( 'Clubs', 'fleet' ),
-			'all_items'                  => __( 'Clubs', 'fleet' ),
-			'new_item_name'              => __( 'New Club Name', 'fleet' ),
-			'add_new_item'               => __( 'Add New Club', 'fleet' ),
-			'edit_item'                  => __( 'Edit Club', 'fleet' ),
-			'update_item'                => __( 'Update Club', 'fleet' ),
-			'view_item'                  => __( 'View Club', 'fleet' ),
-			'separate_items_with_commas' => __( 'Separate items with commas', 'fleet' ),
-			'add_or_remove_items'        => __( 'Add or remove items', 'fleet' ),
-			'choose_from_most_used'      => __( 'Choose from the most used', 'fleet' ),
-			'popular_items'              => __( 'Popular Clubs', 'fleet' ),
-			'search_items'               => __( 'Search Clubs', 'fleet' ),
-			'not_found'                  => __( 'Not Found', 'fleet' ),
-			'no_terms'                   => __( 'No items', 'fleet' ),
-			'items_list'                 => __( 'Clubs list', 'fleet' ),
-			'items_list_navigation'      => __( 'Clubs list navigation', 'fleet' ),
-		);
-		$args   = array(
-			'labels'             => $labels,
-			'hierarchical'       => false,
-			'public'             => true,
-			'show_admin_column'  => true,
-			'show_in_nav_menus'  => true,
-			'show_tagcloud'      => true,
-			'show_ui'            => true,
-			'show_in_menu'       => true,
-			'show_in_quick_edit' => true,
-			'rewrite'            => array( 'slug' => 'fleet-club' ),
-		);
-		$args   = apply_filters( 'fleet_register_person_taxonomy_args', $args );
-		register_taxonomy( $this->taxonomy_name_club, array( $this->post_type_name ), $args );
 	}
 
 	public function save_post_meta( $post_id, $post, $update ) {
@@ -202,20 +151,10 @@ class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 	}
 
 	public function register_meta_boxes( $post ) {
-		add_meta_box( 'personal', __( 'Rankingal data', 'fleet' ), array( $this, 'personal' ), $this->post_type_name );
-		add_meta_box( 'social', __( 'Social Media', 'fleet' ), array( $this, 'social' ), $this->post_type_name );
-		add_meta_box( 'contact', __( 'Contact data', 'fleet' ), array( $this, 'contact' ), $this->post_type_name );
+		add_meta_box( 'ranking', __( 'Ranking Settings', 'fleet' ), array( $this, 'ranking' ), $this->post_type_name );
 	}
 
-	public function contact( $post ) {
-		$this->get_meta_box_content( $post, $this->fields, __FUNCTION__ );
-	}
-
-	public function social( $post ) {
-		$this->get_meta_box_content( $post, $this->fields, __FUNCTION__ );
-	}
-
-	public function personal( $post ) {
+	public function ranking( $post ) {
 		$this->get_meta_box_content( $post, $this->fields, __FUNCTION__ );
 	}
 
@@ -231,7 +170,7 @@ class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 	public function custom_columns( $column, $post_id ) {
 		switch ( $column ) {
 			case 'birth_year':
-				$meta_name = $this->options->get_option_name( 'personal_' . $column );
+				$meta_name = $this->options->get_option_name( 'ranking_' . $column );
 				echo get_post_meta( $post_id, $meta_name, true );
 				break;
 			case 'email':
@@ -258,6 +197,15 @@ class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 		$columns['birth_year'] = __( 'Birth year', 'fleet' );
 		$columns['email']      = __( 'E-mail', 'fleet' );
 		return $columns;
+	}
+
+	/**
+	 * OpenGraph data.
+	 *
+	 * @since 2.2.0
+	 */
+	public function og_array( $og ) {
+		return $og;
 	}
 }
 
