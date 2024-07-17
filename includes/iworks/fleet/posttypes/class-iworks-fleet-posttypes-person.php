@@ -724,10 +724,16 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 		}
 		$post_id = get_term_meta( $term->term_id, $this->post_type_name, true );
 		if ( empty( $post_id ) ) {
-			$post = get_page_by_title( $term->name, OBJECT, $this->post_type_name );
-			if ( $post ) {
-				$post_id = $post->ID;
-				add_term_meta( $term->term_id, $this->post_type_name, $post->ID, true );
+			$args  = array(
+				'post_type'      => $this->post_type_name,
+				'posts_per_page' => 1,
+				'title'          => $term->name,
+				'fields'         => 'ids',
+			);
+			$query = new WP_Query( $args );
+			if ( ! empty( $query->posts ) ) {
+				$post_id = $query->posts[0];
+				add_term_meta( $term->term_id, $this->post_type_name, $post_id, true );
 			}
 		}
 		if ( ! empty( $post_id ) ) {
