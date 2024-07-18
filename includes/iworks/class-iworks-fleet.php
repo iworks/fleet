@@ -1,6 +1,6 @@
 <?php
 /*
-Copyright 2017-2018 Marcin Pietrzak (marcin@iworks.pl)
+Copyright 2017-PLUGIN_TILL_YEAR Marcin Pietrzak (marcin@iworks.pl)
 
 this program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License, version 2, as
@@ -54,7 +54,7 @@ class iworks_fleet extends iworks {
 		/**
 		 * post_types
 		 */
-		$post_types = array( 'boat', 'person', 'result', 'ranking' );
+		$post_types = array( 'boat', 'person', 'ranking', 'result' );
 		foreach ( $post_types as $post_type ) {
 			include_once $this->base . '/iworks/fleet/posttypes/class-iworks-fleet-posttypes-' . $post_type . '.php';
 			$class        = sprintf( 'iworks_fleet_posttypes_%s', $post_type );
@@ -477,4 +477,5 @@ class iworks_fleet extends iworks {
 		 */
 		do_action( 'fleet/loaded' );
 	}
+
 }

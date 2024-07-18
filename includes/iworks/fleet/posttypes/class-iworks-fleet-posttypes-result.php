@@ -41,7 +41,6 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 	 * Sinle result meta field name
 	 */
 	private $single_result_field_name = 'iworks_fleet_result_result';
-	protected $taxonomy_name_serie    = 'iworks_fleet_serie';
 	/**
 	 * sailors to id
 	 */
@@ -337,17 +336,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 
 
 	public function filter_get_series_array( $series ) {
-		$terms = get_terms(
-			$this->taxonomy_name_serie,
-			array(
-				'taxonomy'   => $this->taxonomy_name_serie,
-				'hide_empty' => false,
-			)
-		);
-		foreach ( $terms as $one ) {
-			$series[ $one->term_id ] = $one->name;
-		}
-		return $series;
+		return $this->get_series_array();
 	}
 
 	/**
@@ -415,7 +404,6 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		switch ( get_post_type( $post_id ) ) {
 			case $iworks_fleet->get_post_type_name( 'person' ):
 				$regattas = $this->get_list_by_sailor_id( $post_id );
-				l( $regattas );
 				if ( empty( $regattas ) ) {
 					return;
 				}

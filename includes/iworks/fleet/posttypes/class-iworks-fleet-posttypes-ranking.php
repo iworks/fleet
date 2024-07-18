@@ -40,28 +40,34 @@ class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 		add_filter( "manage_{$this->get_name()}_posts_columns", array( $this, 'add_columns' ) );
 		add_action( 'manage_posts_custom_column', array( $this, 'custom_columns' ), 10, 2 );
 		/**
+		 * shortcodes
+		 */
+		add_shortcode( 'iworks_fleet_ranking', array( $this, 'shortcode_ranking' ), 10, 2 );
+		/**
 		 * fields
 		 */
 		$this->fields = array(
 			'ranking' => array(
-				'sailor_id'  => array(
-					'label' => __( 'World Sailing Sailor ID', 'fleet' ),
+				'use_boat' => array(
+					'type'  => 'checkbox',
+					'label' => esc_html__( 'Use Boat', 'fleet' ),
 				),
-				'nation'     => array(
-					'label'   => __( 'Nation', 'fleet' ),
-					'type'    => 'select2',
-					'args'    => array(
-						'options' => $this->get_nations(),
-					),
-					'twitter' => 'yes',
+				'use_helm' => array(
+					'type'  => 'checkbox',
+					'label' => esc_html__( 'Use Helm', 'fleet' ),
 				),
-				'birth_year' => array(
-					'label'   => __( 'Birth Year', 'fleet' ),
-					'twitter' => 'yes',
+				'use_crew' => array(
+					'type'  => 'checkbox',
+					'label' => esc_html__( 'Use Crew', 'fleet' ),
 				),
-				'birth_date' => array(
-					'type'  => 'date',
-					'label' => __( 'Birth Date', 'fleet' ),
+				'serie'    => array(
+					'type'  => 'select',
+					'label' => esc_html__( 'Serie', 'fleet' ),
+				),
+				'year'     => array(
+					'type'        => 'date',
+					'label'       => esc_html__( 'Year', 'fleet' ),
+					'description' => esc_html__( 'Only year matters.', 'fleet' ),
 				),
 			),
 		);
@@ -75,6 +81,10 @@ class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 			$key = sprintf( 'postbox_classes_%s_%s', $this->get_name(), $name );
 			add_filter( $key, array( $this, 'add_defult_class_to_postbox' ) );
 		}
+		/**
+		 * Fleet
+		 */
+		add_filter( 'iworks/fleet/register_taxonomy/iworks_fleet_ranking/add', '__return_false' );
 	}
 
 	/**
@@ -155,6 +165,7 @@ class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 	}
 
 	public function ranking( $post ) {
+		$this->fields['ranking']['serie']['args']['options'] = $this->get_series_array();
 		$this->get_meta_box_content( $post, $this->fields, __FUNCTION__ );
 	}
 
@@ -169,16 +180,8 @@ class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 	 */
 	public function custom_columns( $column, $post_id ) {
 		switch ( $column ) {
-			case 'birth_year':
-				$meta_name = $this->options->get_option_name( 'ranking_' . $column );
-				echo get_post_meta( $post_id, $meta_name, true );
-				break;
-			case 'email':
-				$meta_name = $this->options->get_option_name( 'contact_' . $column );
-				$email     = get_post_meta( $post_id, $meta_name, true );
-				if ( ! empty( $email ) ) {
-					printf( '<a href="mailto:%s">%s</a>', esc_attr( $email ), esc_html( $email ) );
-				}
+			case 'shortcode':
+				printf( '[iworks_fleet_ranking id="%d"]', $post_id );
 				break;
 		}
 	}
@@ -193,9 +196,7 @@ class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 	 */
 	public function add_columns( $columns ) {
 		unset( $columns['date'] );
-		$columns['title']      = __( 'Name', 'fleet' );
-		$columns['birth_year'] = __( 'Birth year', 'fleet' );
-		$columns['email']      = __( 'E-mail', 'fleet' );
+		$columns['shortcode'] = __( 'Shortcode', 'fleet' );
 		return $columns;
 	}
 
@@ -206,6 +207,26 @@ class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 	 */
 	public function og_array( $og ) {
 		return $og;
+	}
+
+	public function shortcode_ranking( $atts, $content = '' ) {
+		$args = shortcode_atts(
+			array(
+				'id' => null,
+			),
+			$atts,
+			'iworks/fleet/ranking/shortcode/atts'
+		);
+		if ( empty( $args['id'] ) ) {
+			if ( current_user_can( 'administrator' ) ) {
+				$content .= $this->get_template(
+					'ranking-missing-id',
+					'shortcode'
+				);
+			}
+			return $content;
+		}
+		return $content;
 	}
 }
 

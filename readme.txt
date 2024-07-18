@@ -43,6 +43,10 @@ There are 3 ways to install this plugin:
 
 == Changelog ==
 
+
+= 2.2.0 (2024-07777777) =
+* The function `get_page_by_title()` has been replaced by the `WP_Query`.
+
 = 2.1.6 (2024-06-21) =
 * The "fleet_regattas_list_years" shortcode function params have been fixed. It has wrong order.
 

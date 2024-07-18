@@ -79,10 +79,10 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 		$this->fields = array(
 			'personal' => array(
 				'sailor_id'  => array(
-					'label' => __( 'World Sailing Sailor ID', 'fleet' ),
+					'label' => esc_html__( 'World Sailing Sailor ID', 'fleet' ),
 				),
 				'nation'     => array(
-					'label'   => __( 'Nation', 'fleet' ),
+					'label'   => esc_html__( 'Nation', 'fleet' ),
 					'type'    => 'select2',
 					'args'    => array(
 						'options' => $this->get_nations(),
@@ -90,25 +90,25 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 					'twitter' => 'yes',
 				),
 				'birth_year' => array(
-					'label'   => __( 'Birth Year', 'fleet' ),
+					'label'   => esc_html__( 'Birth Year', 'fleet' ),
 					'twitter' => 'yes',
 				),
 				'birth_date' => array(
 					'type'  => 'date',
-					'label' => __( 'Birth Date', 'fleet' ),
+					'label' => esc_html__( 'Birth Date', 'fleet' ),
 				),
 			),
 			'social'   => array(
-				'website'   => array( 'label' => __( 'Website', 'fleet' ) ),
-				'facebook'  => array( 'label' => __( 'Facebook', 'fleet' ) ),
-				'twitter'   => array( 'label' => __( 'Twitter', 'fleet' ) ),
-				'instagram' => array( 'label' => __( 'Instagram', 'fleet' ) ),
-				'endomondo' => array( 'label' => __( 'Endomondo', 'fleet' ) ),
-				'skype'     => array( 'label' => __( 'Skype', 'fleet' ) ),
+				'website'   => array( 'label' => esc_html__( 'Website', 'fleet' ) ),
+				'facebook'  => array( 'label' => esc_html__( 'Facebook', 'fleet' ) ),
+				'twitter'   => array( 'label' => esc_html__( 'Twitter', 'fleet' ) ),
+				'instagram' => array( 'label' => esc_html__( 'Instagram', 'fleet' ) ),
+				'endomondo' => array( 'label' => esc_html__( 'Endomondo', 'fleet' ) ),
+				'skype'     => array( 'label' => esc_html__( 'Skype', 'fleet' ) ),
 			),
 			'contact'  => array(
-				'mobile' => array( 'label' => __( 'Mobile', 'fleet' ) ),
-				'email'  => array( 'label' => __( 'E-mail', 'fleet' ) ),
+				'mobile' => array( 'label' => esc_html__( 'Mobile', 'fleet' ) ),
+				'email'  => array( 'label' => esc_html__( 'E-mail', 'fleet' ) ),
 			),
 		);
 		/**

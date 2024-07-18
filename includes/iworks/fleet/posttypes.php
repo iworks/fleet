@@ -27,14 +27,21 @@ if ( class_exists( 'iworks_fleet_posttypes' ) ) {
 }
 
 class iworks_fleet_posttypes {
-	protected $post_type_name;
-	protected $options;
-	protected $fields;
 	protected $base;
-	protected $taxonomy_name_location  = 'iworks_fleet_location';
-	protected $show_single_person_flag = false;
+	protected $fields;
+	protected $labels = array();
+	protected $options;
+	protected $post_type_name;
 	protected $show_single_boat_flag   = false;
-	protected $labels                  = array();
+	protected $show_single_person_flag = false;
+	protected $taxonomy_name_location  = 'iworks_fleet_location';
+	protected $taxonomy_name_serie     = 'iworks_fleet_serie';
+	/**
+	 * Root for the plugin files
+	 *
+	 * @since 2.2.0
+	 */
+	private $root;
 
 	/**
 	 * Trophies Names
@@ -57,6 +64,12 @@ class iworks_fleet_posttypes {
 		$this->options = iworks_fleet_get_options_object();
 		$this->base    = preg_replace( '/\/iworks.+/', '/', __FILE__ );
 		$this->debug   = defined( 'WP_DEBUG' ) && WP_DEBUG;
+		/**
+		 * set plugin root
+		 *
+		 * @since 2.3.4
+		 */
+		$this->root = dirname( dirname( dirname( dirname( __FILE__ ) ) ) );
 		/**
 		 * show sigle person flag
 		 */
@@ -145,7 +158,7 @@ class iworks_fleet_posttypes {
 			/**
 			 * Handle select2
 			 */
-			if ( ! empty( $value ) && 'select2' == $type ) {
+			if ( ! empty( $value ) && 'select2' === $type ) {
 				$value = array(
 					'value' => $value,
 					'label' => get_the_title( $value ),
@@ -154,17 +167,38 @@ class iworks_fleet_posttypes {
 			/**
 			 * Handle date
 			 */
-			if ( ! empty( $value ) && 'date' == $type ) {
+			if ( ! empty( $value ) && 'date' === $type ) {
 				$value = date_i18n( 'Y-m-d', $value );
+			}
+			/**
+			 * Handle checkbox
+			 */
+			if ( 'checkbox' === $type ) {
+				$args['default'] = 'yes';
+				if ( 'yes' === $value ) {
+					$args['checked'] = 'checked';
+				}
+			}
+			/**
+			 * classes
+			 */
+			$classes = array(
+				'iworks-fleet-row',
+				sprintf( 'iworks-fleet-row-%s">', esc_attr( $key ) ),
+			);
+			if ( isset( $data['description'] ) ) {
+				$classes[] = 'iworks-fleet-row-has-description';
 			}
 			/**
 			 * build
 			 */
-			$content .= sprintf( '<div class="iworks-fleet-row iworks-fleet-row-%s">', esc_attr( $key ) );
+			$content .= sprintf( '<div class="%s">', esc_attr( implode( ' ', $classes ) ) );
+			// $content .= '<div class="iworks-fleet-row-container">';
 			if ( isset( $data['label'] ) && ! empty( $data['label'] ) ) {
 				$content .= sprintf( '<label for=%s">%s</label>', esc_attr( $args['id'] ), esc_html( $data['label'] ) );
 			}
 			$content .= $this->options->get_field_by_type( $type, $name, $value, $args );
+			// $content .= '</div>';
 			if ( isset( $data['description'] ) ) {
 				$content .= sprintf( '<p class="description">%s</p>', $data['description'] );
 			}
@@ -195,6 +229,7 @@ class iworks_fleet_posttypes {
 			if ( isset( $_POST[ $post_key ] ) ) {
 				foreach ( $group_data as $key => $data ) {
 					$value = isset( $_POST[ $post_key ][ $key ] ) ? $_POST[ $post_key ][ $key ] : null;
+
 					if ( is_string( $value ) ) {
 						$value = trim( $value );
 					} elseif ( is_array( $value ) ) {
@@ -209,8 +244,15 @@ class iworks_fleet_posttypes {
 					if ( empty( $value ) ) {
 						delete_post_meta( $post->ID, $option_name );
 					} else {
-						if ( isset( $data['type'] ) && 'date' == $data['type'] ) {
-							$value = strtotime( $value );
+						if ( isset( $data['type'] ) ) {
+							switch ( $data['type'] ) {
+								case 'date':
+									$value = strtotime( $value );
+									break;
+								case 'checkbox':
+									$value = 'yes';
+									break;
+							}
 						}
 						/**
 						 * filter
@@ -293,6 +335,13 @@ class iworks_fleet_posttypes {
 	}
 
 	public function register_taxonomy_location() {
+		/**
+		 * check to add
+		 */
+		$filter = sprintf( 'iworks/fleet/register_taxonomy/%s/add', $this->post_type_name );
+		if ( ! apply_filters( $filter, true ) ) {
+			return;
+		}
 		/**
 		 * Locations  Taxonomy.
 		 */
@@ -596,5 +645,44 @@ class iworks_fleet_posttypes {
 		return $content;
 	}
 
+	protected function get_series_array() {
+		$terms = get_terms(
+			$this->taxonomy_name_serie,
+			array(
+				'taxonomy'   => $this->taxonomy_name_serie,
+				'hide_empty' => false,
+			)
+		);
+		if ( is_wp_error( $terms ) ) {
+			return array();
+		}
+		foreach ( $terms as $one ) {
+			$series[ $one->term_id ] = $one->name;
+		}
+		return $series;
+	}
+
+	/**
+	 * get template
+	 *
+	 * @since 2.2.0
+	 */
+	private function get_file( $file, $group = '' ) {
+		return sprintf(
+			'%s/assets/templates/%s%s.php',
+			$this->root,
+			'' === $group ? '' : sanitize_title( $group ) . '/',
+			sanitize_title( $file )
+		);
+	}
+
+	protected function get_template( $file_name, $group, $args = array() ) {
+		$file = $this->get_file( $file_name, $group );
+		ob_start();
+		load_template( $file, true, $args );
+		$content = ob_get_contents();
+		ob_end_clean();
+		return $content;
+	}
 }
 
