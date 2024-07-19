@@ -48,30 +48,49 @@ class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 		 */
 		$this->fields = array(
 			'ranking' => array(
-				'use_boat' => array(
+				'use_boat'   => array(
 					'add_class' => 'key',
 					'label'     => esc_html__( 'Use Boat', 'fleet' ),
 					'type'      => 'checkbox',
 				),
-				'use_helm' => array(
+				'use_helm'   => array(
 					'add_class' => 'key',
 					'label'     => esc_html__( 'Use Helm', 'fleet' ),
 					'type'      => 'checkbox',
 				),
-				'use_crew' => array(
+				'use_crew'   => array(
 					'add_class' => 'key',
 					'label'     => esc_html__( 'Use Crew', 'fleet' ),
 					'type'      => 'checkbox',
 				),
-				'serie'    => array(
+				'serie'      => array(
 					'add_class' => 'value',
 					'label'     => esc_html__( 'Serie', 'fleet' ),
 					'type'      => 'select',
+					'options'   => array(
+						'required' => 'required',
+					),
 				),
-				'year'     => array(
+				'year'       => array(
 					'description' => esc_html__( 'Only year matters.', 'fleet' ),
 					'label'       => esc_html__( 'Year', 'fleet' ),
 					'type'        => 'date',
+					'options'     => array(
+						'required' => 'required',
+					),
+				),
+				'drop'       => array(
+					'label' => esc_html__( 'Allow Drop', 'fleet' ),
+					'type'  => 'checkbox',
+				),
+				'drop_after' => array(
+					'label' => esc_html__( 'Drop After', 'fleet' ),
+					'type'  => 'number',
+					'args'  => array(
+						'min'     => 1,
+						'default' => 4,
+						'class'   => array( 'small-text', 'textright' ),
+					),
 				),
 			),
 		);
@@ -297,12 +316,22 @@ class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 			'shortcode',
 			$args,
 		);
-		$content        .= $this->get_template(
+		/**
+		 * get results
+		 */
+		$option_name_year  = $this->options->get_option_name( $group . '_' . 'year' );
+		$option_name_serie = $this->options->get_option_name( $group . '_' . 'serie' );
+		$args              = array(
+			'year'  => date( 'Y', get_post_meta( $id, $option_name_year, true ) ),
+			'serie' => get_post_meta( $id, $option_name_serie, true ),
+		);
+		$data              = apply_filters( 'iworks/fleet/results/get/array', array(), $args );
+		$content          .= $this->get_template(
 			'ranking/output/table',
 			'shortcode',
 			$args,
 		);
-		$content        .= $this->get_template(
+		$content          .= $this->get_template(
 			'ranking/output/footer',
 			'shortcode',
 			$args,

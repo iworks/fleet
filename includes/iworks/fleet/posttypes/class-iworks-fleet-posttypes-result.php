@@ -202,6 +202,12 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		 */
 		add_action( 'init', array( $this, 'add_rewrite_rules' ), 11 );
 		add_filter( 'get_the_archive_title', array( $this, 'get_the_archive_title' ), 10, 3 );
+		/**
+		 * get data filters
+		 *
+		 * @since 2.2.0
+		 */
+		add_filter( 'iworks/fleet/results/get/array', array( $this, 'filter_get_results_array' ), 10, 2 );
 	}
 
 	public function get_trophies_by_sailor_id( $content, $sailor_id ) {
@@ -334,7 +340,6 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		return $content . $cache;
 	}
 
-
 	public function filter_get_series_array( $series ) {
 		return $this->get_series_array();
 	}
@@ -415,7 +420,6 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 				}
 				break;
 		}
-
 		/**
 		 * return if no file
 		 */
@@ -3007,5 +3011,68 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		$cache .= '</section>';
 		set_transient( $cache_key, $cache, DAY_IN_SECONDS );
 		return $content . $cache;
+	}
+
+	/**
+	 * get results array
+	 *
+	 * @since 2.2.0
+	 */
+	public function filter_get_results_array( $data, $args ) {
+		global $options;
+		if ( ! is_array( $data ) ) {
+			$data = array();
+		}
+		/**
+		 * set defaults
+		 */
+		$args = wp_parse_args(
+			$args,
+			array(
+				'serie' => 0,
+				'year'  => 0,
+			)
+		);
+		/**
+		 * build WP Query args
+		 */
+		$wp_query_args = array(
+			'post_type'  => $this->post_type_name,
+			'nopaging'   => true,
+			'tax_query'  => array(
+				array(
+					'taxonomy' => $this->taxonomy_name_serie,
+					'field'    => 'id',
+					'terms'    => $args['serie'],
+				),
+			),
+			'meta_query' => array(
+				'relation' => 'AND',
+				array(
+					'key'       => $this->options->get_option_name( 'result_date_start' ),
+					'value_num' => intval(
+						strtotime(
+							sprintf( '%d-01-01 00:00:00', $args['year'] )
+						)
+					),
+					'compare'   => '>',
+				),
+				array(
+					'key'       => $this->options->get_option_name( 'result_date_start' ),
+					'value_num' => intval(
+						strtotime(
+							sprintf( '%d-12-31 23:59:59', $args['year'] )
+						)
+					),
+					'compare'   => '<',
+				),
+			),
+			'orderby'    => 'meta_value_num',
+			'order'      => 'ASC',
+		);
+		$query         = new WP_Query( $wp_query_args );
+		l( $query );
+
+		return $data;
 	}
 }
