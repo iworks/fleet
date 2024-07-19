@@ -49,25 +49,29 @@ class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 		$this->fields = array(
 			'ranking' => array(
 				'use_boat' => array(
-					'type'  => 'checkbox',
-					'label' => esc_html__( 'Use Boat', 'fleet' ),
+					'add_class' => 'key',
+					'label'     => esc_html__( 'Use Boat', 'fleet' ),
+					'type'      => 'checkbox',
 				),
 				'use_helm' => array(
-					'type'  => 'checkbox',
-					'label' => esc_html__( 'Use Helm', 'fleet' ),
+					'add_class' => 'key',
+					'label'     => esc_html__( 'Use Helm', 'fleet' ),
+					'type'      => 'checkbox',
 				),
 				'use_crew' => array(
-					'type'  => 'checkbox',
-					'label' => esc_html__( 'Use Crew', 'fleet' ),
+					'add_class' => 'key',
+					'label'     => esc_html__( 'Use Crew', 'fleet' ),
+					'type'      => 'checkbox',
 				),
 				'serie'    => array(
-					'type'  => 'select',
-					'label' => esc_html__( 'Serie', 'fleet' ),
+					'add_class' => 'value',
+					'label'     => esc_html__( 'Serie', 'fleet' ),
+					'type'      => 'select',
 				),
 				'year'     => array(
-					'type'        => 'date',
-					'label'       => esc_html__( 'Year', 'fleet' ),
 					'description' => esc_html__( 'Only year matters.', 'fleet' ),
+					'label'       => esc_html__( 'Year', 'fleet' ),
+					'type'        => 'date',
 				),
 			),
 		);
@@ -212,7 +216,10 @@ class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 	public function shortcode_ranking( $atts, $content = '' ) {
 		$args = shortcode_atts(
 			array(
-				'id' => null,
+				'id'      => null,
+				'header'  => 'h2',
+				'title'   => 'hide',
+				'content' => 'hide',
 			),
 			$atts,
 			'iworks/fleet/ranking/shortcode/atts'
@@ -226,6 +233,80 @@ class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 			}
 			return $content;
 		}
+		$post = get_post( $args['id'] );
+		if (
+			is_wp_error( $post )
+			|| empty( $post )
+			|| ! is_a( $post, 'WP_Post' )
+			|| $this->post_type_name !== $post->post_type
+		) {
+			if ( current_user_can( 'administrator' ) ) {
+				$content .= $this->get_template(
+					'ranking-wrong-id',
+					'shortcode'
+				);
+			}
+			return $content;
+		}
+		return $content . $this->get_ranking_table_by_ranking_id( $post->ID, $args );
+	}
+
+	public function get_ranking_table_by_ranking_id( $id, $args = array() ) {
+		$post    = get_post( $id );
+		$content = '';
+		$group   = 'ranking';
+		$classes = array(
+			'iworks-fleet',
+			'iworks-fleet-ranking',
+		);
+		foreach ( $this->fields[ $group ] as $key => $data ) {
+			if ( ! isset( $data['add_class'] ) ) {
+				continue;
+			}
+			$option_name = $this->options->get_option_name( $group . '_' . $key );
+			switch ( $data['add_class'] ) {
+				case 'key':
+					switch ( $data['type'] ) {
+						case 'checkbox':
+							$value = get_post_meta( $id, $option_name, true );
+							if ( 'yes' === $value ) {
+								$classes[] = sprintf(
+									'iworks-fleet-ranking-%s',
+									preg_replace( '/_/', '-', $key )
+								);
+							}
+							break;
+					}
+					break;
+				case 'value':
+					$value = get_post_meta( $id, $option_name, true );
+					if ( $value ) {
+						$classes[] = sprintf(
+							'iworks-fleet-ranking-%s-%s',
+							preg_replace( '/_/', '-', $key ),
+							preg_replace( '/_/', '-', $value )
+						);
+					}
+					break;
+			}
+		}
+		$args['classes'] = $classes;
+		$args['post']    = (array) $post;
+		$content        .= $this->get_template(
+			'ranking/output/header',
+			'shortcode',
+			$args,
+		);
+		$content        .= $this->get_template(
+			'ranking/output/table',
+			'shortcode',
+			$args,
+		);
+		$content        .= $this->get_template(
+			'ranking/output/footer',
+			'shortcode',
+			$args,
+		);
 		return $content;
 	}
 }

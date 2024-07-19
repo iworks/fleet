@@ -672,7 +672,7 @@ class iworks_fleet_posttypes {
 			'%s/assets/templates/%s%s.php',
 			$this->root,
 			'' === $group ? '' : sanitize_title( $group ) . '/',
-			sanitize_title( $file )
+			$file
 		);
 	}
 
