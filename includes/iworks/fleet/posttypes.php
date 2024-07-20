@@ -679,7 +679,7 @@ class iworks_fleet_posttypes {
 	protected function get_template( $file_name, $group, $args = array() ) {
 		$file = $this->get_file( $file_name, $group );
 		ob_start();
-		load_template( $file, true, $args );
+		load_template( $file, false, $args );
 		$content = ob_get_contents();
 		ob_end_clean();
 		return $content;

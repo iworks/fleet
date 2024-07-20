@@ -93,9 +93,10 @@ class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 					),
 				),
 				'sex'        => array(
-					'label' => esc_html__( 'Sex', 'fleet' ),
-					'type'  => 'select',
-					'args'  => array(
+					'add_class' => 'value',
+					'label'     => esc_html__( 'Sex', 'fleet' ),
+					'type'      => 'select',
+					'args'      => array(
 						'options' => array(
 							'any'    => __( '&mdash; any &mdash;', 'fleet' ),
 							'female' => __( 'Female', 'fleet' ),
@@ -244,9 +245,6 @@ class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 	}
 
 	public function shortcode_ranking( $atts, $content = '' ) {
-		if ( is_admin() ) {
-			return $content;
-		}
 		$args = shortcode_atts(
 			array(
 				'id'      => null,
@@ -349,7 +347,9 @@ class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 	}
 
 	private function get_ranking_settings_by_ranking_id( $id ) {
-		$settings = array();
+		$settings = array(
+			'ranking_id' => $id,
+		);
 		$group    = 'ranking';
 		foreach ( $this->fields[ $group ] as $key => $data ) {
 			$option_name  = $this->options->get_option_name( $group . '_' . $key );

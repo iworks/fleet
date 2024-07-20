@@ -3040,6 +3040,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		if ( ! is_array( $data ) ) {
 			$data = array();
 		}
+		remove_filter( 'the_title', array( $this, 'add_year_to_title' ), 10, 2 );
 		$data['events']  = array();
 		$data['sailors'] = array();
 		/**
@@ -3104,37 +3105,63 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 				&& 'yes' === $args['use_helm']
 				&& 'yes' === $args['use_crew']
 			) {
-				$ranking = $this->calculate_boat( $list, $ids );
+				$ranking = $this->calculate_boat( $list, $ids, $args );
 			} elseif (
 				'yes' === $args['use_helm']
 				&& 'yes' === $args['use_crew']
 			) {
 				$ranking = $this->calculate_full_crew( $list, $ids );
 			} elseif ( 'yes' === $args['use_helm'] ) {
-				$ranking = $this->calculate_helm( $list, $ids );
+				$ranking = $this->calculate_helm( $list, $ids, $args );
 			} elseif ( 'yes' === $args['use_crew'] ) {
-				$ranking = $this->calculate_crew( $list, $ids );
+				$ranking = $this->calculate_crew( $list, $ids, $args );
 			}
 		}
 		return $ranking;
 	}
 
-	private function calculate_helm( $list, $ids ) {
+	private function calculate_helm( $list, $ids, $args ) {
+		return $this->calculate_person( $list, $ids, $args, 'helm' );
+	}
+
+	private function calculate_crew( $list, $ids, $args ) {
+		return $this->calculate_person( $list, $ids, $args, 'crew' );
+	}
+
+	private function calculate_person( $list, $ids, $args, $field ) {
 		$data  = array(
 			'events' => $ids,
 			'max'    => 0,
 			'teams'  => array(),
 		);
+		$sex   = array();
 		$races = array();
 		foreach ( $list as $one ) {
 			if ( ! isset( $races[ $one->post_regata_id ] ) ) {
 				$races[ $one->post_regata_id ] = array();
 			}
-			$races[ $one->post_regata_id ][ $one->helm_id ] = $one->place;
-			$data['teams'][ $one->helm_id ]                 = array(
-				'name'    => $one->helm_name,
+			$person_id = $one->{$field . '_id'};
+			if (
+				isset( $args['sex'] )
+				&& ! empty( $args['sex'] )
+				&& 'any' !== $args['sex']
+			) {
+				if ( ! isset( $sex[ $person_id ] ) ) {
+					$sex[ $person_id ] = get_post_meta(
+						$person_id,
+						$this->options->get_option_name( 'personal_sex' ),
+						true
+					);
+				}
+				if ( $args['sex'] !== $sex[ $person_id ] ) {
+					continue;
+				}
+			}
+			$races[ $one->post_regata_id ][ $person_id ] = $one->place;
+			$data['teams'][ $person_id ]                 = array(
+				'name'    => $one->{$field . '_name'},
 				'sum'     => 0,
-				'url'     => get_permalink( $one->helm_id ),
+				'url'     => get_permalink( $person_id ),
 				'results' => array(),
 			);
 			if ( $data['max'] < $one->place ) {
@@ -3172,4 +3199,5 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		}
 		return strcmp( $a['name'], $b['name'] );
 	}
+
 }

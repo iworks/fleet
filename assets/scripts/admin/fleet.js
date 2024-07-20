@@ -1,4 +1,4 @@
-/*! Fleet Manager - v2.1.7
+/*! Fleet Manager - v2.2.0
  * http://iworks.pl/en/plugins/fleet/
  * Copyright (c) 2024; * Licensed GPLv2+ */
 jQuery( document ).ready(function($) {
