@@ -97,6 +97,17 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 					'type'  => 'date',
 					'label' => esc_html__( 'Birth Date', 'fleet' ),
 				),
+				'sex'        => array(
+					'label' => esc_html__( 'Sex', 'fleet' ),
+					'type'  => 'select',
+					'args'  => array(
+						'options' => array(
+							'not-set' => __( '&mdash; select &mdash;', 'fleet' ),
+							'female'  => __( 'Female', 'fleet' ),
+							'male'    => __( 'Male', 'fleet' ),
+						),
+					),
+				),
 			),
 			'social'   => array(
 				'website'   => array( 'label' => esc_html__( 'Website', 'fleet' ) ),

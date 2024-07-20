@@ -92,6 +92,17 @@ class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 						'class'   => array( 'small-text', 'textright' ),
 					),
 				),
+				'sex'        => array(
+					'label' => esc_html__( 'Sex', 'fleet' ),
+					'type'  => 'select',
+					'args'  => array(
+						'options' => array(
+							'any'    => __( '&mdash; any &mdash;', 'fleet' ),
+							'female' => __( 'Female', 'fleet' ),
+							'male'   => __( 'Male', 'fleet' ),
+						),
+					),
+				),
 			),
 		);
 		/**
@@ -233,6 +244,9 @@ class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 	}
 
 	public function shortcode_ranking( $atts, $content = '' ) {
+		if ( is_admin() ) {
+			return $content;
+		}
 		$args = shortcode_atts(
 			array(
 				'id'      => null,
@@ -319,24 +333,35 @@ class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 		/**
 		 * get results
 		 */
-		$option_name_year  = $this->options->get_option_name( $group . '_' . 'year' );
-		$option_name_serie = $this->options->get_option_name( $group . '_' . 'serie' );
-		$args              = array(
-			'year'  => date( 'Y', get_post_meta( $id, $option_name_year, true ) ),
-			'serie' => get_post_meta( $id, $option_name_serie, true ),
-		);
-		$data              = apply_filters( 'iworks/fleet/results/get/array', array(), $args );
-		$content          .= $this->get_template(
+		$args         = $this->get_ranking_settings_by_ranking_id( $id );
+		$args['data'] = apply_filters( 'iworks/fleet/results/get/array', array(), $args );
+		$content     .= $this->get_template(
 			'ranking/output/table',
 			'shortcode',
 			$args,
 		);
-		$content          .= $this->get_template(
+		$content     .= $this->get_template(
 			'ranking/output/footer',
 			'shortcode',
 			$args,
 		);
 		return $content;
+	}
+
+	private function get_ranking_settings_by_ranking_id( $id ) {
+		$settings = array();
+		$group    = 'ranking';
+		foreach ( $this->fields[ $group ] as $key => $data ) {
+			$option_name  = $this->options->get_option_name( $group . '_' . $key );
+			$option_value = get_post_meta( $id, $option_name, true );
+			switch ( $key ) {
+				case 'year':
+					$option_value = date( 'Y', $option_value );
+					break;
+			}
+			$settings[ $key ] = $option_value;
+		}
+		return $settings;
 	}
 }
 

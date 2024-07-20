@@ -960,6 +960,25 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		return $this->add_results_metadata( $wpdb->get_results( $sql ) );
 	}
 
+	private function placeholder_d_helper() {
+		return '%d';
+	}
+
+	private function get_list_by_post_ids( $ids ) {
+		global $wpdb;
+		$table_name_regatta = $wpdb->prefix . 'fleet_regatta';
+		$sql                = sprintf(
+			"select * from {$table_name_regatta} where post_regata_id in( %s ) order by date, year desc",
+			implode(
+				', ',
+				array_map( array( $this, 'placeholder_d_helper' ), $ids )
+			)
+		);
+		$sql                = $wpdb->prepare( $sql, $ids );
+		return $this->add_results_metadata( $wpdb->get_results( $sql ) );
+	}
+
+
 	/**
 	 * get last recorded regatta filter
 	 *
@@ -2066,26 +2085,24 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			global $iworks_fleet;
 			$this->boat_post_type = $iworks_fleet->get_post_type_name( 'boat' );
 		}
-		$boat = get_page_by_title( $number, OBJECT, $this->boat_post_type );
-		if ( empty( $boat ) ) {
 			$args  = array(
 				'post_type'      => $this->post_type_name,
 				'posts_per_page' => 1,
 				'title'          => $number,
 			);
 			$query = new WP_Query( $args );
-			if ( ! empty( $query->posts ) ) {
-				$boat = $query->posts[0];
+			if ( empty( $query->posts ) ) {
+				return false;
 			}
-		}
-		if ( is_a( $boat, 'WP_Post' ) ) {
-			return array(
-				'ID'         => $boat->ID,
-				'post_title' => $boat->post_title,
-				'url'        => get_permalink( $boat ),
-			);
-		}
-		return false;
+			$boat = $query->posts[0];
+			if ( is_a( $boat, 'WP_Post' ) ) {
+				return array(
+					'ID'         => $boat->ID,
+					'post_title' => $boat->post_title,
+					'url'        => get_permalink( $boat ),
+				);
+			}
+			return false;
 	}
 
 	/**
@@ -3023,6 +3040,8 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		if ( ! is_array( $data ) ) {
 			$data = array();
 		}
+		$data['events']  = array();
+		$data['sailors'] = array();
 		/**
 		 * set defaults
 		 */
@@ -3039,6 +3058,29 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		$wp_query_args = array(
 			'post_type'  => $this->post_type_name,
 			'nopaging'   => true,
+			'meta_query' => array(
+				'relation' => 'AND',
+				array(
+					'key'     => $this->options->get_option_name( 'result_date_start' ),
+					'value'   => intval(
+						strtotime(
+							sprintf( '%d-01-01 00:00:00', $args['year'] )
+						)
+					),
+					'compare' => '>',
+					'type'    => 'NUMERIC',
+				),
+				array(
+					'key'     => $this->options->get_option_name( 'result_date_end' ),
+					'value'   => intval(
+						strtotime(
+							sprintf( '%d-12-31 23:59:59', $args['year'] )
+						)
+					),
+					'compare' => '<',
+					'type'    => 'NUMERIC',
+				),
+			),
 			'tax_query'  => array(
 				array(
 					'taxonomy' => $this->taxonomy_name_serie,
@@ -3046,33 +3088,88 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 					'terms'    => $args['serie'],
 				),
 			),
-			'meta_query' => array(
-				'relation' => 'AND',
-				array(
-					'key'       => $this->options->get_option_name( 'result_date_start' ),
-					'value_num' => intval(
-						strtotime(
-							sprintf( '%d-01-01 00:00:00', $args['year'] )
-						)
-					),
-					'compare'   => '>',
-				),
-				array(
-					'key'       => $this->options->get_option_name( 'result_date_start' ),
-					'value_num' => intval(
-						strtotime(
-							sprintf( '%d-12-31 23:59:59', $args['year'] )
-						)
-					),
-					'compare'   => '<',
-				),
-			),
 			'orderby'    => 'meta_value_num',
 			'order'      => 'ASC',
 		);
 		$query         = new WP_Query( $wp_query_args );
-		l( $query );
+		$ids           = array();
+		foreach ( $query->posts as $post ) {
+			$ids[] = $post->ID;
+		}
+		$list    = $this->get_list_by_post_ids( $ids );
+		$ranking = array();
+		foreach ( $list as $one ) {
+			if (
+				'yes' === $args['use_boat']
+				&& 'yes' === $args['use_helm']
+				&& 'yes' === $args['use_crew']
+			) {
+				$ranking = $this->calculate_boat( $list, $ids );
+			} elseif (
+				'yes' === $args['use_helm']
+				&& 'yes' === $args['use_crew']
+			) {
+				$ranking = $this->calculate_full_crew( $list, $ids );
+			} elseif ( 'yes' === $args['use_helm'] ) {
+				$ranking = $this->calculate_helm( $list, $ids );
+			} elseif ( 'yes' === $args['use_crew'] ) {
+				$ranking = $this->calculate_crew( $list, $ids );
+			}
+		}
+		return $ranking;
+	}
 
+	private function calculate_helm( $list, $ids ) {
+		$data  = array(
+			'events' => $ids,
+			'max'    => 0,
+			'teams'  => array(),
+		);
+		$races = array();
+		foreach ( $list as $one ) {
+			if ( ! isset( $races[ $one->post_regata_id ] ) ) {
+				$races[ $one->post_regata_id ] = array();
+			}
+			$races[ $one->post_regata_id ][ $one->helm_id ] = $one->place;
+			$data['teams'][ $one->helm_id ]                 = array(
+				'name'    => $one->helm_name,
+				'sum'     => 0,
+				'url'     => get_permalink( $one->helm_id ),
+				'results' => array(),
+			);
+			if ( $data['max'] < $one->place ) {
+				$data['max'] = $one->place;
+			}
+		}
+		$data['max']++;
+		/**
+		 * add teams points
+		 */
+		foreach ( $ids as $id ) {
+			foreach ( $data['teams'] as $sailor_id => $d ) {
+				$points                                        = $data['max'];
+				$data['teams'][ $sailor_id ]['results'][ $id ] = 'DNS';
+				if (
+					isset( $races[ $id ] )
+					&& isset( $races[ $id ][ $sailor_id ] )
+				) {
+					$points                                        = $races[ $id ][ $sailor_id ];
+					$data['teams'][ $sailor_id ]['results'][ $id ] = $points;
+				}
+				$data['teams'][ $sailor_id ]['sum'] += $points;
+			}
+		}
+		uasort( $data['teams'], array( $this, 'calculate_sort_helper' ) );
 		return $data;
+	}
+
+	private function calculate_sort_helper( $a, $b ) {
+		if ( $a['sum'] > $b['sum'] ) {
+			return 1;
+		}
+		if ( $a['sum'] < $b['sum'] ) {
+			return -1;
+		}
+		return strcmp( $a['name'], $b['name'] );
 	}
 }
