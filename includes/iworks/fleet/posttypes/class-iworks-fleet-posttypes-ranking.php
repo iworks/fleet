@@ -356,7 +356,7 @@ class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 			$option_value = get_post_meta( $id, $option_name, true );
 			switch ( $key ) {
 				case 'year':
-					$option_value = date( 'Y', $option_value );
+					$option_value = date( 'Y', intval( $option_value ) );
 					break;
 			}
 			$settings[ $key ] = $option_value;
