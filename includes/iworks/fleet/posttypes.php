@@ -656,6 +656,7 @@ class iworks_fleet_posttypes {
 		if ( is_wp_error( $terms ) ) {
 			return array();
 		}
+		$series[] = esc_html__( '&mdash; Select &mdash;', 'fleet' );
 		foreach ( $terms as $one ) {
 			$series[ $one->term_id ] = $one->name;
 		}

@@ -12,6 +12,7 @@ foreach ( $args['data']['events'] as $event_id ) {
 	);
 }
 ?>
+			<th rowspan="2"><?php esc_html_e( 'Sailed', 'fleet' ); ?></th>
 			<th rowspan="2"><?php esc_html_e( 'Total', 'fleet' ); ?></th>
 		</tr>
 		<tr>
@@ -23,15 +24,29 @@ foreach ( $args['data']['events'] as $event_id ) {
 	</thead>
 	<tbody>
 <?php
-$i           = 1;
-$last_points = 0;
-$last_place  = $i;
+$i                     = 1;
+$last_points           = 0;
+$last_place            = $i;
+$last_number_of_starts = 0;
 foreach ( $args['data']['teams'] as $one ) {
 	echo '<tr>';
 	echo '<td class="iworks-fleet-ranking-table-place">';
-	if ( $last_points < $one['sum'] ) {
-		$last_points = $one['sum'];
-		$last_place  = $i;
+	if ( $last_points === $one['sum'] ) {
+		if ( $last_number_of_starts < $one['number_of_starts'] ) {
+			$last_place = $i + 1;
+			echo $i + 1;
+		} else {
+			if ( $last_points === $one['sum'] ) {
+				if ( $last_number_of_starts > $one['number_of_starts'] ) {
+					$last_place++;
+				}
+				echo $last_place;
+			} else {
+				echo $i;
+			}
+		}
+	} elseif ( $last_points < $one['sum'] ) {
+		$last_place = $i;
 		echo $i;
 	} else {
 		echo $last_place;
@@ -60,10 +75,21 @@ foreach ( $args['data']['teams'] as $one ) {
 			'DNS' === $points ? $args['data']['max'] : $points
 		);
 	}
+	echo '<td class="iworks-fleet-ranking-table-number-of-starts">';
+	echo $one['number_of_starts'];
+	echo '</td>';
 	echo '<td class="iworks-fleet-ranking-table-total">';
 	echo $one['sum'];
 	echo '</td>';
 	echo '</tr>';
+	/**
+	 * update
+	 */
+	$last_number_of_starts = $one['number_of_starts'];
+	$last_points           = $one['sum'];
+	/**
+	 * increment
+	 */
 	$i++;
 }
 ?>

@@ -3159,10 +3159,11 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			}
 			$races[ $one->post_regata_id ][ $person_id ] = $one->place;
 			$data['teams'][ $person_id ]                 = array(
-				'name'    => $one->{$field . '_name'},
-				'sum'     => 0,
-				'url'     => get_permalink( $person_id ),
-				'results' => array(),
+				'name'             => $one->{$field . '_name'},
+				'sum'              => 0,
+				'url'              => get_permalink( $person_id ),
+				'number_of_starts' => 0,
+				'results'          => array(),
 			);
 			if ( $data['max'] < $one->place ) {
 				$data['max'] = $one->place;
@@ -3182,6 +3183,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 				) {
 					$points                                        = $races[ $id ][ $sailor_id ];
 					$data['teams'][ $sailor_id ]['results'][ $id ] = $points;
+					$data['teams'][ $sailor_id ]['number_of_starts']++;
 				}
 				$data['teams'][ $sailor_id ]['sum'] += $points;
 			}
@@ -3191,12 +3193,29 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 	}
 
 	private function calculate_sort_helper( $a, $b ) {
+		/**
+		 * sort by points
+		 * less is better
+		 */
 		if ( $a['sum'] > $b['sum'] ) {
 			return 1;
 		}
 		if ( $a['sum'] < $b['sum'] ) {
 			return -1;
 		}
+		/**
+		 * sort by number of starts
+		 * more is better
+		 */
+		if ( $a['number_of_starts'] < $b['number_of_starts'] ) {
+			return 1;
+		}
+		if ( $a['number_of_starts'] > $b['number_of_starts'] ) {
+			return -1;
+		}
+		/**
+		 * sort by name
+		 */
 		return strcmp( $a['name'], $b['name'] );
 	}
 

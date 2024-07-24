@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Plugins - Fleet - Stable (latest release)\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/fleet\n"
-"POT-Creation-Date: 2024-07-20 14:25:51+00:00\n"
+"POT-Creation-Date: 2024-07-24 06:02:50+00:00\n"
 "PO-Revision-Date: 2021-04-29 17:17+0200\n"
 "Last-Translator: Marcin Pietrzak <marcin@iworks.pl>\n"
 "Language-Team: \n"
@@ -26,17 +26,21 @@ msgid "Name"
 msgstr ""
 
 #: assets/templates/shortcode/ranking/output/table.php:15
+msgid "Sailed"
+msgstr ""
+
+#: assets/templates/shortcode/ranking/output/table.php:16
 msgid "Total"
 msgstr ""
 
-#: assets/templates/shortcode/ranking/output/table.php:19
+#: assets/templates/shortcode/ranking/output/table.php:20
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:470
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:492
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1860
 msgid "Place"
 msgstr "Miejsce"
 
-#: assets/templates/shortcode/ranking/output/table.php:20
+#: assets/templates/shortcode/ranking/output/table.php:21
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:472
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1148
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1267
@@ -2056,7 +2060,7 @@ msgstr "Łódka"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:330
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:157
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:148
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:153
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1348
 msgid "Item Attributes"
 msgstr ""
@@ -2097,21 +2101,21 @@ msgstr ""
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:340
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:167
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:158
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:163
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1358
 msgid "Not found"
 msgstr ""
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:341
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:168
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:159
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:164
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1359
 msgid "Not found in Trash"
 msgstr ""
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:342
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:169
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:160
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:165
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1360
 #, fuzzy
 msgid "Featured Image"
@@ -2119,7 +2123,7 @@ msgstr "Automatycznie ustaw obrazek wyróżniający"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:343
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:170
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:161
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:166
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1361
 #, fuzzy
 msgid "Set featured image"
@@ -2127,7 +2131,7 @@ msgstr "Automatycznie ustaw obrazek wyróżniający"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:344
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:171
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:162
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:167
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1362
 #, fuzzy
 msgid "Remove featured image"
@@ -2135,7 +2139,7 @@ msgstr "Automatycznie ustaw obrazek wyróżniający"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:345
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:172
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:163
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:168
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1363
 #, fuzzy
 msgid "Use as featured image"
@@ -2143,35 +2147,35 @@ msgstr "Automatycznie ustaw obrazek wyróżniający"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:346
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:173
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:164
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:169
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1364
 msgid "Insert into item"
 msgstr ""
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:347
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:174
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:165
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:170
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1365
 msgid "Uploaded to this item"
 msgstr ""
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:348
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:175
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:166
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:171
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1366
 msgid "Items list"
 msgstr ""
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:349
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:176
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:167
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:172
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1367
 msgid "Items list navigation"
 msgstr ""
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:350
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:177
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:168
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:173
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1368
 msgid "Filter items list"
 msgstr ""
@@ -2528,7 +2532,7 @@ msgid "Birth Date"
 msgstr ""
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:101
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:97
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:102
 msgid "Sex"
 msgstr ""
 
@@ -2537,12 +2541,12 @@ msgid "&mdash; select &mdash;"
 msgstr ""
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:106
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:102
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:107
 msgid "Female"
 msgstr ""
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:107
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:103
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:108
 msgid "Male"
 msgstr ""
 
@@ -2568,7 +2572,7 @@ msgid "E-mail"
 msgstr ""
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:154
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:145
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:150
 msgid "Fleet"
 msgstr ""
 
@@ -2711,11 +2715,16 @@ msgstr "Załogant"
 msgid "Serie"
 msgstr "Serie"
 
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:75
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:76
+#, fuzzy
+msgid "Not Discardable Serie"
+msgstr "Serie"
+
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:80
 msgid "Only year matters."
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:76
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:81
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1141
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1261
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1538
@@ -2723,76 +2732,76 @@ msgstr ""
 msgid "Year"
 msgstr "Rok"
 
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:83
-msgid "Allow Drop"
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:88
+msgid "Allow Discard"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:87
-msgid "Drop After"
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:92
+msgid "Discard After"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:101
-msgid "&mdash; any &mdash;"
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:106
+msgid "&mdash; Any &mdash;"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:146
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:151
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:2233
 msgid "Ranking"
 msgstr "Ranking"
 
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:147
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:149
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:152
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:154
 #, fuzzy
 msgid "Rankings"
 msgstr "Ranking"
 
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:150
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:151
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:155
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:156
 #, fuzzy
 msgid "Add New Ranking"
 msgstr "Dodaj łódkę"
 
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:152
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:157
 #, fuzzy
 msgid "New Ranking"
 msgstr "Ranking"
 
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:153
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:158
 #, fuzzy
 msgid "Edit Ranking"
 msgstr "Ranking"
 
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:154
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:159
 #, fuzzy
 msgid "Update Ranking"
 msgstr "Lokalizacja"
 
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:155
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:160
 #, fuzzy
 msgid "View Ranking"
 msgstr "Ranking"
 
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:156
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:161
 #, fuzzy
 msgid "View Rankings"
 msgstr "Ranking"
 
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:157
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:162
 #, fuzzy
 msgid "Search ranking"
 msgstr "Lokalizacja"
 
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:171
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:176
 #, fuzzy
 msgid "ranking"
 msgstr "Ranking"
 
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:199
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:204
 #, fuzzy
 msgid "Ranking Settings"
 msgstr "Ranking"
 
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:234
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:240
 msgid "Shortcode"
 msgstr ""
 
@@ -3208,6 +3217,10 @@ msgstr ""
 msgid "select color"
 msgstr ""
 
+#: includes/iworks/fleet/posttypes.php:659
+msgid "&mdash; Select &mdash;"
+msgstr ""
+
 #: includes/iworks/options/options.php:258
 msgid "An error occurred while getting the configuration."
 msgstr ""
@@ -3580,19 +3593,19 @@ msgctxt "Person name on crews list if it is not set"
 msgid "not set"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:143
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:148
 #, fuzzy
 msgctxt "Ranking General Name"
 msgid "Rankings"
 msgstr "Ranking"
 
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:144
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:149
 #, fuzzy
 msgctxt "Ranking Singular Name"
 msgid "Ranking"
 msgstr "Ranking"
 
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:187
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:192
 #, fuzzy
 msgctxt "slug for single ranking"
 msgid "fleet-ranking"

@@ -71,6 +71,11 @@ class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 						'required' => 'required',
 					),
 				),
+				'no_discard' => array(
+					'add_class' => 'value',
+					'label'     => esc_html__( 'Not Discardable Serie', 'fleet' ),
+					'type'      => 'select',
+				),
 				'year'       => array(
 					'description' => esc_html__( 'Only year matters.', 'fleet' ),
 					'label'       => esc_html__( 'Year', 'fleet' ),
@@ -80,11 +85,11 @@ class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 					),
 				),
 				'drop'       => array(
-					'label' => esc_html__( 'Allow Drop', 'fleet' ),
+					'label' => esc_html__( 'Allow Discard', 'fleet' ),
 					'type'  => 'checkbox',
 				),
 				'drop_after' => array(
-					'label' => esc_html__( 'Drop After', 'fleet' ),
+					'label' => esc_html__( 'Discard After', 'fleet' ),
 					'type'  => 'number',
 					'args'  => array(
 						'min'     => 1,
@@ -98,7 +103,7 @@ class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 					'type'      => 'select',
 					'args'      => array(
 						'options' => array(
-							'any'    => __( '&mdash; any &mdash;', 'fleet' ),
+							'any'    => __( '&mdash; Any &mdash;', 'fleet' ),
 							'female' => __( 'Female', 'fleet' ),
 							'male'   => __( 'Male', 'fleet' ),
 						),
@@ -200,7 +205,8 @@ class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 	}
 
 	public function ranking( $post ) {
-		$this->fields['ranking']['serie']['args']['options'] = $this->get_series_array();
+		$this->fields['ranking']['serie']['args']['options']      = $this->get_series_array();
+		$this->fields['ranking']['no_discard']['args']['options'] = $this->get_series_array();
 		$this->get_meta_box_content( $post, $this->fields, __FUNCTION__ );
 	}
 
