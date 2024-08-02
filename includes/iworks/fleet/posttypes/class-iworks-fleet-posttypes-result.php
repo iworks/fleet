@@ -384,6 +384,12 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			return;
 		}
 		/**
+		 * turn off when download
+		 *
+		 * @since 2.2.2
+		 */
+		add_filter( 'suppress_filter_pre_get_posts_limit_to_year', '__return_true' );
+		/**
 		 * check post type & settings
 		 */
 		switch ( get_post_type( $post_id ) ) {
@@ -2085,24 +2091,24 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			global $iworks_fleet;
 			$this->boat_post_type = $iworks_fleet->get_post_type_name( 'boat' );
 		}
-			$args  = array(
-				'post_type'      => $this->post_type_name,
-				'posts_per_page' => 1,
-				'title'          => $number,
-			);
-			$query = new WP_Query( $args );
-			if ( empty( $query->posts ) ) {
-				return false;
-			}
-			$boat = $query->posts[0];
-			if ( is_a( $boat, 'WP_Post' ) ) {
-				return array(
-					'ID'         => $boat->ID,
-					'post_title' => $boat->post_title,
-					'url'        => get_permalink( $boat ),
-				);
-			}
+		$args  = array(
+			'post_type'      => $this->boat_post_type,
+			'posts_per_page' => 1,
+			'title'          => $number,
+		);
+		$query = new WP_Query( $args );
+		if ( empty( $query->posts ) ) {
 			return false;
+		}
+		$boat = $query->posts[0];
+		if ( is_a( $boat, 'WP_Post' ) ) {
+			return array(
+				'ID'         => $boat->ID,
+				'post_title' => $boat->post_title,
+				'url'        => get_permalink( $boat ),
+			);
+		}
+		return false;
 	}
 
 	/**
