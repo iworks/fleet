@@ -1994,6 +1994,15 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 							intval( $race_points )
 						);
 					}
+					/**
+					 * medal
+					 */
+					switch ( intval( $race_points ) ) {
+						case 1:
+						case 2:
+						case 3:
+							$race_points = sprintf( '<span class="medal">%s</span>', $race_points );
+					}
 					$one_content .= sprintf(
 						'<td class="%s">%s</td>',
 						esc_attr( implode( ' ', $classes ) ),

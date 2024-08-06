@@ -40,6 +40,48 @@ function iworks_fleet_options() {
 				'sanitize_callback' => 'absint',
 				'classes'           => array( 'switch-button' ),
 			),
+			array(
+				'type'  => 'subheading',
+				'label' => __( 'Load Modules', 'fleet' ),
+			),
+			/*
+			array(
+				'name'              => 'load_person',
+				'type'              => 'checkbox',
+				'th'                => __( 'Load Persons', 'fleet' ),
+				'default'           => 1,
+				'sanitize_callback' => 'absint',
+				'classes'           => array( 'switch-button' ),
+				'since' => '2.2.3',
+			),
+			array(
+				'name'              => 'load_result',
+				'type'              => 'checkbox',
+				'th'                => __( 'Load Results', 'fleet' ),
+				'default'           => 1,
+				'sanitize_callback' => 'absint',
+				'classes'           => array( 'switch-button' ),
+				'since' => '2.2.3',
+			),
+			array(
+				'name'              => 'load_boat',
+				'type'              => 'checkbox',
+				'th'                => __( 'Load Boats', 'fleet' ),
+				'default'           => 1,
+				'sanitize_callback' => 'absint',
+				'classes'           => array( 'switch-button' ),
+				'since' => '2.2.3',
+			),
+			 */
+			array(
+				'name'              => 'load_ranking',
+				'type'              => 'checkbox',
+				'th'                => __( 'Load Rankings', 'fleet' ),
+				'default'           => 0,
+				'sanitize_callback' => 'absint',
+				'classes'           => array( 'switch-button' ),
+				'since'             => '2.2.3',
+			),
 			/**
 			 * Results
 			 */

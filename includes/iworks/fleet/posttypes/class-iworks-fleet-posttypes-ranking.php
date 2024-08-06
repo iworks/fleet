@@ -48,6 +48,18 @@ class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 		 */
 		$this->fields = array(
 			'ranking' => array(
+				'type'       => array(
+					'add_class' => 'value',
+					'label'     => esc_html__( 'Ranking Type', 'fleet' ),
+					'type'      => 'select',
+					'args'      => array(
+						'options' => array(
+							''         => __( '&mdash; Select &mdash;', 'fleet' ),
+							'standard' => __( 'Standard Ranking', 'fleet' ),
+							'medals'   => __( 'Only Medals', 'fleet' ),
+						),
+					),
+				),
 				'use_boat'   => array(
 					'add_class' => 'key',
 					'label'     => esc_html__( 'Use Boat', 'fleet' ),
@@ -285,6 +297,8 @@ class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 			}
 			return $content;
 		}
+		d( get_post_meta( $post->ID ) );
+		d( $this->fields['ranking']['type']['args']['options'] );
 		return $content . $this->get_ranking_table_by_ranking_id( $post->ID, $args );
 	}
 

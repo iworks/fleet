@@ -1,171 +1,206 @@
 @import "_mixin";
 
+@mixin race_place {
+}
+
 .fleet-results {
-    @include table;
+	@include table;
 
-    .boat_id,
-    .race,
-    .year {
-        white-space: nowrap;
-    }
+	.boat_id,
+	.race,
+	.year {
+		white-space: nowrap;
+	}
 
-    .number-of-races,
-    .number-of-competitors {
-        text-align: right;
-    }
+	.number-of-races,
+	.number-of-competitors {
+		text-align: right;
+	}
 
-    .fleet-place-1 {
-        td {
-            background-color: $color_place_gold;
-        }
-    }
-    .fleet-place-2 {
-        td {
-            background-color: $color_place_silver;
-        }
-    }
-    .fleet-place-3 {
-        td {
-            background-color: $color_place_bronze;
-        }
-    }
-    .race {
-        &.race-discard {
-            color: rgba( 0, 0, 0, .3 );
-        }
-    }
+	.fleet-place-1 {
+		td {
+			background-color: var(--fleet-color-place-1);
+		}
+	}
+	.fleet-place-2 {
+		td {
+			background-color: var(--fleet-color-place-2);
+		}
+	}
+	.fleet-place-3 {
+		td {
+			background-color: var(--fleet-color-place-3);
+		}
+	}
+	.race {
+		&.race-discard {
+			color: rgba( 0, 0, 0, .3 );
+		}
+	}
+	.race {
+		&-result {
+			&-1,
+			&-2,
+			&-3 {
+				.medal {
+					display: flex;
+					width: 1.5em;
+					height: 1.5em;
+					@include radius(50%);
+					justify-content: center;
+					border: 1px solid var(--fleet-color-place-border);
+					font-weight: bolder;
+				}
+			}
+			&-1 {
+				.medal {
+					background-color: var(--fleet-color-place-1);
+				}
+			}
+			&-2 {
+				.medal {
+					background-color: var(--fleet-color-place-2);
+				}
+			}
+			&-3 {
+				.medal {
+					background-color: var(--fleet-color-place-3);
+				}
+			}
+		}
+	}
 }
 
 .iworks-fleet-trophies {
-    td {
-        &:first-child {
-            white-space: nowrap;
-            font-weight: 700;
-        }
-    }
-    @media screen and ( max-width: 599px ) {
-        thead {
-            display: none;
-        }
-        td {
-            display: block !important;
-            &:first-child {
-                text-align: center;
-            }
-        }
-    }
-    ul {
-        @include reset;
-        display: flex;
-        flex-wrap: wrap;
-        li {
-            padding: 0;
-            margin: 0 5px;
-            a {
-                text-decoration: none;
-                white-space: nowrap;
-            }
-            span {
-                display: block;
-                text-align: center;
-                font: {
-                    family: sans-serif;
-                    size: 12px;
-                    weight: 200;
-                }
-                text-align: center;
-                &.trophy {
-                    width: 100%;
-                    height: 20px;
-                    background: {
-                        repeat: no-repeat;
-                        position: 50% 100%;
-                        size: 20px 20px;
-                    }
-                }
-            }
-            &.fleet-type-world {
-                &.fleet-place-1 {
-                    .trophy {
-                        @include trophy( 'world-gold' );
-                    }
-                }
-                &.fleet-place-2 {
-                    .trophy {
-                        @include trophy( 'world-silver' );
-                    }
-                }
-                &.fleet-place-3 {
-                    .trophy {
-                        @include trophy( 'world-bronze' );
-                    }
-                }
-            }
-            &.fleet-type-continental {
-                &.fleet-place-1 {
-                    .trophy {
-                        @include trophy( 'continental-gold' );
-                    }
-                }
-                &.fleet-place-2 {
-                    .trophy {
-                        @include trophy( 'continental-silver' );
-                    }
-                }
-                &.fleet-place-3 {
-                    .trophy {
-                        @include trophy( 'continental-bronze' );
-                    }
-                }
-            }
-            &.fleet-type-national {
-                &.fleet-place-1 {
-                    .trophy {
-                        @include trophy( 'national-gold' );
-                    }
-                }
-                &.fleet-place-2 {
-                    .trophy {
-                        @include trophy( 'national-silver' );
-                    }
-                }
-                &.fleet-place-3 {
-                    .trophy {
-                        @include trophy( 'national-bronze' );
-                    }
-                }
-            }
-        }
-    }
+	td {
+		&:first-child {
+			white-space: nowrap;
+			font-weight: 700;
+		}
+	}
+	@media screen and ( max-width: 599px ) {
+		thead {
+			display: none;
+		}
+		td {
+			display: block !important;
+			&:first-child {
+				text-align: center;
+			}
+		}
+	}
+	ul {
+		@include reset;
+		display: flex;
+		flex-wrap: wrap;
+		li {
+			padding: 0;
+			margin: 0 5px;
+			a {
+				text-decoration: none;
+				white-space: nowrap;
+			}
+			span {
+				display: block;
+				text-align: center;
+				font: {
+					family: sans-serif;
+					size: 12px;
+					weight: 200;
+				}
+				text-align: center;
+				&.trophy {
+					width: 100%;
+					height: 20px;
+					background: {
+						repeat: no-repeat;
+						position: 50% 100%;
+						size: 20px 20px;
+					}
+				}
+			}
+			&.fleet-type-world {
+				&.fleet-place-1 {
+					.trophy {
+						@include trophy( 'world-gold' );
+					}
+				}
+				&.fleet-place-2 {
+					.trophy {
+						@include trophy( 'world-silver' );
+					}
+				}
+				&.fleet-place-3 {
+					.trophy {
+						@include trophy( 'world-bronze' );
+					}
+				}
+			}
+			&.fleet-type-continental {
+				&.fleet-place-1 {
+					.trophy {
+						@include trophy( 'continental-gold' );
+					}
+				}
+				&.fleet-place-2 {
+					.trophy {
+						@include trophy( 'continental-silver' );
+					}
+				}
+				&.fleet-place-3 {
+					.trophy {
+						@include trophy( 'continental-bronze' );
+					}
+				}
+			}
+			&.fleet-type-national {
+				&.fleet-place-1 {
+					.trophy {
+						@include trophy( 'national-gold' );
+					}
+				}
+				&.fleet-place-2 {
+					.trophy {
+						@include trophy( 'national-silver' );
+					}
+				}
+				&.fleet-place-3 {
+					.trophy {
+						@include trophy( 'national-bronze' );
+					}
+				}
+			}
+		}
+	}
 }
 body {
-    &.post-type-archive {
-        .results-countries-list {
-            ul {
-                display: flex;
-                flex-wrap: wrap;
-                li {
-                    padding: 0;
-                    margin: 5px;
-                }
-                a {
-                    display: block;
-                    overflow: hidden;
-                    text-indent: -999em;
-                    width: 36px;
-                    height: 24px;
-                    background: {
-                        repeat: no-repeat;
-                        size: contain;
-                        position: 50%
-                    }
-                    &:hover {
-                        background-color: transparent;
-                        opacity: .7;
-                    }
-                }
-            }
-        }
-    }
+	&.post-type-archive {
+		.results-countries-list {
+			ul {
+				display: flex;
+				flex-wrap: wrap;
+				li {
+					padding: 0;
+					margin: 5px;
+				}
+				a {
+					display: block;
+					overflow: hidden;
+					text-indent: -999em;
+					width: 36px;
+					height: 24px;
+					background: {
+						repeat: no-repeat;
+						size: contain;
+						position: 50%
+					}
+					&:hover {
+						background-color: transparent;
+						opacity: .7;
+					}
+				}
+			}
+		}
+	}
 }
 

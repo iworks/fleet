@@ -43,6 +43,9 @@ There are 3 ways to install this plugin:
 
 == Changelog ==
 
+= 2.2.3 (2024-xx-xx) =
+* Medals display have been improved.
+
 = 2.2.2 (2024-08-02) =
 * A boat link has been fixed.
 

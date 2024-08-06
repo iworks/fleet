@@ -1,11 +1,13 @@
-
 $dark: #040404;
 
 $transparentize: .3;
 
-$color_place_gold:   transparentize( gold, $transparentize );
-$color_place_silver: transparentize( silver, $transparentize );
-$color_place_bronze: transparentize( #cd7f32, $transparentize );
+:root {
+	--fleet-color-place-1: #{ transparentize( gold, $transparentize ) };
+	--fleet-color-place-2: #{ transparentize( silver, $transparentize ) };
+	--fleet-color-place-3: #{ transparentize( #cd7f32, $transparentize ) };
+	--fleet-color-place-border: #{ transparentize( $dark, .9 ) };
+}
 
 $version: PLUGIN_VERSION;
 
@@ -95,7 +97,7 @@ $image_root: '../images/';
     @include radius(0);
 }
 
-@mixin random_border_color() {
+@mixin rbc() {
     border: 1px solid rgb(random(255),random(255),random(255));
 }
 

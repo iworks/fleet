@@ -1,3 +1,10 @@
+:root {
+  --fleet-color-place-1: rgba(255, 215, 0, 0.7);
+  --fleet-color-place-2: rgba(192, 192, 192, 0.7);
+  --fleet-color-place-3: rgba(205, 127, 50, 0.7);
+  --fleet-color-place-border: rgba(4, 4, 4, 0.1);
+}
+
 .fleet-results {
   border: 0;
   border-collapse: collapse;
@@ -27,16 +34,36 @@
   text-align: right;
 }
 .fleet-results .fleet-place-1 td {
-  background-color: rgba(255, 215, 0, 0.7);
+  background-color: var(--fleet-color-place-1);
 }
 .fleet-results .fleet-place-2 td {
-  background-color: rgba(192, 192, 192, 0.7);
+  background-color: var(--fleet-color-place-2);
 }
 .fleet-results .fleet-place-3 td {
-  background-color: rgba(205, 127, 50, 0.7);
+  background-color: var(--fleet-color-place-3);
 }
 .fleet-results .race.race-discard {
   color: rgba(0, 0, 0, 0.3);
+}
+.fleet-results .race-result-1 .medal, .fleet-results .race-result-2 .medal, .fleet-results .race-result-3 .medal {
+  display: flex;
+  width: 1.5em;
+  height: 1.5em;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  justify-content: center;
+  border: 1px solid var(--fleet-color-place-border);
+  font-weight: bolder;
+}
+.fleet-results .race-result-1 .medal {
+  background-color: var(--fleet-color-place-1);
+}
+.fleet-results .race-result-2 .medal {
+  background-color: var(--fleet-color-place-2);
+}
+.fleet-results .race-result-3 .medal {
+  background-color: var(--fleet-color-place-3);
 }
 
 .iworks-fleet-trophies td:first-child {

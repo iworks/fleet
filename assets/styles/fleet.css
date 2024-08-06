@@ -1,3 +1,10 @@
+:root {
+  --fleet-color-place-1: rgba(255, 215, 0, 0.7);
+  --fleet-color-place-2: rgba(192, 192, 192, 0.7);
+  --fleet-color-place-3: rgba(205, 127, 50, 0.7);
+  --fleet-color-place-border: rgba(4, 4, 4, 0.1);
+}
+
 .boat-social .iworks-fleet-boat-social-media {
   display: inline;
   position: static;
@@ -15,9 +22,12 @@
   font-size: 100%;
   font-style: normal;
   font-weight: normal;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
   box-shadow: none;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
   border-radius: 0;
-  display: -ms-flexbox;
   display: flex;
 }
 .boat-social .iworks-fleet-boat-social-media a {
@@ -26,6 +36,13 @@
 .boat-social .iworks-fleet-boat-social-media a:hover {
   opacity: .6;
 }
+:root {
+  --fleet-color-place-1: rgba(255, 215, 0, 0.7);
+  --fleet-color-place-2: rgba(192, 192, 192, 0.7);
+  --fleet-color-place-3: rgba(205, 127, 50, 0.7);
+  --fleet-color-place-border: rgba(4, 4, 4, 0.1);
+}
+
 .fleet-results-person {
   border: 0;
   border-collapse: collapse;
@@ -305,6 +322,13 @@ td.points {
 .flag.flag-zim {
   background-image: url(../images/flags/zim.svg?v=PLUGIN_VERSION);
 }
+:root {
+  --fleet-color-place-1: rgba(255, 215, 0, 0.7);
+  --fleet-color-place-2: rgba(192, 192, 192, 0.7);
+  --fleet-color-place-3: rgba(205, 127, 50, 0.7);
+  --fleet-color-place-border: rgba(4, 4, 4, 0.1);
+}
+
 .fleet-results {
   border: 0;
   border-collapse: collapse;
@@ -334,16 +358,36 @@ td.points {
   text-align: right;
 }
 .fleet-results .fleet-place-1 td {
-  background-color: rgba(255, 215, 0, 0.7);
+  background-color: var(--fleet-color-place-1);
 }
 .fleet-results .fleet-place-2 td {
-  background-color: rgba(192, 192, 192, 0.7);
+  background-color: var(--fleet-color-place-2);
 }
 .fleet-results .fleet-place-3 td {
-  background-color: rgba(205, 127, 50, 0.7);
+  background-color: var(--fleet-color-place-3);
 }
 .fleet-results .race.race-discard {
   color: rgba(0, 0, 0, 0.3);
+}
+.fleet-results .race-result-1 .medal, .fleet-results .race-result-2 .medal, .fleet-results .race-result-3 .medal {
+  display: flex;
+  width: 1.5em;
+  height: 1.5em;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  justify-content: center;
+  border: 1px solid var(--fleet-color-place-border);
+  font-weight: bolder;
+}
+.fleet-results .race-result-1 .medal {
+  background-color: var(--fleet-color-place-1);
+}
+.fleet-results .race-result-2 .medal {
+  background-color: var(--fleet-color-place-2);
+}
+.fleet-results .race-result-3 .medal {
+  background-color: var(--fleet-color-place-3);
 }
 
 .iworks-fleet-trophies td:first-child {
@@ -378,12 +422,14 @@ td.points {
   font-size: 100%;
   font-style: normal;
   font-weight: normal;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
   box-shadow: none;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
   border-radius: 0;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  flex-wrap: wrap;
 }
 .iworks-fleet-trophies ul li {
   padding: 0;
@@ -437,10 +483,8 @@ td.points {
 }
 
 body.post-type-archive .results-countries-list ul {
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  flex-wrap: wrap;
 }
 body.post-type-archive .results-countries-list ul li {
   padding: 0;

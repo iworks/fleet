@@ -34,10 +34,6 @@ module.exports = function( grunt ) {
 			'assets/styles/frontend/post-type-person.css': 'assets/sass/frontend/post-type-person.scss',
 			'assets/styles/frontend/post-type-boat.css': 'assets/sass/frontend/post-type-boat.scss',
 		},
-		css_files_concat: {
-			'assets/styles/fleet-admin.css': ['assets/styles/admin/*.css'],
-			'assets/styles/fleet.css': ['assets/styles/frontend/*.css']
-		},
 		plugin_dir: '',
 		plugin_file: 'fleet.php',
 		// Regex patterns to exclude from transation.
@@ -72,6 +68,18 @@ module.exports = function( grunt ) {
 				files: conf.js_files_concat
 			}
 		},
+
+		concat_css: {
+            options: {},
+			frontend: {
+				src: [ 'assets/styles/frontend/*.css'],
+				dest: 'assets/styles/fleet.css'
+			},
+			admin: {
+				src: [ 'assets/styles/admin/*.css'],
+				dest: 'assets/styles/fleet-admin.css'
+			}
+        },
 
 		jshint: {
 			all: [
@@ -152,22 +160,13 @@ module.exports = function( grunt ) {
 		},
 
 		cssmin: {
-			options: {
-				banner: '/*! <%= pkg.title %> - v<%= pkg.version %>\n' +
-				' * <%= pkg.homepage %>\n' +
-				' * Copyright (c) <%= grunt.template.today("yyyy") %>;' +
-				' * Licensed GPLv2+' +
-				' */\n',
-				mergeIntoShorthands: false
-			},
 			target: {
-				sourceMap: true,
 				expand: true,
-				files: {
-					// 'assets/css/ultimate-branding-admin.min.css': [
-					// 'assets/css/admin/*.css'
-					// ]
-				},
+				cwd: 'assets/styles',
+				src: [ '*.css', '!*.min.css'],
+				dest: 'assets/styles',
+				sourceMap: true,
+				ext: '.min.css'
 			},
 		},
 
@@ -177,7 +176,7 @@ module.exports = function( grunt ) {
 					'assets/sass/**/*.scss',
 					'inc/modules/**/*.scss'
 				],
-				tasks: ['sass', 'cssmin'],
+				tasks: ['css'],
 				options: {
 					debounceDelay: 500
 				}
@@ -363,7 +362,7 @@ module.exports = function( grunt ) {
 
 	grunt.registerTask( 'default', ['clean:temp', 'concat', 'uglify', 'sass', 'cssmin' ] );
 	grunt.registerTask( 'js', [ 'concat', 'uglify' ] );
-	grunt.registerTask( 'css', [ 'sass', 'cssmin' ] );
+	grunt.registerTask( 'css', [ 'sass', 'concat_css','cssmin' ] );
 	grunt.registerTask( 'i18n', [ 'checktextdomain', 'makepot', 'potomo' ] );
 
 	// grunt.registerTask( 'build', [ 'default', 'i18n', 'clean', 'copy', 'compress', 'notes'] );
