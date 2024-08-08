@@ -633,6 +633,13 @@ class iworks_fleet_posttypes {
 	}
 
 	public function filter_int505_archive_stats_table_row( $content ) {
+		$post_type_object = get_post_type_object( $this->post_type_name );
+		if ( empty( $post_type_object ) || is_wp_error( $post_type_object ) ) {
+			return $content;
+		}
+		if ( false === $post_type_object->has_archive ) {
+			return $content;
+		}
 		$content .= sprintf(
 			'<li class="fleet-stats-row fleet-stats-row-%s">',
 			esc_attr( $this->post_type_name )

@@ -4,6 +4,9 @@
 			<th rowspan="2">#</th>
 			<th rowspan="2"><?php esc_html_e( 'Name', 'fleet' ); ?></th>
 <?php
+
+d( $args );
+
 foreach ( $args['data']['events'] as $event_id ) {
 	printf(
 		'<th colspan="2" class="iworks-fleet-ranking-table-thead-event"><span><a href="%s">%s</a></span></th>',

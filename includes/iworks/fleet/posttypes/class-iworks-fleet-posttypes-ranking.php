@@ -269,6 +269,7 @@ class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 				'header'  => 'h2',
 				'title'   => 'hide',
 				'content' => 'hide',
+				'type'    => 'results',
 			),
 			$atts,
 			'iworks/fleet/ranking/shortcode/atts'
@@ -297,10 +298,28 @@ class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 			}
 			return $content;
 		}
-		d( get_post_meta( $post->ID ) );
-		d( $this->fields['ranking']['type']['args']['options'] );
+		/**
+		 * set type
+		 */
+		$type = get_post_meta( $post->ID, $this->options->get_option_name( 'ranking_type' ), true );
+		switch ( $type ) {
+			case 'medals':
+				$args['type'] = $type;
+				break;
+		}
+		/**
+		 * sanitize type to allowed values
+		 */
+		switch ( $args['type'] ) {
+			case 'medals':
+			case 'results':
+				break;
+			default:
+				$args['type'] = 'results';
+		}
 		return $content . $this->get_ranking_table_by_ranking_id( $post->ID, $args );
 	}
+
 
 	public function get_ranking_table_by_ranking_id( $id, $args = array() ) {
 		$post    = get_post( $id );
@@ -344,7 +363,7 @@ class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 		$args['classes'] = $classes;
 		$args['post']    = (array) $post;
 		$content        .= $this->get_template(
-			'ranking/output/header',
+			$args['type'] . '/output/header',
 			'shortcode',
 			$args,
 		);
@@ -352,14 +371,14 @@ class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 		 * get results
 		 */
 		$args         = $this->get_ranking_settings_by_ranking_id( $id );
-		$args['data'] = apply_filters( 'iworks/fleet/results/get/array', array(), $args );
+		$args['data'] = apply_filters( 'iworks/fleet/' . $args['type'] . '/get/array', array(), $args );
 		$content     .= $this->get_template(
-			'ranking/output/table',
+			$args['type'] . '/output/table',
 			'shortcode',
 			$args,
 		);
 		$content     .= $this->get_template(
-			'ranking/output/footer',
+			$args['type'] . '/output/footer',
 			'shortcode',
 			$args,
 		);

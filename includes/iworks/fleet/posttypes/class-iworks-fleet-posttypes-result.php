@@ -207,7 +207,9 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		 *
 		 * @since 2.2.0
 		 */
+		add_filter( 'iworks/fleet/standard/get/array', array( $this, 'filter_get_results_array' ), 10, 2 );
 		add_filter( 'iworks/fleet/results/get/array', array( $this, 'filter_get_results_array' ), 10, 2 );
+		add_filter( 'iworks/fleet/medals/get/array', array( $this, 'filter_get_medals_array' ), 10, 2 );
 	}
 
 	public function get_trophies_by_sailor_id( $content, $sailor_id ) {
@@ -980,6 +982,22 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 				array_map( array( $this, 'placeholder_d_helper' ), $ids )
 			)
 		);
+		$sql                = $wpdb->prepare( $sql, $ids );
+		return $this->add_results_metadata( $wpdb->get_results( $sql ) );
+	}
+
+	private function get_list_by_post_ids_limit_place( $ids, $min, $max ) {
+		global $wpdb;
+		$table_name_regatta = $wpdb->prefix . 'fleet_regatta';
+		$sql                = sprintf(
+			"select * from {$table_name_regatta} where post_regata_id in( %s ) and place >= %%d and place <= %%d order by date, year desc",
+			implode(
+				', ',
+				array_map( array( $this, 'placeholder_d_helper' ), $ids )
+			)
+		);
+		$ids[]              = $min;
+		$ids[]              = $max;
 		$sql                = $wpdb->prepare( $sql, $ids );
 		return $this->add_results_metadata( $wpdb->get_results( $sql ) );
 	}
@@ -3056,8 +3074,6 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			$data = array();
 		}
 		remove_filter( 'the_title', array( $this, 'add_year_to_title' ), 10, 2 );
-		$data['events']  = array();
-		$data['sailors'] = array();
 		/**
 		 * set defaults
 		 */
@@ -3132,6 +3148,17 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 				$ranking = $this->calculate_crew( $list, $ids, $args );
 			}
 		}
+		/**
+		 * check keys
+		 */
+		foreach ( array( 'events', 'teams' ) as $key ) {
+			if ( ! isset( $ranking[ $key ] ) ) {
+				$ranking[ $key ] = array();
+			}
+		}
+		/**
+		 * return
+		 */
 		return $ranking;
 	}
 
@@ -3234,4 +3261,236 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		return strcmp( $a['name'], $b['name'] );
 	}
 
+	/**
+	 * get medals array
+	 *
+	 * @since 2.2.0
+	 */
+	public function filter_get_medals_array( $data, $args ) {
+		global $options;
+		if ( ! is_array( $data ) ) {
+			$data = array();
+		}
+		remove_filter( 'the_title', array( $this, 'add_year_to_title' ), 10, 2 );
+		/**
+		 * set defaults
+		 */
+		$args = wp_parse_args(
+			$args,
+			array(
+				'serie' => 0,
+			)
+		);
+		/**
+		 * build WP Query args
+		 */
+		$wp_query_args = array(
+			'post_type' => $this->post_type_name,
+			'nopaging'  => true,
+			'tax_query' => array(
+				array(
+					'taxonomy' => $this->taxonomy_name_serie,
+					'field'    => 'id',
+					'terms'    => $args['serie'],
+				),
+			),
+			'orderby'   => 'meta_value_num',
+			'order'     => 'ASC',
+		);
+		$query         = new WP_Query( $wp_query_args );
+		$ids           = array();
+		foreach ( $query->posts as $post ) {
+			$ids[] = $post->ID;
+		}
+		$list    = $this->get_list_by_post_ids_limit_place( $ids, 1, 3 );
+		$ranking = array();
+		foreach ( $list as $one ) {
+			if (
+				'yes' === $args['use_boat']
+				&& 'yes' === $args['use_helm']
+				&& 'yes' === $args['use_crew']
+			) {
+				$ranking = $this->calculate_boat( $list, $ids, $args );
+			} elseif (
+				'yes' === $args['use_helm']
+				&& 'yes' === $args['use_crew']
+			) {
+				$ranking = $this->calculate_medal_any_position( $list, $ids, $args );
+			} elseif ( 'yes' === $args['use_helm'] ) {
+				$ranking = $this->calculate_medal_helm( $list, $ids, $args );
+			} elseif ( 'yes' === $args['use_crew'] ) {
+				$ranking = $this->calculate_medal_crew( $list, $ids, $args );
+			}
+		}
+		/**
+		 * check keys
+		 */
+		foreach ( array( 'events', 'teams' ) as $key ) {
+			if ( ! isset( $ranking[ $key ] ) ) {
+				$ranking[ $key ] = array();
+			}
+		}
+		/**
+		 * return
+		 */
+		return $ranking;
+	}
+
+	private function calculate_medal_helm( $list, $ids, $args ) {
+		return $this->calculate_medal_person( $list, $ids, $args, 'helm' );
+	}
+
+	private function calculate_medal_any_position( $list, $ids, $args ) {
+		return $this->calculate_medal_person( $list, $ids, $args, array( 'helm', 'crew' ) );
+	}
+
+	private function calculate_medal_person( $list, $ids, $args, $fields ) {
+		$data  = array(
+			'events' => $ids,
+			'teams'  => array(),
+		);
+		$sex   = array();
+		$races = array();
+		if ( ! is_array( $fields ) ) {
+			$fields = array( $fields );
+		}
+		foreach ( $list as $one ) {
+			if ( ! isset( $races[ $one->post_regata_id ] ) ) {
+				$races[ $one->post_regata_id ] = array();
+			}
+			foreach ( $fields as $field ) {
+				$person_id                                   = $one->{$field . '_id'};
+				$races[ $one->post_regata_id ][ $person_id ] = $one->place;
+				if ( isset( $data['teams'][ $person_id ] ) ) {
+					if ( $one->year < $data['teams'][ $person_id ]['year_of_first_start'] ) {
+						$data['teams'][ $person_id ]['year_of_first_start'] = $one->year;
+					}
+					if ( $one->year > $data['teams'][ $person_id ]['year_of_last_start'] ) {
+						$data['teams'][ $person_id ]['year_of_last_start'] = $one->year;
+					}
+				} else {
+					$data['teams'][ $person_id ] = array(
+						'name'                => $one->{$field . '_name'},
+						'url'                 => get_permalink( $person_id ),
+						'number_of_starts'    => 0,
+						'year_of_first_start' => $one->year,
+						'year_of_last_start'  => $one->year,
+						'medals'              => array(
+							'gold'   => 0,
+							'silver' => 0,
+							'bronze' => 0,
+						),
+						'place'               => 0,
+						'years'               => '&mdash;',
+					);
+				}
+			}
+		}
+			/**
+			 * add teams points
+			 */
+		foreach ( $ids as $id ) {
+			foreach ( $data['teams'] as $sailor_id => $d ) {
+				if (
+					isset( $races[ $id ] )
+					&& isset( $races[ $id ][ $sailor_id ] )
+				) {
+					switch ( $races[ $id ][ $sailor_id ] ) {
+						case 1:
+							$data['teams'][ $sailor_id ]['medals']['gold']++;
+							break;
+						case 2:
+							$data['teams'][ $sailor_id ]['medals']['silver']++;
+							break;
+						case 3:
+							$data['teams'][ $sailor_id ]['medals']['bronze']++;
+							break;
+					}
+					$data['teams'][ $sailor_id ]['number_of_starts']++;
+				}
+			}
+		}
+		uasort( $data['teams'], array( $this, 'calculate_medal_sort_helper' ) );
+		/**
+		 * calculate places
+		 */
+		$i           = 0;
+		$last_place  = $i;
+		$last_medals = array(
+			'gold'   => 0,
+			'silver' => 0,
+			'bronze' => 0,
+		);
+		foreach ( $data['teams'] as $id => &$d ) {
+			$i++;
+			if (
+				$d['medals']['gold'] !== $last_medals['gold']
+				|| $d['medals']['silver'] !== $last_medals['silver']
+				|| $d['medals']['bronze'] !== $last_medals['bronze']
+			) {
+				$last_place = $i;
+			}
+			$d['place']  = $last_place;
+			$last_medals = $d['medals'];
+			/**
+			 * years
+			 */
+			if ( $d['year_of_first_start'] === $d['year_of_last_start'] ) {
+				$d['years'] = $d['year_of_first_start'];
+			} else {
+				$d['years'] = sprintf( '%d&ndash;%d', $d['year_of_first_start'], $d['year_of_last_start'] );
+			}
+		}
+		/**
+		 * return
+		 */
+		return $data;
+	}
+
+	private function calculate_medal_sort_helper( $a, $b ) {
+		/**
+		 * sort by gold
+		 * more is better
+		 */
+		if ( $a['medals']['gold'] < $b['medals']['gold'] ) {
+			return 1;
+		}
+		if ( $a['medals']['gold'] > $b['medals']['gold'] ) {
+			return -1;
+		}
+		/**
+		 * sort by silver
+		 * more is better
+		 */
+		if ( $a['medals']['silver'] < $b['medals']['silver'] ) {
+			return 1;
+		}
+		if ( $a['medals']['silver'] > $b['medals']['silver'] ) {
+			return -1;
+		}
+		/**
+		 * sort by bronze
+		 * more is better
+		 */
+		if ( $a['medals']['bronze'] < $b['medals']['bronze'] ) {
+			return 1;
+		}
+		if ( $a['medals']['bronze'] > $b['medals']['bronze'] ) {
+			return -1;
+		}
+		/**
+		 * sort by start year
+		 * less is better
+		 */
+		if ( $a['year_of_first_start'] > $b['year_of_first_start'] ) {
+			return 1;
+		}
+		if ( $a['year_of_first_start'] < $b['year_of_first_start'] ) {
+			return -1;
+		}
+		/**
+		 * sort by name
+		 */
+		return strcmp( $a['name'], $b['name'] );
+	}
 }
