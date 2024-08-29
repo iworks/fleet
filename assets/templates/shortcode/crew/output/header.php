@@ -1,4 +1,4 @@
-aaa<div class="<?php echo esc_attr( implode( ' ', $args['classes'] ) ); ?>">
+<div class="<?php echo esc_attr( implode( ' ', $args['classes'] ) ); ?>">
 <?php
 if (
 	isset( $args['header'] )

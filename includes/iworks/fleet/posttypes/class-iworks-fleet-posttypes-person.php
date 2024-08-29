@@ -136,6 +136,12 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 		 * Change tag link to person
 		 */
 		add_filter( 'term_link', array( $this, 'change_tag_link_to_person_link' ), 10, 3 );
+		/**
+		 * get data filters
+		 *
+		 * @since 2.3.0
+		 */
+		add_filter( 'iworks/fleet/person/get/array', array( $this, 'filter_get_person_array' ), 10, 3 );
 	}
 
 	/**
@@ -818,5 +824,52 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 		}
 		return $og;
 	}
+
+	/**
+	 * get sailor data by id
+	 *
+	 * @since 2.3.0
+	 */
+	public function filter_get_person_array( $data, $person_id, $name ) {
+		if ( isset( $this->cache['persons'][ $person_id ] ) ) {
+			return $this->cache['persons'][ $person_id ];
+		}
+		$data = array(
+			'id'        => $person_id,
+			'name'      => $name,
+			'permalink' => false,
+		);
+		if (
+			! empty( $person_id )
+			&& get_post_type( $person_id ) === $this->post_type_name
+		) {
+			$data['permalink'] = get_permalink( $person_id );
+		}
+		foreach ( $this->fields as $group_key  => $group_data ) {
+			foreach ( $group_data as $field_key => $field_data ) {
+				$k = $group_key . '_' . $field_key;
+				switch ( $k ) {
+					case 'personal_sailor_id';
+						$data[ $k ] = $person_id;
+					break;
+					default:
+						$data[ $k ] = get_post_meta( $person_id, $this->options->get_option_name( $k ), true );
+				}
+			}
+			if ( isset( $data['contact_email'] ) && is_email( $data['contact_email'] ) ) {
+				$data['gravatar_url'] = get_avatar_url(
+					$data['contact_email'],
+					array(
+						'size'    => 512,
+						'default' => 'blank',
+						'rating'  => 'G',
+					)
+				);
+			}
+		}
+		$this->cache['persons'][ $person_id ] = $data;
+		return $this->cache['persons'][ $person_id ];
+	}
+
 }
 

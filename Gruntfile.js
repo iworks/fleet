@@ -10,10 +10,10 @@
  *   $ grunt hello
  */
 
-module.exports = function( grunt ) {
+module.exports = function(grunt) {
 
 	// Load all grunt tasks.
-	require( 'load-grunt-tasks' )(grunt);
+	require('load-grunt-tasks')(grunt);
 
 	var buildtime = new Date().toISOString();
 	var buildyear = 1900 + new Date().getYear();
@@ -41,27 +41,29 @@ module.exports = function( grunt ) {
 			ignore_files: [
 				'.git*',
 				'node_modules/.*',
-				'(^.php)',		 // Ignore non-php files.
-				'release/.*',	  // Temp release files.
+				'(^.php)', // Ignore non-php files.
+				'release/.*', // Temp release files.
 				'.sass-cache/.*',
-				'tests/.*',		// Unit testing.
+				'tests/.*', // Unit testing.
 			],
 			pot_dir: 'languages/', // With trailing slash.
-			textdomain: 'fleet',
+			textdomain: '<%= pkg.name %>',
 		}
 	};
 
 
 	// Project configuration
-	grunt.initConfig( {
-		pkg: grunt.file.readJSON( 'package.json' ),
+	grunt.initConfig({
+		pkg: grunt.file.readJSON('package.json'),
+
+		// JS - Concat .js source files into a single .js file.
 		concat: {
 			options: {
 				stripBanners: true,
 				banner: '/*! <%= pkg.title %> - v<%= pkg.version %>\n' +
 				' * <%= pkg.homepage %>\n' +
 				' * Copyright (c) <%= grunt.template.today("yyyy") %>;' +
-				' * Licensed GPLv2+' +
+				' * Licensed <%= pkg.license %>' +
 				' */\n'
 			},
 			scripts: {
@@ -70,16 +72,16 @@ module.exports = function( grunt ) {
 		},
 
 		concat_css: {
-            options: {},
+			options: {},
 			frontend: {
-				src: [ 'assets/styles/frontend/*.css'],
+				src: ['assets/styles/frontend/*.css'],
 				dest: 'assets/styles/fleet.css'
 			},
 			admin: {
-				src: [ 'assets/styles/admin/*.css'],
+				src: ['assets/styles/admin/*.css'],
 				dest: 'assets/styles/fleet-admin.css'
 			}
-        },
+		},
 
 		jshint: {
 			all: [
@@ -88,28 +90,29 @@ module.exports = function( grunt ) {
 				'assets/js/test/**/*.js'
 			],
 			options: {
-				curly:   true,
-				eqeqeq:  true,
-				immed:   true,
+				curly: true,
+				eqeqeq: true,
+				immed: true,
 				latedef: true,
-				newcap:  true,
-				noarg:   true,
-				sub:	 true,
-				undef:   true,
-				boss:	true,
-				eqnull:  true,
+				newcap: true,
+				noarg: true,
+				sub: true,
+				undef: true,
+				boss: true,
+				eqnull: true,
 				globals: {
 					exports: true,
-					module:  false
+					module: false
 				}
 			}
 		},
 
+		// JS - Uglyfies the source code of .js files (to make files smaller).
 		uglify: {
 			all: {
 				files: [{
 					expand: true,
-					src: ['*.js', '!*.min.js', '!shared*' ],
+					src: ['*.js', '!*.min.js', '!shared*'],
 					cwd: 'assets/js/',
 					dest: 'assets/js/',
 					ext: '.min.js',
@@ -119,7 +122,7 @@ module.exports = function( grunt ) {
 					banner: '/*! <%= pkg.title %> - v<%= pkg.version %>\n' +
 					' * <%= pkg.homepage %>\n' +
 					' * Copyright (c) <%= grunt.template.today("yyyy") %>;' +
-					' * Licensed GPLv2+' +
+					' * Licensed <%= pkg.license %>' +
 					' */\n',
 					mangle: {
 						reserved: ['jQuery']
@@ -128,7 +131,7 @@ module.exports = function( grunt ) {
 			}
 		},
 
-		test:   {
+		test: {
 			files: ['assets/js/test/**/*.js']
 		},
 
@@ -148,7 +151,7 @@ module.exports = function( grunt ) {
 			}
 		},
 
-		sass:   {
+		sass: {
 			all: {
 				options: {
 					'sourcemap=none': true, // 'sourcemap': 'none' does not work...
@@ -159,18 +162,19 @@ module.exports = function( grunt ) {
 			}
 		},
 
+		// CSS - Minify all .css files.
 		cssmin: {
 			target: {
 				expand: true,
 				cwd: 'assets/styles',
-				src: [ '*.css', '!*.min.css'],
+				src: ['*.css', '!*.min.css'],
 				dest: 'assets/styles',
 				sourceMap: true,
 				ext: '.min.css'
 			},
 		},
 
-		watch:  {
+		watch: {
 			sass: {
 				files: [
 					'assets/sass/**/*.scss',
@@ -239,11 +243,12 @@ module.exports = function( grunt ) {
 		copy: {
 			// Copy the plugin to a versioned release directory
 			main: {
-				src:  [
+				src: [
 					'**',
 					'!assets/sass/**',
 					'!assets/scss/**',
 					'!**/bitbucket-pipelines.yml',
+					'!contributing.md',
 					'!**/css/less/**',
 					'!**/css/sass/**',
 					'!**/css/src/**',
@@ -253,8 +258,8 @@ module.exports = function( grunt ) {
 					'!**/Gruntfile.js',
 					'!**/img/src/**',
 					'!**/js/src/**',
-					'!languages/*.[pm]o',
 					'!languages/*.json',
+					'!languages/*.[pm]o',
 					'!LICENSE',
 					'!**/*.map',
 					'!node_modules/**',
@@ -279,15 +284,17 @@ module.exports = function( grunt ) {
 					{ match: /AUTHOR_NAME/g, replace: '<%= pkg.author[0].name %>' },
 					{ match: /AUTHOR_URI/g, replace: '<%= pkg.author[0].uri %>' },
 					{ match: /BUILDTIME/g, replace: buildtime },
+					{ match: /IWORKS_OPTIONS_TEXTDOMAIN/g, replace: '<%= pkg.name %>' },
 					{ match: /IWORKS_RATE_TEXTDOMAIN/g, replace: '<%= pkg.name %>' },
 					{ match: /PLUGIN_DESCRIPTION/g, replace: '<%= pkg.description %>' },
+					{ match: /PLUGIN_GITHUB_WEBSITE/g, replace: '<%= pkg.repository.url %>' },
 					{ match: /PLUGIN_NAME/g, replace: '<%= pkg.name %>' },
 					{ match: /PLUGIN_REQUIRES_PHP/g, replace: '<%= pkg.requires.PHP %>' },
 					{ match: /PLUGIN_REQUIRES_WORDPRESS/g, replace: '<%= pkg.requires.WordPress %>' },
-					{ match: /PLUGIN_TESTED_WORDPRESS/g, replace: '<%= pkg.tested.WordPress %>' },
 					{ match: /PLUGIN_TAGLINE/g, replace: '<%= pkg.tagline %>' },
-					{ match: /PLUGIN_TITLE/g, replace: '<%= pkg.title %>' },
+					{ match: /PLUGIN_TESTED_WORDPRESS/g, replace: '<%= pkg.tested.WordPress %>' },
 					{ match: /PLUGIN_TILL_YEAR/g, replace: buildyear },
+					{ match: /PLUGIN_TITLE/g, replace: '<%= pkg.title %>' },
 					{ match: /PLUGIN_URI/g, replace: '<%= pkg.homepage %>' },
 					{ match: /PLUGIN_VERSION/g, replace: '<%= pkg.version %>' },
 					{ match: /^Version: .+$/g, replace: 'Version: <%= pkg.version %>' },
@@ -307,7 +314,7 @@ module.exports = function( grunt ) {
 			main: {
 				options: {
 					mode: 'zip',
-					archive: './release/<%= pkg.name %>-<%= pkg.version %>.zip'
+					archive: './release/<%= pkg.name %>.zip'
 				},
 				expand: true,
 				cwd: 'release/<%= pkg.version %>/',
@@ -337,37 +344,37 @@ module.exports = function( grunt ) {
 				]
 			},
 			files: {
-				src: ['og.php', 'vendor/**/*.php' ], //all php
+				src: ['<%= pkg.name %>.php', 'includes/**/*.php'], //all php
 				expand: true,
 			},
 		},
 
-	} );
+	});
 
-	grunt.registerTask( 'notes', 'Show release notes', function() {
-		grunt.log.subhead( 'Release notes' );
-		grunt.log.writeln( '  1. Check BITBUCKET for pull-requests' );
-		grunt.log.writeln( '  2. Check ASANA for high-priority bugs' );
-		grunt.log.writeln( '  3. Check EMAILS for high-priority bugs' );
-		grunt.log.writeln( '  4. Check FORUM for open threads' );
-		grunt.log.writeln( '  5. REPLY to forum threads + unsubscribe' );
-		grunt.log.writeln( '  6. Update the TRANSLATION files' );
-		grunt.log.writeln( '  7. Generate ARCHIVE' );
-		grunt.log.writeln( '  8. Check ARCHIVE structure - it should be a folder with plugin name' );
-		grunt.log.writeln( '  9. INSTALL on a clean WordPress installation' );
-		grunt.log.writeln( ' 10. RELEASE the plugin!' );
+	grunt.registerTask('notes', 'Show release notes', function() {
+		grunt.log.subhead('Release notes');
+		grunt.log.writeln('  1. Check BITBUCKET for pull-requests');
+		grunt.log.writeln('  2. Check ASANA for high-priority bugs');
+		grunt.log.writeln('  3. Check EMAILS for high-priority bugs');
+		grunt.log.writeln('  4. Check FORUM for open threads');
+		grunt.log.writeln('  5. REPLY to forum threads + unsubscribe');
+		grunt.log.writeln('  6. Update the TRANSLATION files');
+		grunt.log.writeln('  7. Generate ARCHIVE');
+		grunt.log.writeln('  8. Check ARCHIVE structure - it should be a folder with plugin name');
+		grunt.log.writeln('  9. INSTALL on a clean WordPress installation');
+		grunt.log.writeln(' 10. RELEASE the plugin!');
 	});
 
 	// Default task.
 
-	grunt.registerTask( 'default', ['clean:temp', 'concat', 'uglify', 'sass', 'cssmin' ] );
-	grunt.registerTask( 'js', [ 'concat', 'uglify' ] );
-	grunt.registerTask( 'css', [ 'sass', 'concat_css','cssmin' ] );
-	grunt.registerTask( 'i18n', [ 'checktextdomain', 'makepot', 'potomo' ] );
+	grunt.registerTask('default', ['clean:temp', 'concat', 'uglify', 'sass', 'cssmin']);
+	grunt.registerTask('js', ['concat', 'uglify']);
+	grunt.registerTask('css', ['sass', 'concat_css', 'cssmin']);
+	grunt.registerTask('i18n', ['checktextdomain', 'makepot', 'potomo']);
 
 	// grunt.registerTask( 'build', [ 'default', 'i18n', 'clean', 'copy', 'compress', 'notes'] );
-	grunt.registerTask( 'build', [ 'default', 'clean', 'copy', 'replace', 'compress', 'notes'] );
-	grunt.registerTask( 'test', ['phpunit', 'jshint', 'notes'] );
+	grunt.registerTask('build', ['default', 'clean', 'copy', 'replace', 'compress', 'notes']);
+	grunt.registerTask('test', ['phpunit', 'jshint', 'notes']);
 
 	grunt.util.linefeed = '\n';
 };

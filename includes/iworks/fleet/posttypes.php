@@ -60,6 +60,15 @@ class iworks_fleet_posttypes {
 	 */
 	private $mna_codes = array();
 
+	/**
+	 * Cache
+	 *
+	 * @since 2.3.0
+	 */
+	protected $cache = array(
+		'person' => array(),
+	);
+
 	public function __construct() {
 		$this->options = iworks_fleet_get_options_object();
 		$this->base    = preg_replace( '/\/iworks.+/', '/', __FILE__ );

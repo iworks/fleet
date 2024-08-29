@@ -207,7 +207,6 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		 *
 		 * @since 2.2.0
 		 */
-		add_filter( 'iworks/fleet/standard/get/array', array( $this, 'filter_get_results_array' ), 10, 2 );
 		add_filter( 'iworks/fleet/results/get/array', array( $this, 'filter_get_results_array' ), 10, 2 );
 		add_filter( 'iworks/fleet/medals/get/array', array( $this, 'filter_get_medals_array' ), 10, 2 );
 	}
@@ -855,7 +854,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 
 	public function change_order( $query ) {
 		if ( is_admin() ) {
-			if ( __( 'Year' === $query->get( 'orderby' ) ) ) {
+			if ( 'Year' === $query->get( 'orderby' ) ) {
 				$query->set( 'meta_key', $this->options->get_option_name( 'result_date_start' ) );
 				$query->set( 'meta_value_num', 0 );
 				$query->set( 'meta_compare', '>' );
@@ -3141,7 +3140,8 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 				'yes' === $args['use_helm']
 				&& 'yes' === $args['use_crew']
 			) {
-				$ranking = $this->calculate_full_crew( $list, $ids );
+				$ranking         = $this->calculate_full_crew( $list, $ids, $args );
+				$ranking['type'] = 'crew';
 			} elseif ( 'yes' === $args['use_helm'] ) {
 				$ranking = $this->calculate_helm( $list, $ids, $args );
 			} elseif ( 'yes' === $args['use_crew'] ) {
@@ -3160,6 +3160,131 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		 * return
 		 */
 		return $ranking;
+	}
+
+	private function get_team_from_one( $one ) {
+		$data  = array(
+			'id'      => false,
+			'sailors' => array(),
+			'sex'     => false,
+		);
+		$names = array( $one->helm_name, $one->crew_name );
+		sort( $names );
+		$data['id']                       = md5( implode( $names ) );
+		$data['sailors'][ $one->helm_id ] = apply_filters( 'iworks/fleet/person/get/array', array(), $one->helm_id, $one->helm_name );
+		$data['sailors'][ $one->crew_id ] = apply_filters( 'iworks/fleet/person/get/array', array(), $one->crew_id, $one->crew_name );
+		return $data;
+	}
+
+	private function calculate_full_crew( $list, $ids, $args ) {
+		$data  = array(
+			'events' => $ids,
+			'max'    => 0,
+			'teams'  => array(),
+		);
+		$sex   = array();
+		$races = array();
+		foreach ( $list as $one ) {
+			if ( ! isset( $races[ $one->post_regata_id ] ) ) {
+				$races[ $one->post_regata_id ] = array();
+			}
+			$team = $this->get_team_from_one( $one );
+			$races[ $one->post_regata_id ][ $team['id'] ] = $one->place;
+			/**
+			 * merge
+			 */
+			$data['teams'][ $team['id'] ] = wp_parse_args(
+				array(
+					'sum'              => 0,
+					'number_of_starts' => 0,
+					'no_drop_place'    => 0,
+					'results'          => array(),
+				),
+				$team
+			);
+			if ( $data['max'] < $one->place ) {
+				$data['max'] = $one->place;
+			}
+		}
+		$data['max']++;
+		/**
+		 * add teams points
+		 */
+		foreach ( $ids as $id ) {
+			foreach ( $data['teams'] as $team_id => $d ) {
+				$points                                      = $data['max'];
+				$data['teams'][ $team_id ]['results'][ $id ] = array(
+					'points'    => $data['max'],
+					'status'    => 'DNS',
+					'discarded' => 'no',
+				);
+				if (
+					isset( $races[ $id ] )
+					&& isset( $races[ $id ][ $team_id ] )
+				) {
+					$points                                      = $races[ $id ][ $team_id ];
+					$data['teams'][ $team_id ]['results'][ $id ] = array(
+						'points'    => $points,
+						'status'    => 'started',
+						'discarded' => 'no',
+					);
+					$data['teams'][ $team_id ]['number_of_starts']++;
+				}
+				$data['teams'][ $team_id ]['sum']  += $points;
+				$data['teams'][ $team_id ]['netto'] = $data['teams'][ $team_id ]['sum'];
+			}
+		}
+		/**
+		 * discard
+		 */
+		if (
+			'yes' === $args['drop']
+			&& count( $data['teams'] ) >= $args['drop_after']
+		) {
+			foreach ( $data['teams'] as $sailor_id => $d ) {
+				$max = 0;
+				foreach ( $data['teams'][ $sailor_id ]['results'] as $regatta_id => $regatta_result ) {
+					if ( $max < $regatta_result['points'] ) {
+						if (
+							$args['no_discard']
+							&& has_term( $args['no_discard'], $this->taxonomy_name_serie, $regatta_id )
+						) {
+							$data['teams'][ $sailor_id ]['no_drop_place'] = $regatta_result['points'];
+						} else {
+							$max                                      = $regatta_result['points'];
+							$data['teams'][ $sailor_id ]['discarded'] = array(
+								'points'     => $max,
+								'reggata_id' => $regatta_id,
+							);
+						}
+					}
+				}
+				if ( 0 < $max ) {
+					foreach ( $data['teams'][ $sailor_id ]['results'] as $regatta_id => $regatta_result ) {
+						if ( $regatta_result['points'] < $max ) {
+							continue;
+						}
+						if (
+							$args['no_discard']
+							&& has_term( $args['no_discard'], $this->taxonomy_name_serie, $regatta_id )
+						) {
+							continue;
+						}
+						$data['teams'][ $sailor_id ]['results'][ $regatta_id ]['discarded'] = 'yes';
+						$data['teams'][ $sailor_id ]['netto']                              -= $max;
+						break;
+					}
+				}
+			}
+		}
+		/**
+		 * sort
+		 */
+		uasort( $data['teams'], array( $this, 'calculate_sort_helper' ) );
+		/**
+		 * return data
+		 */
+		return $data;
 	}
 
 	private function calculate_helm( $list, $ids, $args ) {
@@ -3205,6 +3330,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 				'sum'              => 0,
 				'url'              => get_permalink( $person_id ),
 				'number_of_starts' => 0,
+				'no_drop_place'    => 0,
 				'results'          => array(),
 			);
 			if ( $data['max'] < $one->place ) {
@@ -3218,18 +3344,73 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		foreach ( $ids as $id ) {
 			foreach ( $data['teams'] as $sailor_id => $d ) {
 				$points                                        = $data['max'];
-				$data['teams'][ $sailor_id ]['results'][ $id ] = 'DNS';
+				$data['teams'][ $sailor_id ]['results'][ $id ] = array(
+					'points'    => $data['max'],
+					'status'    => 'DNS',
+					'discarded' => 'no',
+				);
 				if (
 					isset( $races[ $id ] )
 					&& isset( $races[ $id ][ $sailor_id ] )
 				) {
 					$points                                        = $races[ $id ][ $sailor_id ];
-					$data['teams'][ $sailor_id ]['results'][ $id ] = $points;
+					$data['teams'][ $sailor_id ]['results'][ $id ] = array(
+						'points'    => $points,
+						'status'    => 'started',
+						'discarded' => 'no',
+					);
 					$data['teams'][ $sailor_id ]['number_of_starts']++;
 				}
-				$data['teams'][ $sailor_id ]['sum'] += $points;
+				$data['teams'][ $sailor_id ]['sum']  += $points;
+				$data['teams'][ $sailor_id ]['netto'] = $data['teams'][ $sailor_id ]['sum'];
 			}
 		}
+		/**
+		 * discard
+		 */
+		if (
+			'yes' === $args['drop']
+			&& count( $data['teams'] ) >= $args['drop_after']
+		) {
+			foreach ( $data['teams'] as $sailor_id => $d ) {
+				$max = 0;
+				foreach ( $data['teams'][ $sailor_id ]['results'] as $regatta_id => $regatta_result ) {
+					if ( $max < $regatta_result['points'] ) {
+						if (
+							$args['no_discard']
+							&& has_term( $args['no_discard'], $this->taxonomy_name_serie, $regatta_id )
+						) {
+							$data['teams'][ $sailor_id ]['no_drop_place'] = $regatta_result['points'];
+						} else {
+							$max                                      = $regatta_result['points'];
+							$data['teams'][ $sailor_id ]['discarded'] = array(
+								'points'     => $max,
+								'reggata_id' => $regatta_id,
+							);
+						}
+					}
+				}
+				if ( 0 < $max ) {
+					foreach ( $data['teams'][ $sailor_id ]['results'] as $regatta_id => $regatta_result ) {
+						if ( $regatta_result['points'] < $max ) {
+							continue;
+						}
+						if (
+							$args['no_discard']
+							&& has_term( $args['no_discard'], $this->taxonomy_name_serie, $regatta_id )
+						) {
+							continue;
+						}
+						$data['teams'][ $sailor_id ]['results'][ $regatta_id ]['discarded'] = 'yes';
+						$data['teams'][ $sailor_id ]['netto']                              -= $max;
+						break;
+					}
+				}
+			}
+		}
+		/**
+		 * sort
+		 */
 		uasort( $data['teams'], array( $this, 'calculate_sort_helper' ) );
 		return $data;
 	}
@@ -3239,10 +3420,10 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		 * sort by points
 		 * less is better
 		 */
-		if ( $a['sum'] > $b['sum'] ) {
+		if ( $a['netto'] > $b['netto'] ) {
 			return 1;
 		}
-		if ( $a['sum'] < $b['sum'] ) {
+		if ( $a['netto'] < $b['netto'] ) {
 			return -1;
 		}
 		/**
@@ -3258,7 +3439,10 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		/**
 		 * sort by name
 		 */
-		return strcmp( $a['name'], $b['name'] );
+		if ( isset( $a['name'] ) ) {
+			return strcmp( $a['name'], $b['name'] );
+		}
+		return 0;
 	}
 
 	/**

@@ -56,12 +56,13 @@ class iworks_fleet extends iworks {
 		 */
 		$post_types = array( 'boat', 'person', 'ranking', 'result' );
 		foreach ( $post_types as $post_type ) {
-			if ( 'person' === $post_type || $this->options->get_option( 'load_' . $post_type ) ) {
-				include_once $this->base . '/iworks/fleet/posttypes/class-iworks-fleet-posttypes-' . $post_type . '.php';
-				$class        = sprintf( 'iworks_fleet_posttypes_%s', $post_type );
-				$value        = sprintf( 'post_type_%s', $post_type );
-				$this->$value = new $class();
+			if ( 'ranking' === $post_type && ! $this->options->get_option( 'load_' . $post_type ) ) {
+				continue;
 			}
+			include_once $this->base . '/iworks/fleet/posttypes/class-iworks-fleet-posttypes-' . $post_type . '.php';
+			$class        = sprintf( 'iworks_fleet_posttypes_%s', $post_type );
+			$value        = sprintf( 'post_type_%s', $post_type );
+			$this->$value = new $class();
 		}
 		/**
 		 * blocks
@@ -142,7 +143,7 @@ class iworks_fleet extends iworks {
 		if ( isset( $this->$value ) ) {
 			return $this->$value->get_name();
 		}
-		return new WP_Error( 'broke', __( 'fleet do not have such post type!', 'fleet' ) );
+		return new WP_Error( 'broke', __( 'The Fleet plugin do not have such post type!', 'fleet' ) );
 	}
 
 	public function admin_enqueue_scripts() {
@@ -239,10 +240,10 @@ class iworks_fleet extends iworks {
 	public function plugin_row_meta( $links, $file ) {
 		if ( $this->dir . '/fleet.php' == $file ) {
 			if ( ! is_multisite() && current_user_can( $this->capability ) ) {
-				$links[] = '<a href="themes.php?page=' . $this->dir . '/admin/index.php">' . __( 'Settings' ) . '</a>';
+				$links[] = '<a href="themes.php?page=' . $this->dir . '/admin/index.php">' . __( 'Settings', 'fleet' ) . '</a>';
 			}
 
-			$links[] = '<a href="http://iworks.pl/donate/fleet.php">' . __( 'Donate' ) . '</a>';
+			$links[] = '<a href="http://iworks.pl/donate/fleet.php">' . __( 'Donate', 'fleet' ) . '</a>';
 
 		}
 		return $links;

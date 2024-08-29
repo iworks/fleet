@@ -1,6 +1,6 @@
-/*! Fleet Manager - v2.2.2
+/*! Fleet Manager - v2.3.0
  * http://iworks.pl/en/plugins/fleet/
- * Copyright (c) 2024; * Licensed GPLv2+ */
+ * Copyright (c) 2024; * Licensed GPL-2.0 */
 jQuery( document ).ready(function($) {
     $( function() {
         $( ".iworks-fleet-row .datepicker" ).each( function() {

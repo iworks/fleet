@@ -2,7 +2,7 @@
 	<thead class="iworks-fleet-ranking-table-thead">
 		<tr>
 			<th rowspan="2">#</th>
-			<th rowspan="2"><?php esc_html_e( 'Name', 'fleet' ); ?></th>
+			<th rowspan="2"><?php esc_html_e( 'Team', 'fleet' ); ?></th>
 <?php
 foreach ( $args['data']['events'] as $event_id ) {
 	printf(
@@ -54,41 +54,71 @@ foreach ( $args['data']['teams'] as $one ) {
 		echo $last_place;
 	}
 	echo '</td>';
-	echo '<td class="iworks-fleet-ranking-table-name">';
-	if ( isset( $one['url'] ) ) {
-		printf( '<a href="%s">%s</a>', $one['url'], esc_html( $one['name'] ) );
-	} else {
-		echo $one['name'];
+	echo '<td class="iworks-fleet-ranking-table-name"><ul>';
+	foreach ( $one['sailors'] as $sailor_id => $sailor ) {
+		echo '<li>';
+		if (
+			isset( $sailor['permalink'] )
+			&& $sailor['permalink']
+		) {
+			printf( '<a href="%s">%s</a>', $sailor['permalink'], esc_html( $sailor['name'] ) );
+		} else {
+			echo $sailor['name'];
+		}
+		echo '</li>';
 	}
-	echo '</td>';
-	foreach ( $one['results'] as $regatta_id => $regatta_data) {
+	echo '</ul></td>';
+	foreach ( $one['results'] as $regatta_id => $regatta_data ) {
+		$prefix = $sufix = '';
+		if ( 'yes' === $regatta_data['discarded'] ) {
+			$prefix = '[';
+			$sufix  = ']';
+		}
 		$classes = array(
 			'iworks-fleet-ranking-table-points',
 			sprintf( 'iworks-fleet-ranking-table-points-%d', strtolower( $regatta_data['points'] ) ),
 			sprintf( 'iworks-fleet-ranking-table-points-%s', strtolower( $regatta_data['status'] ) ),
 			sprintf( 'iworks-fleet-ranking-table-points-discard-%s', strtolower( $regatta_data['discarded'] ) ),
 		);
-		if ( 'started'  === $regatta_data['status'] ) {
+		if ( 'started' === $regatta_data['status'] ) {
+			if ( 3 < $regatta_data['points'] ) {
+				printf(
+					'<td class="%s">%s%d%s</td>',
+					esc_attr( implode( ' ', $classes ) ),
+					$prefix,
+					$regatta_data['points'],
+					$sufix
+				);
+			} else {
+				printf(
+					'<td class="%1$s"><span class="medal medal-%2$d">%3$s%2$d%4$s</span></td>',
+					esc_attr( implode( ' ', $classes ) ),
+					$regatta_data['points'],
+					$prefix,
+					$sufix
+				);
+			}
 			printf(
-				'<td class="%s">%d</td>',
+				'<td class="%s">%s%d%s</td>',
 				esc_attr( implode( ' ', $classes ) ),
-				$regatta_data['points']
-			);
-			printf(
-				'<td class="%s">%d</td>',
-				esc_attr( implode( ' ', $classes ) ),
-				$regatta_data['points']
+				$prefix,
+				$regatta_data['points'],
+				$sufix
 			);
 		} else {
 			printf(
-				'<td class="%s"><span>%s</span></td>',
+				'<td class="%s">%s%s%s</td>',
 				esc_attr( implode( ' ', $classes ) ),
-				esc_html( $regatta_data['status'] )
+				$prefix,
+				$regatta_data['status'],
+				$sufix
 			);
 			printf(
-				'<td class="%s"><span>%d</span></td>',
+				'<td class="%s">%s%d%s</td>',
 				esc_attr( implode( ' ', $classes ) ),
-				$regatta_data['points']
+				$prefix,
+				$regatta_data['points'],
+				$sufix
 			);
 		}
 	}

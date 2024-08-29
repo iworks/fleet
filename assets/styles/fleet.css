@@ -329,6 +329,27 @@ td.points {
   --fleet-color-place-border: rgba(4, 4, 4, 0.1);
 }
 
+span.medal {
+  display: inline-flex;
+  width: 2.2em;
+  line-height: 2.2em;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  justify-content: center;
+  border: 1px solid var(--fleet-color-place-border);
+  font-weight: bolder;
+}
+span.medal-1 {
+  background-color: var(--fleet-color-place-1);
+}
+span.medal-2 {
+  background-color: var(--fleet-color-place-2);
+}
+span.medal-3 {
+  background-color: var(--fleet-color-place-3);
+}
+
 .fleet-results {
   border: 0;
   border-collapse: collapse;
@@ -369,17 +390,6 @@ td.points {
 .fleet-results .race.race-discard {
   color: rgba(0, 0, 0, 0.3);
 }
-.fleet-results .race-result-1 .medal, .fleet-results .race-result-2 .medal, .fleet-results .race-result-3 .medal {
-  display: flex;
-  width: 1.5em;
-  height: 1.5em;
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
-  border-radius: 50%;
-  justify-content: center;
-  border: 1px solid var(--fleet-color-place-border);
-  font-weight: bolder;
-}
 .fleet-results .race-result-1 .medal {
   background-color: var(--fleet-color-place-1);
 }
@@ -390,6 +400,12 @@ td.points {
   background-color: var(--fleet-color-place-3);
 }
 
+.iworks-fleet-ranking-table-points-discard-yes {
+  text-decoration: line-through;
+}
+.iworks-fleet-ranking-table-points-discard-yes * {
+  text-decoration: line-through;
+}
 .iworks-fleet-trophies td:first-child {
   white-space: nowrap;
   font-weight: 700;

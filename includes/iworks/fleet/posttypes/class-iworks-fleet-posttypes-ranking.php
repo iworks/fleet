@@ -301,25 +301,18 @@ class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 		/**
 		 * set type
 		 */
-		$type = get_post_meta( $post->ID, $this->options->get_option_name( 'ranking_type' ), true );
-		switch ( $type ) {
-			case 'medals':
-				$args['type'] = $type;
-				break;
-		}
+		$args['type'] = get_post_meta( $post->ID, $this->options->get_option_name( 'ranking_type' ), true );
 		/**
 		 * sanitize type to allowed values
 		 */
 		switch ( $args['type'] ) {
 			case 'medals':
-			case 'results':
 				break;
 			default:
 				$args['type'] = 'results';
 		}
 		return $content . $this->get_ranking_table_by_ranking_id( $post->ID, $args );
 	}
-
 
 	public function get_ranking_table_by_ranking_id( $id, $args = array() ) {
 		$post    = get_post( $id );
@@ -362,22 +355,41 @@ class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 		}
 		$args['classes'] = $classes;
 		$args['post']    = (array) $post;
-		$content        .= $this->get_template(
-			$args['type'] . '/output/header',
-			'shortcode',
+		/**
+		 * get config
+		 */
+		$args = wp_parse_args(
 			$args,
+			$this->get_ranking_settings_by_ranking_id( $id )
 		);
 		/**
 		 * get results
 		 */
-		$args         = $this->get_ranking_settings_by_ranking_id( $id );
 		$args['data'] = apply_filters( 'iworks/fleet/' . $args['type'] . '/get/array', array(), $args );
-		$content     .= $this->get_template(
+		/**
+		 * override type
+		 */
+		if ( isset( $args['data']['type'] ) ) {
+			switch ( $args['data']['type'] ) {
+				case 'crew':
+					$args['type'] = $args['data']['type'];
+					break;
+			}
+		}
+		/**
+		 * get templates
+		 */
+		$content .= $this->get_template(
+			$args['type'] . '/output/header',
+			'shortcode',
+			$args,
+		);
+		$content .= $this->get_template(
 			$args['type'] . '/output/table',
 			'shortcode',
 			$args,
 		);
-		$content     .= $this->get_template(
+		$content .= $this->get_template(
 			$args['type'] . '/output/footer',
 			'shortcode',
 			$args,
