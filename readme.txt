@@ -43,7 +43,10 @@ There are 3 ways to install this plugin:
 
 == Changelog ==
 
-= 2.3.0 (2024-09-29) =
+= 2.3.1 (2024-09-13) =
+* The boat last update date has been added to show.
+
+= 2.3.0 (2024-08-29) =
 * Medals display have been improved.
 * The [iWorks Rate](https://github.com/iworks/iworks-rate) module has been updated to 2.2.0.
 * *The ranking for the whole crew has been added.*

@@ -189,6 +189,10 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 					'label'   => __( 'First Certified', 'fleet' ),
 					'twitter' => 'yes',
 				),
+				'last_update'          => array(
+					'type'  => 'date',
+					'label' => __( 'Last Update', 'fleet' ),
+				),
 			),
 			'social' => array(
 				'website'   => array( 'label' => __( 'Web site', 'fleet' ) ),
@@ -626,6 +630,7 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 			'boat_location'             => __( 'Location', 'fleet' ),
 			'social_website'            => __( 'Web site', 'fleet' ),
 			'social'                    => __( 'Social Media', 'fleet' ),
+			'boat_last_update'          => __( 'Last Update', 'fleet' ),
 		);
 		$separator  = _x( ', ', 'Custom taxonomies separator.', 'fleet' );
 		$dateformat = get_option( 'date_format' );
@@ -731,6 +736,7 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 					/**
 					 * handle date
 					 */
+					case 'boat_last_update':
 					case 'boat_first_certified_date':
 						$value = date_i18n( $dateformat, $value );
 						break;
