@@ -140,6 +140,9 @@ td.points {
 .flag.flag-est {
   background-image: url(../images/flags/est.svg?v=PLUGIN_VERSION);
 }
+.flag.flag-eu {
+  background-image: url(../images/flags/eu.svg?v=PLUGIN_VERSION);
+}
 .flag.flag-fin {
   background-image: url(../images/flags/fin.svg?v=PLUGIN_VERSION);
 }

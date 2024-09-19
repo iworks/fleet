@@ -505,12 +505,14 @@ class iworks_fleet_posttypes {
 	 * @since 2.0.1
 	 */
 	protected function get_country_code_by_country_name( $name ) {
-		$mna_codes = $this->get_mna_codes();
 		switch ( $name ) {
 			case 'UK':
 				$name = 'Great Britain';
 				break;
+			case 'EU':
+				return 'eu';
 		}
+		$mna_codes = $this->get_mna_codes();
 		foreach ( $mna_codes as $one ) {
 			if ( isset( $one['nation'] ) && $one['nation'] === $name ) {
 				return $one['code'];

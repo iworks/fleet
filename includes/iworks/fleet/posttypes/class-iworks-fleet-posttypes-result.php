@@ -1852,6 +1852,18 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		$query   = $wpdb->prepare( "SELECT * FROM {$table_name_regatta} where post_regata_id = %d order by place", $post_id );
 		$regatta = $wpdb->get_results( $query );
 		/**
+		 * regatta in the future
+		 */
+		$date_start = get_post_meta(
+			$post_id,
+			$this->options->get_option_name( 'result_date_start' ),
+			true
+		);
+		if ( time() < $date_start ) {
+			$content .= __( 'The regatta will take place in the future.', 'fleet' );
+			return $content;
+		}
+		/**
 		 * get regata races data
 		 */
 		$races = $this->get_races_data( $post_id );

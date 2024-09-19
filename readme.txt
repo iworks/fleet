@@ -43,6 +43,10 @@ There are 3 ways to install this plugin:
 
 == Changelog ==
 
+= 2.3.2 (2024-09-19) =
+* Handle a future date of a regatta.
+* The EU flag has been added.
+
 = 2.3.1 (2024-09-13) =
 * The boat last update date has been added to show.
 
