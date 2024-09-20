@@ -43,6 +43,9 @@ There are 3 ways to install this plugin:
 
 == Changelog ==
 
+= 2.3.3 (2024-09-20) =
+* Hide future regatta.
+
 = 2.3.2 (2024-09-19) =
 * Handle a future date of a regatta.
 * The EU flag has been added.
