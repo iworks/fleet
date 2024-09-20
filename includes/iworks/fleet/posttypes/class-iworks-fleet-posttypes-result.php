@@ -2721,10 +2721,18 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 				),
 			),
 			'meta_query'     => array(
+				'relation' => 'AND',
 				array(
-					'key'       => $this->options->get_option_name( 'result_date_start' ),
-					'value_num' => 0,
-					'compare'   => '>',
+					'key'     => $this->options->get_option_name( 'result_date_start' ),
+					'value'   => 0,
+					'compare' => '>',
+					'type'    => 'SIGNED',
+				),
+				array(
+					'key'     => $this->options->get_option_name( 'result_date_start' ),
+					'value'   => time(),
+					'compare' => '<',
+					'type'    => 'SIGNED',
 				),
 			),
 			'orderby'        => 'meta_value_num',
