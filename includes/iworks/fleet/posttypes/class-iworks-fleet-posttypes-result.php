@@ -1795,11 +1795,37 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		/**
 		 * regata meta
 		 */
-		$meta  = '';
+		$meta = '';
+		/**
+		 * Serie
+		 */
+		if ( $this->options->get_option( 'results_serie_show' ) ) {
+			$terms = '';
+			if ( $this->options->get_option( 'results_serie_link' ) ) {
+				$terms = get_the_term_list( $post_id, $this->taxonomy_name_serie, '<li>', '</li><li>', '</li>' );
+			} else {
+				$t = get_the_terms( $post_id, $this->taxonomy_name_serie );
+				if ( ! empty( $t ) ) {
+					foreach ( $t as $one ) {
+						$terms .= sprintf( '<li>%s</li>', $one->name );
+					}
+				}
+			}
+			if ( ! empty( $terms ) ) {
+				$meta .= sprintf(
+					'<tr class="fleet-results-meta-serie"><td>%s</td><td><ul>%s</ul></td></tr>',
+					esc_html__( 'Serie', 'fleet' ),
+					$terms
+				);
+			}
+		}
+		/**
+		 * Location
+		 */
 		$terms = get_the_term_list( $post_id, $this->taxonomy_name_location );
 		if ( ! empty( $terms ) ) {
-			$meta = sprintf(
-				'<tr><td>%s</td><td>%s</td></tr>',
+			$meta .= sprintf(
+				'<tr class="fleet-results-meta-location"><td>%s</td><td>%s</td></tr>',
 				esc_html__( 'Location', 'fleet' ),
 				$terms
 			);
@@ -2740,7 +2766,12 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			'order'          => $options['order'],
 		);
 		if ( '::last' === $serie_slug ) {
-			unset( $args['meta_query'], $args['orderby'], $args['tax_query'] );
+			unset( $args['tax_query'] );
+			$args['meta_query']['last'] = array(
+				'key'     => $this->options->get_option_name( 'result_date_added' ),
+				'compare' => 'EXISTS',
+			);
+			$args['orderby']            = 'last';
 		}
 		$the_query = new WP_Query( $args );
 		if ( ! $the_query->have_posts() ) {

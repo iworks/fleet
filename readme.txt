@@ -43,6 +43,9 @@ There are 3 ways to install this plugin:
 
 == Changelog ==
 
+= 2.3.4 (2024-09-21) =
+* The ability to show a serie has been added.
+
 = 2.3.3 (2024-09-20) =
 * Hide future regatta.
 
