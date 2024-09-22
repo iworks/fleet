@@ -244,7 +244,6 @@ class iworks_fleet_posttypes {
 			if ( isset( $_POST[ $post_key ] ) ) {
 				foreach ( $group_data as $key => $data ) {
 					$value = isset( $_POST[ $post_key ][ $key ] ) ? $_POST[ $post_key ][ $key ] : null;
-
 					if ( is_string( $value ) ) {
 						$value = trim( $value );
 					} elseif ( is_array( $value ) ) {
@@ -257,7 +256,14 @@ class iworks_fleet_posttypes {
 					}
 					$option_name = $this->options->get_option_name( $group . '_' . $key );
 					if ( empty( $value ) ) {
-						delete_post_meta( $post->ID, $option_name );
+						if (
+							isset( $data['save_zero'] )
+							&& 'yes' === $data['save_zero']
+						) {
+							$value = 0;
+						} else {
+							delete_post_meta( $post->ID, $option_name );
+						}
 					} else {
 						if ( isset( $data['type'] ) ) {
 							switch ( $data['type'] ) {

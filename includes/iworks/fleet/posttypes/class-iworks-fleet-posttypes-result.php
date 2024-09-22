@@ -121,9 +121,10 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 					'twitter' => 'yes',
 				),
 				'number_of_races'       => array(
-					'type'    => 'number',
-					'label'   => __( 'Number of races', 'fleet' ),
-					'twitter' => 'yes',
+					'type'      => 'number',
+					'label'     => __( 'Number of races', 'fleet' ),
+					'twitter'   => 'yes',
+					'save_zero' => 'yes',
 				),
 				'number_of_competitors' => array(
 					'type'    => 'number',
@@ -1491,7 +1492,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		<a href="#" class="iworks-crew-single-delete" data-id="{{{data.id}}}"><?php esc_html_e( 'Delete', 'fleet' ); ?></a>
 	</td>
 </tr>
-</script>
+</script
 		<?php
 	}
 
@@ -1789,6 +1790,14 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			return $content;
 		}
 		$post_id = get_the_ID();
+		/**
+		 * numer of races
+		 */
+		$name            = $this->options->get_option_name( 'result_number_of_races' );
+		$number_of_races = intval( get_post_meta( $post_id, $name, true ) );
+		/**
+		 * setup
+		 */
 		global $wpdb, $iworks_fleet;
 		$table_name_regatta      = $wpdb->prefix . 'fleet_regatta';
 		$table_name_regatta_race = $wpdb->prefix . 'fleet_regatta_race';
@@ -2029,9 +2038,16 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 					$extra
 				);
 			} else {
-				$one_content .= sprintf( '<td class="crew_name">%s</td>', $one->crew_name );
+				$one_content .= sprintf(
+					'<td class="crew_name">%s</td>',
+					empty( $one->crew_name ) ? '&mdash;' : $one->crew_name
+				);
 			}
-			if ( isset( $races[ $one->ID ] ) && ! empty( $races[ $one->ID ] ) ) {
+			if (
+				$number_of_races
+				&& isset( $races[ $one->ID ] )
+				&& ! empty( $races[ $one->ID ] )
+			) {
 				foreach ( $races[ $one->ID ] as $race_number => $race_points ) {
 					if ( '0' === $race_points ) {
 						$race_points = '&ndash;';
