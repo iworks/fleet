@@ -391,6 +391,21 @@ class iworks_fleet extends iworks {
 				update_option( 'fleet_db_version', $install );
 			}
 		}
+		/**
+		 * 20241006
+		 */
+		$install = 20241006;
+		if ( $install > $version ) {
+			$charset_collate = $wpdb->get_charset_collate();
+			require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+			$table_name = $wpdb->prefix . 'fleet_regatta';
+			$sql        = "ALTER TABLE $table_name ADD COLUMN ranking INT DEFAULT 0 AFTER points";
+			$result     = $wpdb->query( $sql );
+			if ( $result ) {
+				update_option( 'fleet_db_version', $install );
+			}
+		}
+
 	}
 
 	/**

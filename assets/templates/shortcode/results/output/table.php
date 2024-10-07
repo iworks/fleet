@@ -74,19 +74,19 @@ foreach ( $args['data']['teams'] as $one ) {
 			sprintf( 'iworks-fleet-ranking-table-points-discard-%s', strtolower( $regatta_data['discarded'] ) ),
 		);
 		if ( 'started' === $regatta_data['status'] ) {
-			if ( 3 < $regatta_data['points'] ) {
+			if ( 3 < $regatta_data['place'] ) {
 				printf(
 					'<td class="%s">%s%d%s</td>',
 					esc_attr( implode( ' ', $classes ) ),
 					$prefix,
-					$regatta_data['points'],
+					$regatta_data['place'],
 					$sufix
 				);
 			} else {
 				printf(
 					'<td class="%1$s"><span class="medal medal-%2$d">%3$s%2$d%4$s</span></td>',
 					esc_attr( implode( ' ', $classes ) ),
-					$regatta_data['points'],
+					$regatta_data['place'],
 					$prefix,
 					$sufix
 				);

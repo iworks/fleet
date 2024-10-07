@@ -86,7 +86,7 @@ foreach ( $args['data']['teams'] as $one ) {
 					'<td class="%s">%s%d%s</td>',
 					esc_attr( implode( ' ', $classes ) ),
 					$prefix,
-					$regatta_data['points'],
+					$regatta_data['place'],
 					$sufix
 				);
 			} else {

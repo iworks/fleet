@@ -1632,7 +1632,24 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		global $wpdb, $iworks_fleet;
 		$table_name_regatta      = $wpdb->prefix . 'fleet_regatta';
 		$table_name_regatta_race = $wpdb->prefix . 'fleet_regatta_race';
-		array_shift( $data );
+		/**
+		 * remove file first row
+		 */
+		$first_row = array_shift( $data );
+		/**
+		 * ranking column check
+		 */
+		$ranking_column = false;
+		$i              = 0;
+		foreach ( $first_row as $field ) {
+			if ( 'Ranking' === $field ) {
+				$ranking_column = $i;
+			}
+			$i++;
+		}
+		/**
+		 * sailors
+		 */
 		$sailors = $iworks_fleet->get_list_by_post_type( 'person' );
 		$wpdb->delete( $table_name_regatta, array( 'post_regata_id' => $post_id ), array( '%d' ) );
 		$wpdb->delete( $table_name_regatta_race, array( 'post_regata_id' => $post_id ), array( '%d' ) );
@@ -1648,6 +1665,16 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		$name            = $this->options->get_option_name( 'result_number_of_races' );
 		$number_of_races = intval( get_post_meta( $post_id, $name, true ) );
 		foreach ( $data as $row ) {
+			/**
+			 * ranking points
+			 */
+			$ranking = 0;
+			if ( $ranking_column ) {
+				$ranking = $row[ $ranking_column ];
+			}
+			/**
+			 * country
+			 */
 			$country = '';
 			$boat_id = null;
 			$boat    = array_shift( $row );
@@ -1701,6 +1728,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 				'crew_name'      => $crew,
 				'place'          => $place,
 				'points'         => $points,
+				'ranking'        => intval( $ranking ),
 			);
 			/**
 			 * maybe update sailors nation
@@ -2311,7 +2339,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 	 *
 	 * @since 1.2.8
 	 */
-	public function shortcode_ranking( $atts ) {
+	public function shortcode_ranking( $atts, $content = '' ) {
 		$atts    = shortcode_atts(
 			array(
 				'year'       => date( 'Y' ),
@@ -3256,7 +3284,13 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 				$races[ $one->post_regata_id ] = array();
 			}
 			$team = $this->get_team_from_one( $one );
-			$races[ $one->post_regata_id ][ $team['id'] ] = $one->place;
+			$races[ $one->post_regata_id ][ $team['id'] ] = array(
+				'place'  => $one->place,
+				'points' => $one->place,
+			);
+			if ( 0 < intval( $one->ranking ) ) {
+				$races[ $one->post_regata_id ][ $team['id'] ]['points'] = intval( $one->ranking );
+			}
 			/**
 			 * merge
 			 */
@@ -3272,6 +3306,9 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			if ( $data['max'] < $one->place ) {
 				$data['max'] = $one->place;
 			}
+			if ( $data['max'] < $one->ranking ) {
+				$data['max'] = $one->ranking;
+			}
 		}
 		$data['max']++;
 		/**
@@ -3279,7 +3316,10 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		 */
 		foreach ( $ids as $id ) {
 			foreach ( $data['teams'] as $team_id => $d ) {
-				$points                                      = $data['max'];
+				$points = $data['max'];
+				/**
+				 * default data
+				 */
 				$data['teams'][ $team_id ]['results'][ $id ] = array(
 					'points'    => $data['max'],
 					'status'    => 'DNS',
@@ -3289,8 +3329,13 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 					isset( $races[ $id ] )
 					&& isset( $races[ $id ][ $team_id ] )
 				) {
-					$points                                      = $races[ $id ][ $team_id ];
+					$place  = $races[ $id ][ $team_id ]['place'];
+					$points = $races[ $id ][ $team_id ]['points'];
+					/**
+					 * table
+					 */
 					$data['teams'][ $team_id ]['results'][ $id ] = array(
+						'place'     => $place,
 						'points'    => $points,
 						'status'    => 'started',
 						'discarded' => 'no',
@@ -3391,7 +3436,10 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 					continue;
 				}
 			}
-			$races[ $one->post_regata_id ][ $person_id ] = $one->place;
+			$races[ $one->post_regata_id ][ $person_id ] = array(
+				'place'  => $one->place,
+				'points' => $one->ranking ? $one->ranking : $one->place,
+			);
 			$data['teams'][ $person_id ]                 = array(
 				'name'             => $one->{$field . '_name'},
 				'sum'              => 0,
@@ -3412,6 +3460,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			foreach ( $data['teams'] as $sailor_id => $d ) {
 				$points                                        = $data['max'];
 				$data['teams'][ $sailor_id ]['results'][ $id ] = array(
+					'place'     => 0,
 					'points'    => $data['max'],
 					'status'    => 'DNS',
 					'discarded' => 'no',
@@ -3420,8 +3469,13 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 					isset( $races[ $id ] )
 					&& isset( $races[ $id ][ $sailor_id ] )
 				) {
-					$points                                        = $races[ $id ][ $sailor_id ];
+					$points = $races[ $id ][ $sailor_id ]['points'];
+					$place  = $races[ $id ][ $sailor_id ]['place'];
+					/**
+					 * merge
+					 */
 					$data['teams'][ $sailor_id ]['results'][ $id ] = array(
+						'place'     => $place,
 						'points'    => $points,
 						'status'    => 'started',
 						'discarded' => 'no',
