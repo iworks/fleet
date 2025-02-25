@@ -13,29 +13,52 @@ PLUGIN_TAGLINE
 
 == Description ==
 
+The **Fleet Manager** plugin for WordPress is designed to manage sailboats, sailors, regattas, and their results. It allows users to track boats, record sailor statistics, and manage competition results in an organized and accessible way. Key features include:
+
+1. **Regatta Management**: Allows the creation and management of sailing events and competitions.
+1. **Sailor and Boat**: Records detailed information about sailors and boats.
+1. **Results**: Displays race results, supporting features like medal display and ranking integration.
+
+= GitHub =
+
+The Simple Consent Mode plugin is available also on [GitHub - Fleet](https://github.com/iworks/fleet).
+
+= See room for improvement? =
+
+Great! There are several ways you can get involved to help make PLUGIN_TITLE better:
+
+1. **Report Bugs:** If you find a bug, error or other problem, please report it! You can do this by [creating a new topic](https://wordpress.org/support/plugin/fleet/) in the plugin forum. Once a developer can verify the bug by reproducing it, they will create an official bug report in [GitHub](PLUGIN_GITHUB_WEBSITE) where the bug will be worked on.
+2. **Suggest New Features:** Have an awesome idea? Please share it! Simply [create a new topic](https://wordpress.org/support/plugin/fleet/) in the plugin forum to express your thoughts on why the feature should be included and get a discussion going around your idea.
+3. **Issue Pull Requests:** If you're a developer, the easiest way to get involved is to help out on [issues already reported](PLUGIN_GITHUB_WEBSITE/issues) in GitHub. Be sure to check out the [contributing guide](PLUGIN_GITHUB_WEBSITE/blob/master/contributing.md) for developers.
+
+Thank you for wanting to make PLUGIN_TITLE better for everyone!
+
 == Installation ==
 
 There are 3 ways to install this plugin:
 
-= 1. The super easy way =
-1. In your Admin, go to menu Plugins > Add
-1. Search for `Fleet`
-1. Click to install
-1. Activate the plugin
-1. A new menu `Fleet` will appear in your Admin
+= The super-easy way =
 
-= 2. The easy way =
+1. Navigate to WPA > the Plugins and click the `Add New` button.
+1. Search for `Fleet`.
+1. Click to install.
+1. Activate the plugin.
+1. A new menu `Fleet` will appear in your Admin.
+
+= The easy way =
+
 1. Download the plugin (.zip file) on the right column of this page
-1. In your Admin, go to menu Plugins > Add
-1. Select button `Upload Plugin`
-1. Upload the .zip file you just downloaded
-1. Activate the plugin
-1. A new menu `Fleet` will appear in your Admin
+1. Navigate to WPA > the Plugins and click the `Add New` button.
+1. Select button `Upload Plugin`.
+1. Upload the .zip file you just downloaded.
+1. Activate the plugin.
+1. A new menu `Fleet` will appear in your Admin.
 
-= 3. The old and reliable way (FTP) =
-1. Upload `Fleet` folder to the `/wp-content/plugins/` directory
+= The old and reliable way (FTP) =
+
+1. Upload `simple-consent-mode` folder to the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
-1. A new menu `Fleet` will appear in your Admin
+1. A new menu `Fleet` will appear in your Admin.
 
 == Frequently Asked Questions ==
 
@@ -44,6 +67,7 @@ There are 3 ways to install this plugin:
 == Changelog ==
 
 = 2.3.6 (2025-02-25) =
+* Ability to upload SVG file has been removed due to Stored Cross-Site Scripting vulnerability. We recommended to install [Safe SVG](https://wordpress.org/plugins/safe-svg/) to allow upload SVG files.
 * The build process has been improved.
 * The [iWorks Options](https://github.com/iworks/wordpress-options-class) module has been updated to 2.9.6.
 * The [iWorks Rate](https://github.com/iworks/iworks-rate) module has been updated to 2.2.3.

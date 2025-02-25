@@ -55,7 +55,7 @@ if ( ! class_exists( 'iworks_options' ) ) {
  */
 
 global $iworks_fleet_options;
-$iworks_fleet_options = iworks_fleet_get_options_object();
+$iworks_fleet_options = null;
 
 function iworks_fleet_get_options_object() {
 	global $iworks_fleet_options;
@@ -71,15 +71,8 @@ function iworks_fleet_get_options_object() {
 	return $iworks_fleet_options;
 }
 
-function iworks_fleet_options_init() {
-	global $iworks_fleet_options;
-	$iworks_fleet_options->options_init();
-}
-
 function iworks_fleet_activate() {
-	$iworks_fleet_options = new iworks_options();
-	$iworks_fleet_options->set_option_function_name( 'iworks_fleet_options' );
-	$iworks_fleet_options->set_option_prefix( IWORKS_FLEET_PREFIX );
+	$iworks_fleet_options = iworks_fleet_get_options_object();
 	$iworks_fleet_options->activate();
 	/**
 	 * install tables
@@ -89,7 +82,7 @@ function iworks_fleet_activate() {
 }
 
 function iworks_fleet_deactivate() {
-	global $iworks_fleet_options;
+	$iworks_fleet_options = iworks_fleet_get_options_object();
 	$iworks_fleet_options->deactivate();
 }
 

@@ -3,9 +3,9 @@
     "title": "Fleet Manager",
     "tagline": "The sailboat manager makes it possible to manage boats, sailors, regattas and their results.",
     "description": "The sailboat manager makes it possible to manage boats, sailors, regattas and their results.",
-    "version": "2.3.5",
+    "version": "2.3.6",
     "homepage": "http://iworks.pl/en/plugins/fleet/",
-    "keywords": [
+    "tags": [
         "fleet",
         "result",
         "team",

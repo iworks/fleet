@@ -46,7 +46,6 @@ class iworks_fleet extends iworks {
 
 	public function __construct() {
 		parent::__construct();
-		$this->options    = iworks_fleet_get_options_object();
 		$this->base       = dirname( dirname( __FILE__ ) );
 		$this->dir        = basename( dirname( $this->base ) );
 		$this->version    = 'PLUGIN_VERSION';
@@ -56,9 +55,6 @@ class iworks_fleet extends iworks {
 		 */
 		$post_types = array( 'boat', 'person', 'ranking', 'result' );
 		foreach ( $post_types as $post_type ) {
-			if ( 'ranking' === $post_type && ! $this->options->get_option( 'load_' . $post_type ) ) {
-				continue;
-			}
 			include_once $this->base . '/iworks/fleet/posttypes/class-iworks-fleet-posttypes-' . $post_type . '.php';
 			$class        = sprintf( 'iworks_fleet_posttypes_%s', $post_type );
 			$value        = sprintf( 'post_type_%s', $post_type );
@@ -73,6 +69,7 @@ class iworks_fleet extends iworks {
 		 * admin init
 		 */
 		add_action( 'admin_init', array( $this, 'admin_init' ) );
+		add_action( 'init', array( $this, 'action_init_load_post_types' ) );
 		add_action( 'init', array( $this, 'register_boat_number' ) );
 		add_action( 'init', array( $this, 'db_install' ) );
 		add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
@@ -90,12 +87,6 @@ class iworks_fleet extends iworks {
 		 */
 		add_shortcode( 'fleet_stats', array( $this, 'stats' ) );
 		/**
-		 * Add SVG to allowed files.
-		 *
-		 * @since 1.2.2
-		 */
-		add_filter( 'upload_mimes', array( $this, 'add_mime_types' ) );
-		/**
 		 * iWorks Rate integration - change logo for rate
 		 *
 		 * @since 2.0.6
@@ -104,13 +95,10 @@ class iworks_fleet extends iworks {
 	}
 
 	/**
-	 * Add SVG to allowed files.
-	 *
-	 * @since 1.2.2
+	 * Load post types
 	 */
-	public function add_mime_types( $mimes ) {
-		$mimes['svg'] = 'image/svg+xml';
-		return $mimes;
+	public function action_init_load_post_types() {
+		$this->check_option_object();
 	}
 
 	/**
@@ -134,7 +122,7 @@ class iworks_fleet extends iworks {
 	}
 
 	public function admin_init() {
-		iworks_fleet_options_init();
+		$this->check_option_object();
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
 		add_filter( 'plugin_row_meta', array( $this, 'plugin_row_meta' ), 10, 2 );
 	}
@@ -415,6 +403,7 @@ class iworks_fleet extends iworks {
 	 * @since 1.3.0
 	 */
 	public function register_styles() {
+		$this->check_option_object();
 		wp_register_style(
 			$this->options->get_option_name( 'frontend' ),
 			sprintf( plugins_url( '/assets/styles/fleet%s.css', $this->base ), $this->dev ? '' : '.min' ),
@@ -429,6 +418,7 @@ class iworks_fleet extends iworks {
 	 * @since 1.3.0
 	 */
 	public function enqueue_styles() {
+		$this->check_option_object();
 		if ( $this->options->get_option( 'load_frontend_css' ) ) {
 			wp_enqueue_style( $this->options->get_option_name( 'frontend' ) );
 		}
@@ -510,5 +500,17 @@ class iworks_fleet extends iworks {
 
 	public function get_regatta_select_by_year_and_serie_id( $year, $serie ) {
 		return $this->post_type_result->get_regatta_select_by_year_and_serie_id( $year, $serie );
+	}
+
+	/**
+	 * check option object
+	 *
+	 * @since 2.3.6
+	 */
+	private function check_option_object() {
+		if ( is_a( $this->options, 'iworks_options' ) ) {
+			return;
+		}
+		$this->options = iworks_fleet_get_options_object();
 	}
 }
