@@ -43,6 +43,11 @@ There are 3 ways to install this plugin:
 
 == Changelog ==
 
+= 2.3.6 (2025-02-25) =
+* The build process has been improved.
+* The [iWorks Options](https://github.com/iworks/wordpress-options-class) module has been updated to 2.9.6.
+* The [iWorks Rate](https://github.com/iworks/iworks-rate) module has been updated to 2.2.3.
+
 = 2.3.5 (2024-10-07) =
 * Displaying a regatta without races has been improved.
 * To import file the "Ranking" column has been added for handle different points then place.
