@@ -75,6 +75,7 @@ class iworks_fleet extends iworks {
 		add_action( 'admin_init', array( $this, 'admin_init' ) );
 		add_action( 'init', array( $this, 'register_boat_number' ) );
 		add_action( 'init', array( $this, 'db_install' ) );
+		add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'register_styles' ), 0 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ) );
 		add_action( 'plugins_loaded', array( $this, 'action_plugins_loaded' ) );
@@ -496,4 +497,18 @@ class iworks_fleet extends iworks {
 		do_action( 'fleet/loaded' );
 	}
 
+	/**
+	 * i18n
+	 */
+	public function load_plugin_textdomain() {
+		load_plugin_textdomain(
+			'fleet',
+			false,
+			plugin_basename( dirname( $this->base ) ) . '/languages'
+		);
+	}
+
+	public function get_regatta_select_by_year_and_serie_id( $year, $serie ) {
+		return $this->post_type_result->get_regatta_select_by_year_and_serie_id( $year, $serie );
+	}
 }

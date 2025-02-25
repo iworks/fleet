@@ -1492,7 +1492,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		<a href="#" class="iworks-crew-single-delete" data-id="{{{data.id}}}"><?php esc_html_e( 'Delete', 'fleet' ); ?></a>
 	</td>
 </tr>
-</script
+</script>
 		<?php
 	}
 
@@ -3451,6 +3451,9 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			if ( $data['max'] < $one->place ) {
 				$data['max'] = $one->place;
 			}
+			if ( $data['max'] < $one->ranking ) {
+				$data['max'] = $one->ranking;
+			}
 		}
 		$data['max']++;
 		/**
@@ -3797,5 +3800,41 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		 * sort by name
 		 */
 		return strcmp( $a['name'], $b['name'] );
+	}
+
+
+	public function get_regatta_select_by_year_and_serie_id( $year, $serie ) {
+		/**
+		 * WP Query base args
+		 */
+		$args  = array(
+			'post_type'  => $this->post_type_name,
+			'nopaging'   => true,
+			'orderby'    => 'meta_value_num',
+			'order'      => 'ASC',
+			'meta_query' => array(
+				array(
+					'key'     => $this->options->get_option_name( 'result_date_start' ),
+					'value'   => strtotime( ( $year - 1 ) . '-12-31 23:59:59' ),
+					'compare' => '>',
+					'type'    => 'NUMERIC',
+				),
+				array(
+					'key'     => $this->options->get_option_name( 'result_date_start' ),
+					'value'   => strtotime( ( $year + 1 ) . '-01-01 00:00:00' ),
+					'compare' => '<',
+					'type'    => 'NUMERIC',
+				),
+				'tax_query' => array(
+					array(
+						'taxonomy' => $this->taxonomy_name_serie,
+						'field'    => 'id',
+						'terms'    => $serie,
+					),
+				),
+			),
+		);
+		$query = new WP_Query( $args );
+		return $query->posts;
 	}
 }

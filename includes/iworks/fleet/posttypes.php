@@ -715,5 +715,9 @@ class iworks_fleet_posttypes {
 		ob_end_clean();
 		return $content;
 	}
+
+	protected function get_option_name_helper( $group, $key ) {
+		return $this->options->get_option_name( $group . '_' . $key );
+	}
 }
 

@@ -75,6 +75,17 @@ class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 					'label'     => esc_html__( 'Use Crew', 'fleet' ),
 					'type'      => 'checkbox',
 				),
+				'year'       => array(
+					'description' => esc_html__( 'Only year matters.', 'fleet' ),
+					'label'       => esc_html__( 'Year', 'fleet' ),
+					'type'        => 'date',
+					'options'     => array(
+						'required' => 'required',
+					),
+					'args'        => array(
+						'class' => array( 'regular-text' ),
+					),
+				),
 				'serie'      => array(
 					'add_class' => 'value',
 					'label'     => esc_html__( 'Serie', 'fleet' ),
@@ -83,18 +94,17 @@ class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 						'required' => 'required',
 					),
 				),
+				'tie'        => array(
+					'add_class'   => 'value',
+					'label'       => esc_html__( 'Ordering Regatta', 'fleet' ),
+					'type'        => 'select',
+					'options'     => array(),
+					'description' => esc_html__( 'Select special reggata to set ranking order when tie. First select a year and a serie, then save and reload page to load regatta. ', 'fleet' ),
+				),
 				'no_discard' => array(
 					'add_class' => 'value',
 					'label'     => esc_html__( 'Not Discardable Serie', 'fleet' ),
 					'type'      => 'select',
-				),
-				'year'       => array(
-					'description' => esc_html__( 'Only year matters.', 'fleet' ),
-					'label'       => esc_html__( 'Year', 'fleet' ),
-					'type'        => 'date',
-					'options'     => array(
-						'required' => 'required',
-					),
 				),
 				'drop'       => array(
 					'label' => esc_html__( 'Allow Discard', 'fleet' ),
@@ -219,6 +229,7 @@ class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 	public function ranking( $post ) {
 		$this->fields['ranking']['serie']['args']['options']      = $this->get_series_array();
 		$this->fields['ranking']['no_discard']['args']['options'] = $this->get_series_array();
+		$this->fields['ranking']['tie']['args']['options']        = $this->get_regatta_by_ranking( $post );
 		$this->get_meta_box_content( $post, $this->fields, __FUNCTION__ );
 	}
 
@@ -414,5 +425,40 @@ class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 		}
 		return $settings;
 	}
+
+	public function get_regatta_by_ranking( $post ) {
+		$list  = array();
+		$group = 'ranking';
+		/**
+		 * year
+		 */
+		$option_name = $this->get_option_name_helper( $group, 'year' );
+		$value       = get_post_meta( $post->ID, $option_name, true );
+		if ( empty( $value ) ) {
+			return $list;
+		}
+		$year = date( 'Y', $value );
+		/**
+		 * serie
+		 */
+		$option_name = $this->get_option_name_helper( $group, 'serie' );
+		$value       = get_post_meta( $post->ID, $option_name, true );
+		if ( empty( $value ) ) {
+			return $list;
+		}
+		$serie = $value;
+		global $iworks_fleet;
+		$posts  = $iworks_fleet->get_regatta_select_by_year_and_serie_id( $year, $serie );
+		$list[] = esc_html__( '-- Select --', 'fleet' );
+		foreach ( $posts as $p ) {
+			$list[ $p->ID ] = sprintf(
+				'%s &mdash; %s',
+				date_i18n( 'm-d', get_post_meta( $p->ID, $this->options->get_option_name( 'result_date_end' ), true ) ),
+				$p->post_title
+			);
+		}
+		return $list;
+	}
+
 }
 

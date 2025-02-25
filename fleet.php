@@ -51,11 +51,6 @@ if ( ! class_exists( 'iworks_options' ) ) {
 }
 
 /**
- * i18n
- */
-load_plugin_textdomain( 'fleet', false, plugin_basename( dirname( __FILE__ ) ) . '/languages' );
-
-/**
  * load options
  */
 
