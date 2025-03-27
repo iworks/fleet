@@ -1,11 +1,11 @@
-# Translation of Plugins - Fleet Manager - Stable (latest release) in Polish
-# This file is distributed under the same license as the Plugins - Fleet Manager - Stable (latest release) package.
+# Translation of Plugins - Fleet Manager - Development (trunk) in Polish
+# This file is distributed under the same license as the Plugins - Fleet Manager - Development (trunk) package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Plugins - Fleet Manager - Stable (latest release)\n"
+"Project-Id-Version: Plugins - Fleet Manager - Development (trunk)\n"
 "Report-Msgid-Bugs-To: http://iworks.pl\n"
-"POT-Creation-Date: 2025-02-25 06:46:33+00:00\n"
-"PO-Revision-Date: 2024-10-07 17:34:55+0000\n"
+"POT-Creation-Date: 2025-03-27 19:55:59+00:00\n"
+"PO-Revision-Date: 2025-03-27 19:53:40+0000\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -103,7 +103,7 @@ msgstr "Konfiguracja"
 msgid "General"
 msgstr "Główne"
 
-#: etc/options.php:22 includes/iworks/options/options.php:1804
+#: etc/options.php:22 includes/iworks/options/options.php:1859
 msgid "Country"
 msgstr "Kraj"
 
@@ -2654,14 +2654,18 @@ msgid "Serie"
 msgstr "Seria"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:99
-msgid "Ordering Regatta"
-msgstr ""
+#, fuzzy
+msgid "Order of Regatta"
+msgstr "Kolejność regat"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:102
 msgid ""
 "Select special reggata to set ranking order when tie. First select a year "
 "and a serie, then save and reload page to load regatta. "
 msgstr ""
+"Wybierz specjalne regaty, aby ustawić kolejność w rankingu po remisie. "
+"Najpierw wybierz rok i serię, a następnie zapisz i przeładuj stronę, aby "
+"załadować regaty. "
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:106
 msgid "Not Discardable Serie"
@@ -2732,7 +2736,7 @@ msgstr "Krótki kod"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:452
 msgid "-- Select --"
-msgstr ""
+msgstr "-- Wybierz --"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:103
 msgid "English name"
@@ -3125,40 +3129,40 @@ msgstr "wybierz kolor"
 msgid "An error occurred while getting the configuration."
 msgstr "Wystąpił błąd przy pobieraniu konfiguracji."
 
-#: includes/iworks/options/options.php:816
-#: includes/iworks/options/options.php:1910
+#: includes/iworks/options/options.php:842
+#: includes/iworks/options/options.php:1965
 msgid "Select Image"
 msgstr "Wybierz obrazek"
 
-#: includes/iworks/options/options.php:821
+#: includes/iworks/options/options.php:847
 msgid "Delete image"
 msgstr "Usuń obrazek"
 
-#: includes/iworks/options/options.php:927
+#: includes/iworks/options/options.php:955
 msgid "Save Changes"
 msgstr "Zapisz zmiany"
 
-#: includes/iworks/options/options.php:1805
+#: includes/iworks/options/options.php:1860
 msgid "City"
 msgstr "Miejscowość"
 
-#: includes/iworks/options/options.php:1806
+#: includes/iworks/options/options.php:1861
 msgid "Street"
 msgstr "Ulica"
 
-#: includes/iworks/options/options.php:1807
+#: includes/iworks/options/options.php:1862
 msgid "ZIP code"
 msgstr "Kod pocztowy"
 
-#: includes/iworks/options/options.php:1963
+#: includes/iworks/options/options.php:2018
 msgid "OFF"
 msgstr "Wyłącz"
 
-#: includes/iworks/options/options.php:1964
+#: includes/iworks/options/options.php:2019
 msgid "ON"
 msgstr "Włącz"
 
-#: includes/iworks/options/options.php:2029
+#: includes/iworks/options/options.php:2084
 msgid "Failed Security Check"
 msgstr "Nieudana kontrola bezpieczeństwa"
 
@@ -3169,9 +3173,8 @@ msgstr "Postaw nam kawę"
 
 #. translators: %s: plugin id
 #: includes/iworks/rate/rate.php:446
-#, fuzzy
 msgid "There is no plugin with id: %s."
-msgstr "Brak wyników."
+msgstr "Nie istnieje wtyczka o identyfikatorze: %s."
 
 #: includes/iworks/rate/rate.php:563
 msgid "OpenGraph"
@@ -3551,30 +3554,6 @@ msgctxt "plugins support home"
 msgid "https://wordpress.org/support/plugin/%s"
 msgstr "https://wordpress.org/support/plugin/%s"
 
-#~ msgid "fleet"
-#~ msgstr "flota"
-
-#~ msgid "Product saved prices"
-#~ msgstr "Zapisane ceny produktów"
-
-#~ msgid "Date"
-#~ msgstr "Data"
-
-#~ msgid "Sale Price"
-#~ msgstr "Cena promocyjna"
-
-#~ msgid "Regular Price"
-#~ msgstr "Cena standardowa"
-
-#~ msgid "There is no price history recorded."
-#~ msgstr "Nie zarejestrowano zmian w historii ceny."
-
-#~ msgid "Product changes log"
-#~ msgstr "Dziennik zmian produktu"
-
-#~ msgid "Product info"
-#~ msgstr "Informacje o produkcie"
-
 #~ msgid ""
 #~ "The sailboat manager makes it possible to manage boats, sailors, regattas "
 #~ "and their results."
@@ -3611,22 +3590,6 @@ msgstr "https://wordpress.org/support/plugin/%s"
 
 #~ msgid "Expences"
 #~ msgstr "Wydatki"
-
-#~ msgctxt "Block pattern description"
-#~ msgid "Show statistics with header."
-#~ msgstr "Pokaż statystyki w nagłówku."
-
-#~ msgid "Statistics with header"
-#~ msgstr "Statystyki w magłówku"
-
-#~ msgid "table"
-#~ msgstr "tabela"
-
-#~ msgid "statistics"
-#~ msgstr "statystyki"
-
-#~ msgid "Show statistics."
-#~ msgstr "Pokaż statystykę."
 
 #~ msgid "http://iworks.pl/"
 #~ msgstr "http://iworks.pl/"

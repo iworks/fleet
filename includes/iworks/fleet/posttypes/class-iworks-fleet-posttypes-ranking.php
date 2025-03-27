@@ -96,7 +96,7 @@ class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 				),
 				'tie'        => array(
 					'add_class'   => 'value',
-					'label'       => esc_html__( 'Ordering Regatta', 'fleet' ),
+					'label'       => esc_html__( 'Order of Regatta', 'fleet' ),
 					'type'        => 'select',
 					'options'     => array(),
 					'description' => esc_html__( 'Select special reggata to set ranking order when tie. First select a year and a serie, then save and reload page to load regatta. ', 'fleet' ),

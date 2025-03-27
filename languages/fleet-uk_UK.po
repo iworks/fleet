@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Plugins - Fleet Manager - Stable (latest release)\n"
 "Report-Msgid-Bugs-To: http://iworks.pl\n"
-"POT-Creation-Date: 2025-02-25 06:46:33+00:00\n"
+"POT-Creation-Date: 2025-03-27 19:55:19+00:00\n"
 "PO-Revision-Date: 2024-07-23 13:00:32+0000\n"
 "Language: uk_UA\n"
 "MIME-Version: 1.0\n"
@@ -103,7 +103,7 @@ msgstr ""
 msgid "General"
 msgstr "Загальне"
 
-#: etc/options.php:22 includes/iworks/options/options.php:1804
+#: etc/options.php:22 includes/iworks/options/options.php:1859
 msgid "Country"
 msgstr "Країна"
 
@@ -2653,7 +2653,7 @@ msgid "Serie"
 msgstr ""
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:99
-msgid "Ordering Regatta"
+msgid "Order of Regatta"
 msgstr ""
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:102
@@ -3120,40 +3120,40 @@ msgstr ""
 msgid "An error occurred while getting the configuration."
 msgstr ""
 
-#: includes/iworks/options/options.php:816
-#: includes/iworks/options/options.php:1910
+#: includes/iworks/options/options.php:842
+#: includes/iworks/options/options.php:1965
 msgid "Select Image"
 msgstr "Виберіть зображення"
 
-#: includes/iworks/options/options.php:821
+#: includes/iworks/options/options.php:847
 msgid "Delete image"
 msgstr "Видалити зображення"
 
-#: includes/iworks/options/options.php:927
+#: includes/iworks/options/options.php:955
 msgid "Save Changes"
 msgstr "Зберегти зміни"
 
-#: includes/iworks/options/options.php:1805
+#: includes/iworks/options/options.php:1860
 msgid "City"
 msgstr "Місто"
 
-#: includes/iworks/options/options.php:1806
+#: includes/iworks/options/options.php:1861
 msgid "Street"
 msgstr "Вулиця"
 
-#: includes/iworks/options/options.php:1807
+#: includes/iworks/options/options.php:1862
 msgid "ZIP code"
 msgstr ""
 
-#: includes/iworks/options/options.php:1963
+#: includes/iworks/options/options.php:2018
 msgid "OFF"
 msgstr "ВИМК"
 
-#: includes/iworks/options/options.php:1964
+#: includes/iworks/options/options.php:2019
 msgid "ON"
 msgstr "УВІМК"
 
-#: includes/iworks/options/options.php:2029
+#: includes/iworks/options/options.php:2084
 msgid "Failed Security Check"
 msgstr ""
 
@@ -3525,15 +3525,6 @@ msgstr ""
 msgctxt "plugins support home"
 msgid "https://wordpress.org/support/plugin/%s"
 msgstr ""
-
-#~ msgid "Date"
-#~ msgstr "Дата"
-
-#~ msgid "Sale Price"
-#~ msgstr "Ціна продажу"
-
-#~ msgid "Regular Price"
-#~ msgstr "Звичайна ціна"
 
 #~ msgid "http://iworks.pl/en/plugins/fleet/"
 #~ msgstr "http://iworks.pl/en/plugins/fleet/"

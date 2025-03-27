@@ -21,7 +21,7 @@ The **Fleet Manager** plugin for WordPress is designed to manage sailboats, sail
 
 = GitHub =
 
-The Simple Consent Mode plugin is available also on [GitHub - Fleet](https://github.com/iworks/fleet).
+The Fleet Manager plugin is available also on [GitHub - Fleet](https://github.com/iworks/fleet).
 
 = See room for improvement? =
 
