@@ -66,11 +66,14 @@ There are 3 ways to install this plugin:
 
 == Changelog ==
 
+= 2.3.7 (2025-03-27) =
+* Updated the [iWorks Options](https://github.com/iworks/wordpress-options-class) module to version 2.9.9.
+
 = 2.3.6 (2025-02-25) =
 * Ability to upload SVG file has been removed due to Stored Cross-Site Scripting vulnerability. We recommended to install [Safe SVG](https://wordpress.org/plugins/safe-svg/) to allow upload SVG files.
 * The build process has been improved.
-* The [iWorks Options](https://github.com/iworks/wordpress-options-class) module has been updated to 2.9.6.
-* The [iWorks Rate](https://github.com/iworks/iworks-rate) module has been updated to 2.2.3.
+* Updated the [iWorks Options](https://github.com/iworks/wordpress-options-class) module to version 2.9.6.
+* Updated the [iWorks Rate](https://github.com/iworks/iworks-rate) module to version 2.2.3.
 
 = 2.3.5 (2024-10-07) =
 * Displaying a regatta without races has been improved.
@@ -91,7 +94,7 @@ There are 3 ways to install this plugin:
 
 = 2.3.0 (2024-08-29) =
 * Medals display have been improved.
-* The [iWorks Rate](https://github.com/iworks/iworks-rate) module has been updated to 2.2.0.
+* Updated the [iWorks Rate](https://github.com/iworks/iworks-rate) module to version 2.2.0.
 * *The ranking for the whole crew has been added.*
 
 = 2.2.2 (2024-08-02) =
@@ -110,13 +113,13 @@ There are 3 ways to install this plugin:
 = 2.1.6 (2024-05-20) =
 * The [OG — Better Share on Social Media Plugin](https://wordpress.org/plugins/og/) has been added.
 * The class for single race has been added.
-* The [iWorks Options](https://github.com/iworks/wordpress-options-class) module has been updated to 2.9.2.
-* The [iWorks Rate](https://github.com/iworks/iworks-rate) module has been updated to 2.1.9.
+* Updated the [iWorks Options](https://github.com/iworks/wordpress-options-class) module to version 2.9.2.
+* Updated the [iWorks Rate](https://github.com/iworks/iworks-rate) module to version 2.1.9.
 
 = 2.1.5 (2023-06-30) =
 
-* The [iWorks Options](https://github.com/iworks/wordpress-options-class) module has been updated to 2.8.5.
-* The [iWorks Rate](https://github.com/iworks/iworks-rate) module has been updated to 2.1.2.
+* Updated the [iWorks Options](https://github.com/iworks/wordpress-options-class) module to version 2.8.5.
+* Updated the [iWorks Rate](https://github.com/iworks/iworks-rate) module to version 2.1.2.
 * The statistics HTML has been fixed.
 * Unnecessary trailing slashes have been removed.
 
@@ -138,12 +141,12 @@ There are 3 ways to install this plugin:
 * The special result row class has been added.
 
 = 2.1.0 (2022-09-01) =
-* Updated iWorks Rate to 2.1.1.
+* Updated the [iWorks Rate](https://github.com/iworks/iworks-rate) module to version 2.1.1.
 * Changed some strings to improve translations.
 
 = 2.0.9 (2022-07-22) =
 * Changed series names to avoid translations issues.
-* Updated iWorks Options to 2.8.3.
+* Updated the [iWorks Options](https://github.com/iworks/wordpress-options-class) module to version 2.8.3.
 
 = 2.0.8 (2022-03-23) =
 * Added icons for custom posts types to allow show it in [PWA — easy way to Progressive Web App](https://wordpress.org/plugins/iworks-pwa/) plugin as PWA Shortcodes.
@@ -152,12 +155,12 @@ There are 3 ways to install this plugin:
 * Added filter country + year.
 
 = 2.0.6 (2022-02-18) =
-* Updated iWorks Options to 2.8.1.
-* Updated iWorks Rate to 2.1.0.
+* Updated the [iWorks Options](https://github.com/iworks/wordpress-options-class) module to version 2.8.1.
+* Updated the [iWorks Rate](https://github.com/iworks/iworks-rate) module to version 2.1.0.
 
 = 2.0.5 (2022-01-20) =
-* Updated iWorks Options to 2.8.0.
-* Updated iWorks Rate to 2.0.6.
+* Updated the [iWorks Options](https://github.com/iworks/wordpress-options-class) module to version 2.8.0.
+* Updated the [iWorks Rate](https://github.com/iworks/iworks-rate) module to version 2.0.6.
 
 = 2.0.4 (2021-11-16) =
 * Added filter `suppress_filter_pre_get_posts_limit_to_year` to turn off year limitation.
@@ -167,13 +170,13 @@ There are 3 ways to install this plugin:
 * Fixed trophies if there was no place.
 
 = 2.0.3 (2021-05-28) =
-* Updated iWorks Rate to 1.0.3.
+* Updated the [iWorks Rate](https://github.com/iworks/iworks-rate) module to version 1.0.3.
 * Improved filter `iworks_fleet_result_serie_regatta_list` by new config options: `output` - default html works like it was, and `raw` to return array of data instead of HTML string.
 
 = 2.0.2 (2021-05-16) =
 * Fixed race code status.
 * Renamed directory `vendor` into `includes`.
-* Updated iWorks Options to 2.6.9.
+* Updated the [iWorks Options](https://github.com/iworks/wordpress-options-class) module to version 2.6.9.
 * Improved owner boat list.
 
 = 2.0.1 (2021-05-06) =
@@ -214,7 +217,7 @@ There are 3 ways to install this plugin:
 * Added ranking-o-mat.
 
 = 1.2.7 (2019-11-07) =
-* Updated iWorks Options to 2.6.7
+* Updated the [iWorks Options](https://github.com/iworks/wordpress-options-class) module to version 2.6.7.
 
 = 1.2.6 (2019-11-04) =
 * Fixed function for `the_title` filter - second argument should have default.
@@ -237,7 +240,7 @@ There are 3 ways to install this plugin:
 * Allow to turn on/off boat sails taxonomy.
 * Allow to turn on/off boat crew.
 * Fixed problem with last regatta result by serie - it was doubled.
-* Updated iWorks Options to 2.6.6
+* Updated the [iWorks Options](https://github.com/iworks/wordpress-options-class) module to version 2.6.6.
 
 = 1.2.2 =
 * Show regatta city instead area.
