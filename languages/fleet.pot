@@ -2,9 +2,9 @@
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: 2.3.7\n"
+"Project-Id-Version: 2.3.8\n"
 "Report-Msgid-Bugs-To: http://iworks.pl\n"
-"POT-Creation-Date: 2025-03-27 19:58:27+00:00\n"
+"POT-Creation-Date: 2025-05-07 05:38:36+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -3021,29 +3021,35 @@ msgstr ""
 msgid "netto"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:2736
-msgid "Year: %s"
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:2737
+#. translators: year of regatta
+msgid "Results of the %s Sailing Regatta"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:2833
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:2748
+#. translators: %1$s - country name, %2$s year of event
+msgid "%2$s Results of Sailing Regattas in %1$s"
+msgstr ""
+
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:2834
 msgid "Last added"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:2945
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:2946
 msgid "Regatta results by year"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:2953
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:2954
 msgid "Number of result: %d"
 msgid_plural "Number of results: %d"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:3007
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:3008
 msgid "Regatta results by country"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:3132
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:3133
 msgid "Places"
 msgstr ""
 
@@ -3506,13 +3512,13 @@ msgstr ""
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:2703
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:2708
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:3057
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:3065
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:3058
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:3066
 msgctxt "rewrite rule handler for results"
 msgid "results"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:2904
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:2905
 msgctxt "all of taxonomy link title"
 msgid "Show more: %s"
 msgstr ""

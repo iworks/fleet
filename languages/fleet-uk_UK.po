@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Plugins - Fleet Manager - Stable (latest release)\n"
 "Report-Msgid-Bugs-To: http://iworks.pl\n"
-"POT-Creation-Date: 2025-03-27 19:55:19+00:00\n"
+"POT-Creation-Date: 2025-05-07 05:38:26+00:00\n"
 "PO-Revision-Date: 2024-07-23 13:00:32+0000\n"
 "Language: uk_UA\n"
 "MIME-Version: 1.0\n"
@@ -3013,30 +3013,36 @@ msgstr ""
 msgid "netto"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:2736
-msgid "Year: %s"
-msgstr "Рік: %s"
+#. translators: year of regatta
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:2737
+msgid "Results of the %s Sailing Regatta"
+msgstr ""
 
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:2833
+#. translators: %1$s - country name, %2$s year of event
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:2748
+msgid "%2$s Results of Sailing Regattas in %1$s"
+msgstr ""
+
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:2834
 msgid "Last added"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:2945
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:2946
 msgid "Regatta results by year"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:2953
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:2954
 msgid "Number of result: %d"
 msgid_plural "Number of results: %d"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:3007
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:3008
 msgid "Regatta results by country"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:3132
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:3133
 msgid "Places"
 msgstr "Місця"
 
@@ -3503,13 +3509,13 @@ msgstr ""
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:2703
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:2708
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:3057
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:3065
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:3058
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:3066
 msgctxt "rewrite rule handler for results"
 msgid "results"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:2904
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:2905
 msgctxt "all of taxonomy link title"
 msgid "Show more: %s"
 msgstr ""
@@ -3525,6 +3531,9 @@ msgstr ""
 msgctxt "plugins support home"
 msgid "https://wordpress.org/support/plugin/%s"
 msgstr ""
+
+#~ msgid "Year: %s"
+#~ msgstr "Рік: %s"
 
 #~ msgid "http://iworks.pl/en/plugins/fleet/"
 #~ msgstr "http://iworks.pl/en/plugins/fleet/"
