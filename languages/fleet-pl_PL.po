@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Plugins - Fleet Manager - Development (trunk)\n"
 "Report-Msgid-Bugs-To: http://iworks.pl\n"
-"POT-Creation-Date: 2025-05-07 05:38:26+00:00\n"
-"PO-Revision-Date: 2025-03-27 19:53:40+0000\n"
+"POT-Creation-Date: 2025-05-07 13:28:00+00:00\n"
+"PO-Revision-Date: 2025-05-07 13:26:27+0000\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2654,7 +2654,6 @@ msgid "Serie"
 msgstr "Seria"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:99
-#, fuzzy
 msgid "Order of Regatta"
 msgstr "Kolejność regat"
 
@@ -3025,12 +3024,12 @@ msgstr "netto"
 #. translators: year of regatta
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:2737
 msgid "Results of the %s Sailing Regatta"
-msgstr ""
+msgstr "Wyniki regat żeglarskich w %s"
 
 #. translators: %1$s - country name, %2$s year of event
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:2748
 msgid "%2$s Results of Sailing Regattas in %1$s"
-msgstr ""
+msgstr "%2$s wyniki regat żeglarskich w %1$s"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:2834
 msgid "Last added"
@@ -3559,9 +3558,6 @@ msgstr "https://pl.wordpress.org/plugins/%s"
 msgctxt "plugins support home"
 msgid "https://wordpress.org/support/plugin/%s"
 msgstr "https://wordpress.org/support/plugin/%s"
-
-#~ msgid "Year: %s"
-#~ msgstr "Rok: %s"
 
 #~ msgid ""
 #~ "The sailboat manager makes it possible to manage boats, sailors, regattas "
