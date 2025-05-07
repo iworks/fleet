@@ -2732,9 +2732,10 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		if ( empty( $year ) ) {
 			return $title;
 		}
-		$title   = sprintf(
-			__( 'Year: %s', 'fleet' ),
-			sprintf( '<span>%d</span>', $year )
+		$title = sprintf(
+			// translators: year of regatta
+			__( 'Results of the %s Sailing Regatta', 'fleet' ),
+			sprintf( '<span class="archive-title-year">%d</span>', $year )
 		);
 		$country = get_query_var( 'iworks_fleet_location' );
 		if ( empty( $country ) ) {
@@ -2743,13 +2744,13 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		$term = get_term_by( 'slug', $country, 'iworks_fleet_location' );
 		if ( is_a( $term, 'WP_Term' ) ) {
 			return sprintf(
-				'%s: %s',
-				$term->name,
-				sprintf( '<span>%d</span>', $year )
+				// translators: %1$s - country name, %2$s year of event
+				esc_html__( '%2$s Results of Sailing Regattas in %1$s', 'fleet' ),
+				sprintf( '<span class="archive-title-country">%s</span>', $term->name ),
+				sprintf( '<span class="archive-title-year">%d</span>', $year )
 			);
 		}
 		return $title;
-
 	}
 
 	/**
@@ -3837,4 +3838,5 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		$query = new WP_Query( $args );
 		return $query->posts;
 	}
+
 }

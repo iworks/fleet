@@ -66,6 +66,10 @@ There are 3 ways to install this plugin:
 
 == Changelog ==
 
+= 2.3.8 (2025-05-07) =
+* Updated the [iWorks Options](https://github.com/iworks/wordpress-options-class) module to version 3.0.0.
+* Improved archive titles.
+
 = 2.3.7 (2025-03-27) =
 * Updated the [iWorks Options](https://github.com/iworks/wordpress-options-class) module to version 2.9.9.
 
