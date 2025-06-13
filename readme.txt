@@ -1,4 +1,4 @@
-=== PLUGIN_TITLE ===
+=== Fleet Manager ===
 Contributors: iworks
 Donate link: https://ko-fi.com/iworks?utm_source=simple-revision-control&utm_medium=readme-donate
 Tags: PLUGIN_TAGS
@@ -13,56 +13,76 @@ PLUGIN_TAGLINE
 
 == Description ==
 
-The **Fleet Manager** plugin for WordPress is designed to manage sailboats, sailors, regattas, and their results. It allows users to track boats, record sailor statistics, and manage competition results in an organized and accessible way. Key features include:
+PLUGIN_DESCRIPTION
 
-1. **Regatta Management**: Allows the creation and management of sailing events and competitions.
-1. **Sailor and Boat**: Records detailed information about sailors and boats.
-1. **Results**: Displays race results, supporting features like medal display and ranking integration.
+== Features ==
 
-= GitHub =
-
-The Fleet Manager plugin is available also on [GitHub - Fleet](https://github.com/iworks/fleet).
-
-= See room for improvement? =
-
-Great! There are several ways you can get involved to help make PLUGIN_TITLE better:
-
-1. **Report Bugs:** If you find a bug, error or other problem, please report it! You can do this by [creating a new topic](https://wordpress.org/support/plugin/fleet/) in the plugin forum. Once a developer can verify the bug by reproducing it, they will create an official bug report in [GitHub](PLUGIN_GITHUB_WEBSITE) where the bug will be worked on.
-2. **Suggest New Features:** Have an awesome idea? Please share it! Simply [create a new topic](https://wordpress.org/support/plugin/fleet/) in the plugin forum to express your thoughts on why the feature should be included and get a discussion going around your idea.
-3. **Issue Pull Requests:** If you're a developer, the easiest way to get involved is to help out on [issues already reported](PLUGIN_GITHUB_WEBSITE/issues) in GitHub. Be sure to check out the [contributing guide](PLUGIN_GITHUB_WEBSITE/blob/master/contributing.md) for developers.
-
-Thank you for wanting to make PLUGIN_TITLE better for everyone!
+* **Regatta Management:** Create and manage sailing events, regattas, and competitions.
+* **Sailor & Boat Records:** Store detailed information about sailors and boats.
+* **Results Display:** Show race results, including medals and rankings.
+* **Statistics:** Visualize sailor performance over time.
+* **Custom Shortcodes:** Display regatta lists by country or year, show boat galleries, and more.
+* **Export Tools:** Export results for boats and sailors.
+* **Compatibility:** Works with popular WordPress themes and includes PWA support.
+* **Localization:** Translated into multiple languages.
 
 == Installation ==
 
-There are 3 ways to install this plugin:
+**There are three ways to install Fleet Manager:**
 
-= The super-easy way =
+=== 1. Via WordPress Admin ===
 
-1. Navigate to WPA > the Plugins and click the `Add New` button.
-1. Search for `Fleet`.
-1. Click to install.
-1. Activate the plugin.
-1. A new menu `Fleet` will appear in your Admin.
+1. Go to **Plugins > Add New** in your WordPress dashboard.
+2. Search for **Fleet**.
+3. Click **Install Now** and then **Activate**.
+4. The **Fleet** menu will appear in your admin sidebar.
 
-= The easy way =
+=== 2. Manual Upload ===
 
-1. Download the plugin (.zip file) on the right column of this page
-1. Navigate to WPA > the Plugins and click the `Add New` button.
-1. Select button `Upload Plugin`.
-1. Upload the .zip file you just downloaded.
-1. Activate the plugin.
-1. A new menu `Fleet` will appear in your Admin.
+1. Download the plugin `.zip` file from the plugin page.
+2. Go to **Plugins > Add New** in your dashboard.
+3. Click **Upload Plugin**, select the `.zip` file, and install.
+4. Activate the plugin.
 
-= The old and reliable way (FTP) =
+=== 3. FTP Upload ===
 
-1. Upload `simple-consent-mode` folder to the `/wp-content/plugins/` directory
-1. Activate the plugin through the 'Plugins' menu in WordPress
-1. A new menu `Fleet` will appear in your Admin.
+1. Upload the `fleet` folder to `/wp-content/plugins/` directory.
+2. Activate the plugin via the **Plugins** menu.
+3. The **Fleet** menu will appear in your admin sidebar.
+
+== Usage ==
+
+* Use the **Fleet** menu to add boats, sailors, regattas, and results.
+* Utilize available shortcodes to display regatta lists, results, and statistics on your site.
+* Customize plugin settings as needed for your club or event.
+
+== Shortcodes ==
+
+* `[fleet_regattas_list_years]` – List regattas by year.
+* `[fleet_regattas_list_countries]` – List regattas by country.
+* `[boat]` – Show boat link, data, or gallery.
+* See documentation for more available shortcodes and parameters.
+
+== Blocks ==
+
+* **Expenses:** Manage and display regatta or fleet-related expenses.
 
 == Frequently Asked Questions ==
 
+= Can I import/export data? =
+Yes, Fleet Manager supports CSV export for boats, sailors, and results.
+
+= Is it possible to customize fields? =
+The plugin offers filters and hooks for developers to extend functionality.
+
+= How do I report a bug or suggest a feature? =
+Please use the plugin support forum or submit issues/pull requests on GitHub.
+
 == Screenshots ==
+
+1. Screenshot 1 description
+2. Screenshot 2 description
+3. Screenshot 3 description
 
 == Changelog ==
 
@@ -99,7 +119,7 @@ There are 3 ways to install this plugin:
 = 2.3.0 (2024-08-29) =
 * Medals display have been improved.
 * Updated the [iWorks Rate](https://github.com/iworks/iworks-rate) module to version 2.2.0.
-* *The ranking for the whole crew has been added.*
+* The ranking for the whole crew has been added.
 
 = 2.2.2 (2024-08-02) =
 * A boat link has been fixed.
@@ -272,5 +292,14 @@ There are 3 ways to install this plugin:
 * Added the boat list on a sailor page.
 * Add year to a single result slug on save.
 
-== Upgrade Notice ==
+== Contributing ==
 
+Want to help improve Fleet Manager?
+
+* **Report Bugs:** Open a topic in the plugin forum. Verified bugs are tracked on GitHub.
+* **Suggest Features:** Share your ideas in the forum to start a discussion.
+* **Contribute Code:** Fork the [GitHub repository](https://github.com/iworks/fleet) and submit pull requests. See the contributing guide for details.
+
+== GitHub ==
+
+The Fleet Manager plugin is available on [GitHub](https://github.com/iworks/fleet).
