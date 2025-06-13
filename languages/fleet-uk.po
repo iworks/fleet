@@ -1,11 +1,11 @@
-# Translation of Plugins - Fleet Manager - Development (trunk) in Ukrainian
-# This file is distributed under the same license as the Plugins - Fleet Manager - Development (trunk) package.
+# Translation of Plugins - Fleet Manager - Stable (latest release) in Ukrainian
+# This file is distributed under the same license as the Plugins - Fleet Manager - Stable (latest release) package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Plugins - Fleet Manager - Development (trunk)\n"
+"Project-Id-Version: Plugins - Fleet Manager - Stable (latest release)\n"
 "Report-Msgid-Bugs-To: http://iworks.pl\n"
-"POT-Creation-Date: 2025-06-13 08:26:38+00:00\n"
-"PO-Revision-Date: 2025-05-07 10:00:45+0000\n"
+"POT-Creation-Date: 2025-06-13 16:34:16+00:00\n"
+"PO-Revision-Date: 2025-05-09 16:44:09+0000\n"
 "Language: uk_UA\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,7 +21,7 @@ msgstr "Команда"
 #: assets/templates/shortcode/crew/output/table.php:15
 #: assets/templates/shortcode/results/output/table.php:15
 msgid "Sailed"
-msgstr ""
+msgstr "Кількість регат"
 
 #: assets/templates/shortcode/crew/output/table.php:16
 #: assets/templates/shortcode/crew/output/table.php:21
@@ -32,7 +32,7 @@ msgstr ""
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1291
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:2592
 msgid "Points"
-msgstr ""
+msgstr "Пункти"
 
 #: assets/templates/shortcode/crew/output/table.php:20
 #: assets/templates/shortcode/results/output/table.php:20
@@ -51,7 +51,7 @@ msgstr "Загалом"
 #: assets/templates/shortcode/crew/output/table.php:24
 #: assets/templates/shortcode/results/output/table.php:24
 msgid "Netto"
-msgstr ""
+msgstr "Нетто"
 
 #: assets/templates/shortcode/medals/output/table.php:5
 #: assets/templates/shortcode/results/output/table.php:5
@@ -65,7 +65,7 @@ msgstr "Ім’я"
 
 #: assets/templates/shortcode/medals/output/table.php:6
 msgid "Years"
-msgstr ""
+msgstr "Роки"
 
 #: assets/templates/shortcode/medals/output/table.php:7 etc/options.php:512
 msgid "Gold"
@@ -81,19 +81,19 @@ msgstr "Бронза"
 
 #: assets/templates/shortcode/ranking-missing-id.php:9
 msgid "Fleet: the ranking id is required!"
-msgstr ""
+msgstr "Флот: потрібно ID рейтингу!"
 
 #: assets/templates/shortcode/ranking-missing-id.php:11
 msgid "The shortcode require <code>id</code> param to work."
-msgstr ""
+msgstr "Для роботи шорткоду потрібен параметр <code>id</code>."
 
 #: assets/templates/shortcode/ranking-wrong-id.php:9
 msgid "Fleet: the ranking id is wrong!"
-msgstr ""
+msgstr "Флот: id рейтингу неправильний!"
 
 #: assets/templates/shortcode/ranking-wrong-id.php:11
 msgid "The shortcode param <code>id</code> param is wrong."
-msgstr ""
+msgstr "Параметр шорткоду <code>id</code> є неправильним."
 
 #: etc/options.php:11
 msgid "Configuration"
@@ -112,22 +112,24 @@ msgid ""
 "Select country or countries if you need to show only boats and sailors from "
 "it."
 msgstr ""
+"Виберіть країну або країни, якщо вам потрібно показати лише човни та моряків "
+"з неї."
 
 #: etc/options.php:30
 msgid "Add wide body class"
-msgstr ""
+msgstr "Додати клас широкого вмісту body"
 
 #: etc/options.php:38
 msgid "Load frontend CSS"
-msgstr ""
+msgstr "Завантажити CSS з інтерфейсу"
 
 #: etc/options.php:45
 msgid "Load Modules"
-msgstr ""
+msgstr "Завантаження модулів"
 
 #: etc/options.php:79
 msgid "Load Rankings"
-msgstr ""
+msgstr "Завантаження рейтингів"
 
 #: etc/options.php:90
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:562
@@ -139,69 +141,69 @@ msgstr "Результати"
 
 #: etc/options.php:95
 msgid "Show Points"
-msgstr "Показати бали"
+msgstr "Показати пункти"
 
 #: etc/options.php:103
 msgid "Show Trophy"
-msgstr ""
+msgstr "Показати приз"
 
 #: etc/options.php:111
 msgid "Show Country"
-msgstr ""
+msgstr "Показати країну"
 
 #: etc/options.php:119
 msgid "Show Series"
-msgstr ""
+msgstr "Показати серію"
 
 #: etc/options.php:127
 msgid "Link Series"
-msgstr ""
+msgstr "Посилання на серії"
 
 #: etc/options.php:135
 msgid "World Serie"
-msgstr ""
+msgstr "Світова серія"
 
 #: etc/options.php:138
 msgid "Select World serie to show trophy"
-msgstr ""
+msgstr "Виберіть Світову серію, щоб показати приз"
 
 #: etc/options.php:143
 msgid "Continental Serie"
-msgstr ""
+msgstr "Континентальна серія"
 
 #: etc/options.php:146
 msgid "Select continental serie to show trophy"
-msgstr ""
+msgstr "Виберіть континентальну серію, щоб показати приз"
 
 #: etc/options.php:151
 msgid "National Serie"
-msgstr ""
+msgstr "Національна серія"
 
 #: etc/options.php:154
 msgid "Select national serie to show trophy"
-msgstr ""
+msgstr "Виберіть національну серію, щоб показати приз"
 
 #: etc/options.php:159 etc/options.php:258 etc/options.php:349
 msgid "Allow download CSV"
-msgstr ""
+msgstr "Дозволити завантаження CSV"
 
 #: etc/options.php:167
 msgid "Show English"
-msgstr ""
+msgstr "Показати англійську назву"
 
 #: etc/options.php:171
 msgid "Allow to show English title on a list."
-msgstr ""
+msgstr "Дозволити показувати англійську назву у переліку."
 
 #: etc/options.php:178
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:162
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:164
 msgid "Persons"
-msgstr "Люди"
+msgstr "Особи"
 
 #: etc/options.php:183
 msgid "Show social media links"
-msgstr "Показати посилання на соціальні мережі"
+msgstr "Показати посилання на соцмережі"
 
 #: etc/options.php:191
 msgid "Show Boats Table"
@@ -209,43 +211,44 @@ msgstr "Показати таблицю човнів"
 
 #: etc/options.php:199
 msgid "Show Boat Owned"
-msgstr ""
+msgstr "Показати власника човна"
 
 #: etc/options.php:207
 msgid "Show Places Chart"
-msgstr ""
+msgstr "Показати схему розсаджування"
 
 #: etc/options.php:215
 msgid "Tag to person"
-msgstr ""
+msgstr "Тег для особи"
 
 #: etc/options.php:216
 msgid "Replace person tag by fleet person."
-msgstr ""
+msgstr "Замініть тег особа на особа флоту."
 
 #: etc/options.php:224
 msgid "Add posts list"
-msgstr ""
+msgstr "Додати список записів"
 
 #: etc/options.php:225
 msgid "Add posts list to person with matching tag."
-msgstr ""
+msgstr "Додати перелік записів до особи з відповідним тегом."
 
 #: etc/options.php:233
 msgid "Show flag"
-msgstr ""
+msgstr "Показати прапор"
 
 #: etc/options.php:234
 msgid "Show country flag before person on single person page."
-msgstr ""
+msgstr "Показувати прапор країни перед особою на сторінці однієї особи."
 
 #: etc/options.php:242 etc/options.php:341
 msgid "Show trophy"
-msgstr ""
+msgstr "Показати приз"
 
 #: etc/options.php:250
 msgid "Show link to World Sailin with Sailor ID"
 msgstr ""
+"Показати посилання на Міжнародну федерацію парусного спорту з ID яхтсмена"
 
 #: etc/options.php:268
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:333
@@ -255,11 +258,11 @@ msgstr "Човни"
 
 #: etc/options.php:273
 msgid "Show boat flag"
-msgstr ""
+msgstr "Показати прапор човна"
 
 #: etc/options.php:275
 msgid "We recommend to turn off if we show sailors nationality."
-msgstr ""
+msgstr "Рекомендуємо вимкнути, якщо ми показуємо національність моряка."
 
 #: etc/options.php:282
 msgid "Add crew manually"
@@ -267,19 +270,19 @@ msgstr "Додайте екіпаж вручну"
 
 #: etc/options.php:290
 msgid "Add extra data"
-msgstr ""
+msgstr "Додайте додаткові дані"
 
 #: etc/options.php:298
 msgid "Add boat social media"
-msgstr ""
+msgstr "Додати соцмережі човна"
 
 #: etc/options.php:306
 msgid "Add boat owners"
-msgstr ""
+msgstr "Додати власників човнів"
 
 #: etc/options.php:314
 msgid "Show boat owners on boat details page"
-msgstr ""
+msgstr "Показати власників човнів на сторінці деталей човна"
 
 #: etc/options.php:322
 msgid "Boat taxonomies"
@@ -287,56 +290,56 @@ msgstr "Таксономії човнів"
 
 #: etc/options.php:324
 msgid "Sail manufacturer"
-msgstr ""
+msgstr "Виробник вітрил"
 
 #: etc/options.php:325
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:629
 msgid "Mast manufacturer"
-msgstr ""
+msgstr "Виробник щогл"
 
 #: etc/options.php:326
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:622
 msgid "Hull manufacturer"
-msgstr ""
+msgstr "Виробник корпусу"
 
 #: etc/options.php:332
 msgid "Auto add feature image"
-msgstr ""
+msgstr "Авто додавання зображення"
 
 #: etc/options.php:333
 msgid ""
 "Automagicaly add feature image, if there is some taged with boat number."
-msgstr ""
+msgstr "Автоматично додається зображення об'єкта, якщо є тег з номером човна."
 
 #: etc/options.php:360
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:336
 msgid "Add New Boat"
-msgstr ""
+msgstr "Додати новий човен"
 
 #: etc/options.php:374 etc/options.php:375
 msgid "Series"
-msgstr ""
+msgstr "Серії"
 
 #: etc/options.php:390 etc/options.php:391
 msgid "Hulls Manufaturers"
-msgstr ""
+msgstr "Виробники корпусів"
 
 #: etc/options.php:406 etc/options.php:407
 msgid "Sails Manufaturers"
-msgstr ""
+msgstr "Виробники вітрил"
 
 #: etc/options.php:422 etc/options.php:423
 msgid "Masts Manufaturers"
-msgstr ""
+msgstr "Виробники щогл"
 
 #: etc/options.php:438 etc/options.php:439
 #: includes/iworks/fleet/posttypes.php:372
 msgid "Locations"
-msgstr "Розташування"
+msgstr "Розміщення"
 
 #: etc/options.php:461
 msgid "Alice Blue"
-msgstr ""
+msgstr "Синя Еліс"
 
 #: etc/options.php:462
 msgid "Antique White"
@@ -344,23 +347,23 @@ msgstr "Античний білий"
 
 #: etc/options.php:463
 msgid "Aqua"
-msgstr ""
+msgstr "Колір морської хвилі"
 
 #: etc/options.php:464
 msgid "Aquamarine"
-msgstr ""
+msgstr "Аквамарин"
 
 #: etc/options.php:465
 msgid "Azure"
-msgstr ""
+msgstr "Лазурний"
 
 #: etc/options.php:466
 msgid "Beige"
-msgstr ""
+msgstr "Бежевий"
 
 #: etc/options.php:467
 msgid "Bisque"
-msgstr ""
+msgstr "Бісквітий"
 
 #: etc/options.php:468
 msgid "Black"
@@ -368,7 +371,7 @@ msgstr "Чорний"
 
 #: etc/options.php:469
 msgid "Blanched Almond"
-msgstr ""
+msgstr "Мигдаль бланшований"
 
 #: etc/options.php:470
 msgid "Blue"
@@ -376,7 +379,7 @@ msgstr "Блакитний"
 
 #: etc/options.php:471
 msgid "Blue Violet"
-msgstr ""
+msgstr "Синьо-фіолетовий"
 
 #: etc/options.php:472
 msgid "Brown"
@@ -384,19 +387,19 @@ msgstr "Коричневий"
 
 #: etc/options.php:473
 msgid "Burly Wood"
-msgstr ""
+msgstr "Щільної деревини"
 
 #: etc/options.php:474
 msgid "Cadet Blue"
-msgstr ""
+msgstr "Кадетський синій"
 
 #: etc/options.php:475
 msgid "Chartreuse"
-msgstr ""
+msgstr "Зеленувато-жовтий"
 
 #: etc/options.php:476
 msgid "Chocolate"
-msgstr ""
+msgstr "Шоколадний"
 
 #: etc/options.php:477
 msgid "Coral"
@@ -404,15 +407,15 @@ msgstr "Кораловий"
 
 #: etc/options.php:478
 msgid "Cornflower Blue"
-msgstr ""
+msgstr "Волошковий синій"
 
 #: etc/options.php:479
 msgid "Cornsilk"
-msgstr ""
+msgstr "Кукурудзяний"
 
 #: etc/options.php:480
 msgid "Crimson"
-msgstr ""
+msgstr "Багряний"
 
 #: etc/options.php:481
 msgid "Cyan"
@@ -424,11 +427,11 @@ msgstr "Темно-блакитний"
 
 #: etc/options.php:483
 msgid "Dark Cyan"
-msgstr ""
+msgstr "Темно-циановий"
 
 #: etc/options.php:484
 msgid "Dark Golden Rod"
-msgstr ""
+msgstr "Темно-золотий"
 
 #: etc/options.php:485
 msgid "Dark Gray"
@@ -436,7 +439,7 @@ msgstr "Темно-сірий"
 
 #: etc/options.php:486
 msgid "Dark Grey"
-msgstr ""
+msgstr "Темно-сірий"
 
 #: etc/options.php:487
 msgid "Dark Green"
@@ -444,87 +447,87 @@ msgstr "Темно-зелений"
 
 #: etc/options.php:488
 msgid "Dark Khaki"
-msgstr ""
+msgstr "Темний хакі"
 
 #: etc/options.php:489
 msgid "Dark Magenta"
-msgstr ""
+msgstr "Темно-пурпурний"
 
 #: etc/options.php:490
 msgid "Dark Olive Green"
-msgstr ""
+msgstr "Темно-оливково-зелений"
 
 #: etc/options.php:491
 msgid "Dark Orange"
-msgstr ""
+msgstr "Темно-помаранчевий"
 
 #: etc/options.php:492
 msgid "Dark Orchid"
-msgstr ""
+msgstr "Темна орхідея"
 
 #: etc/options.php:493
 msgid "Dark Red"
-msgstr ""
+msgstr "Темно-червоний"
 
 #: etc/options.php:494
 msgid "Dark Salmon"
-msgstr ""
+msgstr "Темний лосось"
 
 #: etc/options.php:495
 msgid "Dark Sea Green"
-msgstr ""
+msgstr "Темно-морська зелень"
 
 #: etc/options.php:496
 msgid "Dark Slate Blue"
-msgstr ""
+msgstr "Темно-синій сланець"
 
 #: etc/options.php:497
 msgid "Dark Slate Gray"
-msgstr ""
+msgstr "Темно-сірий сланець"
 
 #: etc/options.php:498
 msgid "Dark Slate Grey"
-msgstr ""
+msgstr "Темно-сірий сланець"
 
 #: etc/options.php:499
 msgid "Dark Turquoise"
-msgstr ""
+msgstr "Темно-бірюзовий"
 
 #: etc/options.php:500
 msgid "Dark Violet"
-msgstr ""
+msgstr "Темно-фіолетовий"
 
 #: etc/options.php:501
 msgid "Deep Pink"
-msgstr ""
+msgstr "Глибокий рожевий"
 
 #: etc/options.php:502
 msgid "Deep Sky Blue"
-msgstr ""
+msgstr "Глибокий небесно-блакитний"
 
 #: etc/options.php:503
 msgid "Dim Gray"
-msgstr ""
+msgstr "Тьмяно-сірий"
 
 #: etc/options.php:504
 msgid "Dim Grey"
-msgstr ""
+msgstr "Тьмяно-сірий"
 
 #: etc/options.php:505
 msgid "Dodger Blue"
-msgstr ""
+msgstr "Захисний синій"
 
 #: etc/options.php:506
 msgid "Fire Brick"
-msgstr ""
+msgstr "Пожежна цегла"
 
 #: etc/options.php:507
 msgid "Floral White"
-msgstr ""
+msgstr "Квітковий білий"
 
 #: etc/options.php:508
 msgid "Forest Green"
-msgstr ""
+msgstr "Лісова зелень"
 
 #: etc/options.php:509
 msgid "Fuchsia"
@@ -532,15 +535,15 @@ msgstr "Фуксия"
 
 #: etc/options.php:510
 msgid "Gainsboro"
-msgstr ""
+msgstr "Гейнсборо"
 
 #: etc/options.php:511
 msgid "Ghost White"
-msgstr ""
+msgstr "Примарно-білий"
 
 #: etc/options.php:513
 msgid "Golden Rod"
-msgstr ""
+msgstr "Золотисто-березовий"
 
 #: etc/options.php:514
 msgid "Gray"
@@ -556,19 +559,19 @@ msgstr "Зелений"
 
 #: etc/options.php:517
 msgid "Green Yellow"
-msgstr ""
+msgstr "Зелено-жовтий"
 
 #: etc/options.php:518
 msgid "Honey Dew"
-msgstr ""
+msgstr "Медова роса"
 
 #: etc/options.php:519
 msgid "Hot Pink"
-msgstr ""
+msgstr "Яскраво-рожевий"
 
 #: etc/options.php:520
 msgid "Indian Red"
-msgstr ""
+msgstr "Індійський червоний"
 
 #: etc/options.php:521
 msgid "Indigo"
@@ -576,27 +579,27 @@ msgstr "Індиго"
 
 #: etc/options.php:522
 msgid "Ivory"
-msgstr ""
+msgstr "Слонова кістка"
 
 #: etc/options.php:523
 msgid "Khaki"
-msgstr ""
+msgstr "Хакі"
 
 #: etc/options.php:524
 msgid "Lavender"
-msgstr ""
+msgstr "Лавандовий"
 
 #: etc/options.php:525
 msgid "Lavender Blush"
-msgstr ""
+msgstr "Лавандовий рум'янець"
 
 #: etc/options.php:526
 msgid "Lawn Green"
-msgstr ""
+msgstr "Зелена галявина"
 
 #: etc/options.php:527
 msgid "Lemon Chiffon"
-msgstr ""
+msgstr "Лимонний шифон"
 
 #: etc/options.php:528
 msgid "Light Blue"
@@ -604,15 +607,15 @@ msgstr "Світло-блакитний"
 
 #: etc/options.php:529
 msgid "Light Coral"
-msgstr ""
+msgstr "Світло-кораловий"
 
 #: etc/options.php:530
 msgid "Light Cyan"
-msgstr ""
+msgstr "Світло-блакитний"
 
 #: etc/options.php:531
 msgid "Light Golden Rod Yellow"
-msgstr ""
+msgstr "Світло-золотисто жовтий"
 
 #: etc/options.php:532
 msgid "Light Gray"
@@ -620,135 +623,135 @@ msgstr "Світло-сірий"
 
 #: etc/options.php:533
 msgid "Light Grey"
-msgstr ""
+msgstr "Світло-сірий"
 
 #: etc/options.php:534
 msgid "Light Green"
-msgstr ""
+msgstr "Світло-зелений"
 
 #: etc/options.php:535
 msgid "Light Pink"
-msgstr ""
+msgstr "Світло-рожевий"
 
 #: etc/options.php:536
 msgid "Light Salmon"
-msgstr ""
+msgstr "Світлий лосось"
 
 #: etc/options.php:537
 msgid "Light Sea Green"
-msgstr ""
+msgstr "Світло-морський зелений"
 
 #: etc/options.php:538
 msgid "Light Sky Blue"
-msgstr ""
+msgstr "Світлий небесно-блакитний"
 
 #: etc/options.php:539
 msgid "Light Slate Gray"
-msgstr ""
+msgstr "Світло-сірий сланець"
 
 #: etc/options.php:540
 msgid "Light Slate Grey"
-msgstr ""
+msgstr "Світло-сірий сланець"
 
 #: etc/options.php:541
 msgid "Light Steel Blue"
-msgstr ""
+msgstr "Світло-сталевий синій"
 
 #: etc/options.php:542
 msgid "Light Yellow"
-msgstr ""
+msgstr "Світло-жовтий"
 
 #: etc/options.php:543
 msgid "Lime"
-msgstr ""
+msgstr "Лайм"
 
 #: etc/options.php:544
 msgid "Lime Green"
-msgstr ""
+msgstr "Лаймово-зелений"
 
 #: etc/options.php:545
 msgid "Linen"
-msgstr ""
+msgstr "Сіро-бежевий"
 
 #: etc/options.php:546
 msgid "Magenta"
-msgstr ""
+msgstr "Маджента"
 
 #: etc/options.php:547
 msgid "Maroon"
-msgstr ""
+msgstr "Темно-бордовий"
 
 #: etc/options.php:548
 msgid "Medium Aqua Marine"
-msgstr ""
+msgstr "Середній аквамарін"
 
 #: etc/options.php:549
 msgid "Medium Blue"
-msgstr ""
+msgstr "Середньо-блакитний"
 
 #: etc/options.php:550
 msgid "Medium Orchid"
-msgstr ""
+msgstr "Середня орхідея"
 
 #: etc/options.php:551
 msgid "Medium Purple"
-msgstr ""
+msgstr "Середно-фіолетовий"
 
 #: etc/options.php:552
 msgid "Medium Sea Green"
-msgstr ""
+msgstr "Середній морський зелений"
 
 #: etc/options.php:553
 msgid "Medium Slate Blue"
-msgstr ""
+msgstr "Середній сланцево-синій"
 
 #: etc/options.php:554
 msgid "Medium Spring Green"
-msgstr ""
+msgstr "Середній весняний зелений"
 
 #: etc/options.php:555
 msgid "Medium Turquoise"
-msgstr ""
+msgstr "Середній бірюзовий"
 
 #: etc/options.php:556
 msgid "Medium Violet Red"
-msgstr ""
+msgstr "Середній фіолетовий червоний"
 
 #: etc/options.php:557
 msgid "Midnight Blue"
-msgstr ""
+msgstr "Полуночно-синий"
 
 #: etc/options.php:558
 msgid "Mint Cream"
-msgstr ""
+msgstr "М'ятний крем"
 
 #: etc/options.php:559
 msgid "Misty Rose"
-msgstr ""
+msgstr "Туманна троянда"
 
 #: etc/options.php:560
 msgid "Moccasin"
-msgstr ""
+msgstr "Дуже світло-коричневий"
 
 #: etc/options.php:561
 msgid "Navajo White"
-msgstr ""
+msgstr "Помаранчево-білий"
 
 #: etc/options.php:562
 msgid "Navy"
-msgstr ""
+msgstr "Військово-морський флот"
 
 #: etc/options.php:563
 msgid "Old Lace"
-msgstr ""
+msgstr "Старе мереживо"
 
 #: etc/options.php:564
 msgid "Olive"
-msgstr ""
+msgstr "Обліковий"
 
 #: etc/options.php:565
 msgid "Olive Drab"
-msgstr ""
+msgstr "Оливковий сірий"
 
 #: etc/options.php:566
 msgid "Orange"
@@ -756,35 +759,35 @@ msgstr "Помаранчевий"
 
 #: etc/options.php:567
 msgid "Orange Red"
-msgstr ""
+msgstr "Помаранчево-червоний"
 
 #: etc/options.php:568
 msgid "Orchid"
-msgstr ""
+msgstr "Орхідея"
 
 #: etc/options.php:569
 msgid "Pale Golden Rod"
-msgstr ""
+msgstr "Блідо-золотий"
 
 #: etc/options.php:570
 msgid "Pale Green"
-msgstr ""
+msgstr "Блідо-зелений"
 
 #: etc/options.php:571
 msgid "Pale Turquoise"
-msgstr ""
+msgstr "Блідно-бірюзовий"
 
 #: etc/options.php:572
 msgid "Pale Violet Red"
-msgstr ""
+msgstr "Блідо-фіолетовий червоний"
 
 #: etc/options.php:573
 msgid "Papaya Whip"
-msgstr ""
+msgstr "Папайя-батіг"
 
 #: etc/options.php:574
 msgid "Peach Puff"
-msgstr ""
+msgstr "Темно-персиковий"
 
 #: etc/options.php:575 etc/options.php:727
 msgid "Peru"
@@ -796,11 +799,11 @@ msgstr "Рожевий"
 
 #: etc/options.php:577
 msgid "Plum"
-msgstr ""
+msgstr "Сливовий"
 
 #: etc/options.php:578
 msgid "Powder Blue"
-msgstr ""
+msgstr "Пудрово-блакитний"
 
 #: etc/options.php:579
 msgid "Purple"
@@ -808,7 +811,7 @@ msgstr "Фіолетовий"
 
 #: etc/options.php:580
 msgid "Rebecca Purple"
-msgstr ""
+msgstr "Темно-фіолетовий"
 
 #: etc/options.php:581
 msgid "Red"
@@ -816,7 +819,7 @@ msgstr "Червоний"
 
 #: etc/options.php:582
 msgid "Rosy Brown"
-msgstr ""
+msgstr "Рожево-коричневий"
 
 #: etc/options.php:583
 msgid "Royal Blue"
@@ -824,27 +827,27 @@ msgstr "Royal Blue"
 
 #: etc/options.php:584
 msgid "Saddle Brown"
-msgstr ""
+msgstr "Сідло коричневе"
 
 #: etc/options.php:585
 msgid "Salmon"
-msgstr ""
+msgstr "Лосось"
 
 #: etc/options.php:586
 msgid "Sandy Brown"
-msgstr ""
+msgstr "Пісочний"
 
 #: etc/options.php:587
 msgid "Sea Green"
-msgstr ""
+msgstr "Морська зелень"
 
 #: etc/options.php:588
 msgid "Sea Shell"
-msgstr ""
+msgstr "Морская ракушка"
 
 #: etc/options.php:589
 msgid "Sienna"
-msgstr ""
+msgstr "Сієнна"
 
 #: etc/options.php:591
 msgid "Sky Blue"
@@ -852,27 +855,27 @@ msgstr "Небесно-блакитний"
 
 #: etc/options.php:592
 msgid "Slate Blue"
-msgstr ""
+msgstr "Сіро-блакитна"
 
 #: etc/options.php:593
 msgid "Slate Gray"
-msgstr ""
+msgstr "Сланцево-сірий"
 
 #: etc/options.php:594
 msgid "Slate Grey"
-msgstr ""
+msgstr "Сланцево-сірий"
 
 #: etc/options.php:595
 msgid "Snow"
-msgstr ""
+msgstr "Сніг"
 
 #: etc/options.php:596
 msgid "Spring Green"
-msgstr ""
+msgstr "Весняний зелений"
 
 #: etc/options.php:597
 msgid "Steel Blue"
-msgstr ""
+msgstr "Сталево-синій"
 
 #: etc/options.php:598
 msgid "Tan"
@@ -880,15 +883,15 @@ msgstr "Жовто-коричневий"
 
 #: etc/options.php:599
 msgid "Teal"
-msgstr ""
+msgstr "Синьо-зелений"
 
 #: etc/options.php:600
 msgid "Thistle"
-msgstr ""
+msgstr "Чортополох"
 
 #: etc/options.php:601
 msgid "Tomato"
-msgstr ""
+msgstr "Помідорний"
 
 #: etc/options.php:602
 msgid "Turquoise"
@@ -900,7 +903,7 @@ msgstr "Фіолетовий"
 
 #: etc/options.php:604
 msgid "Wheat"
-msgstr ""
+msgstr "Пшениця"
 
 #: etc/options.php:605
 msgid "White"
@@ -908,7 +911,7 @@ msgstr "Білий"
 
 #: etc/options.php:606
 msgid "White Smoke"
-msgstr ""
+msgstr "Білий дим"
 
 #: etc/options.php:607
 msgid "Yellow"
@@ -916,7 +919,7 @@ msgstr "Жовтий"
 
 #: etc/options.php:608
 msgid "Yellow Green"
-msgstr ""
+msgstr "Жовто-зелений"
 
 #: etc/options.php:625
 msgid "Algeria"
@@ -940,7 +943,7 @@ msgstr "Гренада"
 
 #: etc/options.php:655
 msgid "Palestine"
-msgstr ""
+msgstr "Палестина"
 
 #: etc/options.php:661
 msgid "Andorra"
@@ -968,11 +971,11 @@ msgstr "Папуа-Нова Гвінея"
 
 #: etc/options.php:697
 msgid "Antigua"
-msgstr ""
+msgstr "Антигуа"
 
 #: etc/options.php:703
 msgid "Hong Kong, China"
-msgstr ""
+msgstr "Гонконг, Китай"
 
 #: etc/options.php:709
 msgid "Paraguay"
@@ -1136,7 +1139,7 @@ msgstr "Ботсвана"
 
 #: etc/options.php:955
 msgid "Korea"
-msgstr ""
+msgstr "Корея"
 
 #: etc/options.php:961
 msgid "Singapore"
@@ -1152,11 +1155,11 @@ msgstr "Косово"
 
 #: etc/options.php:979
 msgid "Slovak Republic"
-msgstr ""
+msgstr "Словацька республіка"
 
 #: etc/options.php:985
 msgid "British Virgin Islands"
-msgstr ""
+msgstr "Британські Віргінські острови"
 
 #: etc/options.php:991
 msgid "Kyrgyzstan"
@@ -1172,7 +1175,7 @@ msgstr "Бруней"
 
 #: etc/options.php:1009
 msgid "DPR Korea"
-msgstr ""
+msgstr "КНДР"
 
 #: etc/options.php:1015
 msgid "South Africa"
@@ -1212,7 +1215,7 @@ msgstr "Ліван"
 
 #: etc/options.php:1069
 msgid "St Kitts and Nevis"
-msgstr ""
+msgstr "Сент-Кітс і Невіс"
 
 #: etc/options.php:1075
 msgid "Cayman Islands"
@@ -1224,7 +1227,7 @@ msgstr "Лівія"
 
 #: etc/options.php:1087
 msgid "St Lucia"
-msgstr ""
+msgstr "Сан Лучіа"
 
 #: etc/options.php:1093
 msgid "Chile"
@@ -1240,7 +1243,7 @@ msgstr "Судан"
 
 #: etc/options.php:1111
 msgid "China, PR"
-msgstr ""
+msgstr "Китай"
 
 #: etc/options.php:1117
 msgid "Lithuania"
@@ -1252,7 +1255,7 @@ msgstr "Швеція"
 
 #: etc/options.php:1129
 msgid "Chinese Taipei"
-msgstr ""
+msgstr "Китайський Тайбей"
 
 #: etc/options.php:1135
 msgid "Luxembourg"
@@ -1268,11 +1271,11 @@ msgstr "Колумбія"
 
 #: etc/options.php:1153
 msgid "Macau"
-msgstr ""
+msgstr "Макао"
 
 #: etc/options.php:1159
 msgid "Tahiti"
-msgstr ""
+msgstr "Таїті"
 
 #: etc/options.php:1165
 msgid "Cook Islands"
@@ -1308,7 +1311,7 @@ msgstr "Мальта"
 
 #: etc/options.php:1213
 msgid "Timor Leste"
-msgstr ""
+msgstr "Східний Тимор"
 
 #: etc/options.php:1219
 msgid "Cyprus"
@@ -1320,7 +1323,7 @@ msgstr "Маврикій"
 
 #: etc/options.php:1231
 msgid "Trinidad & Tobago"
-msgstr ""
+msgstr "Тринідад і Тобаго"
 
 #: etc/options.php:1237
 msgid "Czech Republic"
@@ -1356,7 +1359,7 @@ msgstr "Монако"
 
 #: etc/options.php:1285
 msgid "Turks and Caicos"
-msgstr ""
+msgstr "Теркс і Кайкос, о-ви"
 
 #: etc/options.php:1291
 msgid "Dominican Republic"
@@ -1444,11 +1447,11 @@ msgstr "Вануату"
 
 #: etc/options.php:1417
 msgid "FYRO Macedonia"
-msgstr ""
+msgstr "Македонія"
 
 #: etc/options.php:1423
 msgid "Netherland Antilles (Curacao and St Maarten)"
-msgstr ""
+msgstr "Нідерландські Антильські острови (Кюрасао і Сен-Мартен)"
 
 #: etc/options.php:1429
 msgid "Venezuela"
@@ -1480,7 +1483,7 @@ msgstr "Зімбабве"
 
 #: etc/options.php:1472
 msgid "Great Britain"
-msgstr ""
+msgstr "Велика Британія"
 
 #: etc/options.php:1478
 msgid "Norway"
@@ -1512,15 +1515,15 @@ msgstr "Арканзас"
 
 #: etc/options.php:1504
 msgid "Armed Forces America"
-msgstr ""
+msgstr "Збройні сили (Америка)"
 
 #: etc/options.php:1505
 msgid "Armed Forces Europe"
-msgstr ""
+msgstr "Збройні сили (Європа)"
 
 #: etc/options.php:1506
 msgid "Armed Forces Pacific"
-msgstr ""
+msgstr "Збройні сили (Тихий океан)"
 
 #: etc/options.php:1507
 msgid "California"
@@ -1540,7 +1543,7 @@ msgstr "Делавер"
 
 #: etc/options.php:1511
 msgid "District of Columbia"
-msgstr ""
+msgstr "Колумбія, округ"
 
 #: etc/options.php:1512
 msgid "Florida"
@@ -1756,7 +1759,7 @@ msgstr "Саскачеван"
 
 #: etc/options.php:1571
 msgid "Yukon"
-msgstr ""
+msgstr "Юкон"
 
 #: etc/options.php:1577 etc/options.php:1578
 msgid "New South Wales"
@@ -1788,7 +1791,7 @@ msgstr "Західна Австралія"
 
 #: fleet.php:104
 msgid "Fleet Manager"
-msgstr ""
+msgstr "Менеджер флоту"
 
 #: includes/iworks/class-iworks-fleet.php:111
 msgid "Statistics"
@@ -1796,19 +1799,19 @@ msgstr "Статистика"
 
 #: includes/iworks/class-iworks-fleet.php:113
 msgid "Number of sailors"
-msgstr ""
+msgstr "Кількість моряків"
 
 #: includes/iworks/class-iworks-fleet.php:115
 msgid "Number of boats"
-msgstr ""
+msgstr "Кількість човнів"
 
 #: includes/iworks/class-iworks-fleet.php:117
 msgid "Number of event results"
-msgstr ""
+msgstr "Кількість результатів заходу"
 
 #: includes/iworks/class-iworks-fleet.php:135
 msgid "The Fleet plugin do not have such post type!"
-msgstr ""
+msgstr "Плагін Fleet не має такого типу запису!"
 
 #: includes/iworks/class-iworks-fleet.php:232 includes/iworks/rate/rate.php:133
 msgid "Settings"
@@ -1821,7 +1824,7 @@ msgstr "Пожертвувати"
 #: includes/iworks/class-iworks-fleet.php:245
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:1237
 msgid "Boat Number"
-msgstr ""
+msgstr "Номер човна"
 
 #: includes/iworks/class-iworks-fleet.php:246
 msgid "All Boat Numbers"
@@ -1829,11 +1832,11 @@ msgstr "Всі номери човнів"
 
 #: includes/iworks/class-iworks-fleet.php:247
 msgid "New Boat Number Name"
-msgstr ""
+msgstr "Новий номер човна"
 
 #: includes/iworks/class-iworks-fleet.php:248
 msgid "Add New Boat Number"
-msgstr ""
+msgstr "Додати номер човна"
 
 #: includes/iworks/class-iworks-fleet.php:249
 msgid "Edit Boat Number"
@@ -1863,15 +1866,15 @@ msgstr "Додавання або видалення номерів човнів
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1434
 #: includes/iworks/fleet/posttypes.php:381
 msgid "Choose from the most used"
-msgstr ""
+msgstr "Вибирайте з найбільш вживаних"
 
 #: includes/iworks/class-iworks-fleet.php:255
 msgid "Popular Boat Numbers"
-msgstr ""
+msgstr "Популярні номери човнів"
 
 #: includes/iworks/class-iworks-fleet.php:256
 msgid "Search Boat Numbers"
-msgstr ""
+msgstr "Пошук номерів човнів"
 
 #: includes/iworks/class-iworks-fleet.php:257
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:413
@@ -1893,15 +1896,15 @@ msgstr "Немає елементів"
 
 #: includes/iworks/class-iworks-fleet.php:259
 msgid "Boat Numbers list"
-msgstr ""
+msgstr "Перелік номерів човнів"
 
 #: includes/iworks/class-iworks-fleet.php:260
 msgid "Boat Numbers list navigation"
-msgstr ""
+msgstr "Навігація за переліком номерів човнів"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:128
 msgid "Current nation"
-msgstr ""
+msgstr "Нинішня нація"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:136
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:621
@@ -1911,23 +1914,23 @@ msgstr "Рік побудови"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:140
 msgid "Hull number"
-msgstr ""
+msgstr "Номер корпусу"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:144
 msgid "Boat name"
-msgstr ""
+msgstr "Назва човна"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:148
 msgid "Color top"
-msgstr ""
+msgstr "Колір палуби"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:155
 msgid "Color side"
-msgstr ""
+msgstr "Колір борту"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:162
 msgid "Color bottom"
-msgstr ""
+msgstr "Колір дна"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:168
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:630
@@ -1941,11 +1944,11 @@ msgstr "Розміщення"
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:170
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:624
 msgid "Hull material"
-msgstr ""
+msgstr "Матеріал корпусу"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:174
 msgid "--- select hull material ---"
-msgstr ""
+msgstr "--- вибрати матеріал корпусу ---"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:175
 msgid "Mixed"
@@ -1953,23 +1956,23 @@ msgstr "Змішаний"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:176
 msgid "Carbon"
-msgstr ""
+msgstr "Карбон"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:177
 msgid "Plywood"
-msgstr ""
+msgstr "Фанера"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:178
 msgid "GPR"
-msgstr ""
+msgstr "Армований склопластик"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:179
 msgid "Fiberglass"
-msgstr ""
+msgstr "Скловолокно"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:180
 msgid "Composite"
-msgstr ""
+msgstr "Композит"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:181
 msgid "Wood"
@@ -1977,21 +1980,21 @@ msgstr "Деревина"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:182
 msgid "Kevlar"
-msgstr ""
+msgstr "Кевлар"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:189
 msgid "First Certified"
-msgstr ""
+msgstr "Вперше сертифікований"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:194
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:633
 msgid "Last Update"
-msgstr ""
+msgstr "Останнє оновлення"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:198
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:631
 msgid "Web site"
-msgstr ""
+msgstr "Сайт"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:199
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:114
@@ -2033,7 +2036,7 @@ msgstr "Атрибути елемента"
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:337
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1375
 msgid "Add New"
-msgstr "Додати"
+msgstr "Додати новий"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:338
 msgid "New Boat"
@@ -2041,23 +2044,23 @@ msgstr "Новий човен"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:339
 msgid "Edit Boat"
-msgstr ""
+msgstr "Редагувати човен"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:340
 msgid "Update Boat"
-msgstr ""
+msgstr "Оновлення човна"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:341
 msgid "View Boat"
-msgstr ""
+msgstr "Переглянути човен"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:342
 msgid "View Boats"
-msgstr ""
+msgstr "Переглянути човни"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:343
 msgid "Search Boat"
-msgstr ""
+msgstr "Пошук човна"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:344
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:173
@@ -2138,31 +2141,31 @@ msgstr "Фільтрувати список елементів"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:401
 msgid "Hull Manufacturer"
-msgstr ""
+msgstr "Виробник корпусу"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:402
 msgid "All Hull Manufacturers"
-msgstr ""
+msgstr "Всі виробники корпусів"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:403
 msgid "New Hull Manufacturer Name"
-msgstr ""
+msgstr "Назва нового виробника корпусу"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:404
 msgid "Add New Hull Manufacturer"
-msgstr ""
+msgstr "Додати нового виробника корпусу"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:405
 msgid "Edit Hull Manufacturer"
-msgstr ""
+msgstr "Редагувати виробника корпусу"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:406
 msgid "Update Hull Manufacturer"
-msgstr ""
+msgstr "Оновити виробника корпусу"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:407
 msgid "View Hull Manufacturer"
-msgstr ""
+msgstr "Переглянути виробника корпусу"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:408
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:447
@@ -2170,130 +2173,130 @@ msgstr ""
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:225
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1432
 msgid "Separate items with commas"
-msgstr ""
+msgstr "Відокремлюйте елементи комами"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:409
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:448
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:487
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:226
 msgid "Add or remove items"
-msgstr ""
+msgstr "Додавання або видалення елементів"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:411
 msgid "Popular Hull Manufacturers"
-msgstr ""
+msgstr "Популярні виробники корпусів"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:412
 msgid "Search Hull Manufacturers"
-msgstr ""
+msgstr "Пошук виробників корпусів"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:415
 msgid "Hull Manufacturers list"
-msgstr ""
+msgstr "Список виробників корпусів"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:416
 msgid "Hull Manufacturers list navigation"
-msgstr ""
+msgstr "Навігація по списку виробників корпусів"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:440
 msgid "Sails Manufacturer"
-msgstr ""
+msgstr "Виробник вітрил"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:441
 msgid "All Sails Manufacturers"
-msgstr ""
+msgstr "Всі виробники вітрил"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:442
 msgid "New Sails Manufacturer Name"
-msgstr ""
+msgstr "Назва нового виробника вітрил"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:443
 msgid "Add New Sails Manufacturer"
-msgstr ""
+msgstr "Додати нового виробника вітрил"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:444
 msgid "Edit Sails Manufacturer"
-msgstr ""
+msgstr "Редагувати виробника вітрил"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:445
 msgid "Update Sails Manufacturer"
-msgstr ""
+msgstr "Оновлення виробника вітрил"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:446
 msgid "View Sails Manufacturer"
-msgstr ""
+msgstr "Переглянути виробника вітрил"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:450
 msgid "Popular Sails Manufacturers"
-msgstr ""
+msgstr "Популярні виробники вітрил"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:451
 msgid "Search Sails Manufacturers"
-msgstr ""
+msgstr "Пошук виробників вітрил"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:454
 msgid "Sails Manufacturers list"
-msgstr ""
+msgstr "Список виробників вітрил"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:455
 msgid "Sails Manufacturers list navigation"
-msgstr ""
+msgstr "Навігація за переліком виробників вітрил"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:479
 msgid "Masts Manufacturer"
-msgstr ""
+msgstr "Виробник щогл"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:480
 msgid "All Masts Manufacturers"
-msgstr ""
+msgstr "Всі виробники щогл"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:481
 msgid "New Masts Manufacturer Name"
-msgstr ""
+msgstr "Назва нового виробника щогли"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:482
 msgid "Add New Masts Manufacturer"
-msgstr ""
+msgstr "Додати нового виробника щогл"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:483
 msgid "Edit Masts Manufacturer"
-msgstr ""
+msgstr "Редагувати виробника щогл"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:484
 msgid "Update Masts Manufacturer"
-msgstr ""
+msgstr "Оновити виробника щогл"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:485
 msgid "View Masts Manufacturer"
-msgstr ""
+msgstr "Переглянути виробників щогл"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:489
 msgid "Popular Masts Manufacturers"
-msgstr ""
+msgstr "Популярні виробники щогл"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:490
 msgid "Search Masts Manufacturers"
-msgstr ""
+msgstr "Пошук виробників щогл"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:493
 msgid "Masts Manufacturers list"
-msgstr ""
+msgstr "Список виробників щогл"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:494
 msgid "Masts Manufacturers list navigation"
-msgstr ""
+msgstr "Навігація по списку виробників щогл"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:600
 msgid "Enter boat number eg. POL 7020"
-msgstr ""
+msgstr "Введіть номер човна, наприклад, POL 7020"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:623
 msgid "First certified date"
-msgstr ""
+msgstr "Дата першої сертифікації"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:625
 msgid "In Poland"
-msgstr ""
+msgstr "У Польщі"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:627
 msgid "Colors"
@@ -2301,7 +2304,7 @@ msgstr "Кольори"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:628
 msgid "Sails manufacturer"
-msgstr ""
+msgstr "Виробник вітрил"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:632
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:922
@@ -2312,15 +2315,15 @@ msgstr "Соцмережі"
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:796
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:925
 msgid "Owners"
-msgstr ""
+msgstr "Власники"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:803
 msgid "Boat details"
-msgstr ""
+msgstr "Детальна інформація про човен"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:821
 msgid "Current crew"
-msgstr ""
+msgstr "Нинішній екіпаж"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:823
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:838
@@ -2330,7 +2333,7 @@ msgstr ""
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1287
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1960
 msgid "Helmsman"
-msgstr ""
+msgstr "Рульовий"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:825
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:839
@@ -2342,7 +2345,7 @@ msgstr ""
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1961
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:2590
 msgid "Crew"
-msgstr ""
+msgstr "Екіпаж"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:886
 msgid "Gallery"
@@ -2350,11 +2353,11 @@ msgstr "Галерея"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:916
 msgid "Crews data"
-msgstr ""
+msgstr "Дані про екіпажі"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:919
 msgid "Boat data"
-msgstr ""
+msgstr "Дані човна"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:935
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:1059
@@ -2367,11 +2370,11 @@ msgstr "Дія"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:964
 msgid "Select or remove a helmsman"
-msgstr ""
+msgstr "Виберіть або видаліть рульового"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:978
 msgid "Select or remove a  crew"
-msgstr ""
+msgstr "Виберіть або видаліть екіпаж"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:991
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:1032
@@ -2381,25 +2384,25 @@ msgstr "Видалити"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:1004
 msgid "There is no current team"
-msgstr ""
+msgstr "Поточної команди немає"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:1010
 msgid "Add a crew"
-msgstr ""
+msgstr "Додати екіпаж"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:1023
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1483
 msgid "Select a helmsman"
-msgstr ""
+msgstr "Виберіть керманича"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:1028
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1488
 msgid "Select a crew"
-msgstr ""
+msgstr "Виберіть екіпаж"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:1058
 msgid "First"
-msgstr ""
+msgstr "Перша"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:1060
 msgid "Type"
@@ -2407,7 +2410,7 @@ msgstr "Тип"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:1061
 msgid "Owner"
-msgstr ""
+msgstr "Власник"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:1062
 msgid "Date from"
@@ -2419,7 +2422,7 @@ msgstr "Дата до"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:1069
 msgid "Add owner"
-msgstr ""
+msgstr "Додати власника"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:1152
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:161
@@ -2432,42 +2435,42 @@ msgstr "Організація"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:1617
 msgid "Boats list"
-msgstr ""
+msgstr "Перелік човнів"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:82
 msgid "World Sailing Sailor ID"
-msgstr ""
+msgstr "ID яхтсмена Міжнародної федерації парусного спорту"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:85
 msgid "Nation"
-msgstr ""
+msgstr "Нація"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:93
 msgid "Birth Year"
-msgstr ""
+msgstr "Рік народження"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:98
 msgid "Birth Date"
-msgstr ""
+msgstr "Дата народження"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:101
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:124
 msgid "Sex"
-msgstr ""
+msgstr "Стать"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:105
 msgid "&mdash; select &mdash;"
-msgstr ""
+msgstr "&mdash; Обрати &mdash;"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:106
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:129
 msgid "Female"
-msgstr ""
+msgstr "Жінка"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:107
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:130
 msgid "Male"
-msgstr ""
+msgstr "Чоловік"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:113
 msgid "Website"
@@ -2475,7 +2478,7 @@ msgstr "Сайт"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:117
 msgid "Endomondo"
-msgstr ""
+msgstr "Endomondo"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:118
 msgid "Skype"
@@ -2493,53 +2496,53 @@ msgstr "E-mail"
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:160
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:172
 msgid "Fleet"
-msgstr ""
+msgstr "Флот"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:165
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:166
 msgid "Add New Person"
-msgstr ""
+msgstr "Додати нову особу"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:167
 msgid "New Person"
-msgstr ""
+msgstr "Нова особа"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:168
 msgid "Edit Person"
-msgstr ""
+msgstr "Редагувати особу"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:169
 msgid "Update Person"
-msgstr ""
+msgstr "Оновити особу"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:170
 msgid "View Person"
-msgstr ""
+msgstr "Переглянути особу"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:171
 msgid "View Persons"
-msgstr ""
+msgstr "Переглянути осіб"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:172
 msgid "Search person"
-msgstr ""
+msgstr "Пошук особи"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:186
 msgid "person"
-msgstr ""
+msgstr "особа"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:218
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:219
 msgid "Clubs"
-msgstr ""
+msgstr "Клуби"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:220
 msgid "New Club Name"
-msgstr ""
+msgstr "Назва нового клубу"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:221
 msgid "Add New Club"
-msgstr ""
+msgstr "Додати новий клуб"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:222
 msgid "Edit Club"
@@ -2547,96 +2550,96 @@ msgstr "Редагувати клуб"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:223
 msgid "Update Club"
-msgstr ""
+msgstr "Оновити клуб"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:224
 msgid "View Club"
-msgstr ""
+msgstr "Переглянути клуб"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:228
 msgid "Popular Clubs"
-msgstr ""
+msgstr "Популярні клуби"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:229
 msgid "Search Clubs"
-msgstr ""
+msgstr "Пошук клубів"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:232
 msgid "Clubs list"
-msgstr ""
+msgstr "Перелік клубів"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:233
 msgid "Clubs list navigation"
-msgstr ""
+msgstr "Навігація по переліку клубів"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:256
 msgid "Personal data"
-msgstr ""
+msgstr "Персональные данные"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:258
 msgid "Contact data"
-msgstr ""
+msgstr "Контактні дані"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:309
 msgid "Birth year"
-msgstr ""
+msgstr "Рік народження"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:534
 msgid "Read more about sailor"
-msgstr ""
+msgstr "Читати більше про моряка"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:657
 msgid "Sail on %s as helmsman."
-msgstr ""
+msgstr "Пливіть на %s в якості рульового."
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:664
 msgid "Sail on %s as crew."
-msgstr ""
+msgstr "Відпливайте на %s в якості екіпажу."
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:680
 msgid "Sailed on %s as helmsman."
-msgstr ""
+msgstr "Плавав на %s в якості рульового."
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:691
 msgid "Sailed on %s as crew."
-msgstr ""
+msgstr "Плавал на %s в качестве экипажа."
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:698
 msgid "Sail or sailed"
-msgstr ""
+msgstr "Вітрило або вітрило"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:53
 msgid "Ranking Type"
-msgstr ""
+msgstr "Тип рейтингу"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:57
 #: includes/iworks/fleet/posttypes.php:689
 msgid "&mdash; Select &mdash;"
-msgstr ""
+msgstr "&mdash; Обрати &mdash;"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:58
 msgid "Standard Ranking"
-msgstr ""
+msgstr "Стандартний рейтинг"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:59
 msgid "Only Medals"
-msgstr ""
+msgstr "Тільки медалі"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:65
 msgid "Use Boat"
-msgstr ""
+msgstr "Використовувати човен"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:70
 msgid "Use Helm"
-msgstr ""
+msgstr "Використовувати рульового"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:75
 msgid "Use Crew"
-msgstr ""
+msgstr "Використовувати екіпаж"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:79
 msgid "Only year matters."
-msgstr ""
+msgstr "Тільки рік має значення."
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:80
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1165
@@ -2654,68 +2657,71 @@ msgstr "Серія"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:99
 msgid "Order of Regatta"
-msgstr ""
+msgstr "Упорядкування регати"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:102
 msgid ""
 "Select special reggata to set ranking order when tie. First select a year "
 "and a serie, then save and reload page to load regatta. "
 msgstr ""
+"Виберіть спеціальну регату, щоб встановити рейтинговий порядок у разі "
+"нічиєї. Спочатку виберіть рік і серію, потім збережіть і перезавантажте "
+"сторінку, щоб завантажити регату. "
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:106
 msgid "Not Discardable Serie"
-msgstr ""
+msgstr "Серія, що не викидається"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:110
 msgid "Allow Discard"
-msgstr ""
+msgstr "Дозволити відкинути"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:114
 msgid "Discard After"
-msgstr ""
+msgstr "Викинути після"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:128
 msgid "&mdash; Any &mdash;"
-msgstr ""
+msgstr "&mdash; Будь-який &mdash;"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:173
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:2347
 msgid "Ranking"
-msgstr ""
+msgstr "Рейтинг"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:174
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:176
 msgid "Rankings"
-msgstr ""
+msgstr "Рейтинги"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:177
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:178
 msgid "Add New Ranking"
-msgstr ""
+msgstr "Додати новий рейтинг"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:179
 msgid "New Ranking"
-msgstr ""
+msgstr "Новий рейтинг"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:180
 msgid "Edit Ranking"
-msgstr ""
+msgstr "Редагувати рейтинг"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:181
 msgid "Update Ranking"
-msgstr ""
+msgstr "Оновлення рейтингу"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:182
 msgid "View Ranking"
-msgstr ""
+msgstr "Переглянути рейтинг"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:183
 msgid "View Rankings"
-msgstr ""
+msgstr "Переглянути рейтинги"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:184
 msgid "Search ranking"
-msgstr ""
+msgstr "Пошук рейтингу"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:198
 msgid "ranking"
@@ -2723,7 +2729,7 @@ msgstr "рейтингове"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:226
 msgid "Ranking Settings"
-msgstr ""
+msgstr "Налаштування рейтингу"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:263
 msgid "Shortcode"
@@ -2735,7 +2741,7 @@ msgstr "-- Вибрати --"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:103
 msgid "English name"
-msgstr ""
+msgstr "Англійська назва"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:107
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:547
@@ -2744,70 +2750,72 @@ msgstr "Область"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:110
 msgid "Organizer"
-msgstr ""
+msgstr "Організатор"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:111
 msgid "Secretary"
-msgstr ""
+msgstr "Секретар"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:112
 msgid "Arbiter"
-msgstr ""
+msgstr "Арбітр"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:115
 msgid "Event start"
-msgstr ""
+msgstr "Початок заходу"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:120
 msgid "Event end"
-msgstr ""
+msgstr "Закінчення заходу"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:125
 msgid "Number of races"
-msgstr ""
+msgstr "Кількість перегонів"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:131
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:479
 msgid "Number of competitors"
-msgstr ""
+msgstr "Кількість конкурентів"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:134
 msgid "Wind direction"
-msgstr ""
+msgstr "Напрямок вітру"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:135
 msgid "Wind power"
-msgstr ""
+msgstr "Потужність вітру"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:137
 msgid "Custom columns name"
-msgstr ""
+msgstr "Користувацькі назви колонок"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:139
 msgid ""
 "Add one column per line if you want to have a custom race column header."
 msgstr ""
+"Додайте по одній колонки на рядок, якщо ви хочете мати власний хедер колонки "
+"перегонів."
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:310
 msgid "Trophies"
-msgstr ""
+msgstr "Призи"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:360
 msgid "Please select some file first!"
-msgstr ""
+msgstr "Спочатку виберіть якийсь файл!"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:472
 msgid "Date start"
-msgstr ""
+msgstr "Дата початку"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:473
 msgid "Date end"
-msgstr ""
+msgstr "Дата закінчення"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:502
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:2589
 msgid "Helm"
-msgstr ""
+msgstr "Рульовий"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:508
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1980
@@ -2816,7 +2824,7 @@ msgstr "Сума"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:541
 msgid "Dates"
-msgstr ""
+msgstr "Дати"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:545
 msgid "Title"
@@ -2824,7 +2832,7 @@ msgstr "Назва"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:549
 msgid "Races"
-msgstr ""
+msgstr "Перегони"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:550
 msgid "Teams"
@@ -2832,11 +2840,11 @@ msgstr "Команди"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:774
 msgid "No race results."
-msgstr ""
+msgstr "Ніяких результатів перегонів."
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:794
 msgid "There is no results."
-msgstr ""
+msgstr "Результатів немає."
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:913
 msgid "Start date is not set."
@@ -2844,15 +2852,15 @@ msgstr "Дата початку не встановлена."
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1034
 msgid "As a helmsman in %1$s in the %2$s on %3$s"
-msgstr ""
+msgstr "В якості рульового в %1$sв %2$s на %3$s"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1041
 msgid "As a crew in %1$s in the %2$s on %3$s"
-msgstr ""
+msgstr "В якості екіпажу в %1$s в %2$s на %3$s"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1048
 msgid "In %1$s in the %2$s on %3$s"
-msgstr ""
+msgstr "В %1$s в %2$s на %3$s"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1139
 msgid "There is no register regatta for this sailor."
@@ -2872,7 +2880,7 @@ msgstr "Місце (з)"
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1250
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1344
 msgid "Regatta list"
-msgstr "Список учасників регати"
+msgstr "Перелік регати"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1370
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1395
@@ -2897,15 +2905,15 @@ msgstr "Оновлення результату"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1379
 msgid "View Result"
-msgstr "Переглянути результат"
+msgstr "Перегляд результату"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1380
 msgid "View Results"
-msgstr "Переглянути результати"
+msgstr "Перегляд результатів"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1381
 msgid "Search Result"
-msgstr "Результат пошуку"
+msgstr "Пошук результату"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1426
 msgid "All Series"
@@ -2937,11 +2945,11 @@ msgstr "Додати або видалити серію"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1435
 msgid "Popular Series"
-msgstr ""
+msgstr "Популярні серії"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1436
 msgid "Search Series"
-msgstr ""
+msgstr "Пошук серії"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1438
 msgid "No series"
@@ -2957,21 +2965,23 @@ msgstr "Навігація переліком серій"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1470
 msgid "Result data"
-msgstr ""
+msgstr "Дані результату"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1471
 msgid "Races data"
-msgstr ""
+msgstr "Дані про перегони"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1508
 msgid "Import regatta results!"
-msgstr ""
+msgstr "Імпорт результатів регати!"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1509
 msgid ""
 "CSV file with fields: Nation, Boat, Helm. Crew(s), Club, R1, R..n, any-"
 "fileds, netto points, place."
 msgstr ""
+"CSV-файл з полями: нація, човен, рульовий, екіпаж, клуб, R1, R..n, будь-які "
+"поля, чисті пункти, місце."
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1908
 msgid "Show meta"
@@ -2979,27 +2989,27 @@ msgstr "Показати мета"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1926
 msgid "The regatta will take place in the future."
-msgstr ""
+msgstr "Регата буде проводитися і в майбутньому."
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1934
 msgid "There is no race data."
-msgstr ""
+msgstr "Немає даних про перегони."
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:2188
 msgid "Edit Sailor - Missing Birth Year"
-msgstr ""
+msgstr "Редагувати моряка - відсутній рік народження"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:2360
 msgid "Please setup year attribute first!"
-msgstr ""
+msgstr "Спочатку встановіть атрибут року!"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:2367
 msgid "Please setup serie attribute first!"
-msgstr ""
+msgstr "Спочатку налаштуйте атрибут серії!"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:2416
 msgid "Currently we do not have anny results!"
-msgstr ""
+msgstr "Наразі ми не маємо жодних результатів!"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:2587
 msgid "#"
@@ -3007,11 +3017,11 @@ msgstr "№"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:2604
 msgid "brutto"
-msgstr ""
+msgstr "брутто"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:2605
 msgid "netto"
-msgstr ""
+msgstr "нетто"
 
 #. translators: year of regatta
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:2737
@@ -3025,22 +3035,22 @@ msgstr "Результати вітрильних регат у %2$s у %1$s"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:2834
 msgid "Last added"
-msgstr ""
+msgstr "Останнє додавання"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:2946
 msgid "Regatta results by year"
-msgstr ""
+msgstr "Результати регати по роках"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:2954
 msgid "Number of result: %d"
 msgid_plural "Number of results: %d"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Кількість результату: %d"
+msgstr[1] "Кількість результатів: %d"
+msgstr[2] "Кількість результатів: %d"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:3008
 msgid "Regatta results by country"
-msgstr ""
+msgstr "Результати регати по країнах"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:3133
 msgid "Places"
@@ -3048,35 +3058,35 @@ msgstr "Місця"
 
 #: includes/iworks/fleet/posttypes.php:97
 msgid "World Champ"
-msgstr ""
+msgstr "Чемпіонат світу"
 
 #: includes/iworks/fleet/posttypes.php:98
 msgid "Continental Championship"
-msgstr ""
+msgstr "Континентальний чемпіонат"
 
 #: includes/iworks/fleet/posttypes.php:99
 msgid "National Championship"
-msgstr ""
+msgstr "Національний чемпіонат"
 
 #: includes/iworks/fleet/posttypes.php:373
 msgid "All Locations"
-msgstr "Всі локації"
+msgstr "Всі розміщення"
 
 #: includes/iworks/fleet/posttypes.php:374
 msgid "New Location Name"
-msgstr ""
+msgstr "Нова назва місця розміщення"
 
 #: includes/iworks/fleet/posttypes.php:375
 msgid "Add New Location"
-msgstr ""
+msgstr "Додати нове розміщення"
 
 #: includes/iworks/fleet/posttypes.php:376
 msgid "Edit Location"
-msgstr ""
+msgstr "Змінити розміщення"
 
 #: includes/iworks/fleet/posttypes.php:377
 msgid "Update Location"
-msgstr "Оновити місце розташування"
+msgstr "Оновити розміщення"
 
 #: includes/iworks/fleet/posttypes.php:378
 msgid "View Location"
@@ -3084,43 +3094,43 @@ msgstr "Переглянути розміщення"
 
 #: includes/iworks/fleet/posttypes.php:379
 msgid "Separate Locations with commas"
-msgstr ""
+msgstr "Розділяйте місця розміщення комами"
 
 #: includes/iworks/fleet/posttypes.php:380
 msgid "Add or remove Locations"
-msgstr ""
+msgstr "Додати або видалити розміщення"
 
 #: includes/iworks/fleet/posttypes.php:382
 msgid "Popular Locations"
-msgstr ""
+msgstr "Популярні розміщення"
 
 #: includes/iworks/fleet/posttypes.php:383
 msgid "Search Locations"
-msgstr ""
+msgstr "Шукати розміщення"
 
 #: includes/iworks/fleet/posttypes.php:385
 msgid "No Locations"
-msgstr ""
+msgstr "Немає місцезнаходження"
 
 #: includes/iworks/fleet/posttypes.php:386
 msgid "Locations list"
-msgstr ""
+msgstr "Перелік розміщень"
 
 #: includes/iworks/fleet/posttypes.php:387
 msgid "Locations list navigation"
-msgstr ""
+msgstr "Навігація переліком розміщень"
 
 #: includes/iworks/fleet/posttypes.php:502
 msgid "select nation"
-msgstr ""
+msgstr "виберіть нація"
 
 #: includes/iworks/fleet/posttypes.php:530
 msgid "Missing MNA county code."
-msgstr ""
+msgstr "Не вистачає коду країни MNA."
 
 #: includes/iworks/fleet/posttypes.php:543
 msgid "select color"
-msgstr ""
+msgstr "виберіть колір"
 
 #: includes/iworks/options/options.php:176
 msgid "No Page Title"
@@ -3128,7 +3138,7 @@ msgstr ""
 
 #: includes/iworks/options/options.php:341
 msgid "An error occurred while getting the configuration."
-msgstr ""
+msgstr "Під час отримання конфігурації виникла помилка."
 
 #: includes/iworks/options/options.php:920
 #: includes/iworks/options/options.php:2383
@@ -3153,7 +3163,7 @@ msgstr "Вулиця"
 
 #: includes/iworks/options/options.php:2259
 msgid "ZIP code"
-msgstr ""
+msgstr "Поштовий індекс"
 
 #: includes/iworks/options/options.php:2443
 msgid "OFF"
@@ -3165,29 +3175,29 @@ msgstr "УВІМК"
 
 #: includes/iworks/options/options.php:2509
 msgid "Failed Security Check"
-msgstr ""
+msgstr "Не вдалося пройти перевірку безпеки"
 
 #: includes/iworks/rate/rate.php:147
 #: includes/iworks/rate/templates/thanks.php:39
 msgid "Provide us a coffee"
-msgstr ""
+msgstr "Пригостіть нас кавою"
 
 #. translators: %s: plugin id
 #: includes/iworks/rate/rate.php:590
 msgid "There is no plugin with id: %s."
-msgstr ""
+msgstr "Не існує плагіна з id: %s."
 
 #: includes/iworks/rate/rate.php:764
 msgid "OpenGraph"
-msgstr ""
+msgstr "OpenGraph"
 
 #: includes/iworks/rate/rate.php:780
 msgid "OG — Better Share on Social Media"
-msgstr ""
+msgstr "OpenGraph - найкращий спосіб поділитися в соцмережах"
 
 #: includes/iworks/rate/rate.php:781
 msgid "https://wordpress.org/plugins/og/"
-msgstr ""
+msgstr "https://uk.wordpress.org/plugins/og/"
 
 #: includes/iworks/rate/templates/happy-anniversary/anniversary.php:21
 #: includes/iworks/rate/templates/happy-anniversary/first-year.php:21
@@ -3244,12 +3254,12 @@ msgstr ""
 
 #: includes/iworks/rate/templates/plugins/og.php:4
 msgid "Would you like to boost your website sharing abilities?"
-msgstr ""
+msgstr "Чи бажаєте ви розширити можливості спільного використання веб-сайтів?"
 
 #. translators: %s is a plugin name with url
 #: includes/iworks/rate/templates/plugins/og.php:9
 msgid "Don't wait, install plugin %s!"
-msgstr ""
+msgstr "Не чекайте, встановіть плагін %s!"
 
 #. translators: %s is a plugin wp home name, %s plugin name
 #: includes/iworks/rate/templates/plugins/og.php:20
@@ -3259,7 +3269,7 @@ msgstr "Встановити"
 #. translators: %s is a plugin name wrapped by strong html tag
 #: includes/iworks/rate/templates/thanks.php:23
 msgid "Thank you for using our plugin %s!"
-msgstr ""
+msgstr "Дякуємо за використання нашого плагіну %s!"
 
 #. translators: %1$s: open anchor tag, %2$s: close anchor tag
 #: includes/iworks/rate/templates/thanks.php:31
@@ -3270,36 +3280,45 @@ msgid ""
 "our FAQ%2$s or contact us if you did not find help there. We will try to "
 "help you!"
 msgstr ""
+"Будь ласка, дайте нам знати, що ви думаєте про наш плагін. Важливо, що ми "
+"можемо розробити цей інструмент. Дякуємо за всі оцінки, відгуки та пожертви. "
+"Якщо у вас виникла технічна проблема, перш ніж додати відгук, "
+"%1$sперегляньте наші FAQ%2$s або зв’яжіться з нами, якщо ви не знайшли там "
+"допомоги. Ми постараємося вам допомогти!"
 
 #: includes/iworks/rate/templates/thanks.php:35
 #: includes/iworks/rate/templates/widgets/support.php:21
 msgid "Get help"
-msgstr ""
+msgstr "Отримати допомогу"
 
 #: includes/iworks/rate/templates/thanks.php:37
 #: includes/iworks/rate/templates/widgets/support.php:31
 msgid "Add review"
-msgstr ""
+msgstr "Додати відгук"
 
 #: includes/iworks/rate/templates/thanks.php:41
 msgid "I added review, do not show again"
-msgstr ""
+msgstr "Я вже додав відгук"
 
 #: includes/iworks/rate/templates/widgets/donate.php:2
 msgid ""
 "However, working on plugins and technical support requires many hours of "
 "work. If you want to appreciate it, you can provide me a coffee."
 msgstr ""
+"Однак робота над плагінами та технічною підтримкою вимагає багатогодинної "
+"праці. Якщо ви хочете оцінити це, можете дати мені кави."
 
 #: includes/iworks/rate/templates/widgets/donate.php:3
 msgid ""
 "If every plugin user did it, I could devote myself fully to working on this "
 "plugin. Thanks everyone!"
 msgstr ""
+"Якби це робив кожен користувач плагіна, я міг би повністю присвятити себе "
+"роботі над цим плагіном. Дякую всім!"
 
 #: includes/iworks/rate/templates/widgets/donate.php:4
 msgid "Provide me a coffee"
-msgstr ""
+msgstr "Пригостіть мене кавою"
 
 #: includes/iworks/rate/templates/widgets/support.php:4
 msgid ""
@@ -3307,6 +3326,9 @@ msgid ""
 "you. Or maybe you have an idea for a new feature? Please let us know about "
 "it by filling the support form. We will try to add it!"
 msgstr ""
+"У вас технічна проблема? Будь ласка, зв'яжіться з нами. Ми будемо раді Вам "
+"допомогти. Або, можливо, у вас є ідея щодо нової функції? Будь ласка, "
+"повідомте нам про це, заповнивши форму підтримки. Спробуємо додати!"
 
 #. translators: %1$s: open anchor tag, %2$s: close anchor tag, %3$s: open
 #. anchor tag, %4$s: close anchor tag
@@ -3316,6 +3338,9 @@ msgid ""
 "If you do not find help there, %3$scheck support forum%4$s for similar "
 "problems."
 msgstr ""
+"Будь ласка, %1$sперевірте наші FAQ%2$s перед тим, як додати тему з технічною "
+"проблемою. Якщо ви не знайдете там відповіді, %3$sперевірте форум "
+"підтримки%4$s на наявність подібних проблем."
 
 #: includes/iworks/rate/templates/widgets/support.php:26
 msgid ""
@@ -3323,6 +3348,9 @@ msgid ""
 "think about our plugin. It is important that we can develop this tool. Thank "
 "you for all the ratings, reviews and donates."
 msgstr ""
+"Вам подобається наш плагін? Чи можете ви його оцінити? Будь ласка, повідомте "
+"нам, що ви думаєте про наш плагін. Нам важливо, щоб ми могли розвивати цей "
+"інструмент. Дякуємо за всі оцінки, відгуки та пожертви."
 
 #: integration/themes/twentytwenty-5o5-child/5o5-archive.php:15
 msgid "Search:"
@@ -3346,15 +3374,15 @@ msgstr ""
 
 #: integration/themes/twentytwenty-5o5-child/5o5-archive.php:75
 msgid "Number"
-msgstr "Число"
+msgstr "Кількість"
 
 #: integration/themes/twentytwenty-5o5-child/5o5-archive.php:76
 msgid "Hull"
-msgstr ""
+msgstr "Корпус"
 
 #: integration/themes/twentytwenty-5o5-child/5o5-archive.php:77
 msgid "Last known owner"
-msgstr ""
+msgstr "Останній відомий власник"
 
 #: integration/themes/twentytwenty-5o5-child/5o5-archive.php:118
 msgid "search again"
@@ -3388,17 +3416,17 @@ msgstr "Номери човнів"
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:399
 msgctxt "Taxonomy General Name"
 msgid "Hull Manufacturers"
-msgstr ""
+msgstr "Виробники корпусів"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:438
 msgctxt "Taxonomy General Name"
 msgid "Sails Manufacturers"
-msgstr ""
+msgstr "Виробники вітрил"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:477
 msgctxt "Taxonomy General Name"
 msgid "Masts Manufacturers"
-msgstr ""
+msgstr "Виробники щогл"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1423
 msgctxt "Taxonomy General Name"
@@ -3408,7 +3436,7 @@ msgstr "Серії"
 #: includes/iworks/fleet/posttypes.php:370
 msgctxt "Taxonomy General Name"
 msgid "Locations"
-msgstr "Розташування"
+msgstr "Розміщення"
 
 #: includes/iworks/class-iworks-fleet.php:244
 msgctxt "Taxonomy Singular Name"
@@ -3418,17 +3446,17 @@ msgstr "Номер човна"
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:400
 msgctxt "Taxonomy Singular Name"
 msgid "Hull Manufacturer"
-msgstr ""
+msgstr "Виробник корпусу"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:439
 msgctxt "Taxonomy Singular Name"
 msgid "Sails Manufacturer"
-msgstr ""
+msgstr "Виробник вітрил"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:478
 msgctxt "Taxonomy Singular Name"
 msgid "Masts Manufacturer"
-msgstr ""
+msgstr "Виробник щогл"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1424
 msgctxt "Taxonomy Singular Name"
@@ -3443,42 +3471,42 @@ msgstr "Розміщення"
 #: includes/iworks/class-iworks-fleet.php:272
 msgctxt "slug for images"
 msgid "fleet-boat-number"
-msgstr ""
+msgstr "номер-човна"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:286
 msgctxt "number of boats"
 msgid "Number of boats: %1$d."
-msgstr ""
+msgstr "Кількість човнів: %1$d."
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:329
 msgctxt "Boat General Name"
 msgid "Boats"
-msgstr ""
+msgstr "Човни"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:330
 msgctxt "Boat Singular Name"
 msgid "Boat"
-msgstr ""
+msgstr "Човен"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:384
 msgctxt "slug for archive"
 msgid "fleet-boats"
-msgstr ""
+msgstr "човни"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:200
 msgctxt "slug for archive"
 msgid "fleet-persons"
-msgstr ""
+msgstr "персони"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1409
 msgctxt "slug for archive"
 msgid "results"
-msgstr ""
+msgstr "результати"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:390
 msgctxt "slug for single boat"
 msgid "fleet-boat"
-msgstr ""
+msgstr "човен"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:635
 msgctxt "Custom taxonomies separator."
@@ -3494,9 +3522,9 @@ msgstr "невідомо"
 msgctxt "Past crews number"
 msgid "Past crew"
 msgid_plural "Past crews"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Минулий екіпаж"
+msgstr[1] "Минулий екіпаж"
+msgstr[2] "Минулий екіпаж"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:1678
 msgctxt "user list separator"
@@ -3506,48 +3534,48 @@ msgstr " "
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:158
 msgctxt "Person General Name"
 msgid "Persons"
-msgstr ""
+msgstr "Особи"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:159
 msgctxt "Person Singular Name"
 msgid "Person"
-msgstr "Приватна особа"
+msgstr "Особа"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:207
 msgctxt "slug for single person"
 msgid "fleet-person"
-msgstr ""
+msgstr "персона"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:216
 msgctxt "Club General Name"
 msgid "Clubs"
-msgstr ""
+msgstr "Клуби"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:217
 msgctxt "Club Singular Name"
 msgid "Club"
-msgstr ""
+msgstr "Клуб"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:448
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:452
 msgctxt "Person name on crews list if it is not set"
 msgid "not set"
-msgstr ""
+msgstr "не задано"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:170
 msgctxt "Ranking General Name"
 msgid "Rankings"
-msgstr ""
+msgstr "Рейтинги"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:171
 msgctxt "Ranking Singular Name"
 msgid "Ranking"
-msgstr ""
+msgstr "Рейтинг"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:214
 msgctxt "slug for single ranking"
 msgid "fleet-ranking"
-msgstr ""
+msgstr "рейтинг"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1367
 msgctxt "Result General Name"
@@ -3570,27 +3598,30 @@ msgstr "результат"
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:3066
 msgctxt "rewrite rule handler for results"
 msgid "results"
-msgstr ""
+msgstr "результати"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:2905
 msgctxt "all of taxonomy link title"
 msgid "Show more: %s"
-msgstr ""
+msgstr "Показати більше: %s"
 
 #. translators: %s: plugin slug
 #: includes/iworks/rate/rate.php:613
 msgctxt "plugins home"
 msgid "https://wordpress.org/plugins/%s"
-msgstr ""
+msgstr "https://uk.wordpress.org/plugins/%s"
 
 #. translators: %s: plugin slug
 #: includes/iworks/rate/rate.php:620
 msgctxt "plugins support home"
 msgid "https://wordpress.org/support/plugin/%s"
-msgstr ""
+msgstr "https://wordpress.org/support/plugin/%s"
 
 #~ msgid "http://iworks.pl/en/plugins/fleet/"
 #~ msgstr "http://iworks.pl/en/plugins/fleet/"
+
+#~ msgid "Configure block on sidebar."
+#~ msgstr "Налаштуйте блок на бічній колонке."
 
 #~ msgid "Last 7 days"
 #~ msgstr "Останні 7 днів"
@@ -3600,6 +3631,21 @@ msgstr ""
 
 #~ msgid "This year"
 #~ msgstr "Цього року"
+
+#~ msgid "All data"
+#~ msgstr "Всі дані"
+
+#~ msgid "Period:"
+#~ msgstr "Період:"
+
+#~ msgid "Expences Settings"
+#~ msgstr "Налаштування витрат"
+
+#~ msgid "Show expences from selected period."
+#~ msgstr "Показати витрати за вибраний період."
+
+#~ msgid "Expences"
+#~ msgstr "Витрати"
 
 #~ msgid "http://iworks.pl/"
 #~ msgstr "http://iworks.pl/"
