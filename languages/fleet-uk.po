@@ -1,10 +1,10 @@
-# Translation of Plugins - Fleet Manager - Stable (latest release) in Ukrainian
-# This file is distributed under the same license as the Plugins - Fleet Manager - Stable (latest release) package.
+# Translation of Plugins - Fleet Manager - Development (trunk) in Ukrainian
+# This file is distributed under the same license as the Plugins - Fleet Manager - Development (trunk) package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Plugins - Fleet Manager - Stable (latest release)\n"
+"Project-Id-Version: Plugins - Fleet Manager - Development (trunk)\n"
 "Report-Msgid-Bugs-To: http://iworks.pl\n"
-"POT-Creation-Date: 2025-06-13 16:34:16+00:00\n"
+"POT-Creation-Date: 2025-10-16 08:25:47+00:00\n"
 "PO-Revision-Date: 2025-05-09 16:44:09+0000\n"
 "Language: uk_UA\n"
 "MIME-Version: 1.0\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n % 10 == 1 && n % 100 != 11) ? 0 : ((n % "
 "10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14)) ? 1 : 2);\n"
-"X-Generator: GlotPress/4.0.1\n"
+"X-Generator: GlotPress/4.0.2\n"
 
 #: assets/templates/shortcode/crew/output/table.php:5
 msgid "Team"
@@ -103,7 +103,7 @@ msgstr "Конфігурація"
 msgid "General"
 msgstr "Загальне"
 
-#: etc/options.php:22 includes/iworks/options/options.php:2256
+#: etc/options.php:22 includes/iworks/options/options.php:2280
 msgid "Country"
 msgstr "Країна"
 
@@ -1789,7 +1789,7 @@ msgstr "Вікторія"
 msgid "Western Australia"
 msgstr "Західна Австралія"
 
-#: fleet.php:104
+#: fleet.php:106
 msgid "Fleet Manager"
 msgstr "Менеджер флоту"
 
@@ -1813,7 +1813,7 @@ msgstr "Кількість результатів заходу"
 msgid "The Fleet plugin do not have such post type!"
 msgstr "Плагін Fleet не має такого типу запису!"
 
-#: includes/iworks/class-iworks-fleet.php:232 includes/iworks/rate/rate.php:133
+#: includes/iworks/class-iworks-fleet.php:232 includes/iworks/rate/rate.php:159
 msgid "Settings"
 msgstr "Налаштування"
 
@@ -3037,22 +3037,22 @@ msgstr "Результати вітрильних регат у %2$s у %1$s"
 msgid "Last added"
 msgstr "Останнє додавання"
 
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:2946
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:2986
 msgid "Regatta results by year"
 msgstr "Результати регати по роках"
 
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:2954
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:3004
 msgid "Number of result: %d"
 msgid_plural "Number of results: %d"
 msgstr[0] "Кількість результату: %d"
 msgstr[1] "Кількість результатів: %d"
 msgstr[2] "Кількість результатів: %d"
 
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:3008
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:3058
 msgid "Regatta results by country"
 msgstr "Результати регати по країнах"
 
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:3133
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:3199
 msgid "Places"
 msgstr "Місця"
 
@@ -3132,70 +3132,70 @@ msgstr "Не вистачає коду країни MNA."
 msgid "select color"
 msgstr "виберіть колір"
 
-#: includes/iworks/options/options.php:176
+#: includes/iworks/options/options.php:175
 msgid "No Page Title"
 msgstr ""
 
-#: includes/iworks/options/options.php:341
+#: includes/iworks/options/options.php:340
 msgid "An error occurred while getting the configuration."
 msgstr "Під час отримання конфігурації виникла помилка."
 
-#: includes/iworks/options/options.php:920
-#: includes/iworks/options/options.php:2383
+#: includes/iworks/options/options.php:919
+#: includes/iworks/options/options.php:2407
 msgid "Select Image"
 msgstr "Виберіть зображення"
 
-#: includes/iworks/options/options.php:925
+#: includes/iworks/options/options.php:924
 msgid "Delete image"
 msgstr "Видалити зображення"
 
-#: includes/iworks/options/options.php:1033
+#: includes/iworks/options/options.php:1032
 msgid "Save Changes"
 msgstr "Зберегти зміни"
 
-#: includes/iworks/options/options.php:2257
+#: includes/iworks/options/options.php:2281
 msgid "City"
 msgstr "Місто"
 
-#: includes/iworks/options/options.php:2258
+#: includes/iworks/options/options.php:2282
 msgid "Street"
 msgstr "Вулиця"
 
-#: includes/iworks/options/options.php:2259
+#: includes/iworks/options/options.php:2283
 msgid "ZIP code"
 msgstr "Поштовий індекс"
 
-#: includes/iworks/options/options.php:2443
+#: includes/iworks/options/options.php:2467
 msgid "OFF"
 msgstr "ВИМК"
 
-#: includes/iworks/options/options.php:2444
+#: includes/iworks/options/options.php:2468
 msgid "ON"
 msgstr "УВІМК"
 
-#: includes/iworks/options/options.php:2509
+#: includes/iworks/options/options.php:2533
 msgid "Failed Security Check"
 msgstr "Не вдалося пройти перевірку безпеки"
 
-#: includes/iworks/rate/rate.php:147
+#: includes/iworks/rate/rate.php:173
 #: includes/iworks/rate/templates/thanks.php:39
 msgid "Provide us a coffee"
 msgstr "Пригостіть нас кавою"
 
 #. translators: %s: plugin id
-#: includes/iworks/rate/rate.php:590
+#: includes/iworks/rate/rate.php:626
 msgid "There is no plugin with id: %s."
 msgstr "Не існує плагіна з id: %s."
 
-#: includes/iworks/rate/rate.php:764
+#: includes/iworks/rate/rate.php:800
 msgid "OpenGraph"
 msgstr "OpenGraph"
 
-#: includes/iworks/rate/rate.php:780
+#: includes/iworks/rate/rate.php:816
 msgid "OG — Better Share on Social Media"
 msgstr "OpenGraph - найкращий спосіб поділитися в соцмережах"
 
-#: includes/iworks/rate/rate.php:781
+#: includes/iworks/rate/rate.php:817
 msgid "https://wordpress.org/plugins/og/"
 msgstr "https://uk.wordpress.org/plugins/og/"
 
@@ -3594,8 +3594,7 @@ msgstr "результат"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:2703
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:2708
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:3058
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:3066
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:3123
 msgctxt "rewrite rule handler for results"
 msgid "results"
 msgstr "результати"
@@ -3606,13 +3605,13 @@ msgid "Show more: %s"
 msgstr "Показати більше: %s"
 
 #. translators: %s: plugin slug
-#: includes/iworks/rate/rate.php:613
+#: includes/iworks/rate/rate.php:649
 msgctxt "plugins home"
 msgid "https://wordpress.org/plugins/%s"
 msgstr "https://uk.wordpress.org/plugins/%s"
 
 #. translators: %s: plugin slug
-#: includes/iworks/rate/rate.php:620
+#: includes/iworks/rate/rate.php:656
 msgctxt "plugins support home"
 msgid "https://wordpress.org/support/plugin/%s"
 msgstr "https://wordpress.org/support/plugin/%s"

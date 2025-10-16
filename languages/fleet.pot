@@ -2,9 +2,9 @@
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: 2.3.9\n"
+"Project-Id-Version: 2.4.0\n"
 "Report-Msgid-Bugs-To: http://iworks.pl\n"
-"POT-Creation-Date: 2025-06-13 16:34:28+00:00\n"
+"POT-Creation-Date: 2025-10-16 08:26:00+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -113,7 +113,7 @@ msgstr ""
 msgid "General"
 msgstr ""
 
-#: etc/options.php:22 includes/iworks/options/options.php:2256
+#: etc/options.php:22 includes/iworks/options/options.php:2280
 msgid "Country"
 msgstr ""
 
@@ -1795,7 +1795,7 @@ msgstr ""
 msgid "Western Australia"
 msgstr ""
 
-#: fleet.php:104
+#: fleet.php:106
 msgid "Fleet Manager"
 msgstr ""
 
@@ -1819,7 +1819,7 @@ msgstr ""
 msgid "The Fleet plugin do not have such post type!"
 msgstr ""
 
-#: includes/iworks/class-iworks-fleet.php:232 includes/iworks/rate/rate.php:133
+#: includes/iworks/class-iworks-fleet.php:232 includes/iworks/rate/rate.php:159
 msgid "Settings"
 msgstr ""
 
@@ -3035,21 +3035,21 @@ msgstr ""
 msgid "Last added"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:2946
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:2986
 msgid "Regatta results by year"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:2954
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:3004
 msgid "Number of result: %d"
 msgid_plural "Number of results: %d"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:3008
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:3058
 msgid "Regatta results by country"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:3133
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:3199
 msgid "Places"
 msgstr ""
 
@@ -3129,70 +3129,70 @@ msgstr ""
 msgid "select color"
 msgstr ""
 
-#: includes/iworks/options/options.php:176
+#: includes/iworks/options/options.php:175
 msgid "No Page Title"
 msgstr ""
 
-#: includes/iworks/options/options.php:341
+#: includes/iworks/options/options.php:340
 msgid "An error occurred while getting the configuration."
 msgstr ""
 
-#: includes/iworks/options/options.php:920
-#: includes/iworks/options/options.php:2383
+#: includes/iworks/options/options.php:919
+#: includes/iworks/options/options.php:2407
 msgid "Select Image"
 msgstr ""
 
-#: includes/iworks/options/options.php:925
+#: includes/iworks/options/options.php:924
 msgid "Delete image"
 msgstr ""
 
-#: includes/iworks/options/options.php:1033
+#: includes/iworks/options/options.php:1032
 msgid "Save Changes"
 msgstr ""
 
-#: includes/iworks/options/options.php:2257
+#: includes/iworks/options/options.php:2281
 msgid "City"
 msgstr ""
 
-#: includes/iworks/options/options.php:2258
+#: includes/iworks/options/options.php:2282
 msgid "Street"
 msgstr ""
 
-#: includes/iworks/options/options.php:2259
+#: includes/iworks/options/options.php:2283
 msgid "ZIP code"
 msgstr ""
 
-#: includes/iworks/options/options.php:2443
+#: includes/iworks/options/options.php:2467
 msgid "OFF"
 msgstr ""
 
-#: includes/iworks/options/options.php:2444
+#: includes/iworks/options/options.php:2468
 msgid "ON"
 msgstr ""
 
-#: includes/iworks/options/options.php:2509
+#: includes/iworks/options/options.php:2533
 msgid "Failed Security Check"
 msgstr ""
 
-#: includes/iworks/rate/rate.php:147
+#: includes/iworks/rate/rate.php:173
 #: includes/iworks/rate/templates/thanks.php:39
 msgid "Provide us a coffee"
 msgstr ""
 
-#: includes/iworks/rate/rate.php:590
+#: includes/iworks/rate/rate.php:626
 #. translators: %s: plugin id
 msgid "There is no plugin with id: %s."
 msgstr ""
 
-#: includes/iworks/rate/rate.php:764
+#: includes/iworks/rate/rate.php:800
 msgid "OpenGraph"
 msgstr ""
 
-#: includes/iworks/rate/rate.php:780
+#: includes/iworks/rate/rate.php:816
 msgid "OG — Better Share on Social Media"
 msgstr ""
 
-#: includes/iworks/rate/rate.php:781
+#: includes/iworks/rate/rate.php:817
 msgid "https://wordpress.org/plugins/og/"
 msgstr ""
 
@@ -3570,8 +3570,7 @@ msgstr ""
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:2703
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:2708
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:3058
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:3066
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:3123
 msgctxt "rewrite rule handler for results"
 msgid "results"
 msgstr ""
@@ -3581,13 +3580,13 @@ msgctxt "all of taxonomy link title"
 msgid "Show more: %s"
 msgstr ""
 
-#: includes/iworks/rate/rate.php:613
+#: includes/iworks/rate/rate.php:649
 #. translators: %s: plugin slug
 msgctxt "plugins home"
 msgid "https://wordpress.org/plugins/%s"
 msgstr ""
 
-#: includes/iworks/rate/rate.php:620
+#: includes/iworks/rate/rate.php:656
 #. translators: %s: plugin slug
 msgctxt "plugins support home"
 msgid "https://wordpress.org/support/plugin/%s"

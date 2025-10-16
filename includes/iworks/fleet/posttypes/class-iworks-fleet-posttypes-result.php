@@ -3098,7 +3098,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 	 * @param int $year
 	 * @param int $counter
 	 *
-	 * @since 2.3.9
+	 * @since 2.4.0
 	 * @param string $location
 	 * @param array $classes
 	 */
