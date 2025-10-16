@@ -25,7 +25,7 @@ if ( class_exists( 'iworks_fleet_posttypes_result' ) ) {
 	return;
 }
 
-require_once dirname( dirname( __FILE__ ) ) . '/posttypes.php';
+require_once dirname( __DIR__, 1 ) . '/posttypes.php';
 
 class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 
@@ -1645,7 +1645,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			if ( 'Ranking' === $field ) {
 				$ranking_column = $i;
 			}
-			$i++;
+			++$i;
 		}
 		/**
 		 * sailors
@@ -2611,10 +2611,10 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		$last_protectd = 0;
 		foreach ( $results as $result ) {
 			if ( $result['netto'] > $last_score ) {
-				$i++;
+				++$i;
 			} elseif ( isset( $result['results'][ $atts['protected'] ] ) ) {
 				if ( $result['results'][ $atts['protected'] ] > $last_protectd ) {
-					$i++;
+					++$i;
 				}
 			}
 			$content .= '<tr>';
@@ -2906,7 +2906,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 						$term->name
 					)
 				);
-			};
+			}
 		}
 		$content .= '</div>';
 		wp_reset_postdata();
@@ -2926,27 +2926,77 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		return $content;
 	}
 
+	/**
+	 * Shortcode years links
+	 */
 	public function shortcode_years_links( $atts, $content = '' ) {
 		global $wpdb;
-		$sql   = sprintf(
-			'select substring( date_add(from_unixtime(0), interval meta_value second), 1, 4 ) as year, count(*) as counter from %s where meta_key = %%s and meta_value is not null group by 1 order by 1 desc',
-			$wpdb->postmeta
+		$attr = wp_parse_args(
+			$atts,
+			array(
+				'title'    => 1,
+				'location' => false,
+				'year'     => 0,
+			)
 		);
-		$query = $wpdb->prepare(
+
+		$where = '1=1';
+		/**
+		 * for location
+		 */
+		if ( ! empty( $atts['location'] ) ) {
+				$wp_query_args = array(
+					'tax_query'      => array(
+						array(
+							'taxonomy' => $this->taxonomy_name_location,
+							'field'    => 'slug',
+							'terms'    => $atts['location'],
+						),
+					),
+					'posts_per_page' => -1,
+					'fields'         => 'ids',
+					'post_type'      => $this->post_type_name,
+				);
+				$wp_query      = new WP_Query( $wp_query_args );
+				$object_ids    = $wp_query->posts;
+				if ( empty( $object_ids ) ) {
+					$where = '1=0';
+				} else {
+					$where .= ' and post_id in (' . implode( ',', $object_ids ) . ')';
+				}
+		}
+			$where .= ' and meta_key = %s and meta_value is not null';
+		$sql        = sprintf(
+			'select substring( date_add(from_unixtime(0), interval meta_value second), 1, 4 ) as year, count(*) as counter from %s where %s group by 1 order by 1 desc',
+			$wpdb->postmeta,
+			$where
+		);
+		$query      = $wpdb->prepare(
 			$sql,
 			$this->options->get_option_name( 'result_date_start' )
 		);
-		$years = $wpdb->get_results( $query );
+		$years      = $wpdb->get_results( $query );
 		if ( empty( $years ) ) {
 			return $content;
 		}
 		$content .= '<div class="results results-years-list">';
-		$content .= sprintf(
-			'<h2>%s</h2>',
-			esc_html__( 'Regatta results by year', 'fleet' )
-		);
+		if ( $attr['title'] ) {
+			$content .= sprintf(
+				'<h2>%s</h2>',
+				esc_html__( 'Regatta results by year', 'fleet' )
+			);
+		}
 		$content .= '<ul>';
 		foreach ( $years as $one ) {
+			$classes = array();
+			if ( empty( $atts['location'] ) ) {
+				$link = $this->get_year_link( $one->year );
+			} else {
+				if ( intval( $one->year ) === intval( $atts['year'] ) ) {
+					$classes[] = 'current';
+				}
+				$link = $this->get_year_link( $one->year, $one->counter, $atts['location'], $classes );
+			}
 			$content .= sprintf(
 				'<li class="result-year-%d" title="%s">%s</li>',
 				esc_attr( $one->year ),
@@ -2959,7 +3009,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 					),
 					$one->counter
 				),
-				$this->get_year_link( $one->year )
+				$link
 			);
 		}
 		$content .= '</ul>';
@@ -3044,27 +3094,43 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 	 * get year link
 	 *
 	 * @since 2.0.0
+	 *
+	 * @param int $year
+	 * @param int $counter
+	 *
+	 * @since 2.3.9
+	 * @param string $location
+	 * @param array $classes
 	 */
-	public function get_year_link( $year, $counter = 0 ) {
+	public function get_year_link( $year, $counter = 0, $location = '', $classes = array() ) {
 		$y = intval( $year );
 		if ( 1 > $y ) {
 			return $year;
 		}
-		$year = $y;
+		$classes[] = 'results-year-link';
+		$year      = $y;
+		$link_text = $year;
 		if ( 0 < intval( $counter ) ) {
-			return sprintf(
-				'<a href="/%2$s/%1$d"><span>%3$d <small>(%4$d)</small></span></a>',
-				esc_attr( $year ),
-				esc_attr( _x( 'results', 'rewrite rule handler for results', 'fleet' ) ),
-				esc_html( $year ),
+			$link_text = sprintf(
+				'%d <small>(%d)</small>',
+				$year,
 				$counter
 			);
 		}
-		return sprintf(
-			'<a href="/%2$s/%1$d">%3$d</a>',
+		$link = sprintf(
+			'/%2$s/%1$d',
 			esc_attr( $year ),
 			esc_attr( _x( 'results', 'rewrite rule handler for results', 'fleet' ) ),
-			esc_html( $year ),
+		);
+		if ( ! empty( $location ) ) {
+			$link .= '/' . $location;
+		}
+
+		return sprintf(
+			'<a href="%s" class="%s">%s</a>',
+			esc_url( $link ),
+			esc_attr( implode( ' ', $classes ) ),
+			wp_kses_post( $link_text )
 		);
 	}
 
@@ -3311,7 +3377,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 				$data['max'] = $one->ranking;
 			}
 		}
-		$data['max']++;
+		++$data['max'];
 		/**
 		 * add teams points
 		 */
@@ -3341,7 +3407,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 						'status'    => 'started',
 						'discarded' => 'no',
 					);
-					$data['teams'][ $team_id ]['number_of_starts']++;
+					++$data['teams'][ $team_id ]['number_of_starts'];
 				}
 				$data['teams'][ $team_id ]['sum']  += $points;
 				$data['teams'][ $team_id ]['netto'] = $data['teams'][ $team_id ]['sum'];
@@ -3456,7 +3522,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 				$data['max'] = $one->ranking;
 			}
 		}
-		$data['max']++;
+		++$data['max'];
 		/**
 		 * add teams points
 		 */
@@ -3484,7 +3550,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 						'status'    => 'started',
 						'discarded' => 'no',
 					);
-					$data['teams'][ $sailor_id ]['number_of_starts']++;
+					++$data['teams'][ $sailor_id ]['number_of_starts'];
 				}
 				$data['teams'][ $sailor_id ]['sum']  += $points;
 				$data['teams'][ $sailor_id ]['netto'] = $data['teams'][ $sailor_id ]['sum'];
@@ -3706,16 +3772,16 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 				) {
 					switch ( $races[ $id ][ $sailor_id ] ) {
 						case 1:
-							$data['teams'][ $sailor_id ]['medals']['gold']++;
+							++$data['teams'][ $sailor_id ]['medals']['gold'];
 							break;
 						case 2:
-							$data['teams'][ $sailor_id ]['medals']['silver']++;
+							++$data['teams'][ $sailor_id ]['medals']['silver'];
 							break;
 						case 3:
-							$data['teams'][ $sailor_id ]['medals']['bronze']++;
+							++$data['teams'][ $sailor_id ]['medals']['bronze'];
 							break;
 					}
-					$data['teams'][ $sailor_id ]['number_of_starts']++;
+					++$data['teams'][ $sailor_id ]['number_of_starts'];
 				}
 			}
 		}
@@ -3731,7 +3797,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			'bronze' => 0,
 		);
 		foreach ( $data['teams'] as $id => &$d ) {
-			$i++;
+			++$i;
 			if (
 				$d['medals']['gold'] !== $last_medals['gold']
 				|| $d['medals']['silver'] !== $last_medals['silver']
@@ -3838,5 +3904,4 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		$query = new WP_Query( $args );
 		return $query->posts;
 	}
-
 }
