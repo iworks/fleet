@@ -91,7 +91,7 @@ Please use the plugin support forum or submit issues/pull requests on GitHub.
 * Updated the [iWorks Options](https://github.com/iworks/wordpress-options-class) module to version 3.0.8.
 * Updated the [iWorks Rate](https://github.com/iworks/iworks-rate) module to version 2.3.1.
 
-= 2.3.8 (2025-05-13) =
+= 2.3.9 (2025-05-13) =
 * Updated the [iWorks Options](https://github.com/iworks/wordpress-options-class) module to version 3.0.7.
 * Updated the [iWorks Rate](https://github.com/iworks/iworks-rate) module to version 2.3.0.
 
