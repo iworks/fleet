@@ -25,7 +25,7 @@ if ( class_exists( 'iworks_fleet_posttypes_boat' ) ) {
 	return;
 }
 
-require_once dirname( dirname( __FILE__ ) ) . '/posttypes.php';
+require_once dirname( __DIR__, 1 ) . '/posttypes.php';
 
 class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 
@@ -63,6 +63,7 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		add_filter( 'the_content', array( $this, 'add_media' ), 999 );
 		add_filter( 'international_fleet_posted_on', array( $this, 'get_manufacturer' ), 10, 2 );
 		add_filter( 'posts_orderby', array( $this, 'posts_orderby_post_title' ), 10, 2 );
+		add_action( 'init', array( $this, 'action_init_setup' ) );
 		/**
 		 * get taxonomy Manufacturer
 		 *
@@ -102,22 +103,37 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		add_filter( 'iworks_fleet_boat_get_hull', array( $this, 'get_hull_filter' ), 10, 2 );
 		add_filter( 'iworks_fleet_boat_get_last_owner', array( $this, 'filter_get_last_owner' ), 10, 2 );
 		/**
-		 * replace names to proper
+		 * get owner boats
 		 */
-		if ( is_a( $this->options, 'iworks_options' ) ) {
-			/**
-			 * Sinle crew meta field name
-			 */
-			$this->single_crew_field_name = $this->options->get_option_name( 'crew' );
+		add_filter( 'iworks_fleet_boat_get_by_owner_id', array( $this, 'get_content_table_by_owner_id' ), 10, 3 );
+		/**
+		 * shortcodes
+		 */
+		add_shortcode( 'fleet_boats_list', array( $this, 'shortcode_list' ) );
+		add_shortcode( 'boat', array( $this, 'shortcode_boat' ) );
+		/**
+		 * OG Plugin Integration
+		 *
+		 * @since 2.1.6
+		 */
+		add_filter( 'og_image_value', array( $this, 'filter_og_image_value_maybe_use_manufacturer_logo' ) );
+	}
+
+	/**
+	 * init setup
+	 *
+	 * @since 2.5.0
+	 */
+	public function action_init_setup() {
+		/**
+		 * Single crew meta field name
+		 */
+		$this->single_crew_field_name = $this->options->get_option_name( 'crew' );
 			/**
 			 * Single boat meta field name
 			 */
 			$this->single_boat_field_name = $this->options->get_option_name( 'boat', true );
-		}
-		/**
-		 * get owner boats
-		 */
-		add_filter( 'iworks_fleet_boat_get_by_owner_id', array( $this, 'get_content_table_by_owner_id' ), 10, 3 );
+
 		/**
 		 * fields
 		 */
@@ -211,17 +227,6 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 			$key = sprintf( 'postbox_classes_%s_%s', $this->get_name(), $name );
 			add_filter( $key, array( $this, 'add_defult_class_to_postbox' ) );
 		}
-		/**
-		 * shortcodes
-		 */
-		add_shortcode( 'fleet_boats_list', array( $this, 'shortcode_list' ) );
-		add_shortcode( 'boat', array( $this, 'shortcode_boat' ) );
-		/**
-		 * OG Plugin Integration
-		 *
-		 * @since 2.1.6
-		 */
-		add_filter( 'og_image_value', array( $this, 'filter_og_image_value_maybe_use_manufacturer_logo' ) );
 	}
 
 	public function shortcode_list( $atts ) {
@@ -313,12 +318,6 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 	}
 
 	public function register() {
-		/**
-		 * Check iworks_options object
-		 */
-		if ( ! is_a( $this->options, 'iworks_options' ) ) {
-			return;
-		}
 		global $iworks_fleet;
 		/**
 		 * taxonomies configuration
@@ -615,6 +614,9 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 			return $content;
 		}
 		global $iworks_fleet;
+		/**
+		 * set data
+		 */
 		$post_id    = get_the_ID();
 		$text       = '';
 		$options    = array(
@@ -1100,7 +1102,7 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		$name = esc_attr( $this->owners_field_name );
 		?>
 <script type="text/html" id="tmpl-iworks-fleet-boat-owner-user">
-	  <select name="<?php echo $name; ?>[{{{data.id}}}][users_ids][]" class="select2 empty"></select>
+		<select name="<?php echo $name; ?>[{{{data.id}}}][users_ids][]" class="select2 empty"></select>
 </script>
 <script type="text/html" id="tmpl-iworks-fleet-boat-owner">
 		<?php

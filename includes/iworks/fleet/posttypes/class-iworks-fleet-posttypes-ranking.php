@@ -26,7 +26,7 @@ if ( class_exists( 'iworks_fleet_posttypes_ranking' ) ) {
 	return;
 }
 
-require_once( dirname( dirname( __FILE__ ) ) . '/posttypes.php' );
+require_once dirname( __DIR__, 1 ) . '/posttypes.php';
 
 class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 
@@ -39,10 +39,23 @@ class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 		 */
 		add_filter( "manage_{$this->get_name()}_posts_columns", array( $this, 'add_columns' ) );
 		add_action( 'manage_posts_custom_column', array( $this, 'custom_columns' ), 10, 2 );
+		add_action( 'init', array( $this, 'action_init_setup' ) );
 		/**
 		 * shortcodes
 		 */
 		add_shortcode( 'iworks_fleet_ranking', array( $this, 'shortcode_ranking' ), 10, 2 );
+		/**
+		 * Fleet
+		 */
+		add_filter( 'iworks/fleet/register_taxonomy/iworks_fleet_ranking/add', '__return_false' );
+	}
+
+	/**
+	 * init setup
+	 *
+	 * @since 2.5.0
+	 */
+	public function action_init_setup() {
 		/**
 		 * fields
 		 */
@@ -143,10 +156,6 @@ class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 			$key = sprintf( 'postbox_classes_%s_%s', $this->get_name(), $name );
 			add_filter( $key, array( $this, 'add_defult_class_to_postbox' ) );
 		}
-		/**
-		 * Fleet
-		 */
-		add_filter( 'iworks/fleet/register_taxonomy/iworks_fleet_ranking/add', '__return_false' );
 	}
 
 	/**
@@ -158,12 +167,6 @@ class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 	}
 
 	public function register() {
-		/**
-		 * Check iworks_options object
-		 */
-		if ( ! is_a( $this->options, 'iworks_options' ) ) {
-			return;
-		}
 		global $iworks_fleet;
 		$show_in_menu = add_query_arg( 'post_type', $iworks_fleet->get_post_type_name( 'person' ), 'edit.php' );
 		$this->labels = array(
@@ -459,6 +462,4 @@ class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 		}
 		return $list;
 	}
-
 }
-

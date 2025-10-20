@@ -30,7 +30,7 @@ if ( ! defined( 'WPINC' ) ) {
  */
 define( 'IWORKS_FLEET_VERSION', 'PLUGIN_VERSION' );
 define( 'IWORKS_FLEET_PREFIX', 'iworks_fleet_' );
-$base     = dirname( __FILE__ );
+$base     = __DIR__;
 $includes = $base . '/includes';
 
 /**
@@ -77,7 +77,7 @@ function iworks_fleet_activate() {
 	/**
 	 * install tables
 	 */
-	$iworks_fleet = new iworks_fleet;
+	$iworks_fleet = new iworks_fleet();
 	$iworks_fleet->db_install();
 }
 
@@ -97,13 +97,13 @@ register_deactivation_hook( __FILE__, 'iworks_fleet_deactivate' );
 /**
  * Ask for vote
  */
-include_once $includes . '/iworks/rate/rate.php';
+require_once $includes . '/iworks/rate/rate.php';
 add_action( 'init', 'iworks_fleet_init_rate' );
 function iworks_fleet_init_rate() {
-do_action(
-	'iworks-register-plugin',
-	plugin_basename( __FILE__ ),
-	__( 'Fleet Manager', 'fleet' ),
-	'fleet'
-);
+	do_action(
+		'iworks-register-plugin',
+		plugin_basename( __FILE__ ),
+		__( 'Fleet Manager', 'fleet' ),
+		'fleet'
+	);
 }

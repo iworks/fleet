@@ -26,7 +26,7 @@ if ( class_exists( 'iworks_fleet_posttypes_person' ) ) {
 	return;
 }
 
-require_once( dirname( dirname( __FILE__ ) ) . '/posttypes.php' );
+require_once dirname( __DIR__, 1 ) . '/posttypes.php';
 
 class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 
@@ -41,6 +41,7 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 		add_filter( 'the_content', array( $this, 'the_content' ) );
 		add_filter( 'international_fleet_posted_on', array( $this, 'get_club' ), 10, 2 );
 		add_filter( 'the_title', array( $this, 'add_flag_to_single_title' ), 10, 2 );
+		add_action( 'init', array( $this, 'action_init_setup' ) );
 		/**
 		 * change default columns
 		 */
@@ -58,12 +59,6 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 		add_filter( 'get_next_post_sort', array( $this, 'adjacent_post_sort' ), 10, 3 );
 		add_filter( 'get_previous_post_where', array( $this, 'adjacent_post_where' ), 10, 5 );
 		add_filter( 'get_next_post_where', array( $this, 'adjacent_post_where' ), 10, 5 );
-		/**
-		 * AJAX list
-		 */
-		if ( is_a( $this->options, 'iworks_options' ) ) {
-			$this->nonce_list = $this->options->get_option_name( 'persons_list_nonce' );
-		}
 		add_action( 'wp_ajax_iworks_fleet_persons_list', array( $this, 'get_select2_list' ) );
 		/**
 		 * add nonce
@@ -73,6 +68,28 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 		 * maybe update country
 		 */
 		add_action( 'maybe_add_person_nation', array( $this, 'maybe_add_person_nation' ), 10, 2 );
+		/**
+		 * Change tag link to person
+		 */
+		add_filter( 'term_link', array( $this, 'change_tag_link_to_person_link' ), 10, 3 );
+		/**
+		 * get data filters
+		 *
+		 * @since 2.3.0
+		 */
+		add_filter( 'iworks/fleet/person/get/array', array( $this, 'filter_get_person_array' ), 10, 3 );
+	}
+
+	/**
+	 * init setup
+	 *
+	 * @since 2.5.0
+	 */
+	public function action_init_setup() {
+		/**
+		 * AJAX list
+		 */
+			$this->nonce_list = $this->options->get_option_name( 'persons_list_nonce' );
 		/**
 		 * fields
 		 */
@@ -132,16 +149,6 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 			$key = sprintf( 'postbox_classes_%s_%s', $this->get_name(), $name );
 			add_filter( $key, array( $this, 'add_defult_class_to_postbox' ) );
 		}
-		/**
-		 * Change tag link to person
-		 */
-		add_filter( 'term_link', array( $this, 'change_tag_link_to_person_link' ), 10, 3 );
-		/**
-		 * get data filters
-		 *
-		 * @since 2.3.0
-		 */
-		add_filter( 'iworks/fleet/person/get/array', array( $this, 'filter_get_person_array' ), 10, 3 );
 	}
 
 	/**
@@ -870,6 +877,4 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 		$this->cache['persons'][ $person_id ] = $data;
 		return $this->cache['persons'][ $person_id ];
 	}
-
 }
-

@@ -70,8 +70,7 @@ class iworks_fleet_posttypes {
 	);
 
 	public function __construct() {
-		$this->options = iworks_fleet_get_options_object();
-		$this->base    = preg_replace( '/\/iworks.+/', '/', __FILE__ );
+		$this->base = preg_replace( '/\/iworks.+/', '/', __FILE__ );
 		/**
 		 * debug
 		 */
@@ -84,20 +83,7 @@ class iworks_fleet_posttypes {
 		 *
 		 * @since 2.3.4
 		 */
-		$this->root = dirname( dirname( dirname( dirname( __FILE__ ) ) ) );
-		/**
-		 * show sigle person flag
-		 */
-		$this->show_single_person_flag = $this->options->get_option( 'person_show_flag_on_single' );
-		$this->show_single_boat_flag   = $this->options->get_option( 'boat_show_flag' );
-		/**
-		 * Trophies names
-		 */
-		$this->trophies_names = array(
-			'world'       => __( 'World Champ', 'fleet' ),
-			'continental' => __( 'Continental Championship', 'fleet' ),
-			'national'    => __( 'National Championship', 'fleet' ),
-		);
+		$this->root = dirname( __DIR__, 3 );
 		/**
 		 * OpenGraph
 		 */
@@ -105,6 +91,8 @@ class iworks_fleet_posttypes {
 		/**
 		 * register
 		 */
+		add_action( 'init', array( $this, 'check_option_object' ), 0 );
+		add_action( 'init', array( $this, 'init_setup_common' ) );
 		add_action( 'init', array( $this, 'register' ) );
 		add_action( 'init', array( $this, 'register_taxonomy_location' ), 9 );
 		add_filter( 'body_class', array( $this, 'add_wide_body_class' ) );
@@ -126,6 +114,23 @@ class iworks_fleet_posttypes {
 		 * stats
 		 */
 		add_filter( 'int505_archive_stats_table_row', array( $this, 'filter_int505_archive_stats_table_row' ) );
+	}
+
+	public function init_setup_common() {
+		$this->check_option_object();
+		/**
+		 * show sigle person flag
+		 */
+		$this->show_single_person_flag = $this->options->get_option( 'person_show_flag_on_single' );
+		$this->show_single_boat_flag   = $this->options->get_option( 'boat_show_flag' );
+		/**
+		 * Trophies names
+		 */
+		$this->trophies_names = array(
+			'world'       => __( 'World Champ', 'fleet' ),
+			'continental' => __( 'Continental Championship', 'fleet' ),
+			'national'    => __( 'National Championship', 'fleet' ),
+		);
 	}
 
 	public function dashboard_glance_items( $elements ) {
@@ -474,6 +479,10 @@ class iworks_fleet_posttypes {
 	 * @since 2.0.1
 	 */
 	private function get_mna_codes() {
+		/**
+		 * Check iworks_options object
+		 */
+		$this->check_option_object();
 		if ( empty( $this->mna_codes ) ) {
 			$this->mna_codes = $this->options->get_group( 'mna_codes' );
 		}
@@ -607,7 +616,7 @@ class iworks_fleet_posttypes {
 			}
 			$og['twitter'][ 'label' . $counter ] = $data['label'];
 			$og['twitter'][ 'data' . $counter ]  = $value;
-			$counter++;
+			++$counter;
 		}
 		return $og;
 	}
@@ -719,5 +728,15 @@ class iworks_fleet_posttypes {
 	protected function get_option_name_helper( $group, $key ) {
 		return $this->options->get_option_name( $group . '_' . $key );
 	}
+	/**
+	 * check option object
+	 *
+	 * @since 2.3.6
+	 */
+	public function check_option_object() {
+		if ( is_a( $this->options, 'iworks_options' ) ) {
+			return;
+		}
+		$this->options = iworks_fleet_get_options_object();
+	}
 }
-

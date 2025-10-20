@@ -70,11 +70,9 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 	public function __construct() {
 		parent::__construct();
 		/**
-		 * set show points
+		 * setup
 		 */
-		if ( is_object( $this->options ) ) {
-			$this->show_points = ! empty( $this->options->get_option( 'results_show_points' ) );
-		}
+		add_action( 'init', array( $this, 'action_init_setup' ) );
 		/**
 		 * filter content
 		 */
@@ -94,62 +92,6 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		 * insert post
 		 */
 		add_action( 'wp_insert_post', array( $this, 'save_added_date' ), 10, 3 );
-		/**
-		 * fields
-		 */
-		$this->fields = array(
-			'result' => array(
-				'english'               => array(
-					'label'   => __( 'English name', 'fleet' ),
-					'twitter' => 'yes',
-				),
-				'location'              => array(
-					'label'   => __( 'Area', 'fleet' ),
-					'twitter' => 'yes',
-				),
-				'organizer'             => array( 'label' => __( 'Organizer', 'fleet' ) ),
-				'secretary'             => array( 'label' => __( 'Secretary', 'fleet' ) ),
-				'arbiter'               => array( 'label' => __( 'Arbiter', 'fleet' ) ),
-				'date_start'            => array(
-					'type'    => 'date',
-					'label'   => __( 'Event start', 'fleet' ),
-					'twitter' => 'yes',
-				),
-				'date_end'              => array(
-					'type'    => 'date',
-					'label'   => __( 'Event end', 'fleet' ),
-					'twitter' => 'yes',
-				),
-				'number_of_races'       => array(
-					'type'      => 'number',
-					'label'     => __( 'Number of races', 'fleet' ),
-					'twitter'   => 'yes',
-					'save_zero' => 'yes',
-				),
-				'number_of_competitors' => array(
-					'type'    => 'number',
-					'label'   => __( 'Number of competitors', 'fleet' ),
-					'twitter' => 'yes',
-				),
-				'wind_direction'        => array( 'label' => __( 'Wind direction', 'fleet' ) ),
-				'wind_power'            => array( 'label' => __( 'Wind power', 'fleet' ) ),
-				'columns'               => array(
-					'label'       => __( 'Custom columns name', 'fleet' ),
-					'type'        => 'textarea',
-					'description' => __( 'Add one column per line if you want to have a custom race column header.', 'fleet' ),
-				),
-			),
-		);
-		/**
-		 * add class to metaboxes
-		 */
-		foreach ( array_keys( $this->fields ) as $name ) {
-			if ( 'basic' == $name ) {
-				continue;
-			}
-			$key = sprintf( 'postbox_classes_%s_%s', $this->get_name(), $name );
-			add_filter( $key, array( $this, 'add_defult_class_to_postbox' ) );
-		}
 		/**
 		 * handle results
 		 */
@@ -210,6 +152,74 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		 */
 		add_filter( 'iworks/fleet/results/get/array', array( $this, 'filter_get_results_array' ), 10, 2 );
 		add_filter( 'iworks/fleet/medals/get/array', array( $this, 'filter_get_medals_array' ), 10, 2 );
+	}
+
+	/**
+	 * init setup
+	 *
+	 * @since 2.5.0
+	 */
+	public function action_init_setup() {
+		/**
+		 * set show points
+		 */
+		$this->show_points = ! empty( $this->options->get_option( 'results_show_points' ) );
+		/**
+		 * fields
+		 */
+		$this->fields = array(
+			'result' => array(
+				'english'               => array(
+					'label'   => __( 'English name', 'fleet' ),
+					'twitter' => 'yes',
+				),
+				'location'              => array(
+					'label'   => __( 'Area', 'fleet' ),
+					'twitter' => 'yes',
+				),
+				'organizer'             => array( 'label' => __( 'Organizer', 'fleet' ) ),
+				'secretary'             => array( 'label' => __( 'Secretary', 'fleet' ) ),
+				'arbiter'               => array( 'label' => __( 'Arbiter', 'fleet' ) ),
+				'date_start'            => array(
+					'type'    => 'date',
+					'label'   => __( 'Event start', 'fleet' ),
+					'twitter' => 'yes',
+				),
+				'date_end'              => array(
+					'type'    => 'date',
+					'label'   => __( 'Event end', 'fleet' ),
+					'twitter' => 'yes',
+				),
+				'number_of_races'       => array(
+					'type'      => 'number',
+					'label'     => __( 'Number of races', 'fleet' ),
+					'twitter'   => 'yes',
+					'save_zero' => 'yes',
+				),
+				'number_of_competitors' => array(
+					'type'    => 'number',
+					'label'   => __( 'Number of competitors', 'fleet' ),
+					'twitter' => 'yes',
+				),
+				'wind_direction'        => array( 'label' => __( 'Wind direction', 'fleet' ) ),
+				'wind_power'            => array( 'label' => __( 'Wind power', 'fleet' ) ),
+				'columns'               => array(
+					'label'       => __( 'Custom columns name', 'fleet' ),
+					'type'        => 'textarea',
+					'description' => __( 'Add one column per line if you want to have a custom race column header.', 'fleet' ),
+				),
+			),
+		);
+		/**
+		 * add class to metaboxes
+		 */
+		foreach ( array_keys( $this->fields ) as $name ) {
+			if ( 'basic' == $name ) {
+				continue;
+			}
+			$key = sprintf( 'postbox_classes_%s_%s', $this->get_name(), $name );
+			add_filter( $key, array( $this, 'add_defult_class_to_postbox' ) );
+		}
 	}
 
 	public function get_trophies_by_sailor_id( $content, $sailor_id ) {
@@ -1355,12 +1365,6 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 	}
 
 	public function register() {
-		/**
-		 * Check iworks_options object
-		 */
-		if ( ! is_a( $this->options, 'iworks_options' ) ) {
-			return;
-		}
 		global $iworks_fleet;
 		$show_in_menu = add_query_arg( 'post_type', $iworks_fleet->get_post_type_name( 'person' ), 'edit.php' );
 		$this->labels = array(

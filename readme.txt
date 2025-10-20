@@ -78,13 +78,10 @@ The plugin offers filters and hooks for developers to extend functionality.
 = How do I report a bug or suggest a feature? =
 Please use the plugin support forum or submit issues/pull requests on GitHub.
 
-== Screenshots ==
-
-1. Screenshot 1 description
-2. Screenshot 2 description
-3. Screenshot 3 description
-
 == Changelog ==
+
+= 2.5.0 (2025-10-20) =
+* Fixed issue with textdomain which was called incorrectly. [#1](https://github.com/iworks/fleet/issues/1)
 
 = 2.4.0 (2025-10-16) =
 * Added years submenu on country results page.
