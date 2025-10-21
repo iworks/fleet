@@ -1,18 +1,18 @@
-# Translation of Plugins - Fleet Manager - Development (trunk) in Ukrainian
-# This file is distributed under the same license as the Plugins - Fleet Manager - Development (trunk) package.
+# Translation of Plugins - Fleet Manager - Stable (latest release) in Ukrainian
+# This file is distributed under the same license as the Plugins - Fleet Manager - Stable (latest release) package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Plugins - Fleet Manager - Development (trunk)\n"
+"Project-Id-Version: Plugins - Fleet Manager - Stable (latest release)\n"
 "Report-Msgid-Bugs-To: http://iworks.pl\n"
-"POT-Creation-Date: 2025-10-20 16:31:52+00:00\n"
-"PO-Revision-Date: 2025-05-09 16:44:09+0000\n"
+"POT-Creation-Date: 2025-10-21 08:22:26+00:00\n"
+"PO-Revision-Date: 2025-10-20 11:30:12+0000\n"
 "Language: uk_UA\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n % 10 == 1 && n % 100 != 11) ? 0 : ((n % "
 "10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14)) ? 1 : 2);\n"
-"X-Generator: GlotPress/4.0.2\n"
+"X-Generator: GlotPress/4.0.3\n"
 
 #: assets/templates/shortcode/crew/output/table.php:5
 msgid "Team"
@@ -3134,7 +3134,7 @@ msgstr "виберіть колір"
 
 #: includes/iworks/options/options.php:175
 msgid "No Page Title"
-msgstr ""
+msgstr "Без назви сторінки"
 
 #: includes/iworks/options/options.php:340
 msgid "An error occurred while getting the configuration."
@@ -3202,7 +3202,7 @@ msgstr "https://uk.wordpress.org/plugins/og/"
 #: includes/iworks/rate/templates/happy-anniversary/anniversary.php:21
 #: includes/iworks/rate/templates/happy-anniversary/first-year.php:21
 msgid "🎉 Happy Anniversary! 🎉"
-msgstr ""
+msgstr "З річницею! 🎉"
 
 #: includes/iworks/rate/templates/happy-anniversary/anniversary.php:23
 msgid ""
@@ -3210,6 +3210,9 @@ msgid ""
 "you so much for being part of our journey! We truly appreciate your support "
 "and hope the plugin has made your work easier and more enjoyable."
 msgstr ""
+"Ого, минув уже цілий рік, як ви користуєтеся нашим плагіном - велике "
+"спасибі, що ви стали частиною нашої подорожі! Ми щиро цінуємо вашу підтримку "
+"і сподіваємося, що плагін зробив вашу роботу легшою і приємнішою."
 
 #: includes/iworks/rate/templates/happy-anniversary/anniversary.php:24
 #: includes/iworks/rate/templates/happy-anniversary/first-year.php:24
@@ -3219,21 +3222,25 @@ msgid ""
 "coffee. Every little bit helps us keep improving and adding new features for "
 "awesome users like you!"
 msgstr ""
+"Якщо ви знайшли наш плагін корисним і хочете підтримати його подальший "
+"розвиток, ми будемо неймовірно вдячні, якщо ви купите нам каву. Кожна "
+"копійка допомагає нам продовжувати вдосконалюватися і додавати нові функції "
+"для таких чудових користувачів, як ви!"
 
 #: includes/iworks/rate/templates/happy-anniversary/anniversary.php:25
 #: includes/iworks/rate/templates/happy-anniversary/first-year.php:25
 msgid "☕ Buy Me a Coffee"
-msgstr ""
+msgstr "Купи мені кави"
 
 #: includes/iworks/rate/templates/happy-anniversary/anniversary.php:26
 #: includes/iworks/rate/templates/happy-anniversary/first-year.php:26
 msgid "Thank you for your support and for making this community amazing!"
-msgstr ""
+msgstr "Дякуємо за вашу підтримку і за те, що робите цю спільноту дивовижною!"
 
 #: includes/iworks/rate/templates/happy-anniversary/anniversary.php:30
 #: includes/iworks/rate/templates/happy-anniversary/first-year.php:30
 msgid "With gratitude"
-msgstr ""
+msgstr "З вдячністю"
 
 #: includes/iworks/rate/templates/happy-anniversary/anniversary.php:34
 #: includes/iworks/rate/templates/happy-anniversary/first-year.php:34
@@ -3243,7 +3250,7 @@ msgstr "Marcin Pietrzak"
 #: includes/iworks/rate/templates/happy-anniversary/anniversary.php:36
 #: includes/iworks/rate/templates/happy-anniversary/first-year.php:36
 msgid "Plugin Author"
-msgstr ""
+msgstr "Автор плагіна"
 
 #: includes/iworks/rate/templates/happy-anniversary/first-year.php:23
 msgid ""
@@ -3251,6 +3258,9 @@ msgid ""
 "you so much for being part of our journey! We hope it’s made your work "
 "easier and more enjoyable."
 msgstr ""
+"Ого, вже минув цілий рік, як ви почали користуватися нашим плагіном - "
+"дякуємо вам за те, що ви стали частиною нашої подорожі! Ми сподіваємося, що "
+"він зробив вашу роботу легшою та приємнішою."
 
 #: includes/iworks/rate/templates/plugins/og.php:4
 msgid "Would you like to boost your website sharing abilities?"
@@ -3615,6 +3625,15 @@ msgstr "https://uk.wordpress.org/plugins/%s"
 msgctxt "plugins support home"
 msgid "https://wordpress.org/support/plugin/%s"
 msgstr "https://wordpress.org/support/plugin/%s"
+
+#~ msgid ""
+#~ "Manage sailboats, sailors, regattas, and results with ease. Track boats, "
+#~ "record sailor statistics, and organize sailing competitions—all within "
+#~ "WordPress."
+#~ msgstr ""
+#~ "Керуйте вітрильниками, моряками, регатами та результатами з легкістю. "
+#~ "Відстежуйте човни, записуйте статистику яхтсменів та організовуйте "
+#~ "змагання з вітрильного спорту - і все це за допомогою WordPress."
 
 #~ msgid "http://iworks.pl/en/plugins/fleet/"
 #~ msgstr "http://iworks.pl/en/plugins/fleet/"

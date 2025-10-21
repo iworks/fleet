@@ -1,10 +1,10 @@
-# Translation of Plugins - Fleet Manager - Development (trunk) in Polish
-# This file is distributed under the same license as the Plugins - Fleet Manager - Development (trunk) package.
+# Translation of Plugins - Fleet Manager - Stable (latest release) in Polish
+# This file is distributed under the same license as the Plugins - Fleet Manager - Stable (latest release) package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Plugins - Fleet Manager - Development (trunk)\n"
+"Project-Id-Version: Plugins - Fleet Manager - Stable (latest release)\n"
 "Report-Msgid-Bugs-To: http://iworks.pl\n"
-"POT-Creation-Date: 2025-10-20 16:31:52+00:00\n"
+"POT-Creation-Date: 2025-10-21 08:22:26+00:00\n"
 "PO-Revision-Date: 2025-09-05 08:16:56+0000\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n == 1) ? 0 : ((n % 10 >= 2 && n % 10 <= 4 "
 "&& (n % 100 < 12 || n % 100 > 14)) ? 1 : 2);\n"
-"X-Generator: GlotPress/4.0.2\n"
+"X-Generator: GlotPress/4.0.3\n"
 
 #: assets/templates/shortcode/crew/output/table.php:5
 msgid "Team"
