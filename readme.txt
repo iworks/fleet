@@ -80,6 +80,15 @@ Please use the plugin support forum or submit issues/pull requests on GitHub.
 
 == Changelog ==
 
+= 2.5.1 (2025-10-22) =
+* Fixed issue with option object on ajax calls.
+* Added function private `fputcsv` with default params.
+* Added filter `iworks/fleet/result/fputcsv/data` to allow modify data before export.
+* Added filter `iworks/fleet_result_fputcsv/delimiter` to allow modify delimiter.
+* Added filter `iworks/fleet_result_fputcsv/enclosure` to allow modify enclosure.
+* Added filter `iworks/fleet_result_fputcsv/escaped` to allow modify escaped.
+* Added filter `iworks/fleet_result_fputcsv/eol` to allow modify EOL.
+
 = 2.5.0 (2025-10-20) =
 * Fixed issue with textdomain which was called incorrectly. [#1](https://github.com/iworks/fleet/issues/1)
 

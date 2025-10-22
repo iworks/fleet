@@ -396,6 +396,10 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			return;
 		}
 		/**
+		 * check option object
+		 */
+		$this->check_option_object();
+		/**
 		 * turn off when download
 		 *
 		 * @since 2.2.2
@@ -488,7 +492,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 				$row[] = __( 'Place', 'fleet' );
 				$row[] = __( 'Number of competitors', 'fleet' );
 				$row[] = __( 'Points', 'fleet' );
-				fputcsv( $out, $row );
+				$this->fputcsv( $out, $row );
 				foreach ( $regattas as $regatta ) {
 					$row   = array();
 					$row[] = date_i18n( $format, $regatta->date_start );
@@ -500,7 +504,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 					$row[] = $regatta->place;
 					$row[] = get_post_meta( $regatta->post_regata_id, $this->options->get_option_name( 'result_number_of_competitors' ), true );
 					$row[] = $regatta->points;
-					fputcsv( $out, $row );
+					$this->fputcsv( $out, $row );
 				}
 				break;
 			/**
@@ -516,7 +520,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 					$row[] = 'R' . $i;
 				}
 				$row[] = __( 'Sum', 'fleet' );
-				fputcsv( $out, $row );
+				$this->fputcsv( $out, $row );
 				$races              = $this->get_races_data( $post_id, 'csv' );
 				$table_name_regatta = $wpdb->prefix . 'fleet_regatta';
 				$query              = $wpdb->prepare( "SELECT * FROM {$table_name_regatta} where post_regata_id = %d order by place", $post_id );
@@ -534,7 +538,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 						}
 					}
 					$row[] = $one->points;
-					fputcsv( $out, $row );
+					$this->fputcsv( $out, $row );
 				}
 				break;
 			default:
@@ -3907,5 +3911,21 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		);
 		$query = new WP_Query( $args );
 		return $query->posts;
+	}
+
+	/**
+	 * fputs csv plus defaults params
+	 *
+	 * @since 2.5.1
+	 */
+	private function fputcsv( $file, $data ) {
+		fputcsv(
+			$file,
+			apply_filters( 'iworks/fleet/result/fputcsv/data', $data ),
+			apply_filters( 'iworks/fleet_result_fputcsv/delimiter', ',' ),
+			apply_filters( 'iworks/fleet/result/fputcsv/enclosure', '"' ),
+			apply_filters( 'iworks/fleet/result/fputcsv/escaped', '\\' ),
+			apply_filters( 'iworks/fleet/result/fputcsv/eol', "\n" )
+		);
 	}
 }
