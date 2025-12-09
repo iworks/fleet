@@ -26,15 +26,16 @@ if ( class_exists( 'iworks_fleet_posttypes_person' ) ) {
 	return;
 }
 
-require_once dirname( __DIR__, 1 ) . '/posttypes.php';
+require_once dirname( __DIR__, 1 ) . '/class-iworks-posttypes.php';
 
 class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 
-	protected $post_type_name     = 'iworks_fleet_person';
-	protected $taxonomy_name_club = 'iworks_fleet_club';
-	private $nonce_list           = 'iworks_fleet_person_persons_list_nonce';
-	private $users_list           = array();
-	private $boats_list           = array();
+	protected $post_type_name                 = 'iworks_fleet_person';
+	protected $taxonomy_name_club             = 'iworks_fleet_club';
+	private $nonce_list                       = 'iworks_fleet_person_persons_list_nonce';
+	private $users_list                       = array();
+	private $boats_list                       = array();
+	private $suspend_add_flag_to_single_title = false;
 
 	public function __construct() {
 		parent::__construct();
@@ -78,6 +79,12 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 		 * @since 2.3.0
 		 */
 		add_filter( 'iworks/fleet/person/get/array', array( $this, 'filter_get_person_array' ), 10, 3 );
+		/**
+		 * Plugin "Simple SEO Improvements" for person integration
+		 *
+		 * @since 2.6.0
+		 */
+		add_filter( 'iworks_simple_seo_improvements_json_ld::WebSite', array( $this, 'filter_json_ld_data_for_simple_seo_improvements_plugin' ) );
 	}
 
 	/**
@@ -98,21 +105,33 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 				'sailor_id'  => array(
 					'label' => esc_html__( 'World Sailing Sailor ID', 'fleet' ),
 				),
+				'full_name'  => array(
+					'label' => esc_html__( 'Full name', 'fleet' ),
+				),
+				'nickname'   => array(
+					'label' => esc_html__( 'Nickname', 'fleet' ),
+				),
 				'nation'     => array(
-					'label'   => esc_html__( 'Nation', 'fleet' ),
-					'type'    => 'select2',
-					'args'    => array(
+					'label'    => esc_html__( 'Nation', 'fleet' ),
+					'type'     => 'select2',
+					'args'     => array(
 						'options' => $this->get_nations(),
 					),
-					'twitter' => 'yes',
+					'twitter'  => 'yes',
+					'sanitize' => array( $this, 'sanitize_nation' ),
 				),
 				'birth_year' => array(
 					'label'   => esc_html__( 'Birth Year', 'fleet' ),
 					'twitter' => 'yes',
+					'type'    => 'number',
 				),
 				'birth_date' => array(
 					'type'  => 'date',
 					'label' => esc_html__( 'Birth Date', 'fleet' ),
+				),
+				'death_date' => array(
+					'type'  => 'date',
+					'label' => esc_html__( 'Death Date', 'fleet' ),
 				),
 				'sex'        => array(
 					'label' => esc_html__( 'Sex', 'fleet' ),
@@ -127,16 +146,48 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 				),
 			),
 			'social'   => array(
-				'website'   => array( 'label' => esc_html__( 'Website', 'fleet' ) ),
-				'facebook'  => array( 'label' => esc_html__( 'Facebook', 'fleet' ) ),
-				'twitter'   => array( 'label' => esc_html__( 'Twitter', 'fleet' ) ),
-				'instagram' => array( 'label' => esc_html__( 'Instagram', 'fleet' ) ),
-				'endomondo' => array( 'label' => esc_html__( 'Endomondo', 'fleet' ) ),
-				'skype'     => array( 'label' => esc_html__( 'Skype', 'fleet' ) ),
+				'website'   => array(
+					'type'  => 'url',
+					'label' => esc_html__( 'Website', 'fleet' ),
+				),
+				'facebook'  => array(
+					'type'  => 'url',
+					'label' => esc_html__( 'Facebook', 'fleet' ),
+				),
+				'twitter'   => array(
+					'type'  => 'url',
+					'label' => esc_html__( 'Twitter', 'fleet' ),
+				),
+				'instagram' => array(
+					'type'  => 'url',
+					'label' => esc_html__( 'Instagram', 'fleet' ),
+				),
+				'endomondo' => array(
+					'type'  => 'url',
+					'label' => esc_html__( 'Endomondo', 'fleet' ),
+				),
+				'skype'     => array(
+					'type'  => 'url',
+					'label' => esc_html__( 'Skype', 'fleet' ),
+				),
 			),
 			'contact'  => array(
-				'mobile' => array( 'label' => esc_html__( 'Mobile', 'fleet' ) ),
-				'email'  => array( 'label' => esc_html__( 'E-mail', 'fleet' ) ),
+				'mobile'    => array(
+					'type'  => 'tel',
+					'label' => esc_html__( 'Mobile', 'fleet' ),
+				),
+				'email'     => array(
+					'type'  => 'email',
+					'label' => esc_html__( 'E-mail', 'fleet' ),
+				),
+				'wikipedia' => array(
+					'type'  => 'url',
+					'label' => esc_html__( 'Wikipedia', 'fleet' ),
+				),
+				'olympedia' => array(
+					'type'  => 'url',
+					'label' => esc_html__( 'Olympedia', 'fleet' ),
+				),
 			),
 		);
 		/**
@@ -290,12 +341,15 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 		switch ( $column ) {
 			case 'birth_year':
 				$meta_name = $this->options->get_option_name( 'personal_' . $column );
-				echo get_post_meta( $post_id, $meta_name, true );
+				$year      = intval( get_post_meta( $post_id, $meta_name, true ) );
+				echo 0 < $year ? esc_html( $year ) : '&mdash;';
 				break;
 			case 'email':
 				$meta_name = $this->options->get_option_name( 'contact_' . $column );
 				$email     = get_post_meta( $post_id, $meta_name, true );
-				if ( ! empty( $email ) ) {
+				if ( empty( $email ) ) {
+					echo '&nbsp;';
+				} else {
 					printf( '<a href="mailto:%s">%s</a>', esc_attr( $email ), esc_html( $email ) );
 				}
 				break;
@@ -380,8 +434,8 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 		if ( ! isset( $_POST['_wpnonce'] ) || ! isset( $_POST['user_id'] ) ) {
 			wp_send_json_error();
 		}
-		$nonce = $_POST['_wpnonce'];
-		if ( ! wp_verify_nonce( $nonce, $this->nonce_list . $_POST['user_id'] ) ) {
+		$nonce = sanitize_text_field( $_POST['_wpnonce'] );
+		if ( ! wp_verify_nonce( $nonce, $this->nonce_list . sanitize_text_field( $_POST['user_id'] ) ) ) {
 			wp_send_json_error();
 		}
 		$data      = array();
@@ -554,7 +608,6 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 					/* Restore original Post Data */
 					wp_reset_postdata();
 				}
-				wp_reset_query();
 			}
 		}
 		/**
@@ -661,13 +714,15 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 				unset( $crew['crew'][ $crew['current'] ] );
 				if ( isset( $value['helmsman'] ) && $post_id == $value['helmsman'] ) {
 					$currently_sails_on[] = sprintf(
+					// translators: %s: The hull's number.
 						__( 'Sail on %s as helmsman.', 'fleet' ),
 						$this->get_boat( $boat_id )
 					);
-					$done[]               = $this->get_done_key( 'helmsman', $boat_id, $post_id );
+					$done[] = $this->get_done_key( 'helmsman', $boat_id, $post_id );
 				}
 				if ( isset( $value['crew'] ) && $post_id == $value['crew'] ) {
 					$currently_sails_on[] = sprintf(
+					// translators: %s: The hull's number.
 						__( 'Sail on %s as crew.', 'fleet' ),
 						$this->get_boat( $boat_id )
 					);
@@ -684,6 +739,7 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 					}
 					$done[]     = $done_key;
 					$sails_on[] = sprintf(
+					// translators: %s: The hull's number.
 						__( 'Sailed on %s as helmsman.', 'fleet' ),
 						$this->get_boat( $boat_id )
 					);
@@ -695,6 +751,7 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 					}
 					$done[]     = $done_key;
 					$sails_on[] = sprintf(
+					// translators: %s: The hull's number.
 						__( 'Sailed on %s as crew.', 'fleet' ),
 						$this->get_boat( $boat_id )
 					);
@@ -805,6 +862,9 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 	}
 
 	public function add_flag_to_single_title( $post_title, $post_ID ) {
+		if ( $this->suspend_add_flag_to_single_title ) {
+			return $post_title;
+		}
 		if ( is_admin() ) {
 			return $post_title;
 		}
@@ -852,6 +912,14 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 		) {
 			$data['permalink'] = get_permalink( $person_id );
 		}
+		$data = wp_parse_args( $this->get_sailor_meta_by_id( $person_id ), $data );
+
+		$this->cache['persons'][ $person_id ] = $data;
+		return $this->cache['persons'][ $person_id ];
+	}
+
+	private function get_sailor_meta_by_id( $person_id ) {
+		$data = array();
 		foreach ( $this->fields as $group_key  => $group_data ) {
 			foreach ( $group_data as $field_key => $field_data ) {
 				$k = $group_key . '_' . $field_key;
@@ -874,7 +942,90 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 				);
 			}
 		}
-		$this->cache['persons'][ $person_id ] = $data;
-		return $this->cache['persons'][ $person_id ];
+		return $data;
+	}
+
+	/**
+	 * Plugin "Simple SEO Improvements" for person integration
+	 *
+	 * @since 2.6.0
+	 */
+	public function filter_json_ld_data_for_simple_seo_improvements_plugin( $data ) {
+		if ( is_singular( $this->post_type_name ) ) {
+			return $this->get_json_ld( get_the_ID() );
+		}
+		return $data;
+	}
+
+	public function get_json_ld( $person_id ) {
+		$person = $this->get_sailor_meta_by_id( $person_id );
+		$data   = array(
+			'@type' => 'Person',
+			'name'  => $this->get_sailor_name( $person_id ),
+		);
+		/**
+		 * iworks_fleet_personal_nation
+		 */
+		if ( isset( $person['personal_nation'] ) && ! empty( $person['personal_nation'] ) ) {
+			$country = iworks_fleet_get_nation_by_code( $person['personal_nation'] );
+			if ( $country ) {
+				$data['nationality'] = $country['en'];
+			}
+		}
+		/**
+		 * add birthdate only when for dead sailors
+		 */
+		if (
+				isset( $person['personal_birth_date'] )
+				&& ! empty( $person['personal_birth_date'] )
+				&& isset( $person['personal_death_date'] )
+				&& ! empty( $person['personal_death_date'] )
+			) {
+			$data['birthDate'] = gmdate( 'Y-m-d', $person['personal_birth_date'] );
+			$data['deathDate'] = gmdate( 'Y-m-d', $person['personal_death_date'] );
+		}
+		/**
+		 * add sameAs
+		 */
+			$same_as   = array();
+			$group_key = 'social';
+		foreach ( $this->fields[ $group_key ] as $field_key => $field_data ) {
+				$k = $group_key . '_' . $field_key;
+			if ( isset( $person[ $k ] ) && ! empty( $person[ $k ] ) ) {
+				$same_as[] = $person[ $k ];
+			}
+		}
+		if ( isset( $person['contact_wikipedia'] ) && ! empty( $person['contact_wikipedia'] ) ) {
+			$same_as[] = $person['contact_wikipedia'];
+		}
+		if ( isset( $person['contact_olympedia'] ) && ! empty( $person['contact_olympedia'] ) ) {
+			$same_as[] = $person['contact_olympedia'];
+		}
+		if ( ! empty( $same_as ) ) {
+			$data['sameAs'] = $same_as;
+		}
+			return $data;
+	}
+
+	/**
+	 * get sailor name for JSON-LD
+	 *
+	 * @since 2.6.0
+	 */
+	private function get_sailor_name( $person_id ) {
+		$name   = false;
+		$person = $this->get_sailor_meta_by_id( $person_id );
+		if (
+			isset( $person['personal_name'] )
+			&& ! empty( $person['personal_name'] )
+		) {
+			$name = $person['personal_name'];
+		}
+		if ( empty( $name ) ) {
+			$this->suspend_add_flag_to_single_title = true;
+			$name                                   = get_the_title( $person_id );
+			$this->suspend_add_flag_to_single_title = false;
+		}
+		return $name;
 	}
 }

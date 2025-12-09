@@ -15,32 +15,35 @@
 foreach ( $args['data']['teams'] as $one ) {
 	echo '<tr>';
 	echo '<td class="iworks-fleet-ranking-table-place">';
-	echo $one['place'];
+	echo wp_kses_post( $one['place'] );
 	echo '</td>';
 	echo '<td class="iworks-fleet-ranking-table-name">';
 	if ( isset( $one['url'] ) ) {
-		printf( '<a href="%s">%s</a>', $one['url'], esc_html( $one['name'] ) );
+		printf(
+			'<a href="%s">%s</a>',
+			esc_url( $one['url'] ),
+			wp_kses_post( $one['name'] )
+		);
 	} else {
-		echo $one['name'];
+		echo wp_kses_post( $one['name'] );
 	}
 	echo '</td>';
 	echo '<td class="iworks-fleet-ranking-table-years">';
-	echo $one['years'];
+	echo wp_kses_post( $one['years'] );
 	echo '</td>';
 	echo '<td class="iworks-fleet-ranking-table-number-of-gold">';
-	echo $one['medals']['gold'];
+	echo wp_kses_post( $one['medals']['gold'] );
 	echo '</td>';
 	echo '<td class="iworks-fleet-ranking-table-number-of-silver">';
-	echo $one['medals']['silver'];
+	echo wp_kses_post( $one['medals']['silver'] );
 	echo '</td>';
 	echo '<td class="iworks-fleet-ranking-table-number-of-bronze">';
-	echo $one['medals']['bronze'];
+	echo wp_kses_post( $one['medals']['bronze'] );
 	echo '</td>';
 	echo '<td class="iworks-fleet-ranking-table-number-of-starts">';
-	echo $one['number_of_starts'];
+	echo wp_kses_post( $one['number_of_starts'] );
 	echo '</td>';
 	echo '</tr>';
 }
-?>
-	</tbody>
-</table>
+echo '</tbody>';
+echo '</table>';

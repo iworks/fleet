@@ -26,7 +26,7 @@ if ( class_exists( 'iworks_fleet_posttypes_ranking' ) ) {
 	return;
 }
 
-require_once dirname( __DIR__, 1 ) . '/posttypes.php';
+require_once dirname( __DIR__, 1 ) . '/class-iworks-posttypes.php';
 
 class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 
@@ -167,8 +167,6 @@ class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 	}
 
 	public function register() {
-		global $iworks_fleet;
-		$show_in_menu = add_query_arg( 'post_type', $iworks_fleet->get_post_type_name( 'person' ), 'edit.php' );
 		$this->labels = array(
 			'name'                  => _x( 'Rankings', 'Ranking General Name', 'fleet' ),
 			'singular_name'         => _x( 'Ranking', 'Ranking Singular Name', 'fleet' ),
@@ -204,7 +202,7 @@ class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 			'hierarchical'         => false,
 			'public'               => true,
 			'show_ui'              => true,
-			'show_in_menu'         => $show_in_menu,
+			'show_in_menu'         => $this->get_show_in_menu(),
 			'show_in_admin_bar'    => false,
 			'show_in_nav_menus'    => false,
 			'can_export'           => true,
@@ -248,7 +246,7 @@ class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 	public function custom_columns( $column, $post_id ) {
 		switch ( $column ) {
 			case 'shortcode':
-				printf( '[iworks_fleet_ranking id="%d"]', $post_id );
+				printf( '[iworks_fleet_ranking id="%d"]', intval( $post_id ) );
 				break;
 		}
 	}
@@ -421,7 +419,7 @@ class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 			$option_value = get_post_meta( $id, $option_name, true );
 			switch ( $key ) {
 				case 'year':
-					$option_value = date( 'Y', intval( $option_value ) );
+					$option_value = gmdate( 'Y', intval( $option_value ) );
 					break;
 			}
 			$settings[ $key ] = $option_value;
@@ -440,7 +438,7 @@ class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 		if ( empty( $value ) ) {
 			return $list;
 		}
-		$year = date( 'Y', $value );
+		$year = gmdate( 'Y', $value );
 		/**
 		 * serie
 		 */

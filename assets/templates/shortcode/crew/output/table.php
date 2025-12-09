@@ -7,8 +7,8 @@
 foreach ( $args['data']['events'] as $event_id ) {
 	printf(
 		'<th colspan="2" class="iworks-fleet-ranking-table-thead-event"><span><a href="%s">%s</a></span></th>',
-		get_permalink( $event_id ),
-		get_the_title( $event_id )
+		esc_url( get_permalink( $event_id ) ),
+		wp_kses_post( get_the_title( $event_id ) )
 	);
 }
 ?>
@@ -36,22 +36,22 @@ foreach ( $args['data']['teams'] as $one ) {
 	if ( $last_points === $one['sum'] ) {
 		if ( $last_number_of_starts < $one['number_of_starts'] ) {
 			$last_place = $i + 1;
-			echo $i + 1;
+			echo esc_html( $i + 1 );
 		} else {
 			if ( $last_points === $one['sum'] ) {
 				if ( $last_number_of_starts > $one['number_of_starts'] ) {
-					$last_place++;
+					++$last_place;
 				}
-				echo $last_place;
+				echo esc_html( $last_place );
 			} else {
-				echo $i;
+				echo esc_html( $i );
 			}
 		}
 	} elseif ( $last_points < $one['sum'] ) {
 		$last_place = $i;
-		echo $i;
+		echo esc_html( $i );
 	} else {
-		echo $last_place;
+		echo esc_html( $last_place );
 	}
 	echo '</td>';
 	echo '<td class="iworks-fleet-ranking-table-name"><ul>';
@@ -61,7 +61,11 @@ foreach ( $args['data']['teams'] as $one ) {
 			isset( $sailor['permalink'] )
 			&& $sailor['permalink']
 		) {
-			printf( '<a href="%s">%s</a>', $sailor['permalink'], esc_html( $sailor['name'] ) );
+			printf(
+				'<a href="%s">%s</a>',
+				esc_url( $sailor['permalink'] ),
+				esc_html( $sailor['name'] )
+			);
 		} else {
 			echo $sailor['name'];
 		}
@@ -123,13 +127,13 @@ foreach ( $args['data']['teams'] as $one ) {
 		}
 	}
 	echo '<td class="iworks-fleet-ranking-table-number-of-starts">';
-	echo $one['number_of_starts'];
+	echo esc_html( $one['number_of_starts'] );
 	echo '</td>';
 	echo '<td class="iworks-fleet-ranking-table-brutto">';
-	echo $one['sum'];
+	echo esc_html( $one['sum'] );
 	echo '</td>';
 	echo '<td class="iworks-fleet-ranking-table-netto">';
-	echo $one['netto'];
+	echo esc_html( $one['netto'] );
 	echo '</td>';
 	echo '</tr>';
 	/**
@@ -140,7 +144,7 @@ foreach ( $args['data']['teams'] as $one ) {
 	/**
 	 * increment
 	 */
-	$i++;
+	++$i;
 }
 ?>
 	</tbody>

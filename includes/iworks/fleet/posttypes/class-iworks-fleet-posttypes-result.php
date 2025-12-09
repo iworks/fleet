@@ -8,7 +8,7 @@ published by the Free Software Foundation.
 
 This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
@@ -25,7 +25,7 @@ if ( class_exists( 'iworks_fleet_posttypes_result' ) ) {
 	return;
 }
 
-require_once dirname( __DIR__, 1 ) . '/posttypes.php';
+require_once dirname( __DIR__, 1 ) . '/class-iworks-posttypes.php';
 
 class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 
@@ -152,6 +152,12 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		 */
 		add_filter( 'iworks/fleet/results/get/array', array( $this, 'filter_get_results_array' ), 10, 2 );
 		add_filter( 'iworks/fleet/medals/get/array', array( $this, 'filter_get_medals_array' ), 10, 2 );
+		/**
+		 * Plugin "Simple SEO Improvements" for person integration
+		 *
+		 * @since 2.6.0
+		 */
+		add_filter( 'iworks_simple_seo_improvements_json_ld::WebSite', array( $this, 'filter_json_ld_data_for_simple_seo_improvements_plugin' ) );
 	}
 
 	/**
@@ -230,13 +236,12 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			$content .= $cache;
 			return $content;
 		}
-		$table_name_regatta = $wpdb->prefix . 'fleet_regatta';
-		$query              = $wpdb->prepare(
-			"SELECT post_regata_id, year, place FROM {$table_name_regatta} where ( helm_id = %d or crew_id = %d ) and place < 4 order by year",
+		$query   = $wpdb->prepare(
+			"SELECT post_regata_id, year, place FROM {$wpdb->fleet_regatta} where ( helm_id = %d or crew_id = %d ) and place < 4 order by year",
 			$sailor_id,
 			$sailor_id
 		);
-		$regatta            = $wpdb->get_results( $query );
+		$regatta = $wpdb->get_results( $query );
 		if ( empty( $regatta ) ) {
 			return $content;
 		}
@@ -456,7 +461,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			sanitize_title(
 				sprintf(
 					'%s-%s-%s',
-					date( 'Y-m-d-h-i' ),
+					gmdate( 'Y-m-d-h-i' ),
 					$action,
 					get_the_title( $post_id )
 				)
@@ -521,10 +526,9 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 				}
 				$row[] = __( 'Sum', 'fleet' );
 				$this->fputcsv( $out, $row );
-				$races              = $this->get_races_data( $post_id, 'csv' );
-				$table_name_regatta = $wpdb->prefix . 'fleet_regatta';
-				$query              = $wpdb->prepare( "SELECT * FROM {$table_name_regatta} where post_regata_id = %d order by place", $post_id );
-				$regatta            = $wpdb->get_results( $query );
+				$races   = $this->get_races_data( $post_id, 'csv' );
+				$query   = $wpdb->prepare( "SELECT * FROM {$wpdb->fleet_regatta} where post_regata_id = %d order by place", $post_id );
+				$regatta = $wpdb->get_results( $query );
 				foreach ( $regatta as $one ) {
 					$row   = array();
 					$row[] = $one->place;
@@ -571,7 +575,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 	public function shortcode_list( $atts ) {
 		$atts = shortcode_atts(
 			array(
-				'year'               => date( 'Y' ),
+				'year'               => gmdate( 'Y' ),
 				'serie'              => null,
 				'title'              => __( 'Results', 'fleet' ),
 				'title_show'         => 'on',
@@ -928,7 +932,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 				} else {
 					printf(
 						'<a href="%s">%d</a>',
-						add_query_arg( 'iworks_fleet_result_year', intval( $year ) ),
+						esc_url( add_query_arg( 'iworks_fleet_result_year', intval( $year ) ) ),
 						esc_html( $year )
 					);
 				}
@@ -942,7 +946,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		if ( empty( $start ) ) {
 			return '';
 		}
-		return date( 'Y', $start );
+		return gmdate( 'Y', $start );
 	}
 
 	public function add_year_to_title( $title, $post_id = null ) {
@@ -962,9 +966,8 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 
 	private function get_list_by_year( $year ) {
 		global $wpdb;
-		$table_name_regatta = $wpdb->prefix . 'fleet_regatta';
-		$sql                = $wpdb->prepare(
-			"select * from {$table_name_regatta} where year = %d order by date, year desc",
+		$sql = $wpdb->prepare(
+			"select * from {$wpdb->fleet_regatta} where year = %d order by date, year desc",
 			$year
 		);
 		return $this->add_results_metadata( $wpdb->get_results( $sql ) );
@@ -972,9 +975,8 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 
 	private function get_list_by_sailor_id( $sailor_id ) {
 		global $wpdb;
-		$table_name_regatta = $wpdb->prefix . 'fleet_regatta';
-		$sql                = $wpdb->prepare(
-			"select * from {$table_name_regatta} where helm_id = %d or crew_id = %d order by date, year desc",
+		$sql = $wpdb->prepare(
+			"select * from {$wpdb->fleet_regatta} where helm_id = %d or crew_id = %d order by date, year desc",
 			$sailor_id,
 			$sailor_id
 		);
@@ -988,34 +990,31 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 
 	private function get_list_by_post_ids( $ids ) {
 		global $wpdb;
-		$table_name_regatta = $wpdb->prefix . 'fleet_regatta';
-		$sql                = sprintf(
-			"select * from {$table_name_regatta} where post_regata_id in( %s ) order by date, year desc",
+		$sql = sprintf(
+			"select * from {$wpdb->fleet_regatta} where post_regata_id in( %s ) order by date, year desc",
 			implode(
 				', ',
 				array_map( array( $this, 'placeholder_d_helper' ), $ids )
 			)
 		);
-		$sql                = $wpdb->prepare( $sql, $ids );
+		$sql = $wpdb->prepare( $sql, $ids );
 		return $this->add_results_metadata( $wpdb->get_results( $sql ) );
 	}
 
 	private function get_list_by_post_ids_limit_place( $ids, $min, $max ) {
 		global $wpdb;
-		$table_name_regatta = $wpdb->prefix . 'fleet_regatta';
-		$sql                = sprintf(
-			"select * from {$table_name_regatta} where post_regata_id in( %s ) and place >= %%d and place <= %%d order by date, year desc",
+		$sql   = sprintf(
+			"select * from {$wpdb->fleet_regatta} where post_regata_id in( %s ) and place >= %%d and place <= %%d order by date, year desc",
 			implode(
 				', ',
 				array_map( array( $this, 'placeholder_d_helper' ), $ids )
 			)
 		);
-		$ids[]              = $min;
-		$ids[]              = $max;
-		$sql                = $wpdb->prepare( $sql, $ids );
+		$ids[] = $min;
+		$ids[] = $max;
+		$sql   = $wpdb->prepare( $sql, $ids );
 		return $this->add_results_metadata( $wpdb->get_results( $sql ) );
 	}
-
 
 	/**
 	 * get last recorded regatta filter
@@ -1031,13 +1030,12 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			return $content;
 		}
 		global $wpdb;
-		$table_name_regatta = $wpdb->prefix . 'fleet_regatta';
-		$sql                = $wpdb->prepare(
-			"select * from {$table_name_regatta} where helm_id = %d or crew_id = %d order by date, year desc limit 1",
+		$sql  = $wpdb->prepare(
+			"select * from {$wpdb->fleet_regatta} where helm_id = %d or crew_id = %d order by date, year desc limit 1",
 			$sailor_id,
 			$sailor_id
 		);
-		$data               = $this->add_results_metadata( $wpdb->get_results( $sql ) );
+		$data = $this->add_results_metadata( $wpdb->get_results( $sql ) );
 		if ( empty( $data ) ) {
 			return $content;
 		}
@@ -1045,6 +1043,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		add_filter( 'iworks_fleet_result_skip_year_in_title', '__return_true' );
 		if ( intval( $data->helm_id ) === $sailor_id ) {
 			$content .= sprintf(
+				// translators: This is a string that is used in a specific context where it describes a sailor's role in a regatta. %1$s: The year of the regatta. %2$s: A link to the regatta's page. %3$s: The hull's number.
 				__( 'As a helmsman in %1$s in the %2$s on %3$s', 'fleet' ),
 				$this->get_year_link( $data->year ),
 				sprintf( '<a href="%s">%s</a>', get_permalink( $data->post_regata_id ), get_the_title( $data->post_regata_id ) ),
@@ -1052,6 +1051,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			);
 		} elseif ( intval( $data->crew_id ) === $sailor_id ) {
 			$content .= sprintf(
+				// translators: This is a string that is used in a specific context where it describes a sailor's role in a regatta. %1$s: The year of the regatta. %2$s: A link to the regatta's page. %3$s: The hull's number.
 				__( 'As a crew in %1$s in the %2$s on %3$s', 'fleet' ),
 				$this->get_year_link( $data->year ),
 				sprintf( '<a href="%s">%s</a>', get_permalink( $data->post_regata_id ), get_the_title( $data->post_regata_id ) ),
@@ -1059,6 +1059,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			);
 		} else {
 			$content .= sprintf(
+				// translators: This is a string that is used in a specific context where it describes a sailor's role in a regatta. %1$s: The year of the regatta. %2$s: A link to the regatta's page. %3$s: The hull's number.
 				__( 'In %1$s in the %2$s on %3$s', 'fleet' ),
 				$this->get_year_link( $data->year ),
 				sprintf( '<a href="%s">%s</a>', get_permalink( $data->post_regata_id ), get_the_title( $data->post_regata_id ) ),
@@ -1127,8 +1128,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 
 	private function get_list_by_boat_id( $boat_id ) {
 		global $wpdb;
-		$table_name_regatta = $wpdb->prefix . 'fleet_regatta';
-		$boat_title         = get_the_title( $boat_id );
+		$boat_title = get_the_title( $boat_id );
 		if ( empty( $boat_title ) ) {
 			return array();
 		}
@@ -1137,7 +1137,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			return array();
 		}
 		$sql = $wpdb->prepare(
-			"select * from {$table_name_regatta} where boat_id = %d order by date, year desc",
+			"select * from {$wpdb->fleet_regatta} where boat_id = %d order by date, year desc",
 			$boat_title
 		);
 		return $wpdb->get_results( $sql );
@@ -1369,8 +1369,6 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 	}
 
 	public function register() {
-		global $iworks_fleet;
-		$show_in_menu = add_query_arg( 'post_type', $iworks_fleet->get_post_type_name( 'person' ), 'edit.php' );
 		$this->labels = array(
 			'name'                  => _x( 'Results', 'Result General Name', 'fleet' ),
 			'singular_name'         => _x( 'Result', 'Result Singular Name', 'fleet' ),
@@ -1410,7 +1408,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			'hierarchical'         => false,
 			'public'               => true,
 			'show_ui'              => true,
-			'show_in_menu'         => $show_in_menu,
+			'show_in_menu'         => $this->get_show_in_menu(),
 			'show_in_admin_bar'    => true,
 			'show_in_nav_menus'    => true,
 			'can_export'           => true,
@@ -1484,15 +1482,15 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 <script type="text/html" id="tmpl-iworks-result-crew">
 <tr class="iworks-crew-single-row" id="iworks-crew-{{{data.id}}}">
 	<td class="iworks-crew-current">
-<input type="radio" name="<?php echo $this->single_crew_field_name; ?>[current]" value="{{{data.id}}}" />
+<input type="radio" name="<?php echo esc_attr( $this->single_crew_field_name ); ?>[current]" value="{{{data.id}}}" />
 	</td>
 	<td class="iworks-crew-helmsman">
-		<select name="<?php echo $this->single_crew_field_name; ?>[crew][{{{data.id}}}][helmsman]">
+		<select name="<?php echo esc_attr( $this->single_crew_field_name ); ?>[crew][{{{data.id}}}][helmsman]">
 			<option value=""><?php esc_html_e( 'Select a helmsman', 'fleet' ); ?></option>
 		</select>
 	</td>
 	<td class="iworks-crew-crew">
-		<select name="<?php echo $this->single_crew_field_name; ?>[crew][{{{data.id}}}][crew]">
+		<select name="<?php echo esc_attr( $this->single_crew_field_name ); ?>[crew][{{{data.id}}}][crew]">
 			<option value=""><?php esc_html_e( 'Select a crew', 'fleet' ); ?></option>
 		</select>
 	</td>
@@ -1503,7 +1501,6 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 </script>
 		<?php
 	}
-
 
 	public function result( $post ) {
 		$this->get_meta_box_content( $post, $this->fields, __FUNCTION__ );
@@ -1530,28 +1527,32 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			case 'builder':
 				$id = get_post_meta( $post_id, $this->get_custom_field_basic_manufacturer_name(), true );
 				if ( empty( $id ) ) {
-					echo '-';
+					echo '&mdash;';
 				} else {
 					printf(
 						'<a href="%s">%s</a>',
-						add_query_arg(
-							array(
-								'builder'   => $id,
-								'post_type' => 'iworks_fleet_result',
-							),
-							admin_url( 'edit.php' )
+						esc_url(
+							add_query_arg(
+								array(
+									'builder'   => $id,
+									'post_type' => 'iworks_fleet_result',
+								),
+								admin_url( 'edit.php' )
+							)
 						),
-						get_post_meta( $id, 'iworks_fleet_manufacturer_data_full_name', true )
+						esc_html( get_post_meta( $id, 'iworks_fleet_manufacturer_data_full_name', true ) )
 					);
 				}
 				break;
 			case 'build_year':
 				$name = $this->options->get_option_name( 'result_build_year' );
-				echo get_post_meta( $post_id, $name, true );
+				$year = intval( get_post_meta( $post_id, $name, true ) );
+				echo 0 < $year ? esc_html( $year ) : '&mdash;';
 				break;
 			case 'location':
-				$name = $this->options->get_option_name( 'result_location' );
-				echo get_post_meta( $post_id, $name, true );
+				$name     = $this->options->get_option_name( 'result_location' );
+				$location = get_post_meta( $post_id, $name, true );
+				echo $location ? esc_html( $location ) : '&mdash;';
 				break;
 		}
 	}
@@ -1638,8 +1639,6 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 
 	public function import_data( $post_id, $data ) {
 		global $wpdb, $iworks_fleet;
-		$table_name_regatta      = $wpdb->prefix . 'fleet_regatta';
-		$table_name_regatta_race = $wpdb->prefix . 'fleet_regatta_race';
 		/**
 		 * remove file first row
 		 */
@@ -1659,14 +1658,14 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		 * sailors
 		 */
 		$sailors = $iworks_fleet->get_list_by_post_type( 'person' );
-		$wpdb->delete( $table_name_regatta, array( 'post_regata_id' => $post_id ), array( '%d' ) );
-		$wpdb->delete( $table_name_regatta_race, array( 'post_regata_id' => $post_id ), array( '%d' ) );
+		$wpdb->delete( $wpdb->fleet_regatta, array( 'post_regata_id' => $post_id ), array( '%d' ) );
+		$wpdb->delete( $wpdb->fleet_regatta_race, array( 'post_regata_id' => $post_id ), array( '%d' ) );
 		/**
 		 * Result date end
 		 */
 		$name = $this->options->get_option_name( 'result_date_end' );
 		$year = get_post_meta( $post_id, $name, true );
-		$year = $year ? date( 'Y', $year ) : '';
+		$year = $year ? gmdate( 'Y', $year ) : '';
 		/**
 		 * Result date end
 		 */
@@ -1750,7 +1749,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			/**
 			 * insert
 			 */
-			$wpdb->insert( $table_name_regatta, $regatta );
+			$wpdb->insert( $wpdb->fleet_regatta, $regatta );
 			$regatta_id = $wpdb->insert_id;
 			if ( empty( $row ) ) {
 				continue;
@@ -1811,7 +1810,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 						break;
 				}
 				$race['points'] = preg_replace( '/[^\d^\,^\.]+/', '', $one );
-				$wpdb->insert( $table_name_regatta_race, $race );
+				$wpdb->insert( $wpdb->fleet_regatta_race, $race );
 			}
 		}
 		return true;
@@ -1835,8 +1834,6 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		 * setup
 		 */
 		global $wpdb, $iworks_fleet;
-		$table_name_regatta      = $wpdb->prefix . 'fleet_regatta';
-		$table_name_regatta_race = $wpdb->prefix . 'fleet_regatta_race';
 		/**
 		 * regata meta
 		 */
@@ -1920,7 +1917,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		/**
 		 * get regata data
 		 */
-		$query   = $wpdb->prepare( "SELECT * FROM {$table_name_regatta} where post_regata_id = %d order by place", $post_id );
+		$query   = $wpdb->prepare( "SELECT * FROM {$wpdb->fleet_regatta} where post_regata_id = %d order by place", $post_id );
 		$regatta = $wpdb->get_results( $query );
 		/**
 		 * regatta in the future
@@ -2278,11 +2275,10 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 	 */
 	private function get_races_data( $post_id, $output = 'html' ) {
 		global $wpdb;
-		$races                   = array();
-		$table_name_regatta_race = $wpdb->prefix . 'fleet_regatta_race';
-		$query                   = $wpdb->prepare( "SELECT * FROM {$table_name_regatta_race} where post_regata_id = %d order by regata_id, number", $post_id );
-		$r                       = $wpdb->get_results( $query );
-		$pattern                 = '<small style="fleet-results-code fleet-results-code-%3$s" title="%2$d">%1$s</small>';
+		$races   = array();
+		$query   = $wpdb->prepare( "SELECT * FROM {$wpdb->fleet_regatta_race} where post_regata_id = %d order by regata_id, number", $post_id );
+		$r       = $wpdb->get_results( $query );
+		$pattern = '<small style="fleet-results-code fleet-results-code-%3$s" title="%2$d">%1$s</small>';
 		if ( 'csv' === $output ) {
 			$pattern = '%2$d %1$s';
 		}
@@ -2313,12 +2309,12 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 	}
 
 	private function get_dates( $start, $end ) {
-		$start_year  = date( 'Y', $start );
-		$end_year    = date( 'Y', $end );
-		$start_month = date( 'F', $start );
-		$end_month   = date( 'F', $end );
-		$start_day   = date( 'j', $start );
-		$end_day     = date( 'j', $end );
+		$start_year  = gmdate( 'Y', $start );
+		$end_year    = gmdate( 'Y', $end );
+		$start_month = gmdate( 'F', $start );
+		$end_month   = gmdate( 'F', $end );
+		$start_day   = gmdate( 'j', $start );
+		$end_day     = gmdate( 'j', $end );
 		if (
 			$start_day === $end_day
 			&& $start_month === $end_month
@@ -2350,7 +2346,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 	public function shortcode_ranking( $atts, $content = '' ) {
 		$atts    = shortcode_atts(
 			array(
-				'year'       => date( 'Y' ),
+				'year'       => gmdate( 'Y' ),
 				'serie'      => null,
 				'title'      => __( 'Ranking', 'fleet' ),
 				'protected'  => 0,
@@ -2427,11 +2423,9 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		 * prepare
 		 */
 		global $wpdb, $iworks_fleet;
-		$table_name_regatta      = $wpdb->prefix . 'fleet_regatta';
-		$table_name_regatta_race = $wpdb->prefix . 'fleet_regatta_race';
-		$all                     = array();
-		$max                     = 0;
-		$regattas                = array();
+		$all      = array();
+		$max      = 0;
+		$regattas = array();
 		/**
 		 * get regatta data
 		 */
@@ -2449,7 +2443,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		 * results
 		 */
 		foreach ( $regattas as $post_id => $points ) {
-			$query   = $wpdb->prepare( "SELECT * FROM {$table_name_regatta} where post_regata_id = %d order by place", $post_id );
+			$query   = $wpdb->prepare( "SELECT * FROM {$wpdb->fleet_regatta} where post_regata_id = %d order by place", $post_id );
 			$results = $wpdb->get_results( $query );
 			foreach ( $results as $one ) {
 				$x = array( $one->boat_id, $one->helm_id, $one->crew_id );
@@ -2910,6 +2904,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 					esc_attr( $serie_slug ),
 					get_term_link( $serie_slug, $this->taxonomy_name_serie ),
 					sprintf(
+						// translators: %s: serie name
 						_x( 'Show more: %s', 'all of taxonomy link title', 'fleet' ),
 						$term->name
 					)
@@ -2973,17 +2968,17 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 					$where .= ' and post_id in (' . implode( ',', $object_ids ) . ')';
 				}
 		}
-			$where .= ' and meta_key = %s and meta_value is not null';
-		$sql        = sprintf(
-			'select substring( date_add(from_unixtime(0), interval meta_value second), 1, 4 ) as year, count(*) as counter from %s where %s group by 1 order by 1 desc',
+		$where .= ' and meta_key = %s and meta_value is not null';
+		$sql    = sprintf(
+			'select substring( date_add(from_unixtime(1), interval meta_value second), 1, 4 ) as year, count(*) as counter from %s where %s group by 1 order by 1 desc',
 			$wpdb->postmeta,
 			$where
 		);
-		$query      = $wpdb->prepare(
+		$query  = $wpdb->prepare(
 			$sql,
 			$this->options->get_option_name( 'result_date_start' )
 		);
-		$years      = $wpdb->get_results( $query );
+		$years  = $wpdb->get_results( $query );
 		if ( empty( $years ) ) {
 			return $content;
 		}
@@ -3009,6 +3004,8 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 				'<li class="result-year-%d" title="%s">%s</li>',
 				esc_attr( $one->year ),
 				sprintf(
+				// translators: %d is the number of results of a year
+
 					_n(
 						'Number of result: %d',
 						'Number of results: %d',
@@ -3144,9 +3141,8 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 
 	private function get_regatta_by_year( $year ) {
 		global $wpdb;
-		$table_name_regatta = $wpdb->prefix . 'fleet_regatta';
-		$query              = $wpdb->prepare(
-			"SELECT distinct post_regata_id FROM {$table_name_regatta} where year = %d",
+		$query = $wpdb->prepare(
+			"SELECT distinct post_regata_id FROM {$wpdb->fleet_regatta} where year = %d",
 			$year
 		);
 		return $wpdb->get_col( $query );
@@ -3186,13 +3182,12 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			$content .= $cache;
 			return $content;
 		}
-		$table_name_regatta = $wpdb->prefix . 'fleet_regatta';
-		$query              = $wpdb->prepare(
-			"select place from {$table_name_regatta} where helm_id = %d or crew_id = %d order by date, year",
+		$query  = $wpdb->prepare(
+			"select place from {$wpdb->fleet_regatta} where helm_id = %d or crew_id = %d order by date, year",
 			$sailor_id,
 			$sailor_id
 		);
-		$places             = $wpdb->get_col( $query );
+		$places = $wpdb->get_col( $query );
 		if ( empty( $places ) ) {
 			return $content;
 		}
@@ -3927,5 +3922,89 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			apply_filters( 'iworks/fleet/result/fputcsv/escaped', '\\' ),
 			apply_filters( 'iworks/fleet/result/fputcsv/eol', "\n" )
 		);
+	}
+
+	private function get_competitors_by_post_id( $post_id ) {
+		global $wpdb;
+		$sql         = "select helm_id, crew_id, helm_name, crew_name from {$wpdb->fleet_regatta} where post_regata_id = %d";
+		$sql         = $wpdb->prepare( $sql, $post_id );
+		$results     = $wpdb->get_results( $sql, ARRAY_A );
+		$competitors = array();
+		if ( $results ) {
+			foreach ( $results as $result ) {
+				if ( ! empty( $result['helm_id'] ) ) {
+					$competitors[] = array(
+						'id'   => $result['helm_id'],
+						'name' => $result['helm_name'],
+					);
+				}
+				if ( ! empty( $result['crew_id'] ) ) {
+					$competitors[] = array(
+						'id'   => $result['crew_id'],
+						'name' => $result['crew_name'],
+					);
+				}
+			}
+		}
+		return $competitors;
+	}
+
+	/**
+	 * Plugin "Simple SEO Improvements" for person integration
+	 *
+	 * @since 2.6.0
+	 */
+	public function filter_json_ld_data_for_simple_seo_improvements_plugin( $data ) {
+		if ( is_singular( $this->post_type_name ) ) {
+			global $iworks_fleet;
+			$data = array(
+				'@type'     => 'SportsEvent',
+				'name'      => get_the_title(),
+				'sport'     => 'sailing',
+				'startDate' => gmdate( 'c', get_post_meta( get_the_ID(), 'iworks_fleet_result_date_start', true ) ),
+				'endDate'   => gmdate( 'c', get_post_meta( get_the_ID(), 'iworks_fleet_result_date_end', true ) ),
+			);
+			/**
+			 * organizer
+			 */
+			$organizer = get_post_meta( get_the_ID(), 'iworks_fleet_result_organizer', true );
+			if ( ! empty( $organizer ) ) {
+				$data['organizer'] = $organizer;
+			}
+			/**
+			 * add sameAs
+			 */
+			$same_as = array();
+			$links   = get_post_meta( get_the_ID(), '_links', true );
+			if ( is_array( $links ) ) {
+				foreach ( $links as $link ) {
+					if ( is_array( $link )
+						&& isset( $link['url'] )
+						&& ! empty( $link['url'] )
+					) {
+						$same_as[] = $link['url'];
+					}
+				}
+			}
+			if ( ! empty( $same_as ) ) {
+				$data['sameAs'] = $same_as;
+
+			}
+			/**
+			 * competitors
+			 */
+			$competitors = $this->get_competitors_by_post_id( get_the_ID() );
+			foreach ( $competitors as $competitor ) {
+				if ( ! empty( $competitor['id'] ) ) {
+					$data['competitor'][] = $iworks_fleet->objects['post_type_person']->get_json_ld( $competitor['id'] );
+				} else {
+					$data['competitors'][] = array(
+						'@type' => 'Person',
+						'name'  => $competitor['name'],
+					);
+				}
+			}
+		}
+		return $data;
 	}
 }

@@ -62,8 +62,9 @@ module.exports = function(grunt) {
 			'!assets/scripts/src/**',
 			'!assets/scss/**',
 			'!assets/styles/frontend/**',
-			'!includes/iworks/fleet/class-fleet-github.php',
+			'!includes/iworks/fleet/class-iworks-fleet-github.php',
 			'!includes/pro/**',
+			'!integration/themes/**',
 			'!languages/*.mo',
 			'!languages/*.po',
 		]

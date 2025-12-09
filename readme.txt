@@ -80,12 +80,17 @@ Please use the plugin support forum or submit issues/pull requests on GitHub.
 
 == Changelog ==
 
-= 2.5.2 (2025-12-09) =
-* Resolved an XSS vulnerability in the admin panel affecting the editing of custom post type entries within the plugin.
+= 2.6.0 (2025-12-09) =
 * Added JSON-LD integration with the [Simple SEO Improvements](https://wordpress.org/plugins/simple-seo-improvements/) plugin for the Person schema.
 * Added JSON-LD integration with the [Simple SEO Improvements](https://wordpress.org/plugins/simple-seo-improvements/) plugin for the Result schema.
-* Updated the [iWorks Options](https://github.com/iworks/wordpress-options-class) module to version 3.1.0.
-* Moved database-related functions to a separate class.
+* Added escaping functions for safer output handling.
+* Fixed an XSS vulnerability in the admin panel affecting editing of the plugin’s custom post types.
+* Improved localization by adding translator notes.
+* Refactored database-related logic into a separate class.
+* Removed the call to `load_plugin_textdomain()` as text domains are now loaded automatically.
+* Renamed the file `posttypes.php` to `class-iworks-posttypes.php` for consistency with naming conventions.
+* Replaced the `date()` function with `gmdate()` to ensure the formatted time is always in UTC and unaffected by the server or runtime timezone configuration.
+* Updated the [iWorks Options](https://github.com/iworks/wordpress-options-class) module to version 3.0.9.
 
 = 2.5.1 (2025-10-22) =
 * Fixed issue with option object on ajax calls.

@@ -40,7 +40,7 @@ class iworks {
 		 * static settings
 		 */
 		$this->dev  = ( defined( 'IWORKS_DEV_MODE' ) && IWORKS_DEV_MODE ) ? '' : '.min';
-		$this->base = dirname( __FILE__ );
+		$this->base = __DIR__;
 		$this->dir  = basename( dirname( $this->base ) );
 	}
 
@@ -108,6 +108,9 @@ class iworks {
 						'<input type="number" name="%s" value="%d" %s />',
 						esc_attr( $key ),
 						intval( $value ),
+						/**
+						 * this is escaped few lines above
+						 */
 						$extra
 					);
 					break;
@@ -118,8 +121,8 @@ class iworks {
 					}
 					printf(
 						'<input type="text" class="datepicker" name="%s" value="%s" />',
-						$this->get_meta_name( $name ),
-						$date
+						esc_attr( $this->get_meta_name( $name ) ),
+						esc_attr( $date )
 					);
 					break;
 			}

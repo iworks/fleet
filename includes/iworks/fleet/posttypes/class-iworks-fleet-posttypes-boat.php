@@ -25,7 +25,7 @@ if ( class_exists( 'iworks_fleet_posttypes_boat' ) ) {
 	return;
 }
 
-require_once dirname( __DIR__, 1 ) . '/posttypes.php';
+require_once dirname( __DIR__, 1 ) . '/class-iworks-posttypes.php';
 
 class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 
@@ -129,10 +129,10 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		 * Single crew meta field name
 		 */
 		$this->single_crew_field_name = $this->options->get_option_name( 'crew' );
-			/**
-			 * Single boat meta field name
-			 */
-			$this->single_boat_field_name = $this->options->get_option_name( 'boat', true );
+		/**
+		 * Single boat meta field name
+		 */
+		$this->single_boat_field_name = $this->options->get_option_name( 'boat', true );
 
 		/**
 		 * fields
@@ -149,10 +149,12 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 					'twitter' => 'yes',
 				),
 				'build_year'           => array(
+					'type'    => 'number',
 					'label'   => __( 'Year of building', 'fleet' ),
 					'twitter' => 'yes',
 				),
 				'hull_number'          => array(
+					'type'    => 'number',
 					'label'   => __( 'Hull number', 'fleet' ),
 					'twitter' => 'yes',
 				),
@@ -196,7 +198,6 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 							'composite'  => __( 'Composite', 'fleet' ),
 							'wood'       => __( 'Wood', 'fleet' ),
 							'kevlar'     => __( 'Kevlar', 'fleet' ),
-							''           => __( '', 'fleet' ),
 						),
 					),
 				),
@@ -286,8 +287,8 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 			$content .= '<div class="iworks-fleet-location">';
 			if ( $atts['show_counter'] ) {
 				$content .= sprintf(
-					'<span class="iworks-fleet-list-count">%s</span>',
 					sprintf(
+					/* translators: %1$d: number of boats */
 						esc_html_x( 'Number of boats: %1$d.', 'number of boats', 'fleet' ),
 						$the_query->found_posts
 					)
@@ -323,11 +324,10 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		 * taxonomies configuration
 		 */
 		$taxonomies            = $this->options->get_option( 'boat_taxonomies' );
-		$show_in_menu          = add_query_arg( 'post_type', $iworks_fleet->get_post_type_name( 'person' ), 'edit.php' );
 		$this->labels          = array(
 			'name'                  => _x( 'Boats', 'Boat General Name', 'fleet' ),
 			'singular_name'         => _x( 'Boat', 'Boat Singular Name', 'fleet' ),
-			'menu_name'             => __( '5O5', 'fleet' ),
+			'menu_name'             => __( 'Boats', 'fleet' ),
 			'name_admin_bar'        => __( 'Boat', 'fleet' ),
 			'archives'              => __( 'Boats', 'fleet' ),
 			'attributes'            => __( 'Item Attributes', 'fleet' ),
@@ -376,7 +376,7 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 			'hierarchical'         => false,
 			'public'               => true,
 			'show_ui'              => true,
-			'show_in_menu'         => $show_in_menu,
+			'show_in_menu'         => $this->get_show_in_menu(),
 			'show_in_admin_bar'    => true,
 			'show_in_nav_menus'    => true,
 			'can_export'           => true,
@@ -518,8 +518,8 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		 * save crews
 		 */
 		if (
-			$this->options->get_option( 'boat_add_crew_manually' )
-			&& isset( $_POST[ $this->single_crew_field_name ] )
+		$this->options->get_option( 'boat_add_crew_manually' )
+		&& isset( $_POST[ $this->single_crew_field_name ] )
 		) {
 			$value = $_POST[ $this->single_crew_field_name ];
 			if ( ! isset( $value['crew'] ) ) {
@@ -782,8 +782,8 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 						$owners_text .= $one['organization'];
 					}
 					if (
-						! empty( $one['date_from'] )
-						|| ! empty( $one['date_to'] )
+					! empty( $one['date_from'] )
+					|| ! empty( $one['date_to'] )
 					) {
 						$owners_text .= sprintf(
 							' <span class="dates">%s - %s</span>',
@@ -959,10 +959,10 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 				?>
 <tr class="iworks-crew-single-row" id="iworks-crew-<?php echo esc_attr( $key ); ?>">
 <td class="iworks-crew-current">
-<input type="radio" name="<?php echo $this->single_crew_field_name; ?>[current]" value="<?php echo esc_attr( $key ); ?>" <?php checked( $current, $key ); ?> />
+<input type="radio" name="<?php echo esc_attr( $this->single_crew_field_name ); ?>[current]" value="<?php echo esc_attr( $key ); ?>" <?php checked( $current, $key ); ?> />
 </td>
 <td class="iworks-crew-helmsman">
-<select name="<?php echo $this->single_crew_field_name; ?>[crew][<?php echo esc_attr( $key ); ?>][helmsman]">
+<select name="<?php echo esc_attr( $this->single_crew_field_name ); ?>[crew][<?php echo esc_attr( $key ); ?>][helmsman]">
 	<option value=""><?php esc_html_e( 'Select or remove a helmsman', 'fleet' ); ?></option>
 				<?php
 				if ( isset( $data['helmsman'] ) && ! empty( $data['helmsman'] ) && isset( $persons[ $data['helmsman'] ] ) ) {
@@ -976,7 +976,7 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 </select>
 </td>
 <td class="iworks-crew-crew">
-<select name="<?php echo $this->single_crew_field_name; ?>[crew][<?php echo esc_attr( $key ); ?>][crew]">
+<select name="<?php echo esc_attr( $this->single_crew_field_name ); ?>[crew][<?php echo esc_attr( $key ); ?>][crew]">
 	<option value=""><?php esc_html_e( 'Select or remove a  crew', 'fleet' ); ?></option>
 				<?php
 				if ( isset( $data['crew'] ) && ! empty( $data['crew'] ) && isset( $persons[ $data['crew'] ] ) ) {
@@ -1003,7 +1003,7 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 				<td colspan="4">
 					<label>
 					<input type="radio" name="<?php echo $this->single_crew_field_name; ?>[current]" value="no" <?php checked( 'no', $current ); ?> />
-						<?php esc_html_e( 'There is no current team', 'fleet' ); ?>
+					<?php esc_html_e( 'There is no current team', 'fleet' ); ?>
 					</label>
 				</td>
 			</tr>
@@ -1013,36 +1013,59 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		<?php
 	}
 
+	/**
+	 * Add WP.templetes for crew
+	 *
+	 * @since 1.2.2
+	 */
 	public function print_js_templates() {
-		?>
-<script type="text/html" id="tmpl-iworks-boat-crew">
-<tr class="iworks-crew-single-row" id="iworks-crew-{{{data.id}}}">
-	<td class="iworks-crew-current">
-<input type="radio" name="<?php echo $this->single_crew_field_name; ?>[current]" value="{{{data.id}}}" />
-	</td>
-	<td class="iworks-crew-helmsman">
-		<select name="<?php echo $this->single_crew_field_name; ?>[crew][{{{data.id}}}][helmsman]">
-			<option value=""><?php esc_html_e( 'Select a helmsman', 'fleet' ); ?></option>
-		</select>
-	</td>
-	<td class="iworks-crew-crew">
-		<select name="<?php echo $this->single_crew_field_name; ?>[crew][{{{data.id}}}][crew]">
-			<option value=""><?php esc_html_e( 'Select a crew', 'fleet' ); ?></option>
-		</select>
-	</td>
-	<td>
-		<a href="#" class="iworks-crew-single-delete" data-id="{{{data.id}}}"><?php esc_html_e( 'Delete', 'fleet' ); ?></a>
-	</td>
-</tr>
-</script>
-		<?php
+		echo '<script type="text/html" id="tmpl-iworks-boat-crew">';
+		echo '<tr class="iworks-crew-single-row" id="iworks-crew-{{{data.id}}}">';
+		echo '<td class="iworks-crew-current">';
+		printf(
+			'<input type="radio" name="%s[current]" value="{{{data.id}}}" />',
+			esc_attr( $this->single_crew_field_name )
+		);
+		echo '</td>';
+		echo '<td class="iworks-crew-helmsman">';
+		printf(
+			'<select name="%s[crew][{{{data.id}}}][helmsman]">',
+			esc_attr( $this->single_crew_field_name )
+		);
+		echo '<option value="">';
+		esc_html_e( 'Select a helmsman', 'fleet' );
+		echo '</option>';
+		echo '</select>';
+		echo '</td>';
+		echo '<td class="iworks-crew-crew">';
+		printf(
+			'<select name="%s[crew][{{{data.id}}}][crew]">',
+			esc_attr( $this->single_crew_field_name )
+		);
+		echo '<option value="">';
+		esc_html_e( 'Select a crew', 'fleet' );
+		echo '</option>';
+		echo '</select>';
+		echo '</td>';
+		echo '<td>';
+		echo '<a href="#" class="iworks-crew-single-delete" data-id="{{{data.id}}}">';
+		esc_html_e( 'Delete', 'fleet' );
+		echo '</a>';
+		echo '</td>';
+		echo '</tr>';
+		echo '</script>';
 	}
 
-
+	/**
+	 * Boat meta box
+	 */
 	public function boat( $post ) {
 		$this->get_meta_box_content( $post, $this->fields, __FUNCTION__ );
 	}
 
+	/**
+	 * Social media meta box
+	 */
 	public function social( $post ) {
 		$this->get_meta_box_content( $post, $this->fields, __FUNCTION__ );
 	}
@@ -1094,22 +1117,17 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 				$this->owners_one_row_helper( $owner );
 			}
 		}
-
-		?>
-		</tbody>
-	</table>
-		<?php
-		$name = esc_attr( $this->owners_field_name );
-		?>
-<script type="text/html" id="tmpl-iworks-fleet-boat-owner-user">
-		<select name="<?php echo $name; ?>[{{{data.id}}}][users_ids][]" class="select2 empty"></select>
-</script>
-<script type="text/html" id="tmpl-iworks-fleet-boat-owner">
-		<?php
+		echo '</tbody>';
+		echo '</table>';
+		echo '<script type="text/html" id="tmpl-iworks-fleet-boat-owner-user">';
+		printf(
+			'<select name="%s[{{{data.id}}}][users_ids][]" class="select2 empty"></select>',
+			esc_attr( $this->owners_field_name )
+		);
+		echo '</script>';
+		echo '<script type="text/html" id="tmpl-iworks-fleet-boat-owner">';
 		echo $this->owners_one_row_helper();
-		?>
-</script>
-		<?php
+		echo '</script>';
 	}
 
 	/**
@@ -1136,37 +1154,84 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		 * remove empty
 		 */
 		if (
-			true
-			&& empty( $data['date_to'] )
-			&& empty( $data['date_from'] )
-			&& empty( $data['users_ids'] )
-			&& empty( $data['organization'] )
+		true
+		&& empty( $data['date_to'] )
+		&& empty( $data['date_from'] )
+		&& empty( $data['users_ids'] )
+		&& empty( $data['organization'] )
 		) {
 			return;
 		}
 		$name = esc_attr( $this->owners_field_name );
+		printf(
+			'<tr data-id="%s" data-kind="%s">',
+			esc_attr( $data['id'] ),
+			esc_attr( $data['kind'] )
+		);
+		/**
+		 * first owner
+		 */
+		echo '<td>';
+		printf(
+			'<input type="radio" name="%s_first" value="%s" %s />',
+			esc_attr( $this->owners_field_name ),
+			esc_attr( $data['id'] ),
+			true === $data['first'] ? 'checked="checked"' : ''
+		);
+		echo '</td>';
+		/**
+		 * current owner
+		 */
+		echo '<td>';
+		printf(
+			'<input type="radio" name="%s_current" value="%s" %s />',
+			esc_attr( $this->owners_field_name ),
+			esc_attr( $data['id'] ),
+			true === $data['current'] ? 'checked="checked"' : ''
+		);
+		echo '</td>';
+		/**
+		 * boat kind
+		 */
+		$kinds = array(
+			'person'       => __( 'Person', 'fleet' ),
+			'organization' => __( 'Organization', 'fleet' ),
+		);
+		echo '<td class="boat-kind">';
+		echo '<ul>';
+		foreach ( $kinds as $kind_value => $kind_label ) {
+			echo '<li><label>';
+			printf(
+				'<input type="radio" %s name="%s[%s][kind]" value="%s">',
+				$kind_value === $data['kind'] ? ' checked="checked"' : '',
+				esc_attr( $this->owners_field_name ),
+				esc_attr( $data['id'] ),
+				esc_attr( $kind_value )
+			);
+			echo esc_html( $kind_label );
+			echo '</label></li>';
+		}
+		echo '</ul>';
+		echo '</td>';
 		?>
-			<tr data-id="<?php echo esc_attr( $data['id'] ); ?>" data-kind="<?php echo esc_attr( $data['kind'] ); ?>">
-	<td><input type="radio" name="<?php echo $name; ?>_first" value="<?php echo esc_attr( $data['id'] ); ?>" <?php echo true === $data['first'] ? ' checked="checked"' : ''; ?> /></td>
-	<td><input type="radio" name="<?php echo $name; ?>_current" value="<?php echo esc_attr( $data['id'] ); ?>" <?php echo true === $data['current'] ? ' checked="checked"' : ''; ?> /></td>
-	<td class="boat-kind">
-		<ul>
-			<li><label><input type="radio" <?php echo 'person' === $data['kind'] ? ' checked="checked"' : ''; ?> name="<?php echo $name; ?>[<?php echo esc_attr( $data['id'] ); ?>][kind]" value="person"> <?php esc_html_e( 'Person', 'fleet' ); ?></label></li>
-			<li><label><input type="radio" <?php echo 'organization' === $data['kind'] ? ' checked="checked"' : ''; ?>  name="<?php echo $name; ?>[<?php echo esc_attr( $data['id'] ); ?>][kind]" value="organization"> <?php esc_html_e( 'Organization', 'fleet' ); ?></label></li>
-		</ul>
-	</td>
 	<td>
-		<div class="person<?php echo 'person' === $data['kind'] ? '' : ' hidden'; ?>">
+		<div class="person<?php echo esc_attr( 'person' === $data['kind'] ? '' : ' hidden' ); ?>">
 			<div class="persons">
 		<?php
 		if ( is_array( $data['users_ids'] ) ) {
 			global $iworks_fleet;
 			foreach ( $data['users_ids'] as $user_id ) {
-				?>
-			<select name="<?php echo $name; ?>[<?php echo esc_attr( $data['id'] ); ?>][users_ids][]" class="select2">
-				<?php printf( '<option value="%d">%s</option>', $user_id, $iworks_fleet->get_person_name( $user_id ) ); ?>
-			</select>
-				<?php
+				printf(
+					'<select name="%s[%s][users_ids][]" class="select2">',
+					esc_attr( $this->owners_field_name ),
+					esc_attr( $data['id'] )
+				);
+				printf(
+					'<option value="%d">%s</option>',
+					esc_attr( $user_id ),
+					esc_html( $iworks_fleet->get_person_name( $user_id ) )
+				);
+				echo '</select>';
 			}
 		}
 
@@ -1174,12 +1239,12 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 </div>
 			<a href="#" class="add-person-selector"><span class="dashicons dashicons-plus"></span></a>
 		</div>
-		<div class="organization<?php echo 'organization' === $data['kind'] ? '' : ' hidden'; ?>">
-		<input type="text" name="<?php echo $name; ?>[<?php echo esc_attr( $data['id'] ); ?>][organization]" value="<?php echo esc_attr( $data['organization'] ); ?>" />
+		<div class="organization<?php echo esc_attr( 'organization' === $data['kind'] ? '' : ' hidden' ); ?>">
+		<input type="text" name="<?php echo esc_attr( $name ); ?>[<?php echo esc_attr( $data['id'] ); ?>][organization]" value="<?php echo esc_attr( $data['organization'] ); ?>" />
 		</div>
 	</td>
-	<td><input type="date_from" class="datepicker" name="<?php echo $name; ?>[<?php echo esc_attr( $data['id'] ); ?>][date_from]" value="<?php echo esc_attr( $data['date_from'] ); ?>" /></td>
-	<td><input type="date_to" class="datepicker" name="<?php echo $name; ?>[<?php echo esc_attr( $data['id'] ); ?>][date_to]" value="<?php echo esc_attr( $data['date_to'] ); ?>" /></td>
+	<td><input type="date_from" class="datepicker" name="<?php echo esc_attr( $name ); ?>[<?php echo esc_attr( $data['id'] ); ?>][date_from]" value="<?php echo esc_attr( $data['date_from'] ); ?>" /></td>
+	<td><input type="date_to" class="datepicker" name="<?php echo esc_attr( $name ); ?>[<?php echo esc_attr( $data['id'] ); ?>][date_to]" value="<?php echo esc_attr( $data['date_to'] ); ?>" /></td>
 	<td><a href="#" class="iworks-fleet-boat-delete"><span class="dashicons dashicons-trash"></span></a></td>
 </tr>
 		<?php
@@ -1198,28 +1263,32 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 			case 'builder':
 				$id = get_post_meta( $post_id, $this->get_custom_field_basic_manufacturer_name(), true );
 				if ( empty( $id ) ) {
-					echo '-';
+					echo '&mdash;';
 				} else {
 					printf(
 						'<a href="%s">%s</a>',
-						add_query_arg(
-							array(
-								'builder'   => $id,
-								'post_type' => 'iworks_fleet_boat',
-							),
-							admin_url( 'edit.php' )
+						esc_url(
+							add_query_arg(
+								array(
+									'builder'   => $id,
+									'post_type' => 'iworks_fleet_boat',
+								),
+								admin_url( 'edit.php' )
+							)
 						),
-						get_post_meta( $id, 'iworks_fleet_manufacturer_data_full_name', true )
+						esc_html( get_post_meta( $id, 'iworks_fleet_manufacturer_data_full_name', true ) )
 					);
 				}
 				break;
 			case 'build_year':
 				$name = $this->options->get_option_name( 'boat_build_year' );
-				echo get_post_meta( $post_id, $name, true );
+				$year = intval( get_post_meta( $post_id, $name, true ) );
+				echo 0 < $year ? esc_html( $year ) : '&mdash;';
 				break;
 			case 'location':
-				$name = $this->options->get_option_name( 'boat_location' );
-				echo get_post_meta( $post_id, $name, true );
+				$name     = $this->options->get_option_name( 'boat_location' );
+				$location = esc_html( get_post_meta( $post_id, $name, true ) );
+				echo $location ? esc_html( $location ) : '&mdash;';
 				break;
 		}
 	}
@@ -1426,17 +1495,17 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		if ( isset( $crew['helmsman'] ) ) {
 			$user = $iworks_fleet->get_person_avatar( $crew['helmsman'] );
 			if ( ! empty( $user ) ) {
-				$content .= sprintf( '<div class="iworks-fleet-crew-avatar iworks-fleet-helmsman">%s</div>', $user );
+				$content .= sprintf( '<div class="iworks-fleet-crew-avatar iworks-fleet-helmsman">%s</div>', wp_kses_post( $user ) );
 			}
 		}
 		if ( isset( $crew['crew'] ) ) {
 			$user = $iworks_fleet->get_person_avatar( $crew['crew'] );
 			if ( ! empty( $user ) ) {
-				$content .= sprintf( '<div class="iworks-fleet-crew-avatar iworks-fleet-crew">%s</div>', $user );
+				$content .= sprintf( '<div class="iworks-fleet-crew-avatar iworks-fleet-crew">%s</div>', wp_kses_post( $user ) );
 			}
 		}
 		if ( ! empty( $content ) ) {
-			printf( '<div class="iworks-fleet-crews-container">%s</div>', $content );
+			echo wp_kses_post( sprintf( '<div class="iworks-fleet-crews-container">%s</div>', $content ) );
 		}
 	}
 
@@ -1668,8 +1737,8 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 			if ( ! empty( $name ) ) {
 				$t[] = sprintf(
 					'<a href="%s">%s</a>',
-					get_permalink( $user_ID ),
-					$name
+					esc_url( get_permalink( $user_ID ) ),
+					esc_html( $name )
 				);
 			}
 		}
@@ -1677,6 +1746,7 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		if ( empty( $t ) ) {
 			return;
 		}
+		// translators: user list separator
 		return implode( _x( ' ', 'user list separator', 'fleet' ), $t );
 	}
 

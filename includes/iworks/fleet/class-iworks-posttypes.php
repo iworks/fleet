@@ -272,13 +272,31 @@ class iworks_fleet_posttypes {
 					} else {
 						if ( isset( $data['type'] ) ) {
 							switch ( $data['type'] ) {
+								case 'select':
+								case 'select2':
+									if ( ! array_key_exists( $value, $data['args']['options'] ) ) {
+										$value = '';
+									}
+									break;
 								case 'date':
 									$value = strtotime( $value );
 									break;
 								case 'checkbox':
 									$value = 'yes';
 									break;
+								case 'url':
+									$value = esc_url( $value );
+									break;
+								case 'email':
+									$value = sanitize_email( $value );
+									break;
+								case 'tel':
+								default:
+									$value = sanitize_text_field( $value );
+									break;
 							}
+						} else {
+							$value = sanitize_text_field( $value );
 						}
 						/**
 						 * filter
@@ -738,5 +756,16 @@ class iworks_fleet_posttypes {
 			return;
 		}
 		$this->options = iworks_fleet_get_options_object();
+	}
+
+	/**
+	 * register posts: show in menu
+	 *
+	 * @since 2.6.0
+	 */
+	protected function get_show_in_menu() {
+		global $iworks_fleet;
+		$show_in_menu = add_query_arg( 'post_type', $iworks_fleet->get_post_type_name( 'person' ), 'edit.php' );
+		return apply_filters( 'iworks::fleet::posttypes::show_in_menu', $show_in_menu );
 	}
 }

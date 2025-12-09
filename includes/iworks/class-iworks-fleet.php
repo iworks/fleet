@@ -25,15 +25,11 @@ if ( class_exists( 'iworks_fleet' ) ) {
 	return;
 }
 
-require_once dirname( dirname( __FILE__ ) ) . '/iworks.php';
+require_once dirname( __DIR__, 1 ) . '/iworks.php';
 
 class iworks_fleet extends iworks {
 
 	private $capability;
-	private $post_type_boat;
-	private $post_type_person;
-	private $post_type_result;
-	private $post_type_ranking;
 	private $blocks;
 	protected $options;
 
@@ -42,23 +38,39 @@ class iworks_fleet extends iworks {
 	 *
 	 * @since 2.1.6
 	 */
-	protected $objects = array();
+	public $objects = array();
 
 	public function __construct() {
 		parent::__construct();
-		$this->base       = dirname( dirname( __FILE__ ) );
+		$this->base       = dirname( __DIR__, 1 );
 		$this->dir        = basename( dirname( $this->base ) );
 		$this->version    = 'PLUGIN_VERSION';
 		$this->capability = apply_filters( 'iworks_fleet_capability', 'manage_options' );
+		/**
+		 * DB
+		 *
+		 * separate db function to file
+		 *
+		 * @since 2.6.0
+		 */
+		include_once $this->base . '/iworks/fleet/class-iworks-fleet-db.php';
+		$this->objects['db'] = new iworks_fleet_db();
+		/**
+		 * github relased include (only for git version)
+		 *
+		 * @since 2.6.0
+		 */
+		include_once $this->base . '/iworks/fleet/class-iworks-fleet-github.php';
+		$this->objects['github'] = new iworks_fleet_github();
 		/**
 		 * post_types
 		 */
 		$post_types = array( 'boat', 'person', 'ranking', 'result' );
 		foreach ( $post_types as $post_type ) {
 			include_once $this->base . '/iworks/fleet/posttypes/class-iworks-fleet-posttypes-' . $post_type . '.php';
-			$class        = sprintf( 'iworks_fleet_posttypes_%s', $post_type );
-			$value        = sprintf( 'post_type_%s', $post_type );
-			$this->$value = new $class();
+			$class                   = sprintf( 'iworks_fleet_posttypes_%s', $post_type );
+			$value                   = sprintf( 'post_type_%s', $post_type );
+			$this->objects[ $value ] = new $class();
 		}
 		/**
 		 * blocks
@@ -72,7 +84,6 @@ class iworks_fleet extends iworks {
 		add_action( 'init', array( $this, 'action_init_load_post_types' ) );
 		add_action( 'init', array( $this, 'register_boat_number' ) );
 		add_action( 'init', array( $this, 'db_install' ) );
-		add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'register_styles' ), 0 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ) );
 		add_action( 'plugins_loaded', array( $this, 'action_plugins_loaded' ) );
@@ -129,8 +140,8 @@ class iworks_fleet extends iworks {
 
 	public function get_post_type_name( $post_type ) {
 		$value = sprintf( 'post_type_%s', $post_type );
-		if ( isset( $this->$value ) ) {
-			return $this->$value->get_name();
+		if ( isset( $this->objects[ $value ] ) ) {
+			return $this->objects[ $value ]->get_name();
 		}
 		return new WP_Error( 'broke', __( 'The Fleet plugin do not have such post type!', 'fleet' ) );
 	}
@@ -302,99 +313,6 @@ class iworks_fleet extends iworks {
 	}
 
 	public function db_install() {
-		global $wpdb;
-		$version = intval( get_option( 'fleet_db_version' ) );
-		/**
-		 * 20180611
-		 */
-		$install = 20180611;
-		if ( $install > $version ) {
-			$charset_collate = $wpdb->get_charset_collate();
-			require_once ABSPATH . 'wp-admin/includes/upgrade.php';
-			$table_name = $wpdb->prefix . 'fleet_regatta';
-			$sql        = "CREATE TABLE $table_name (
-                ID mediumint(9) NOT NULL AUTO_INCREMENT,
-                post_regata_id mediumint(9) NOT NULL,
-                year year,
-                boat_id mediumint(9),
-                helm_id mediumint(9),
-                crew_id mediumint(9),
-                helm_name text,
-                crew_name text,
-                place int,
-                points int,
-                PRIMARY KEY (ID),
-                KEY ( post_regata_id ),
-                KEY ( year ),
-                KEY ( boat_id ),
-                KEY ( helm_id ),
-                KEY ( crew_id )
-            ) $charset_collate;";
-			dbDelta( $sql );
-			$table_name = $wpdb->prefix . 'fleet_regatta_race';
-			$sql        = "CREATE TABLE $table_name (
-                ID mediumint(9) NOT NULL AUTO_INCREMENT,
-                post_regata_id mediumint(9) NOT NULL,
-                regata_id mediumint(9) NOT NULL,
-                number int,
-                code varchar(4),
-                place int,
-                points int default 0,
-                discard boolean default 0,
-                PRIMARY KEY (ID),
-                KEY ( post_regata_id ),
-                KEY ( regata_id )
-            ) $charset_collate;";
-			dbDelta( $sql );
-			update_option( 'fleet_db_version', $install );
-		}
-		/**
-		 * 20180618
-		 */
-		$install = 20180618;
-		if ( $install > $version ) {
-			$charset_collate = $wpdb->get_charset_collate();
-			require_once ABSPATH . 'wp-admin/includes/upgrade.php';
-			$table_name = $wpdb->prefix . 'fleet_regatta';
-			$sql        = "ALTER TABLE $table_name ADD COLUMN country TEXT AFTER boat_id;";
-			$result     = $wpdb->query( $sql );
-			if ( $result ) {
-				update_option( 'fleet_db_version', $install );
-			}
-		}
-		/**
-		 * 20180619
-		 */
-		$install = 20180619;
-		if ( $install > $version ) {
-			$charset_collate = $wpdb->get_charset_collate();
-			require_once ABSPATH . 'wp-admin/includes/upgrade.php';
-			$table_name = $wpdb->prefix . 'fleet_regatta';
-			$sql        = "ALTER TABLE $table_name ADD COLUMN date date AFTER year;";
-			$result     = $wpdb->query( $sql );
-			if ( $result ) {
-				$sql    = "ALTER TABLE $table_name ADD key ( date );";
-				$result = $wpdb->query( $sql );
-			}
-			if ( $result ) {
-				update_option( 'fleet_db_version', $install );
-			}
-		}
-		/**
-		 * 20241006
-		 */
-		$install = 20241006;
-		if ( $install > $version ) {
-			$charset_collate = $wpdb->get_charset_collate();
-			require_once ABSPATH . 'wp-admin/includes/upgrade.php';
-			$table_name = $wpdb->prefix . 'fleet_regatta';
-			$sql        = "ALTER TABLE $table_name ADD COLUMN ranking INT DEFAULT 0 AFTER points";
-			$result     = $wpdb->query( $sql );
-			if ( $result ) {
-				update_option( 'fleet_db_version', $install );
-			}
-		}
-
 	}
 
 	/**
@@ -458,7 +376,7 @@ class iworks_fleet extends iworks {
 			$plugin = (array) $plugin;
 		}
 		if ( 'fleet' === $plugin['slug'] ) {
-			return plugin_dir_url( dirname( dirname( __FILE__ ) ) ) . '/assets/images/logo.svg';
+			return plugin_dir_url( dirname( __DIR__, 1 ) ) . '/assets/images/logo.svg';
 		}
 		return $logo;
 	}
@@ -469,7 +387,7 @@ class iworks_fleet extends iworks {
 	 * @since 2.1.6
 	 */
 	public function action_plugins_loaded() {
-		$dir = dirname( __FILE__ ) . '/fleet';
+		$dir = __DIR__ . '/fleet';
 		/**
 		 * og
 		 *
@@ -488,16 +406,8 @@ class iworks_fleet extends iworks {
 	}
 
 	/**
-	 * i18n
+	 * @since 2.3.6
 	 */
-	public function load_plugin_textdomain() {
-		load_plugin_textdomain(
-			'fleet',
-			false,
-			plugin_basename( dirname( $this->base ) ) . '/languages'
-		);
-	}
-
 	public function get_regatta_select_by_year_and_serie_id( $year, $serie ) {
 		return $this->post_type_result->get_regatta_select_by_year_and_serie_id( $year, $serie );
 	}
