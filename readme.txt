@@ -80,6 +80,13 @@ Please use the plugin support forum or submit issues/pull requests on GitHub.
 
 == Changelog ==
 
+= 2.5.2 (2025-12-09) =
+* Resolved an XSS vulnerability in the admin panel affecting the editing of custom post type entries within the plugin.
+* Added JSON-LD integration with the [Simple SEO Improvements](https://wordpress.org/plugins/simple-seo-improvements/) plugin for the Person schema.
+* Added JSON-LD integration with the [Simple SEO Improvements](https://wordpress.org/plugins/simple-seo-improvements/) plugin for the Result schema.
+* Updated the [iWorks Options](https://github.com/iworks/wordpress-options-class) module to version 3.1.0.
+* Moved database-related functions to a separate class.
+
 = 2.5.1 (2025-10-22) =
 * Fixed issue with option object on ajax calls.
 * Added function private `fputcsv` with default params.
