@@ -236,12 +236,13 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			$content .= $cache;
 			return $content;
 		}
-		$query   = $wpdb->prepare(
-			"SELECT post_regata_id, year, place FROM {$wpdb->fleet_regatta} where ( helm_id = %d or crew_id = %d ) and place < 4 order by year",
-			$sailor_id,
-			$sailor_id
+		$regatta = $wpdb->get_results(
+			$wpdb->prepare(
+				"SELECT post_regata_id, year, place FROM {$wpdb->fleet_regatta} where ( helm_id = %d or crew_id = %d ) and place < 4 order by year",
+				$sailor_id,
+				$sailor_id
+			)
 		);
-		$regatta = $wpdb->get_results( $query );
 		if ( empty( $regatta ) ) {
 			return $content;
 		}
@@ -527,8 +528,12 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 				$row[] = __( 'Sum', 'fleet' );
 				$this->fputcsv( $out, $row );
 				$races   = $this->get_races_data( $post_id, 'csv' );
-				$query   = $wpdb->prepare( "SELECT * FROM {$wpdb->fleet_regatta} where post_regata_id = %d order by place", $post_id );
-				$regatta = $wpdb->get_results( $query );
+				$regatta = $wpdb->get_results(
+					$wpdb->prepare(
+						"SELECT * FROM {$wpdb->fleet_regatta} where post_regata_id = %d order by place",
+						$post_id
+					)
+				);
 				foreach ( $regatta as $one ) {
 					$row   = array();
 					$row[] = $one->place;
@@ -815,7 +820,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		 * wrap content
 		 */
 		if ( $content ) {
-			$content = sprintf( '<div class="fleet-results">%s</content>', $content );
+			$content = sprintf( '<div class="fleet-results ">%s</div>', $content );
 		}
 		/**
 		 * Cache
@@ -964,56 +969,70 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		return $title;
 	}
 
+	/**
+	 * get results by year
+	 */
 	private function get_list_by_year( $year ) {
 		global $wpdb;
-		$sql = $wpdb->prepare(
-			"select * from {$wpdb->fleet_regatta} where year = %d order by date, year desc",
-			$year
+		$results = $wpdb->get_results(
+			$wpdb->prepare(
+				"select * from {$wpdb->fleet_regatta} where year = %d order by date, year desc",
+				$year
+			)
 		);
-		return $this->add_results_metadata( $wpdb->get_results( $sql ) );
+		return $this->add_results_metadata( $results );
 	}
 
+	/**
+	 * get results by sailor id
+	 */
 	private function get_list_by_sailor_id( $sailor_id ) {
 		global $wpdb;
-		$sql = $wpdb->prepare(
-			"select * from {$wpdb->fleet_regatta} where helm_id = %d or crew_id = %d order by date, year desc",
-			$sailor_id,
-			$sailor_id
-		);
 		$this->suppress_filter_pre_get_posts_limit_to_year = true;
-		return $this->add_results_metadata( $wpdb->get_results( $sql ) );
+		$results = $wpdb->get_results(
+			$wpdb->prepare(
+				"select * from {$wpdb->fleet_regatta} where helm_id = %d or crew_id = %d order by date, year desc",
+				$sailor_id,
+				$sailor_id
+			)
+		);
+		return $this->add_results_metadata( $results );
 	}
 
 	private function placeholder_d_helper() {
 		return '%d';
 	}
 
+	/**
+	 * get results by post ids
+	 */
 	private function get_list_by_post_ids( $ids ) {
 		global $wpdb;
-		$sql = sprintf(
-			"select * from {$wpdb->fleet_regatta} where post_regata_id in( %s ) order by date, year desc",
-			implode(
-				', ',
-				array_map( array( $this, 'placeholder_d_helper' ), $ids )
+		$results = $wpdb->get_results(
+			$wpdb->prepare(
+				sprintf(
+					"select * from {$wpdb->fleet_regatta} where post_regata_id in( %s ) order by date, year desc",
+					implode( ', ', array_map( array( $this, 'placeholder_d_helper' ), $ids ) )
+				),
+				$ids
 			)
 		);
-		$sql = $wpdb->prepare( $sql, $ids );
-		return $this->add_results_metadata( $wpdb->get_results( $sql ) );
+		return $this->add_results_metadata( $results );
 	}
 
 	private function get_list_by_post_ids_limit_place( $ids, $min, $max ) {
 		global $wpdb;
-		$sql   = sprintf(
-			"select * from {$wpdb->fleet_regatta} where post_regata_id in( %s ) and place >= %%d and place <= %%d order by date, year desc",
-			implode(
-				', ',
-				array_map( array( $this, 'placeholder_d_helper' ), $ids )
-			)
-		);
-		$ids[] = $min;
-		$ids[] = $max;
-		$sql   = $wpdb->prepare( $sql, $ids );
-		return $this->add_results_metadata( $wpdb->get_results( $sql ) );
+				$sql = sprintf(
+					"select * from {$wpdb->fleet_regatta} where post_regata_id in( %s ) and place >= %%d and place <= %%d order by date, year desc",
+					implode(
+						', ',
+						array_map( array( $this, 'placeholder_d_helper' ), $ids )
+					)
+				);
+		$ids[]       = $min;
+		$ids[]       = $max;
+		$results     = $wpdb->get_results( $wpdb->prepare( $sql, $ids ) );
+		return $this->add_results_metadata( $results );
 	}
 
 	/**
@@ -1030,12 +1049,14 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			return $content;
 		}
 		global $wpdb;
-		$sql  = $wpdb->prepare(
-			"select * from {$wpdb->fleet_regatta} where helm_id = %d or crew_id = %d order by date, year desc limit 1",
-			$sailor_id,
-			$sailor_id
+		$results = $wpdb->get_results(
+			$wpdb->prepare(
+				"select * from {$wpdb->fleet_regatta} where helm_id = %d or crew_id = %d order by date, year desc limit 1",
+				$sailor_id,
+				$sailor_id
+			)
 		);
-		$data = $this->add_results_metadata( $wpdb->get_results( $sql ) );
+		$data    = $this->add_results_metadata( $results );
 		if ( empty( $data ) ) {
 			return $content;
 		}
@@ -1126,6 +1147,9 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		return ( $a->date_start < $b->date_start ) ? 1 : -1;
 	}
 
+	/**
+	 * get results by boat id
+	 */
 	private function get_list_by_boat_id( $boat_id ) {
 		global $wpdb;
 		$boat_title = get_the_title( $boat_id );
@@ -1136,13 +1160,17 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		if ( empty( $boat_title ) ) {
 			return array();
 		}
-		$sql = $wpdb->prepare(
-			"select * from {$wpdb->fleet_regatta} where boat_id = %d order by date, year desc",
-			$boat_title
+		return $wpdb->get_results(
+			$wpdb->prepare(
+				"select * from {$wpdb->fleet_regatta} where boat_id = %d order by date, year desc",
+				$boat_title
+			)
 		);
-		return $wpdb->get_results( $sql );
 	}
 
+	/**
+	 * get results by sailor id
+	 */
 	public function regatta_list_by_sailor_id( $content, $sailor_id ) {
 		$cache_key = $this->options->get_option_name( 'regatta_' . $sailor_id );
 		$cache     = $this->get_cache( $cache_key );
@@ -1587,14 +1615,17 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		return $columns;
 	}
 
+	/**
+	 * has a regate any races?
+	 */
 	private function has_races( $regatta_id ) {
 		global $wpdb;
-		$table_name_regatta_race = $wpdb->prefix . 'fleet_regatta_race';
-		$query                   = $wpdb->prepare(
-			sprintf( 'SELECT COUNT(*) from %s WHERE `post_regata_id` = %%d', $table_name_regatta_race ),
-			$regatta_id
+		$val = $wpdb->get_var(
+			$wpdb->prepare(
+				"SELECT COUNT(*) from {$wpdb->regatta_race} WHERE `post_regata_id` = %d",
+				$regatta_id
+			)
 		);
-		$val                     = $wpdb->get_var( $query );
 		return 0 < $val;
 	}
 
@@ -1612,14 +1643,15 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		if ( ! isset( $_POST['_wpnonce'] ) ) {
 			wp_send_json_error();
 		}
-		if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'upload-races' ) ) {
+		$nonce = sanitize_text_field( $_POST['_wpnonce'] );
+		if ( ! wp_verify_nonce( $nonce, 'upload-races' ) ) {
 			wp_send_json_error();
 		}
 		if ( empty( $_FILES ) || ! isset( $_FILES['file'] ) ) {
 			wp_send_json_error();
 		}
 		$file = $_FILES['file'];
-		if ( 'text/csv' != $file['type'] ) {
+		if ( 'text/csv' !== $file['type'] ) {
 			wp_send_json_error();
 		}
 		$row  = 1;
@@ -1917,8 +1949,12 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		/**
 		 * get regata data
 		 */
-		$query   = $wpdb->prepare( "SELECT * FROM {$wpdb->fleet_regatta} where post_regata_id = %d order by place", $post_id );
-		$regatta = $wpdb->get_results( $query );
+		$regatta = $wpdb->get_results(
+			$wpdb->prepare(
+				"SELECT * FROM {$wpdb->fleet_regatta} where post_regata_id = %d order by place",
+				$post_id
+			)
+		);
 		/**
 		 * regatta in the future
 		 */
@@ -2276,8 +2312,12 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 	private function get_races_data( $post_id, $output = 'html' ) {
 		global $wpdb;
 		$races   = array();
-		$query   = $wpdb->prepare( "SELECT * FROM {$wpdb->fleet_regatta_race} where post_regata_id = %d order by regata_id, number", $post_id );
-		$r       = $wpdb->get_results( $query );
+		$r       = $wpdb->get_results(
+			$wpdb->prepare(
+				"SELECT * FROM {$wpdb->fleet_regatta_race} where post_regata_id = %d order by regata_id, number",
+				$post_id
+			)
+		);
 		$pattern = '<small style="fleet-results-code fleet-results-code-%3$s" title="%2$d">%1$s</small>';
 		if ( 'csv' === $output ) {
 			$pattern = '%2$d %1$s';
@@ -2443,8 +2483,12 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		 * results
 		 */
 		foreach ( $regattas as $post_id => $points ) {
-			$query   = $wpdb->prepare( "SELECT * FROM {$wpdb->fleet_regatta} where post_regata_id = %d order by place", $post_id );
-			$results = $wpdb->get_results( $query );
+			$results = $wpdb->get_results(
+				$wpdb->prepare(
+					"SELECT * FROM {$wpdb->fleet_regatta} where post_regata_id = %d order by place",
+					$post_id
+				)
+			);
 			foreach ( $results as $one ) {
 				$x = array( $one->boat_id, $one->helm_id, $one->crew_id );
 				sort( $x );
@@ -2969,16 +3013,16 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 				}
 		}
 		$where .= ' and meta_key = %s and meta_value is not null';
-		$sql    = sprintf(
-			'select substring( date_add(from_unixtime(1), interval meta_value second), 1, 4 ) as year, count(*) as counter from %s where %s group by 1 order by 1 desc',
-			$wpdb->postmeta,
-			$where
+		$years  = $wpdb->get_results(
+			$wpdb->prepare(
+				sprintf(
+					'select substring( date_add(from_unixtime(1), interval meta_value second), 1, 4 ) as year, count(*) as counter from %s where %s group by 1 order by 1 desc',
+					$wpdb->postmeta,
+					$where
+				),
+				$this->options->get_option_name( 'result_date_start' )
+			)
 		);
-		$query  = $wpdb->prepare(
-			$sql,
-			$this->options->get_option_name( 'result_date_start' )
-		);
-		$years  = $wpdb->get_results( $query );
 		if ( empty( $years ) ) {
 			return $content;
 		}
@@ -3139,13 +3183,17 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		);
 	}
 
+	/**
+	 * get regattas by year
+	 */
 	private function get_regatta_by_year( $year ) {
 		global $wpdb;
-		$query = $wpdb->prepare(
-			"SELECT distinct post_regata_id FROM {$wpdb->fleet_regatta} where year = %d",
-			$year
+		return $wpdb->get_col(
+			$wpdb->prepare(
+				"SELECT distinct post_regata_id FROM {$wpdb->fleet_regatta} where year = %d",
+				$year
+			)
 		);
-		return $wpdb->get_col( $query );
 	}
 
 	/**
@@ -3182,12 +3230,13 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			$content .= $cache;
 			return $content;
 		}
-		$query  = $wpdb->prepare(
-			"select place from {$wpdb->fleet_regatta} where helm_id = %d or crew_id = %d order by date, year",
-			$sailor_id,
-			$sailor_id
+		$places = $wpdb->get_col(
+			$wpdb->prepare(
+				"select place from {$wpdb->fleet_regatta} where helm_id = %d or crew_id = %d order by date, year",
+				$sailor_id,
+				$sailor_id
+			)
 		);
-		$places = $wpdb->get_col( $query );
 		if ( empty( $places ) ) {
 			return $content;
 		}
@@ -3926,9 +3975,13 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 
 	private function get_competitors_by_post_id( $post_id ) {
 		global $wpdb;
-		$sql         = "select helm_id, crew_id, helm_name, crew_name from {$wpdb->fleet_regatta} where post_regata_id = %d";
-		$sql         = $wpdb->prepare( $sql, $post_id );
-		$results     = $wpdb->get_results( $sql, ARRAY_A );
+		$results     = $wpdb->get_results(
+			$wpdb->prepare(
+				"select helm_id, crew_id, helm_name, crew_name from {$wpdb->fleet_regatta} where post_regata_id = %d",
+				$post_id
+			),
+			ARRAY_A
+		);
 		$competitors = array();
 		if ( $results ) {
 			foreach ( $results as $result ) {

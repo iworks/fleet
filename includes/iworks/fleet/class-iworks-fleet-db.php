@@ -124,8 +124,7 @@ class iworks_fleet_db {
 		if ( $install > $version ) {
 			$charset_collate = $wpdb->get_charset_collate();
 			require_once ABSPATH . 'wp-admin/includes/upgrade.php';
-			$sql    = "ALTER TABLE $wpdb->fleet_regatta ADD COLUMN country TEXT AFTER boat_id;";
-			$result = $wpdb->query( $sql );
+			$result = $wpdb->query( "ALTER TABLE $wpdb->fleet_regatta ADD COLUMN country TEXT AFTER boat_id;" );
 			if ( $result ) {
 				update_option( $this->db_version_name, $install );
 			}
@@ -137,11 +136,9 @@ class iworks_fleet_db {
 		if ( $install > $version ) {
 			$charset_collate = $wpdb->get_charset_collate();
 			require_once ABSPATH . 'wp-admin/includes/upgrade.php';
-			$sql    = "ALTER TABLE $wpdb->fleet_regatta ADD COLUMN date date AFTER year;";
-			$result = $wpdb->query( $sql );
+			$result = $wpdb->query( "ALTER TABLE $wpdb->fleet_regatta ADD COLUMN date date AFTER year;" );
 			if ( $result ) {
-				$sql    = "ALTER TABLE $wpdb->fleet_regatta ADD key ( date );";
-				$result = $wpdb->query( $sql );
+				$result = $wpdb->query( "ALTER TABLE $wpdb->fleet_regatta ADD key ( date );" );
 			}
 			if ( $result ) {
 				update_option( $this->db_version_name, $install );
@@ -154,8 +151,7 @@ class iworks_fleet_db {
 		if ( $install > $version ) {
 			$charset_collate = $wpdb->get_charset_collate();
 			require_once ABSPATH . 'wp-admin/includes/upgrade.php';
-			$sql    = "ALTER TABLE $wpdb->fleet_regatta ADD COLUMN ranking INT DEFAULT 0 AFTER points";
-			$result = $wpdb->query( $sql );
+			$result = $wpdb->query( "ALTER TABLE $wpdb->fleet_regatta ADD COLUMN ranking INT DEFAULT 0 AFTER points" );
 			if ( $result ) {
 				update_option( $this->db_version_name, $install );
 			}

@@ -8,8 +8,8 @@ if (
 ) {
 	printf(
 		'<%1$s class="iworks-fleet-ranking-title">%2$s</%1$s>',
-		$args['header'],
-		$args['post']['post_title']
+		esc_attr( $args['header'] ),
+		wp_kses_post( $args['post']['post_title'] )
 	);
 }
 if (
@@ -20,7 +20,6 @@ if (
 	printf(
 		'<%1$s class="iworks-fleet-ranking-content">%2$s</%1$s>',
 		'div',
-		apply_filters( 'the_content', $args['post']['post_content'] )
+		wp_kses_post( apply_filters( 'the_content', $args['post']['post_content'] ) )
 	);
 }
-?>

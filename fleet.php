@@ -8,7 +8,7 @@
  * @license           GPL-2.0-or-later
  *
  * @wordpress-plugin
- * Plugin Name:       Fleet Manager Base
+ * Plugin Name:       Development Fleet Manager
  * Plugin URI:        PLUGIN_URI
  * Description:       PLUGIN_DESCRIPTION
  * Version:           PLUGIN_VERSION
@@ -57,17 +57,32 @@ if ( ! class_exists( 'iworks_options' ) ) {
 global $iworks_fleet_options;
 $iworks_fleet_options = null;
 
+/**
+ * Initialize and get plugin options
+ * This function creates and returns the options object
+ *
+ * @return iworks_options The plugin options object
+ */
 function iworks_fleet_get_options_object() {
+	// Use global variable to store options object
 	global $iworks_fleet_options;
+	// Return existing options object if it exists
 	if ( is_object( $iworks_fleet_options ) ) {
 		return $iworks_fleet_options;
 	}
+	// Create new options object if it doesn't exist
 	$iworks_fleet_options = new iworks_options();
+	// Set the function name for options
 	$iworks_fleet_options->set_option_function_name( 'iworks_fleet_options' );
+	// Set the option prefix for all plugin options
 	$iworks_fleet_options->set_option_prefix( IWORKS_FLEET_PREFIX );
+	// Set the plugin file name if the method exists
 	if ( method_exists( $iworks_fleet_options, 'set_plugin' ) ) {
 		$iworks_fleet_options->set_plugin( basename( __FILE__ ) );
 	}
+	// Initialize the options
+	$iworks_fleet_options->options_init();
+	// Return the options object
 	return $iworks_fleet_options;
 }
 

@@ -112,6 +112,9 @@ module.exports = function(grunt) {
 			match: /PLUGIN_GITHUB_WEBSITE/g,
 			replace: '<%= pkg.repository.website %>'
 		}, {
+			match: /Development Fleet Manager/g,
+			replace: '<%= pkg.title %>'
+		}, {
 			match: /PLUGIN_NAME/g,
 			replace: '<%= pkg.name %>'
 		}, {

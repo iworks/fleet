@@ -235,6 +235,12 @@ class iworks_fleet_posttypes {
 	 * @param bool $update Whether this is an existing post being updated or not.
 	 */
 	public function save_post_meta_fields( $post_id, $post, $update, $fields ) {
+		if ( ! isset( $_POST['_wpnonce'] ) ) {
+			return;
+		}
+		if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'update-post_' . $post_id ) ) {
+			return;
+		}
 		/*
 		 * In production code, $slug should be set only once in the plugin,
 		 * preferably as a class property, rather than in each function that needs it.
@@ -704,7 +710,6 @@ class iworks_fleet_posttypes {
 
 	protected function get_series_array() {
 		$terms = get_terms(
-			$this->taxonomy_name_serie,
 			array(
 				'taxonomy'   => $this->taxonomy_name_serie,
 				'hide_empty' => false,

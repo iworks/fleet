@@ -36,29 +36,33 @@ foreach ( $args['data']['teams'] as $one ) {
 	if ( $last_points === $one['sum'] ) {
 		if ( $last_number_of_starts < $one['number_of_starts'] ) {
 			$last_place = $i + 1;
-			echo $i + 1;
+			echo esc_html( $i + 1 );
 		} else {
 			if ( $last_points === $one['sum'] ) {
 				if ( $last_number_of_starts > $one['number_of_starts'] ) {
-					$last_place++;
+					++$last_place;
 				}
-				echo $last_place;
+				echo esc_html( $last_place );
 			} else {
-				echo $i;
+				echo esc_html( $i );
 			}
 		}
 	} elseif ( $last_points < $one['sum'] ) {
 		$last_place = $i;
-		echo $i;
+		echo esc_html( $i );
 	} else {
-		echo $last_place;
+		echo esc_html( $last_place );
 	}
 	echo '</td>';
 	echo '<td class="iworks-fleet-ranking-table-name">';
 	if ( isset( $one['url'] ) ) {
-		printf( '<a href="%s">%s</a>', $one['url'], esc_html( $one['name'] ) );
+		printf(
+			'<a href="%s">%s</a>',
+			esc_url( $one['url'] ),
+			esc_html( $one['name'] )
+		);
 	} else {
-		echo $one['name'];
+		echo esc_html( $one['name'] );
 	}
 	echo '</td>';
 	foreach ( $one['results'] as $regatta_id => $regatta_data ) {
@@ -78,51 +82,51 @@ foreach ( $args['data']['teams'] as $one ) {
 				printf(
 					'<td class="%s">%s%d%s</td>',
 					esc_attr( implode( ' ', $classes ) ),
-					$prefix,
-					$regatta_data['place'],
-					$sufix
+					esc_html( $prefix ),
+					esc_html( $regatta_data['place'] ),
+					esc_html( $sufix )
 				);
 			} else {
 				printf(
 					'<td class="%1$s"><span class="medal medal-%2$d">%3$s%2$d%4$s</span></td>',
 					esc_attr( implode( ' ', $classes ) ),
-					$regatta_data['place'],
-					$prefix,
-					$sufix
+					esc_html( $regatta_data['place'] ),
+					esc_html( $prefix ),
+					esc_html( $sufix )
 				);
 			}
 			printf(
 				'<td class="%s">%s%d%s</td>',
 				esc_attr( implode( ' ', $classes ) ),
-				$prefix,
-				$regatta_data['points'],
-				$sufix
+				esc_html( $prefix ),
+				esc_html( $regatta_data['points'] ),
+				esc_html( $sufix )
 			);
 		} else {
 			printf(
 				'<td class="%s">%s%s%s</td>',
 				esc_attr( implode( ' ', $classes ) ),
-				$prefix,
-				$regatta_data['status'],
-				$sufix
+				esc_html( $prefix ),
+				esc_html( $regatta_data['status'] ),
+				esc_html( $sufix )
 			);
 			printf(
 				'<td class="%s">%s%d%s</td>',
 				esc_attr( implode( ' ', $classes ) ),
-				$prefix,
-				$regatta_data['points'],
-				$sufix
+				esc_html( $prefix ),
+				esc_html( $regatta_data['points'] ),
+				esc_html( $sufix )
 			);
 		}
 	}
 	echo '<td class="iworks-fleet-ranking-table-number-of-starts">';
-	echo $one['number_of_starts'];
+	echo esc_html( $one['number_of_starts'] );
 	echo '</td>';
 	echo '<td class="iworks-fleet-ranking-table-brutto">';
-	echo $one['sum'];
+	echo esc_html( $one['sum'] );
 	echo '</td>';
 	echo '<td class="iworks-fleet-ranking-table-netto">';
-	echo $one['netto'];
+	echo esc_html( $one['netto'] );
 	echo '</td>';
 	echo '</tr>';
 	/**
@@ -133,8 +137,8 @@ foreach ( $args['data']['teams'] as $one ) {
 	/**
 	 * increment
 	 */
-	$i++;
+	++$i;
 }
-?>
-	</tbody>
-</table>
+echo '</tbody>';
+echo '</table>';
+

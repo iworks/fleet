@@ -89,40 +89,40 @@ foreach ( $args['data']['teams'] as $one ) {
 				printf(
 					'<td class="%s">%s%d%s</td>',
 					esc_attr( implode( ' ', $classes ) ),
-					$prefix,
-					$regatta_data['place'],
-					$sufix
+					esc_html( $prefix ),
+					esc_html( $regatta_data['place'] ),
+					esc_html( $sufix )
 				);
 			} else {
 				printf(
 					'<td class="%1$s"><span class="medal medal-%2$d">%3$s%2$d%4$s</span></td>',
 					esc_attr( implode( ' ', $classes ) ),
-					$regatta_data['points'],
-					$prefix,
-					$sufix
+					esc_html( $regatta_data['points'] ),
+					esc_html( $prefix ),
+					esc_html( $sufix )
 				);
 			}
 			printf(
 				'<td class="%s">%s%d%s</td>',
 				esc_attr( implode( ' ', $classes ) ),
-				$prefix,
-				$regatta_data['points'],
-				$sufix
+				esc_html( $prefix ),
+				esc_html( $regatta_data['points'] ),
+				esc_html( $sufix )
 			);
 		} else {
 			printf(
 				'<td class="%s">%s%s%s</td>',
 				esc_attr( implode( ' ', $classes ) ),
-				$prefix,
-				$regatta_data['status'],
-				$sufix
+				esc_html( $prefix ),
+				esc_html( $regatta_data['status'] ),
+				esc_html( $sufix )
 			);
 			printf(
 				'<td class="%s">%s%d%s</td>',
 				esc_attr( implode( ' ', $classes ) ),
-				$prefix,
-				$regatta_data['points'],
-				$sufix
+				esc_html( $prefix ),
+				esc_html( $regatta_data['points'] ),
+				esc_html( $sufix )
 			);
 		}
 	}
@@ -146,6 +146,5 @@ foreach ( $args['data']['teams'] as $one ) {
 	 */
 	++$i;
 }
-?>
-	</tbody>
-</table>
+echo '</tbody>';
+echo '</table>';

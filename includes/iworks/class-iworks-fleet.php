@@ -47,21 +47,23 @@ class iworks_fleet extends iworks {
 		$this->version    = 'PLUGIN_VERSION';
 		$this->capability = apply_filters( 'iworks_fleet_capability', 'manage_options' );
 		/**
-		 * DB
+		 * Include files
 		 *
 		 * separate db function to file
 		 *
 		 * @since 2.6.0
 		 */
-		include_once $this->base . '/iworks/fleet/class-iworks-fleet-db.php';
-		$this->objects['db'] = new iworks_fleet_db();
-		/**
-		 * github relased include (only for git version)
-		 *
-		 * @since 2.6.0
-		 */
-		include_once $this->base . '/iworks/fleet/class-iworks-fleet-github.php';
-		$this->objects['github'] = new iworks_fleet_github();
+		$classes = array(
+			'db',
+			'github',
+		);
+		foreach ( $classes as $class ) {
+			$file = $this->base . '/iworks/fleet/class-iworks-fleet-' . $class . '.php';
+			if ( is_file( $file ) ) {
+				include_once $file;
+				$this->objects[ $class ] = new iworks_fleet_db();
+			}
+		}
 		/**
 		 * post_types
 		 */
@@ -118,15 +120,28 @@ class iworks_fleet extends iworks {
 	 * #since 1.0.0
 	 */
 	public function stats() {
+		$elements = array(
+			'person' => __( 'Number of sailors', 'fleet' ),
+			'boat'   => __( 'Number of boats', 'fleet' ),
+			'result' => __( 'Number of event results', 'fleet' ),
+		);
 		$content  = '<div class="fleet-statistsics">';
 		$content .= sprintf( '<h2>%s</h2>', esc_html__( 'Statistics', 'fleet' ) );
 		$content .= '<dl>';
-		$content .= sprintf( '<dt>%s</dt>', esc_html__( 'Number of sailors', 'fleet' ) );
-		$content .= sprintf( '<dd><a href="%s">%d</a></dd>', get_post_type_archive_link( $this->post_type_person->get_name() ), $this->post_type_person->count() );
-		$content .= sprintf( '<dt>%s</dt>', esc_html__( 'Number of boats', 'fleet' ) );
-		$content .= sprintf( '<dd><a href="%s">%d</a></dd>', get_post_type_archive_link( $this->post_type_boat->get_name() ), $this->post_type_boat->count() );
-		$content .= sprintf( '<dt>%s</dt>', esc_html__( 'Number of event results', 'fleet' ) );
-		$content .= sprintf( '<dd><a href="%s">%d</a></dd>', get_post_type_archive_link( $this->post_type_result->get_name() ), $this->post_type_result->count() );
+		foreach ( $elements as $type => $label ) {
+			$post_type = $this->objects[ 'post_type_' . $type ];
+			$content  .= sprintf(
+				'<dt class="fleet-statistsics-%s">%s</dt>',
+				esc_attr( $type ),
+				esc_html( $label )
+			);
+			$content  .= sprintf(
+				'<dd class="fleet-statistsics-%s"><a href="%s">%d</a></dd>',
+				esc_attr( $type ),
+				get_post_type_archive_link( $post_type->get_name() ),
+				$post_type->count()
+			);
+		}
 		$content .= '</dl>';
 		$content .= '</div>';
 		return $content;
@@ -290,18 +305,18 @@ class iworks_fleet extends iworks {
 	 * Get person name
 	 */
 	public function get_person_name( $user_post_id ) {
-		return $this->post_type_person->get_person_name_by_id( $user_post_id );
+		return $this->objects['post_type_person']->get_person_name_by_id( $user_post_id );
 	}
 	/**
 	 * Get person avatar
 	 */
 	public function get_person_avatar( $user_post_id ) {
-		return $this->post_type_person->get_person_avatar_by_id( $user_post_id );
+		return $this->objects['post_type_person']->get_person_avatar_by_id( $user_post_id );
 	}
 
 	public function get_list_by_post_type( $type ) {
 		$args  = array(
-			'post_type' => $this->{'post_type_' . $type}->get_name(),
+			'post_type' => $this->objects[ 'post_type_' . $type ]->get_name(),
 			'nopaging'  => true,
 		);
 		$list  = array();
@@ -409,7 +424,7 @@ class iworks_fleet extends iworks {
 	 * @since 2.3.6
 	 */
 	public function get_regatta_select_by_year_and_serie_id( $year, $serie ) {
-		return $this->post_type_result->get_regatta_select_by_year_and_serie_id( $year, $serie );
+		return $this->objects['post_type_result']->get_regatta_select_by_year_and_serie_id( $year, $serie );
 	}
 
 	/**

@@ -996,21 +996,26 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 				<?php
 			}
 		}
-		?>
-		</tbody>
-		<tfoot>
-			<tr>
-				<td colspan="4">
-					<label>
-					<input type="radio" name="<?php echo $this->single_crew_field_name; ?>[current]" value="no" <?php checked( 'no', $current ); ?> />
-					<?php esc_html_e( 'There is no current team', 'fleet' ); ?>
-					</label>
-				</td>
-			</tr>
-		</tfoot>
-	</table>
-	<button class="iworks-add-crew"><?php esc_html_e( 'Add a crew', 'fleet' ); ?></button>
-		<?php
+		echo '</tbody>';
+		echo '<tfoot>';
+		echo '<tr>';
+		echo '<td colspan="4">';
+		echo '<label>';
+		printf(
+			'<input type="radio" name="%s[current]" value="no" %s>',
+			esc_attr( $this->single_crew_field_name ),
+			checked( 'no', $current, false )
+		);
+		esc_html_e( 'There is no current team', 'fleet' );
+		echo '</label>';
+		echo '</td>';
+		echo '</tr>';
+		echo '</tfoot>';
+		echo '</table>';
+		printf(
+			'<button class="iworks-add-crew">%s</button>',
+			esc_html__( 'Add a crew', 'fleet' )
+		);
 	}
 
 	/**
@@ -1438,6 +1443,12 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 	}
 
 	public function add_thumbnail( $post_id, $post, $update ) {
+		if ( ! isset( $_POST['_wpnonce'] ) ) {
+			return;
+		}
+		if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'update-post_' . $post_id ) ) {
+			return;
+		}
 		$valid_post_type = $this->check_post_type_by_id( $post_id );
 		if ( ! $valid_post_type ) {
 			return;
@@ -1567,6 +1578,12 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 	}
 
 	public function save_post_owners_save( $post_id, $post, $update ) {
+		if ( ! isset( $_POST['_wpnonce'] ) ) {
+			return;
+		}
+		if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'update-post_' . $post_id ) ) {
+			return;
+		}
 		$valid_post_type = $this->check_post_type_by_id( $post_id );
 		if ( ! $valid_post_type ) {
 			return;
@@ -1738,7 +1755,7 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 				$t[] = sprintf(
 					'<a href="%s">%s</a>',
 					esc_url( get_permalink( $user_ID ) ),
-					esc_html( $name )
+					$name
 				);
 			}
 		}
