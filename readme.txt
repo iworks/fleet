@@ -80,6 +80,9 @@ Please use the plugin support forum or submit issues/pull requests on GitHub.
 
 == Changelog ==
 
+= 2.6.0 (202x-xx-xx) =
+* Fixed class load and initialization.
+
 = 2.6.0 (2025-12-09) =
 * Added JSON-LD integration with the [Simple SEO Improvements](https://wordpress.org/plugins/simple-seo-improvements/) plugin for the Person schema.
 * Added JSON-LD integration with the [Simple SEO Improvements](https://wordpress.org/plugins/simple-seo-improvements/) plugin for the Result schema.

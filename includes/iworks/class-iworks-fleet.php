@@ -61,7 +61,8 @@ class iworks_fleet extends iworks {
 			$file = $this->base . '/iworks/fleet/class-iworks-fleet-' . $class . '.php';
 			if ( is_file( $file ) ) {
 				include_once $file;
-				$this->objects[ $class ] = new iworks_fleet_db();
+				$class_name              = sprintf( 'iworks_fleet_%s', $class );
+				$this->objects[ $class ] = new $class_name();
 			}
 		}
 		/**
