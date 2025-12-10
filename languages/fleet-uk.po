@@ -1,10 +1,10 @@
-# Translation of Plugins - Fleet Manager - Stable (latest release) in Ukrainian
-# This file is distributed under the same license as the Plugins - Fleet Manager - Stable (latest release) package.
+# Translation of Plugins - Fleet Manager - Development (trunk) in Ukrainian
+# This file is distributed under the same license as the Plugins - Fleet Manager - Development (trunk) package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Plugins - Fleet Manager - Stable (latest release)\n"
+"Project-Id-Version: Plugins - Fleet Manager - Development (trunk)\n"
 "Report-Msgid-Bugs-To: http://iworks.pl\n"
-"POT-Creation-Date: 2025-12-09 18:07:35+00:00\n"
+"POT-Creation-Date: 2025-12-10 06:48:48+00:00\n"
 "PO-Revision-Date: 2025-10-20 11:30:12+0000\n"
 "Language: uk_UA\n"
 "MIME-Version: 1.0\n"
@@ -85,7 +85,7 @@ msgstr "Флот: потрібно ID рейтингу!"
 
 #. translators: %s is: <code>id</code>
 #: assets/templates/shortcode/ranking-missing-id.php:14
-msgid " The %s parameter is required for this shortcode to work."
+msgid "The %s parameter is required for this shortcode to work."
 msgstr ""
 
 #: assets/templates/shortcode/ranking-wrong-id.php:9
@@ -1794,7 +1794,7 @@ msgstr "Вікторія"
 msgid "Western Australia"
 msgstr "Західна Австралія"
 
-#: fleet.php:106
+#: fleet.php:121
 msgid "Fleet Manager"
 msgstr "Менеджер флоту"
 
@@ -2523,9 +2523,8 @@ msgid "World Sailing Sailor ID"
 msgstr "ID яхтсмена Міжнародної федерації парусного спорту"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:109
-#, fuzzy
 msgid "Full name"
-msgstr "Номер корпусу"
+msgstr ""
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:112
 msgid "Nickname"
@@ -2544,9 +2543,8 @@ msgid "Birth Date"
 msgstr "Дата народження"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:134
-#, fuzzy
 msgid "Death Date"
-msgstr "Дата народження"
+msgstr ""
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:137
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:137
@@ -3403,40 +3401,41 @@ msgstr ""
 "інструмент. Дякуємо за всі оцінки, відгуки та пожертви."
 
 #: integration/themes/twentytwenty-5o5-child/5o5-archive.php:15
+#, fuzzy
 msgid "Search:"
-msgstr "Пошук:"
+msgstr "Пошук човна"
 
 #. translators: %s: Number of search results.
 #: integration/themes/twentytwenty-5o5-child/5o5-archive.php:22
 msgid "We found %s result for your search."
 msgid_plural "We found %s results for your search."
-msgstr[0] "За вашим запитом знайдено %s результат."
-msgstr[1] "За вашим запитом знайдено %s результатів."
-msgstr[2] "За вашим запитом знайдено %s результатів."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 #: integration/themes/twentytwenty-5o5-child/5o5-archive.php:31
 msgid ""
 "We could not find any results for your search. You can give it another try "
 "through the search form below."
 msgstr ""
-"Не вдалося знайти жодного результату для вашого пошуку. Ви можете спробувати "
-"ще раз через форму пошуку нижче."
 
 #: integration/themes/twentytwenty-5o5-child/5o5-archive.php:75
+#, fuzzy
 msgid "Number"
-msgstr "Кількість"
+msgstr "Номер човна"
 
 #: integration/themes/twentytwenty-5o5-child/5o5-archive.php:76
 msgid "Hull"
-msgstr "Корпус"
+msgstr ""
 
 #: integration/themes/twentytwenty-5o5-child/5o5-archive.php:77
 msgid "Last known owner"
-msgstr "Останній відомий власник"
+msgstr ""
 
 #: integration/themes/twentytwenty-5o5-child/5o5-archive.php:118
+#, fuzzy
 msgid "search again"
-msgstr "шукати знову"
+msgstr "Пошук рейтингу"
 
 #. Plugin Name of the plugin/theme
 #, fuzzy
@@ -3669,15 +3668,6 @@ msgstr "https://uk.wordpress.org/plugins/%s"
 msgctxt "plugins support home"
 msgid "https://wordpress.org/support/plugin/%s"
 msgstr "https://wordpress.org/support/plugin/%s"
-
-#~ msgid "Fleet Manager Base"
-#~ msgstr "Fleet Manager Base"
-
-#~ msgid "The shortcode require <code>id</code> param to work."
-#~ msgstr "Для роботи шорткоду потрібен параметр <code>id</code>."
-
-#~ msgid "The shortcode param <code>id</code> param is wrong."
-#~ msgstr "Параметр шорткоду <code>id</code> є неправильним."
 
 #~ msgid ""
 #~ "Manage sailboats, sailors, regattas, and results with ease. Track boats, "

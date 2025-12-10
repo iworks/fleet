@@ -11,7 +11,7 @@ echo '</h2>';
 echo '<p>';
 printf(
 	// translators: %s is: <code>id</code>
-	esc_html__( ' The %s parameter is required for this shortcode to work.', 'fleet' ),
+	esc_html__( 'The %s parameter is required for this shortcode to work.', 'fleet' ),
 	'<code>id</code>'
 );
 echo '</p>';

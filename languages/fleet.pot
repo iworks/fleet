@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.6.0\n"
 "Report-Msgid-Bugs-To: http://iworks.pl\n"
-"POT-Creation-Date: 2025-12-09 18:07:45+00:00\n"
+"POT-Creation-Date: 2025-12-10 06:49:01+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -95,7 +95,7 @@ msgstr ""
 
 #: assets/templates/shortcode/ranking-missing-id.php:14
 #. translators: %s is: <code>id</code>
-msgid " The %s parameter is required for this shortcode to work."
+msgid "The %s parameter is required for this shortcode to work."
 msgstr ""
 
 #: assets/templates/shortcode/ranking-wrong-id.php:9
@@ -1800,7 +1800,7 @@ msgstr ""
 msgid "Western Australia"
 msgstr ""
 
-#: fleet.php:106
+#: fleet.php:121
 msgid "Fleet Manager"
 msgstr ""
 

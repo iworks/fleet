@@ -1,20 +1,18 @@
-# Translation of Plugins - Fleet Manager - Stable (latest release) in Polish
-# This file is distributed under the same license as the Plugins - Fleet Manager - Stable (latest release) package.
+# Translation of Plugins - Fleet Manager - Development (trunk) in Polish
+# This file is distributed under the same license as the Plugins - Fleet Manager - Development (trunk) package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Plugins - Fleet Manager - Stable (latest release)\n"
+"Project-Id-Version: Plugins - Fleet Manager - Development (trunk)\n"
 "Report-Msgid-Bugs-To: http://iworks.pl\n"
-"POT-Creation-Date: 2025-12-09 18:07:35+00:00\n"
-"PO-Revision-Date: 2025-12-09 14:32+0100\n"
-"Last-Translator: \n"
-"Language-Team: \n"
+"POT-Creation-Date: 2025-12-10 06:43:46+00:00\n"
+"PO-Revision-Date: 2025-12-10 06:38:56+0000\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n == 1) ? 0 : ((n % 10 >= 2 && n % 10 <= 4 "
 "&& (n % 100 < 12 || n % 100 > 14)) ? 1 : 2);\n"
-"X-Generator: Poedit 3.7\n"
+"X-Generator: GlotPress/4.0.3\n"
 
 #: assets/templates/shortcode/crew/output/table.php:5
 msgid "Team"
@@ -87,8 +85,8 @@ msgstr "Flota: identyfikator rankingu jest wymagany!"
 
 #. translators: %s is: <code>id</code>
 #: assets/templates/shortcode/ranking-missing-id.php:14
-msgid " The %s parameter is required for this shortcode to work."
-msgstr ""
+msgid "The %s parameter is required for this shortcode to work."
+msgstr "Parametr %s jest wymagany do działania shortcode."
 
 #: assets/templates/shortcode/ranking-wrong-id.php:9
 msgid "Fleet: the ranking id is wrong!"
@@ -100,6 +98,8 @@ msgid ""
 "The shortcode attribute %1$s is invalid. Please use a correct %1$s value "
 "that matches an existing item."
 msgstr ""
+"Nieprawidłowy atrybut shortcode %1$s. Użyj poprawnej wartości %1$s, która "
+"pasuje do istniejącego elementu."
 
 #: etc/options.php:11
 msgid "Configuration"
@@ -1794,7 +1794,7 @@ msgstr "Wiktoria (stan Australii)"
 msgid "Western Australia"
 msgstr "Australia Zachodnia"
 
-#: fleet.php:106
+#: fleet.php:121
 msgid "Fleet Manager"
 msgstr "Manager Floty"
 
@@ -2524,7 +2524,7 @@ msgstr "Identyfikator żeglarza w World Sailing"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:109
 msgid "Full name"
-msgstr "Pełna nazwa"
+msgstr "Pełne imię i nazwisko"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:112
 msgid "Nickname"
@@ -3403,40 +3403,41 @@ msgstr ""
 "wszystkie oceny, recenzje oraz dodatkowe wsparcie."
 
 #: integration/themes/twentytwenty-5o5-child/5o5-archive.php:15
+#, fuzzy
 msgid "Search:"
-msgstr "Szukaj:"
+msgstr "Szukaj łódki"
 
 #. translators: %s: Number of search results.
 #: integration/themes/twentytwenty-5o5-child/5o5-archive.php:22
 msgid "We found %s result for your search."
 msgid_plural "We found %s results for your search."
-msgstr[0] "Znaleziono %s wynik wyszukiwania."
-msgstr[1] "Znaleziono %s wyniki wyszukiwania."
-msgstr[2] "Znaleziono %s wyników wyszukiwania."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 #: integration/themes/twentytwenty-5o5-child/5o5-archive.php:31
 msgid ""
 "We could not find any results for your search. You can give it another try "
 "through the search form below."
 msgstr ""
-"Nie można było znaleźć żadnych wyników wyszukiwania. Proszę spróbować "
-"jeszcze raz, korzystając z poniższego formularza."
 
 #: integration/themes/twentytwenty-5o5-child/5o5-archive.php:75
+#, fuzzy
 msgid "Number"
-msgstr "Liczba"
+msgstr "Numer łodzi"
 
 #: integration/themes/twentytwenty-5o5-child/5o5-archive.php:76
 msgid "Hull"
-msgstr "Kadłub"
+msgstr ""
 
 #: integration/themes/twentytwenty-5o5-child/5o5-archive.php:77
 msgid "Last known owner"
-msgstr "Ostatni znany właściciel"
+msgstr ""
 
 #: integration/themes/twentytwenty-5o5-child/5o5-archive.php:118
+#, fuzzy
 msgid "search again"
-msgstr "szukaj ponownie"
+msgstr "Szukaj rankingu"
 
 #. Plugin Name of the plugin/theme
 #, fuzzy
@@ -3445,19 +3446,19 @@ msgstr "Manager Floty"
 
 #. Plugin URI of the plugin/theme
 msgid "PLUGIN_URI"
-msgstr "PLUGIN_URI"
+msgstr ""
 
 #. Description of the plugin/theme
 msgid "PLUGIN_DESCRIPTION"
-msgstr "PLUGIN_DESCRIPTION"
+msgstr ""
 
 #. Author of the plugin/theme
 msgid "AUTHOR_NAME"
-msgstr "AUTHOR_NAME"
+msgstr ""
 
 #. Author URI of the plugin/theme
 msgid "AUTHOR_URI"
-msgstr "AUTHOR_URI"
+msgstr ""
 
 #: includes/iworks/class-iworks-fleet.php:269
 msgctxt "Taxonomy General Name"
@@ -3613,7 +3614,7 @@ msgstr "Klub"
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:513
 msgctxt "Person name on crews list if it is not set"
 msgid "not set"
-msgstr "nie ustawiono"
+msgstr "Nie ustawiono"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:171
 msgctxt "Ranking General Name"
@@ -3669,15 +3670,6 @@ msgstr "https://pl.wordpress.org/plugins/%s"
 msgctxt "plugins support home"
 msgid "https://wordpress.org/support/plugin/%s"
 msgstr "https://wordpress.org/support/plugin/%s"
-
-#~ msgid "Fleet Manager Base"
-#~ msgstr "Fleet Manager Base"
-
-#~ msgid "The shortcode require <code>id</code> param to work."
-#~ msgstr "Shortcode wymaga parametru <code>id</code> do działania."
-
-#~ msgid "The shortcode param <code>id</code> param is wrong."
-#~ msgstr "Parametr <code>id</code> krótkiego kodu nie jest prawidłowy."
 
 #~ msgid ""
 #~ "Manage sailboats, sailors, regattas, and results with ease. Track boats, "
