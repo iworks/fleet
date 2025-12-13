@@ -82,6 +82,8 @@ Please use the plugin support forum or submit issues/pull requests on GitHub.
 
 = 2.6.0 (202x-xx-xx) =
 * Fixed class load and initialization.
+* Fixed country code recognition.
+* Added ability to show data source.
 
 = 2.6.0 (2025-12-09) =
 * Added JSON-LD integration with the [Simple SEO Improvements](https://wordpress.org/plugins/simple-seo-improvements/) plugin for the Person schema.

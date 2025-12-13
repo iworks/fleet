@@ -559,6 +559,9 @@ class iworks_fleet_posttypes {
 			if ( isset( $one['en'] ) && $one['en'] === $name ) {
 				return $one['code'];
 			}
+			if ( isset( $one['code'] ) && $one['code'] === $name ) {
+				return $one['code'];
+			}
 		}
 		return new WP_Error( 'missing-mna-code', __( 'Missing MNA county code.', 'fleet' ) );
 	}
