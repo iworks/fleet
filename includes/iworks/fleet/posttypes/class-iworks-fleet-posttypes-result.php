@@ -2069,7 +2069,10 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 				}
 			}
 			if ( false === $boat ) {
-				$one_content .= esc_html( $boat_name );
+				$one_content .= sprintf(
+					'<span class="no-boat">%s</span>',
+					esc_html( $boat_name )
+				);
 			} else {
 				$one_content .= sprintf(
 					'<a href="%s">%s</a>',

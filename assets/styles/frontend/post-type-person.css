@@ -260,6 +260,9 @@ td.points {
 .flag.flag-rus {
   background-image: url(../images/flags/rus.svg?v=PLUGIN_VERSION);
 }
+.flag.flag-sin {
+  background-image: url(../images/flags/sin.svg?v=PLUGIN_VERSION);
+}
 .flag.flag-sui {
   background-image: url(../images/flags/sui.svg?v=PLUGIN_VERSION);
 }
