@@ -4029,6 +4029,20 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			$organizer = get_post_meta( get_the_ID(), 'iworks_fleet_result_organizer', true );
 			if ( ! empty( $organizer ) ) {
 				$data['organizer'] = $organizer;
+				$data['location']  = array(
+					'@type' => 'Place',
+					'name'  => $organizer,
+				);
+			}
+			/**
+			 * location
+			 */
+			$location = get_post_meta( get_the_ID(), 'iworks_fleet_result_location', true );
+			if ( ! empty( $location ) ) {
+				$data['location'] = array(
+					'@type' => 'BodyOfWater',
+					'name'  => $location,
+				);
 			}
 			/**
 			 * add sameAs
