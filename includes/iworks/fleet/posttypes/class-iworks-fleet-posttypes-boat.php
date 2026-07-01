@@ -27,6 +27,14 @@ if ( class_exists( 'iworks_fleet_posttypes_boat' ) ) {
 
 require_once dirname( __DIR__, 1 ) . '/class-iworks-posttypes.php';
 
+/**
+ * Boat post type handler.
+ *
+ * Registers and manages the 'iworks_fleet_boat' post type, its taxonomies,
+ * meta boxes, shortcodes, and related functionality for boat entries.
+ *
+ * @since 1.0.0
+ */
 class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 
 	protected $post_type_name             = 'iworks_fleet_boat';
@@ -56,6 +64,13 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 	 */
 	private $owners_index_field_name = 'iworks_fleet_boot_owner_id';
 
+	/**
+	 * Constructor.
+	 *
+	 * Hooks filters and actions for the boat post type.
+	 *
+	 * @since 1.0.0
+	 */
 	public function __construct() {
 		parent::__construct();
 		add_filter( 'enter_title_here', array( $this, 'enter_title_here' ), 10, 2 );
@@ -123,6 +138,13 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 	 * init setup
 	 *
 	 * @since 2.5.0
+	 */
+	/**
+	 * Initialize setup fields and configurations.
+	 *
+	 * @since 2.5.0
+	 *
+	 * @return void
 	 */
 	public function action_init_setup() {
 		/**
@@ -230,6 +252,14 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		}
 	}
 
+	/**
+	 * Render a list of boats via shortcode.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array $atts Shortcode attributes.
+	 * @return string Rendered HTML list.
+	 */
 	public function shortcode_list( $atts ) {
 		$atts = shortcode_atts(
 			array(
@@ -311,13 +341,25 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 	}
 
 	/**
-	 * Add default class to postbox,
+	 * Add default class to postbox.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array $classes Existing postbox classes.
+	 * @return array Modified classes.
 	 */
 	public function add_defult_class_to_postbox( $classes ) {
 		$classes[] = 'iworks-type';
 		return $classes;
 	}
 
+	/**
+	 * Register the 'boat' post type and its taxonomies.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return void
+	 */
 	public function register() {
 		global $iworks_fleet;
 		/**
@@ -509,6 +551,16 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		}
 	}
 
+	/**
+	 * Save post meta for the boat post type.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param int     $post_id Post ID.
+	 * @param WP_Post $post    Post object.
+	 * @param bool    $update  Whether this is an update.
+	 * @return void
+	 */
 	public function save_post_meta( $post_id, $post, $update ) {
 		$result = $this->save_post_meta_fields( $post_id, $post, $update, $this->fields );
 		if ( ! $result ) {
@@ -593,6 +645,10 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 	 * Change "Enter title here" to "Enter boat number"
 	 *
 	 * @since 1.0
+	 *
+	 * @param string  $title Default placeholder text.
+	 * @param WP_Post $post  Current post object.
+	 * @return string Modified placeholder text.
 	 */
 	public function enter_title_here( $title, $post ) {
 		if ( $post->post_type == $this->post_type_name ) {
@@ -602,8 +658,12 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 	}
 
 	/**
+	 * Filter the content for boat single views.
 	 *
 	 * @since 1.0
+	 *
+	 * @param string $content Post content.
+	 * @return string Modified content.
 	 */
 	public function the_content( $content ) {
 		if ( ! is_singular() ) {
@@ -871,9 +931,14 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		return $content;
 	}
 
-		/**
-		 * attach gallery
-		 */
+	/**
+	 * Attach media gallery to boat content.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $content Post content.
+	 * @return string Content with attached media.
+	 */
 	public function add_media( $content ) {
 		if ( ! is_singular() ) {
 			return $content;
@@ -901,6 +966,16 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		return $content;
 	}
 
+	/**
+	 * Render a single table row for boat data.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $key   Row key.
+	 * @param string $label Row label.
+	 * @param string $value Row value.
+	 * @return string HTML table row.
+	 */
 	private function boat_single_row( $key, $label, $value ) {
 		if ( empty( $value ) || '-' == $value || is_wp_error( $value ) ) {
 			return '';
@@ -913,6 +988,14 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		return $text;
 	}
 
+	/**
+	 * Register meta boxes for the boat post type.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param WP_Post $post Current post object.
+	 * @return void
+	 */
 	public function register_meta_boxes( $post ) {
 		if ( $this->options->get_option( 'boat_add_crew_manually' ) ) {
 			add_meta_box( 'crew', __( 'Crews data', 'fleet' ), array( $this, 'crew' ), $this->post_type_name );
@@ -928,6 +1011,14 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		}
 	}
 
+	/**
+	 * Render the crew meta box.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param WP_Post $post Current post object.
+	 * @return void
+	 */
 	public function crew( $post ) {
 		add_action( 'admin_footer', array( $this, 'print_js_templates' ) );
 		?>
@@ -1022,6 +1113,8 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 	 * Add WP.templetes for crew
 	 *
 	 * @since 1.2.2
+	 *
+	 * @return void
 	 */
 	public function print_js_templates() {
 		echo '<script type="text/html" id="tmpl-iworks-boat-crew">';
@@ -1062,14 +1155,24 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 	}
 
 	/**
-	 * Boat meta box
+	 * Render the boat details meta box.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param WP_Post $post Current post object.
+	 * @return void
 	 */
 	public function boat( $post ) {
 		$this->get_meta_box_content( $post, $this->fields, __FUNCTION__ );
 	}
 
 	/**
-	 * Social media meta box
+	 * Render the social media meta box.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param WP_Post $post Current post object.
+	 * @return void
 	 */
 	public function social( $post ) {
 		$this->get_meta_box_content( $post, $this->fields, __FUNCTION__ );
@@ -1079,6 +1182,9 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 	 * Meta box "Owners"
 	 *
 	 * since 1.3.0
+	 *
+	 * @param WP_Post $post Current post object.
+	 * @return void
 	 */
 	public function owners( $post ) {
 		?>
@@ -1139,6 +1245,9 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 	 * One row owner helper
 	 *
 	 * @since 1.3.0
+	 *
+	 * @param array $data Owner data.
+	 * @return void
 	 */
 	public function owners_one_row_helper( $data = array() ) {
 		$data = wp_parse_args(
@@ -1260,8 +1369,9 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param string  $column Column name,
-	 * @param integer $post_id Current post id (Boat),
+	 * @param string  $column  Column name.
+	 * @param integer $post_id Post ID.
+	 * @return void
 	 */
 	public function custom_columns( $column, $post_id ) {
 		switch ( $column ) {
@@ -1303,8 +1413,8 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param array $columns list of columns.
-	 * @return array $columns list of columns.
+	 * @param array $columns Existing columns.
+	 * @return array Modified columns.
 	 */
 	public function add_columns( $columns ) {
 		unset( $columns['date'] );
@@ -1319,7 +1429,8 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param WP_Query $query WP Query object.
+	 * @param WP_Query $query Query object.
+	 * @return void
 	 */
 	public function apply_default_sort_order( $query ) {
 		/**
@@ -1385,6 +1496,15 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		return $query;
 	}
 
+	/**
+	 * Order posts by title for boat queries.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string  $orderby Current orderby clause.
+	 * @param WP_Query $query  Query object.
+	 * @return string Modified orderby clause.
+	 */
 	public function posts_orderby_post_title( $orderby, $query ) {
 		/**
 		 * query post type
@@ -1411,6 +1531,9 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 	 * get terms by boad id
 	 *
 	 * @since 2.1.6
+	 *
+	 * @param int $post_id Post ID.
+	 * @return array<WP_Term> List of manufacturer terms.
 	 */
 	public function get_manufacturers_list_by_post_id( $post_id ) {
 		return wp_get_post_terms( $post_id, $this->taxonomy_name_manufacturer );
@@ -1420,6 +1543,10 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 	 * filter array to get terms
 	 *
 	 * @since 2,1.6
+	 *
+	 * @param array|WP_Error $terms    Existing terms.
+	 * @param int            $post_id  Post ID.
+	 * @return array<WP_Term> Manufacturer terms.
 	 */
 	public function filter_get_manufacturer( $terms, $post_id ) {
 		$valid_post_type = $this->check_post_type_by_id( $post_id );
@@ -1429,6 +1556,15 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		return $this->get_manufacturers_list_by_post_id( $post_id );
 	}
 
+	/**
+	 * Append manufacturer name to content.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $content Existing content.
+	 * @param int    $post_id Post ID.
+	 * @return string Content with manufacturer appended.
+	 */
 	public function get_manufacturer( $content, $post_id ) {
 		$valid_post_type = $this->check_post_type_by_id( $post_id );
 		if ( ! $valid_post_type ) {
@@ -1442,6 +1578,16 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		return implode( ', ', $t );
 	}
 
+	/**
+	 * Save post thumbnail from attached media.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param int     $post_id Post ID.
+	 * @param WP_Post $post    Post object.
+	 * @param bool    $update  Whether this is an update.
+	 * @return void
+	 */
 	public function add_thumbnail( $post_id, $post, $update ) {
 		if ( ! isset( $_POST['_wpnonce'] ) ) {
 			return;
@@ -1464,6 +1610,14 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		set_post_thumbnail( $post_id, $ids[0] );
 	}
 
+	/**
+	 * Get attached media IDs for a boat post.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param int $post_id Post ID.
+	 * @return array<int> Media attachment IDs.
+	 */
 	private function get_media( $post_id ) {
 		$media     = get_attached_media( 'image', $post_id );
 		$ids       = array_keys( $media );
@@ -1488,10 +1642,26 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		return $ids;
 	}
 
+	/**
+	 * Get crew data for a boat post.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param int $post_id Post ID.
+	 * @return array Crew data.
+	 */
 	private function get_crews_data( $post_id ) {
 		return get_post_meta( $post_id, $this->single_crew_field_name, true );
 	}
 
+	/**
+	 * Add crew information to boat overlay.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param int $post_id Post ID.
+	 * @return void
+	 */
 	public function add_crew_to_boat( $post_id ) {
 		global $iworks_fleet;
 		$content = '';
@@ -1524,6 +1694,10 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 	 * Shortcode "BOAT" to show single boat.
 	 *
 	 * @sonce 1.2.7
+	 *
+	 * @param array  $atts    Shortcode attributes.
+	 * @param string $content Enclosed content.
+	 * @return string Rendered HTML.
 	 */
 	public function shortcode_boat( $atts, $content = '' ) {
 		$atts = shortcode_atts(
@@ -1577,6 +1751,16 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		return $content;
 	}
 
+	/**
+	 * Save boat owners data on post save.
+	 *
+	 * @since 1.3.0
+	 *
+	 * @param int     $post_id Post ID.
+	 * @param WP_Post $post    Post object.
+	 * @param bool    $update  Whether this is an update.
+	 * @return void
+	 */
 	public function save_post_owners_save( $post_id, $post, $update ) {
 		if ( ! isset( $_POST['_wpnonce'] ) ) {
 			return;
@@ -1653,10 +1837,15 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 	}
 
 	/**
-	 * get list of boats by post ID filter
+	 * Get list of boats by post ID filter
 	 *
 	 * @since 1.2
 	 * @since 2.0 array $atts Settings
+	 *
+	 * @param string $content Existing content.
+	 * @param int    $owner_id Owner ID.
+	 * @param array  $atts     Settings.
+	 * @return string Modified content.
 	 */
 	public function get_content_table_by_owner_id( $content, $owner_id, $atts ) {
 		$settings  = wp_parse_args(
@@ -1715,6 +1904,15 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		return $content;
 	}
 
+	/**
+	 * Append flag filter to content.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $content Existing content.
+	 * @param int    $post_ID Post ID.
+	 * @return string Content with flag filter.
+	 */
 	public function get_flag_filter( $content, $post_ID ) {
 		$meta_key = $this->options->get_option_name( 'boat_nation' );
 		$code     = get_post_meta( $post_ID, $meta_key, true );
@@ -1724,6 +1922,15 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		return $content;
 	}
 
+	/**
+	 * Append hull (manufacturer) filter to content.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $content Existing content.
+	 * @param int    $post_ID Post ID.
+	 * @return string Content with hull filter.
+	 */
 	public function get_hull_filter( $content, $post_ID ) {
 		return get_the_term_list( $post_ID, $this->taxonomy_name_manufacturer );
 	}
@@ -1732,6 +1939,9 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 	 * Add OpenGraph data.
 	 *
 	 * @since 1.3.0
+	 *
+	 * @param array $og Existing OpenGraph data.
+	 * @return array Modified OpenGraph data.
 	 */
 	public function og_array( $og ) {
 		if ( is_singular( $this->post_type_name ) ) {
@@ -1740,6 +1950,14 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		return $og;
 	}
 
+	/**
+	 * Helper to format last owner display.
+	 *
+	 * @since 1.3.0
+	 *
+	 * @param array $one Owner data.
+	 * @return string Formatted owner names.
+	 */
 	private function filter_get_last_owner_helper( $one ) {
 		if ( ! isset( $one['users_ids'] ) ) {
 			return;
@@ -1767,6 +1985,15 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		return implode( _x( ' ', 'user list separator', 'fleet' ), $t );
 	}
 
+	/**
+	 * Filter to append last owner to content.
+	 *
+	 * @since 1.3.0
+	 *
+	 * @param string $content Existing content.
+	 * @param int    $post_ID Post ID.
+	 * @return string Content with last owner appended.
+	 */
 	public function filter_get_last_owner( $content, $post_ID ) {
 		$data = get_post_meta( $post_ID, $this->owners_field_name, true );
 		if ( is_array( $data ) ) {
@@ -1790,6 +2017,9 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 	 * OG Plugin Integration: add Manufacturer Logo
 	 *
 	 * @since 2.1.6
+	 *
+	 * @param array $data OG image data.
+	 * @return array Modified OG image data.
 	 */
 	public function filter_og_image_value_maybe_use_manufacturer_logo( $data ) {
 		if ( is_singular( $this->post_type_name ) ) {

@@ -28,6 +28,14 @@ if ( class_exists( 'iworks_fleet_posttypes_person' ) ) {
 
 require_once dirname( __DIR__, 1 ) . '/class-iworks-posttypes.php';
 
+/**
+ * Person post type handler.
+ *
+ * Registers and manages the 'iworks_fleet_person' post type,
+ * its taxonomies, meta boxes, shortcodes, and related functionality for sailor/person entries.
+ *
+ * @since 1.0.0
+ */
 class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 
 	protected $post_type_name                 = 'iworks_fleet_person';
@@ -37,6 +45,13 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 	private $boats_list                       = array();
 	private $suspend_add_flag_to_single_title = false;
 
+	/**
+	 * Constructor.
+	 *
+	 * Hooks filters and actions for the person post type.
+	 *
+	 * @since 1.0.0
+	 */
 	public function __construct() {
 		parent::__construct();
 		add_filter( 'the_content', array( $this, 'the_content' ) );
@@ -88,9 +103,11 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 	}
 
 	/**
-	 * init setup
+	 * Initialize setup fields and configurations.
 	 *
 	 * @since 2.5.0
+	 *
+	 * @return void
 	 */
 	public function action_init_setup() {
 		/**
@@ -203,13 +220,25 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 	}
 
 	/**
-	 * Add default class to postbox,
+	 * Add default class to postbox.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array $classes Existing postbox classes.
+	 * @return array Modified classes.
 	 */
 	public function add_defult_class_to_postbox( $classes ) {
 		$classes[] = 'iworks-type';
 		return $classes;
 	}
 
+	/**
+	 * Register the 'person' post type and its taxonomies.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return void
+	 */
 	public function register() {
 		$parent       = true;
 		$this->labels = array(
@@ -306,24 +335,66 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 		register_taxonomy( $this->taxonomy_name_club, array( $this->post_type_name ), $args );
 	}
 
+	/**
+	 * Save post meta for the person post type.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param int     $post_id Post ID.
+	 * @param WP_Post $post    Post object.
+	 * @param bool    $update  Whether this is an update.
+	 * @return void
+	 */
 	public function save_post_meta( $post_id, $post, $update ) {
 		$result = $this->save_post_meta_fields( $post_id, $post, $update, $this->fields );
 	}
 
+	/**
+	 * Register meta boxes for the person post type.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param WP_Post $post Current post object.
+	 * @return void
+	 */
 	public function register_meta_boxes( $post ) {
 		add_meta_box( 'personal', __( 'Personal data', 'fleet' ), array( $this, 'personal' ), $this->post_type_name );
 		add_meta_box( 'social', __( 'Social Media', 'fleet' ), array( $this, 'social' ), $this->post_type_name );
 		add_meta_box( 'contact', __( 'Contact data', 'fleet' ), array( $this, 'contact' ), $this->post_type_name );
 	}
 
+	/**
+	 * Render the contact meta box.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param WP_Post $post Current post object.
+	 * @return void
+	 */
 	public function contact( $post ) {
 		$this->get_meta_box_content( $post, $this->fields, __FUNCTION__ );
 	}
 
+	/**
+	 * Render the social media meta box.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param WP_Post $post Current post object.
+	 * @return void
+	 */
 	public function social( $post ) {
 		$this->get_meta_box_content( $post, $this->fields, __FUNCTION__ );
 	}
 
+	/**
+	 * Render the personal data meta box.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param WP_Post $post Current post object.
+	 * @return void
+	 */
 	public function personal( $post ) {
 		$this->get_meta_box_content( $post, $this->fields, __FUNCTION__ );
 	}
@@ -333,8 +404,8 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param string $column Column name,
-	 * @param integer $post_id Current post id (person),
+	 * @param string $column Column name.
+	 * @param integer $post_id Current post id (person).
 	 *
 	 */
 	public function custom_columns( $column, $post_id ) {
@@ -357,12 +428,12 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 	}
 
 	/**
-	 * change default columns
+	 * Change default columns.
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param array $columns list of columns.
-	 * @return array $columns list of columns.
+	 * @param array $columns List of columns.
+	 * @return array Modified columns.
 	 */
 	public function add_columns( $columns ) {
 		unset( $columns['date'] );
@@ -373,32 +444,33 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 	}
 
 	/**
-	 * Add default sorting
+	 * Add default sorting.
 	 *
 	 * @since 1.0.0
 	 *
 	 * @param WP_Query $query WP Query object.
+	 * @return void
 	 */
 	public function apply_default_sort_order( $query ) {
 		/**
-		 * do not change if it is already set by request
+		 * Do not change if it is already set by request.
 		 */
 		if ( isset( $_REQUEST['orderby'] ) ) {
 			return $query;
 		}
 		/**
-		 * only main query
+		 * Only main query.
 		 */
 		if ( ! $query->is_main_query() ) {
 			return $query;
 		}
 		/**
-		 * do not change outsite th admin area
+		 * Do not change outside the admin area.
 		 */
 		$post_type = get_query_var( 'post_type' );
 		if ( is_admin() ) {
 			/**
-			 * check get_current_screen()
+			 * Check get_current_screen().
 			 */
 			if ( function_exists( 'get_current_screen' ) ) {
 				$screen = get_current_screen();
@@ -417,6 +489,15 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 		return $query;
 	}
 
+	/**
+	 * Append club name to content.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $content Existing content.
+	 * @param int    $post_id Post ID.
+	 * @return string Content with club appended.
+	 */
 	public function get_club( $content, $post_id ) {
 		$valid_post_type = $this->check_post_type_by_id( $post_id );
 		if ( ! $valid_post_type ) {
@@ -430,6 +511,13 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 		return implode( ', ', $t );
 	}
 
+	/**
+	 * AJAX handler to return Select2-compatible list of persons.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return void Sends JSON response.
+	 */
 	public function get_select2_list() {
 		if ( ! isset( $_POST['_wpnonce'] ) || ! isset( $_POST['user_id'] ) ) {
 			wp_send_json_error();
@@ -459,17 +547,33 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 		wp_send_json_error();
 	}
 
+	/**
+	 * Add nonce to localized script data.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array $data Localized data.
+	 * @return array Modified data with nonce.
+	 */
 	public function add_nonce( $data ) {
 		$data['nonces'][ $this->nonce_list ] = wp_create_nonce( $this->nonce_list . get_current_user_id() );
 		return $data;
 	}
 
+	/**
+	 * Get user data for a person post.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param int $user_post_id Person post ID.
+	 * @return array User data.
+	 */
 	private function get_user( $user_post_id ) {
 		$avatar_size = 100;
 		if ( ! isset( $this->users_list[ $user_post_id ] ) ) {
 			$thumbnail = '';
 			/**
-			 * try to get gravatar
+			 * Try to get Gravatar.
 			 */
 			$email       = $this->options->get_option_name( 'contact_email' );
 			$email       = get_post_meta( $user_post_id, $email, true );
@@ -479,13 +583,13 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 				$thumbnail = $avatar;
 			}
 			/**
-			 * fallback go post thumbnail
+			 * Fallback to post thumbnail.
 			 */
 			if ( empty( $thumbnail ) ) {
 				$thumbnail = get_the_post_thumbnail( $user_post_id, array( $avatar_size, $avatar_size ) );
 			}
 			/**
-			 * fallback to default gravatar
+			 * Fallback to default Gravatar.
 			 */
 			if ( empty( $thumbnail ) ) {
 				$thumbnail = $avatar;
@@ -502,7 +606,12 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 	}
 
 	/**
-	 * Get person name
+	 * Get person name by post ID.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param int $user_post_id Person post ID.
+	 * @return string Person name.
 	 */
 	public function get_person_name_by_id( $user_post_id ) {
 		if ( empty( $user_post_id ) ) {
@@ -521,7 +630,12 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 	}
 
 	/**
-	 * Get person avatar
+	 * Get person avatar by post ID.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param int $user_post_id Person post ID.
+	 * @return string Avatar HTML or empty string.
 	 */
 	public function get_person_avatar_by_id( $user_post_id ) {
 		if ( empty( $user_post_id ) ) {
@@ -541,8 +655,12 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 	}
 
 	/**
+	 * Filter the content for person single views.
 	 *
-	 * @since 1.0
+	 * @since 1.0.0
+	 *
+	 * @param string $content Post content.
+	 * @return string Modified content.
 	 */
 	public function the_content( $content ) {
 		if ( ! is_singular() ) {
@@ -554,7 +672,7 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 		}
 		$post_id = get_the_ID();
 		/**
-		 * trophies!
+		 * Trophies!
 		 */
 		if ( is_main_query() ) {
 			$show     = $this->options->get_option( 'person_show_trophy' );
@@ -562,20 +680,20 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 			$content  = $trophies . $content;
 		}
 		/**
-		 * add social media
+		 * Add social media.
 		 */
 		$content .= $this->social_media( $post_id );
 		/**
-		 * regatta
+		 * Regatta.
 		 */
 		$content .= apply_filters( 'iworks_fleet_result_sailor_regata_list', '', $post_id, array() );
 		/**
-		 * add boats
+		 * Add boats.
 		 */
 		$content .= $this->boats( $post_id );
 		$content .= $this->own_boats( $post_id );
 		/**
-		 * posts list
+		 * Posts list.
 		 *
 		 * @since 1.2.5
 		 */
@@ -611,7 +729,7 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 			}
 		}
 		/**
-		 * places stats
+		 * Places stats.
 		 *
 		 * @since 2.1.2
 		 */
@@ -622,9 +740,12 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 	}
 
 	/**
-	 * get boat name with link
+	 * Get boat name with link.
 	 *
 	 * @since 1.1.1
+	 *
+	 * @param int $boat_id Boat post ID.
+	 * @return string Boat name with link.
 	 */
 	private function get_boat( $boat_id ) {
 		if ( isset( $this->boats_list[ $boat_id ] ) ) {
@@ -643,6 +764,14 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 		return $this->boats_list[ $boat_id ];
 	}
 
+	/**
+	 * Render social media links for a person.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param int $post_id Person post ID.
+	 * @return string Social media links HTML.
+	 */
 	private function social_media( $post_id ) {
 		$content = '';
 		$show    = $this->options->get_option( 'person_show_social_media' );
@@ -669,6 +798,14 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 		return $content;
 	}
 
+	/**
+	 * Render a table of boats owned by a person.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param int $post_id Person post ID.
+	 * @return string HTML table.
+	 */
 	private function own_boats( $post_id ) {
 		$content = '';
 		$show    = $this->options->get_option( 'person_show_boats_owned_table' );
@@ -676,11 +813,19 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 			return $content;
 		}
 		/**
-		 * boats
+		 * Boats.
 		 */
 		return $content = apply_filters( 'iworks_fleet_boat_get_by_owner_id', $content, $post_id, array() );
 	}
 
+	/**
+	 * Render a table of boats associated with a person.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param int $post_id Person post ID.
+	 * @return string HTML table.
+	 */
 	private function boats( $post_id ) {
 		$content = '';
 		$show    = $this->options->get_option( 'person_show_boats_table' );
@@ -688,7 +833,7 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 			return $content;
 		}
 		/**
-		 * boats
+		 * Boats.
 		 */
 		$boats = get_post_meta( $post_id, '_iworks_fleet_boat' );
 		if ( empty( $boats ) ) {
@@ -699,7 +844,7 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 		$currently_sails_on = $sails_on = array();
 		$done               = array();
 		/**
-		 * past
+		 * Past.
 		 */
 		foreach ( $boats as $boat_id ) {
 			$crew = get_post_meta( $boat_id, $meta_name, true );
@@ -707,7 +852,7 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 				continue;
 			}
 			/**
-			 * current
+			 * Current.
 			 */
 			if ( isset( $crew['current'] ) && isset( $crew['crew'][ $crew['current'] ] ) ) {
 				$value = $crew['crew'][ $crew['current'] ];
@@ -729,7 +874,7 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 				}
 			}
 			/**
-			 * past
+			 * Past.
 			 */
 			foreach ( $crew['crew'] as $key => $value ) {
 				if ( isset( $value['helmsman'] ) && $post_id == $value['helmsman'] ) {
@@ -779,21 +924,29 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 	}
 
 	/**
-	 * generate key
+	 * Generate a cache key for boat/person association.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $prefix   Key prefix.
+	 * @param int    $boat_id  Boat post ID.
+	 * @param int    $post_id Person post ID.
+	 * @return string Cache key.
 	 */
 	private function get_done_key( $prefix, $boat_id, $post_id ) {
-		$done_key = 'helmsman-' . $boat_id . '-' . $post_id;
+		$done_key = $prefix . '-' . $boat_id . '-' . $post_id;
 		return $done_key;
 	}
 
 	/**
-	 * Change tag link to person
+	 * Change tag link to person.
 	 *
 	 * @since 1.2.5
 	 *
 	 * @param string $termlink Term link URL.
-	 * @param objec $term Term object.
+	 * @param object $term     Term object.
 	 * @param string $taxonomy Taxonomy slug.
+	 * @return string Modified term link.
 	 */
 	public function change_tag_link_to_person_link( $termlink, $term, $taxonomy ) {
 		if ( 'post_tag' !== $taxonomy ) {
@@ -828,6 +981,15 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 		return $termlink;
 	}
 
+	/**
+	 * Maybe add person nation meta from legacy data.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param int    $post_ID Post ID.
+	 * @param string $nation  Nation code.
+	 * @return void
+	 */
 	public function maybe_add_person_nation( $post_ID, $nation ) {
 		if ( empty( $nation ) ) {
 			return;
@@ -839,11 +1001,27 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 		}
 	}
 
+	/**
+	 * Get the nation code for a person.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param int $post_ID Person post ID.
+	 * @return string Nation code.
+	 */
 	private function get_code( $post_ID ) {
 		$meta_key = $this->options->get_option_name( 'personal_nation' );
 		return get_post_meta( $post_ID, $meta_key, true );
 	}
 
+	/**
+	 * Get the flag SVG content for a person.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param int $post_ID Person post ID.
+	 * @return string Flag SVG content or empty string.
+	 */
 	private function get_flag( $post_ID ) {
 		$code = $this->get_code( $post_ID );
 		if ( empty( $code ) ) {
@@ -861,6 +1039,15 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 		return $content . ' ';
 	}
 
+	/**
+	 * Add flag to single person title.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $post_title Original title.
+	 * @param int    $post_ID    Post ID.
+	 * @return string Title with flag.
+	 */
 	public function add_flag_to_single_title( $post_title, $post_ID ) {
 		if ( $this->suspend_add_flag_to_single_title ) {
 			return $post_title;
@@ -881,9 +1068,12 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 	}
 
 	/**
-	 * Add OpenGraph data.
+	 * Add OpenGraph data for person posts.
 	 *
 	 * @since 1.3.0
+	 *
+	 * @param array $og Existing OpenGraph data.
+	 * @return array Modified OpenGraph data.
 	 */
 	public function og_array( $og ) {
 		if ( is_singular( $this->post_type_name ) ) {
@@ -893,9 +1083,14 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 	}
 
 	/**
-	 * get sailor data by id
+	 * Filter to return structured person data.
 	 *
 	 * @since 2.3.0
+	 *
+	 * @param array $data      Existing data.
+	 * @param int    $person_id Person post ID.
+	 * @param string $name      Person name.
+	 * @return array Structured person data.
 	 */
 	public function filter_get_person_array( $data, $person_id, $name ) {
 		if ( isset( $this->cache['persons'][ $person_id ] ) ) {
@@ -918,6 +1113,14 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 		return $this->cache['persons'][ $person_id ];
 	}
 
+	/**
+	 * Get all meta fields for a person.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param int $person_id Person post ID.
+	 * @return array Meta fields.
+	 */
 	private function get_sailor_meta_by_id( $person_id ) {
 		$data = array();
 		foreach ( $this->fields as $group_key  => $group_data ) {
@@ -946,9 +1149,12 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 	}
 
 	/**
-	 * Plugin "Simple SEO Improvements" for person integration
+	 * Plugin "Simple SEO Improvements" for person integration.
 	 *
 	 * @since 2.6.0
+	 *
+	 * @param array $data Existing JSON-LD data.
+	 * @return array Modified JSON-LD data.
 	 */
 	public function filter_json_ld_data_for_simple_seo_improvements_plugin( $data ) {
 		if ( is_singular( $this->post_type_name ) ) {
@@ -957,6 +1163,14 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 		return $data;
 	}
 
+	/**
+	 * Generate JSON-LD structured data for a person.
+	 *
+	 * @since 2.6.0
+	 *
+	 * @param int $person_id Person post ID.
+	 * @return array JSON-LD data.
+	 */
 	public function get_json_ld( $person_id ) {
 		$person = $this->get_sailor_meta_by_id( $person_id );
 		$data   = array(
@@ -964,7 +1178,7 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 			'name'  => $this->get_sailor_name( $person_id ),
 		);
 		/**
-		 * iworks_fleet_personal_nation
+		 * iworks_fleet_personal_nation.
 		 */
 		if ( isset( $person['personal_nation'] ) && ! empty( $person['personal_nation'] ) ) {
 			$country = iworks_fleet_get_nation_by_code( $person['personal_nation'] );
@@ -973,7 +1187,7 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 			}
 		}
 		/**
-		 * add birthdate only when for dead sailors
+		 * Add birthdate only when for dead sailors.
 		 */
 		if (
 				isset( $person['personal_birth_date'] )
@@ -985,7 +1199,7 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 			$data['deathDate'] = gmdate( 'Y-m-d', $person['personal_death_date'] );
 		}
 		/**
-		 * add sameAs
+		 * Add sameAs.
 		 */
 			$same_as   = array();
 			$group_key = 'social';
@@ -1008,9 +1222,12 @@ class iworks_fleet_posttypes_person extends iworks_fleet_posttypes {
 	}
 
 	/**
-	 * get sailor name for JSON-LD
+	 * Get sailor name for JSON-LD.
 	 *
 	 * @since 2.6.0
+	 *
+	 * @param int $person_id Person post ID.
+	 * @return string Formatted name.
 	 */
 	private function get_sailor_name( $person_id ) {
 		$name   = false;

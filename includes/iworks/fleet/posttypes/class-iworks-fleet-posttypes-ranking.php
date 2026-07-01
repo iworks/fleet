@@ -28,10 +28,25 @@ if ( class_exists( 'iworks_fleet_posttypes_ranking' ) ) {
 
 require_once dirname( __DIR__, 1 ) . '/class-iworks-posttypes.php';
 
+/**
+ * Ranking post type handler.
+ *
+ * Registers and manages the 'iworks_fleet_ranking' post type,
+ * its meta boxes, shortcodes, and related functionality for ranking entries.
+ *
+ * @since 2.5.0
+ */
 class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 
 	protected $post_type_name = 'iworks_fleet_ranking';
 
+	/**
+	 * Constructor.
+	 *
+	 * Hooks filters and actions for the ranking post type.
+	 *
+	 * @since 2.5.0
+	 */
 	public function __construct() {
 		parent::__construct();
 		/**
@@ -51,9 +66,11 @@ class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 	}
 
 	/**
-	 * init setup
+	 * Initialize setup fields and configurations.
 	 *
 	 * @since 2.5.0
+	 *
+	 * @return void
 	 */
 	public function action_init_setup() {
 		/**
@@ -159,13 +176,25 @@ class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 	}
 
 	/**
-	 * Add default class to postbox,
+	 * Add default class to postbox.
+	 *
+	 * @since 2.5.0
+	 *
+	 * @param array $classes Existing postbox classes.
+	 * @return array Modified classes.
 	 */
 	public function add_defult_class_to_postbox( $classes ) {
 		$classes[] = 'iworks-type';
 		return $classes;
 	}
 
+	/**
+	 * Register the 'ranking' post type.
+	 *
+	 * @since 2.5.0
+	 *
+	 * @return void
+	 */
 	public function register() {
 		$this->labels = array(
 			'name'                  => _x( 'Rankings', 'Ranking General Name', 'fleet' ),
@@ -219,14 +248,40 @@ class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 		register_post_type( $this->post_type_name, $args );
 	}
 
+	/**
+	 * Save post meta for the ranking post type.
+	 *
+	 * @since 2.5.0
+	 *
+	 * @param int     $post_id Post ID.
+	 * @param WP_Post $post    Post object.
+	 * @param bool    $update  Whether this is an update.
+	 * @return void
+	 */
 	public function save_post_meta( $post_id, $post, $update ) {
 		$result = $this->save_post_meta_fields( $post_id, $post, $update, $this->fields );
 	}
 
+	/**
+	 * Register meta boxes for the ranking post type.
+	 *
+	 * @since 2.5.0
+	 *
+	 * @param WP_Post $post Current post object.
+	 * @return void
+	 */
 	public function register_meta_boxes( $post ) {
 		add_meta_box( 'ranking', __( 'Ranking Settings', 'fleet' ), array( $this, 'ranking' ), $this->post_type_name );
 	}
 
+	/**
+	 * Render the ranking settings meta box.
+	 *
+	 * @since 2.5.0
+	 *
+	 * @param WP_Post $post Current post object.
+	 * @return void
+	 */
 	public function ranking( $post ) {
 		$this->fields['ranking']['serie']['args']['options']      = $this->get_series_array();
 		$this->fields['ranking']['no_discard']['args']['options'] = $this->get_series_array();
@@ -235,13 +290,13 @@ class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 	}
 
 	/**
-	 * Get custom column values.
+	 * Output custom column content in admin list.
 	 *
-	 * @since 1.0.0
+	 * @since 2.5.0
 	 *
-	 * @param string $column Column name,
-	 * @param integer $post_id Current post id (person),
-	 *
+	 * @param string  $column  Column name.
+	 * @param int     $post_id Post ID.
+	 * @return void
 	 */
 	public function custom_columns( $column, $post_id ) {
 		switch ( $column ) {
@@ -252,12 +307,12 @@ class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 	}
 
 	/**
-	 * change default columns
+	 * Add custom columns to admin posts list.
 	 *
-	 * @since 1.0.0
+	 * @since 2.5.0
 	 *
-	 * @param array $columns list of columns.
-	 * @return array $columns list of columns.
+	 * @param array $columns Existing columns.
+	 * @return array Modified columns.
 	 */
 	public function add_columns( $columns ) {
 		unset( $columns['date'] );
@@ -266,14 +321,26 @@ class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 	}
 
 	/**
-	 * OpenGraph data.
+	 * Add OpenGraph data for ranking posts.
 	 *
 	 * @since 2.2.0
+	 *
+	 * @param array $og Existing OpenGraph data.
+	 * @return array Modified OpenGraph data.
 	 */
 	public function og_array( $og ) {
 		return $og;
 	}
 
+	/**
+	 * Render the ranking shortcode.
+	 *
+	 * @since 2.5.0
+	 *
+	 * @param array  $atts    Shortcode attributes.
+	 * @param string $content Enclosed content.
+	 * @return string Rendered HTML.
+	 */
 	public function shortcode_ranking( $atts, $content = '' ) {
 		$args = shortcode_atts(
 			array(
@@ -326,6 +393,15 @@ class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 		return $content . $this->get_ranking_table_by_ranking_id( $post->ID, $args );
 	}
 
+	/**
+	 * Render the ranking table for a given ranking post.
+	 *
+	 * @since 2.5.0
+	 *
+	 * @param int   $id   Ranking post ID.
+	 * @param array $args Display arguments.
+	 * @return string HTML table.
+	 */
 	public function get_ranking_table_by_ranking_id( $id, $args = array() ) {
 		$post    = get_post( $id );
 		$content = '';
@@ -409,6 +485,14 @@ class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 		return $content;
 	}
 
+	/**
+	 * Get ranking settings for a given ranking post.
+	 *
+	 * @since 2.5.0
+	 *
+	 * @param int $id Ranking post ID.
+	 * @return array Ranking settings.
+	 */
 	private function get_ranking_settings_by_ranking_id( $id ) {
 		$settings = array(
 			'ranking_id' => $id,
@@ -427,6 +511,14 @@ class iworks_fleet_posttypes_ranking extends iworks_fleet_posttypes {
 		return $settings;
 	}
 
+	/**
+	 * Get regatta options for a given ranking post.
+	 *
+	 * @since 2.5.0
+	 *
+	 * @param WP_Post $post Ranking post object.
+	 * @return array Regatta options list.
+	 */
 	public function get_regatta_by_ranking( $post ) {
 		$list  = array();
 		$group = 'ranking';
