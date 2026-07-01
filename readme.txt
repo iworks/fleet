@@ -80,12 +80,14 @@ Please use the plugin support forum or submit issues/pull requests on GitHub.
 
 == Changelog ==
 
-= 2.6.0 (202x-xx-xx) =
+= 2.6.1 (2026-xx-xx) =
 * Fixed class load and initialization.
 * Fixed country code recognition.
 * Added ability to show data source.
 * Added Flag of Singapore.
 * Added "location" into JSON-LD.
+* Changed default slug for events for Y-m-<title>.
+* **Dependencies**: Updated the [iWorks Options](https://github.com/iworks/wordpress-options-class) module to version 3.1.0 and the [iWorks Rate](https://github.com/iworks/iworks-rate) module to version 2.3.2.
 
 = 2.6.0 (2025-12-09) =
 * Added JSON-LD integration with the [Simple SEO Improvements](https://wordpress.org/plugins/simple-seo-improvements/) plugin for the Person schema.
