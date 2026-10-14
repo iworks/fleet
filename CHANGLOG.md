@@ -2,93 +2,88 @@
 
 This file contains historical changelog entries for versions older than 2.3.0.
 
-= 2.2.2 (2024-08-02) =
+## 2.2.2 (2024-08-02)
 * A boat link has been fixed.
 
-= 2.2.1 (2024-07-24) =
+## 2.2.1 (2024-07-24)
 * Few rankings adjustments have been added.
 
-= 2.2.0 (2024-07-20) =
+## 2.2.0 (2024-07-20)
 * The function `get_page_by_title()` has been replaced by the `WP_Query`.
 * Rankings have been added.
 
-= 2.1.7 (2024-06-21) =
+## 2.1.7 (2024-06-21)
 * The "fleet_regattas_list_years" shortcode function params have been fixed. It has wrong order.
 
-= 2.1.6 (2024-05-20) =
+## 2.1.6 (2024-05-20)
 * The [OG — Better Share on Social Media Plugin](https://wordpress.org/plugins/og/) has been added.
 * The class for single race has been added.
 * Updated the [iWorks Options](https://github.com/iworks/wordpress-options-class) module to version 2.9.2.
 * Updated the [iWorks Rate](https://github.com/iworks/iworks-rate) module to version 2.1.9.
 
-= 2.1.5 (2023-06-30) =
-
+## 2.1.5 (2023-06-30)
 * Updated the [iWorks Options](https://github.com/iworks/wordpress-options-class) module to version 2.8.5.
 * Updated the [iWorks Rate](https://github.com/iworks/iworks-rate) module to version 2.1.2.
 * The statistics HTML has been fixed.
 * Unnecessary trailing slashes have been removed.
 
-= 2.1.4 (2023-06-16) =
-
+## 2.1.4 (2023-06-16)
 * The statistics module has been added.
 
-= 2.1.3 (2023-06-15) =
-
+## 2.1.3 (2023-06-15)
 * Division by zero issue has been removed.
 
-= 2.1.2 (2023-06-05) =
-
+## 2.1.2 (2023-06-05)
 * The added date will be saved from now on.
 * Added the ability to show a graph with sailors' results.
 
-= 2.1.1 (2023-02-06) =
-
+## 2.1.1 (2023-02-06)
 * The special result row class has been added.
 
-= 2.1.0 (2022-09-01) =
+## 2.1.0 (2022-09-01)
 * Updated the [iWorks Rate](https://github.com/iworks/iworks-rate) module to version 2.1.1.
 * Changed some strings to improve translations.
 
-= 2.0.9 (2022-07-22) =
+## 2.0.9 (2022-07-22)
 * Changed series names to avoid translations issues.
 * Updated the [iWorks Options](https://github.com/iworks/wordpress-options-class) module to version 2.8.3.
 
-= 2.0.8 (2022-03-23) =
+## 2.0.8 (2022-03-23)
 * Added icons for custom posts types to allow show it in [PWA — easy way to Progressive Web App](https://wordpress.org/plugins/iworks-pwa/) plugin as PWA Shortcodes.
 
-= 2.0.7 (2022-03-18) =
+## 2.0.7 (2022-03-18)
 * Added filter country + year.
 
-= 2.0.6 (2022-02-18) =
+## 2.0.6 (2022-02-18)
 * Updated the [iWorks Options](https://github.com/iworks/wordpress-options-class) module to version 2.8.1.
 * Updated the [iWorks Rate](https://github.com/iworks/iworks-rate) module to version 2.1.0.
 
-= 2.0.5 (2022-01-20) =
+## 2.0.5 (2022-01-20)
 * Updated the [iWorks Options](https://github.com/iworks/wordpress-options-class) module to version 2.8.0.
 * Updated the [iWorks Rate](https://github.com/iworks/iworks-rate) module to version 2.0.6.
 
-= 2.0.4 (2021-11-16) =
+## 2.0.4 (2021-11-16)
 * Added filter `suppress_filter_pre_get_posts_limit_to_year` to turn off year limitation.
 * Added World Sailing Sailor ID.
 * Fixed export CSV files.
 * Fixed taxonomies admin pages when are turned off.
 * Fixed trophies if there was no place.
 
-= 2.0.3 (2021-05-28) =
+## 2.0.3 (2021-05-28)
 * Updated the [iWorks Rate](https://github.com/iworks/iworks-rate) module to version 1.0.3.
 * Improved filter `iworks_fleet_result_serie_regatta_list` by new config options: `output` - default html works like it was, and `raw` to return array of data instead of HTML string.
 
-= 2.0.2 (2021-05-16) =
+## 2.0.2 (2021-05-16)
 * Fixed race code status.
 * Renamed directory `vendor` into `includes`.
 * Updated the [iWorks Options](https://github.com/iworks/wordpress-options-class) module to version 2.6.9.
 * Improved owner boat list.
 
-= 2.0.1 (2021-05-06) =
+## 2.0.1 (2021-05-06)
 * Added missing flags: ESP, NED, POR.
 * Added params `title` and `flags` into `fleet_regattas_list_countries` shortcode.
 
-= 2.0.0 (2021-05-05) =
+## 2.0.0 (2021-05-05)
 * Added `$settings` param into `iworks_fleet_boat_get_by_owner_id` filter.
 * Added ability to add base fleet styles.
 * Added ability to add wide body class (compatibility with 2020 theme).
@@ -114,32 +109,32 @@ This file contains historical changelog entries for versions older than 2.3.0.
 * Improved "Social Media" section.
 * Removed Endomondo integration.
 
-= 1.2.9 (2020-06-17) =
+## 1.2.9 (2020-06-17)
 * Added MNA Codes see: https://www.sailing.org/raceofficials/eventorganizers/mna_codes.php
 * Remove "POL " default prefix.
 
-= 1.2.8 (2020-06-09) =
+## 1.2.8 (2020-06-09)
 * Added ranking-o-mat.
 
-= 1.2.7 (2019-11-07) =
+## 1.2.7 (2019-11-07)
 * Updated the [iWorks Options](https://github.com/iworks/wordpress-options-class) module to version 2.6.7.
 
-= 1.2.6 (2019-11-04) =
+## 1.2.6 (2019-11-04)
 * Fixed function for `the_title` filter - second argument should have default.
 * Added shortcode "boat" to allow show boat link, data or gallery.
 * Fixed taxonomies links in admin menu.
 
-= 1.2.5 =
+## 1.2.5
 * Added ability to change tag link into person link.
 * Added ability to show posts list on fleet person page.
 
-= 1.2.4 =
+## 1.2.4
 * Added filter to adjust dates of results, to use on integrations.
 * Added option to automagically add a feature image to a boat, based on image tags. By default, it is turned off.
 * Changed default sort order in admin for persons.
 * Changed slug for results archive from `fleet-results` to `results`.
 
-= 1.2.3 =
+## 1.2.3
 * Allow to turn on/off boat hull taxonomy.
 * Allow to turn on/off boat mast taxonomy.
 * Allow to turn on/off boat sails taxonomy.
@@ -147,28 +142,25 @@ This file contains historical changelog entries for versions older than 2.3.0.
 * Fixed problem with last regatta result by serie - it was doubled.
 * Updated the [iWorks Options](https://github.com/iworks/wordpress-options-class) module to version 2.6.6.
 
-= 1.2.2 =
+## 1.2.2
 * Show regatta city instead area.
 * Improved dates.
 * Improved shortcode "dinghy_regattas_list" for all years.
 * Added SVG file type to allowed mime types.
 * Added serie thumbnail.
 
-= 1.2.1 =
-
+## 1.2.1
 * Added sort order for "dinghy_regattas_list" shortcode.
 * Added sort order in custom taxonomies "series".
 * Remove year from table for "dinghy_regattas_list" shortcode.
 
-= 1.2.0 =
-
+## 1.2.0
 * Added shortcode "dinghy_regattas_list".
 * Added shortcode "dinghy_stats".
 * Added shortcode "dinghy_boats_list".
 * Added "Series" taxonomy for results.
 
-= 1.1.1 =
-
+## 1.1.1
 * Added `country` field in regatta table.
 * Added the boat list on a sailor page.
 * Add year to a single result slug on save.
