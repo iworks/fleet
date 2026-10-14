@@ -28,7 +28,7 @@
         "PHP": "8.0"
     },
     "tested": {
-        "WordPress": "6.8"
+        "WordPress": "7.2"
     },
     "devDependencies": {
         "grunt": "^1",
