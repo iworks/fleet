@@ -207,7 +207,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 					'label'   => __( 'Area', 'fleet' ),
 					'twitter' => 'yes',
 				),
-				'city'             => array( 'label' => __( 'City', 'fleet' ) ),
+				'city'                  => array( 'label' => __( 'City', 'fleet' ) ),
 				'organizer'             => array( 'label' => __( 'Organizer', 'fleet' ) ),
 				'secretary'             => array( 'label' => __( 'Secretary', 'fleet' ) ),
 				'arbiter'               => array( 'label' => __( 'Arbiter', 'fleet' ) ),
@@ -2163,6 +2163,15 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 				case 'number_of_races':
 				case 'number_of_competitors':
 					$classes[] = 'fleet-results-number';
+					break;
+				case 'data_source':
+					if ( wp_http_validate_url( $value ) ) {
+						$host = parse_url( $value, PHP_URL_HOST );
+						if ( $host ) {
+							$host  = preg_replace( '/^www\./', '', $host );
+							$value = sprintf( '<a href="%s" target="_blank" rel="external">%s</a>', esc_url( $value ), $host );
+						}
+					}
 					break;
 			}
 			$meta .= sprintf(
