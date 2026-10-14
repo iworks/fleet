@@ -47,6 +47,7 @@ module.exports = function(grunt) {
 		'!.sass-cache/**',
 		'!**/tests/**',
 		'!webpack.config.js',
+		'!CHANGLOG.md',
 	];
 
 	var excludeCopyFilesGIT = excludeCopyFiles.slice(0).concat(
