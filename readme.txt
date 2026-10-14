@@ -81,7 +81,6 @@ Please use the plugin support forum or submit issues/pull requests on GitHub.
 == Changelog ==
 
 = 2.6.1 (2026-10-14) =
-* Today is the 14th of October, 2026.
 * Added "location" to the JSON-LD.
 * Added the ability to display the data source.
 * Added the flag of Singapore.
