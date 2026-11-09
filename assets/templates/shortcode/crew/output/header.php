@@ -1,3 +1,4 @@
+<?php defined( 'ABSPATH' ) || exit; ?>
 <div class="<?php echo esc_attr( implode( ' ', $args['classes'] ) ); ?>">
 <?php
 if (

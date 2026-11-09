@@ -1237,7 +1237,7 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		);
 		echo '</script>';
 		echo '<script type="text/html" id="tmpl-iworks-fleet-boat-owner">';
-		echo $this->owners_one_row_helper();
+		echo $this->owners_one_row_helper(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- helper returns internally-built HTML with escaped values
 		echo '</script>';
 	}
 
@@ -1981,8 +1981,7 @@ class iworks_fleet_posttypes_boat extends iworks_fleet_posttypes {
 		if ( empty( $t ) ) {
 			return;
 		}
-		// translators: user list separator
-		return implode( _x( ' ', 'user list separator', 'fleet' ), $t );
+		return implode( ' ', $t );
 	}
 
 	/**

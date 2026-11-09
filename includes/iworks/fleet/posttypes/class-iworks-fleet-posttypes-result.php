@@ -600,7 +600,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			default:
 				return;
 		}
-		fclose( $out );
+		fclose( $out ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fclose -- php://output stream, not a file WP_Filesystem can handle
 		exit;
 	}
 
@@ -1150,6 +1150,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 	 */
 	private function get_list_by_post_ids( $ids ) {
 		global $wpdb;
+		// phpcs:disable WordPress.DB.PreparedSQL.NotPrepared -- the IN() placeholder list is generated dynamically; values are passed through $wpdb->prepare()
 		$results = $wpdb->get_results(
 			$wpdb->prepare(
 				sprintf(
@@ -1159,6 +1160,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 				$ids
 			)
 		);
+		// phpcs:enable
 		return $this->add_results_metadata( $results );
 	}
 
@@ -1181,7 +1183,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 				);
 		$ids[]       = $min;
 		$ids[]       = $max;
-		$results     = $wpdb->get_results( $wpdb->prepare( $sql, $ids ) );
+		$results     = $wpdb->get_results( $wpdb->prepare( $sql, $ids ) ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- the IN() placeholder list is generated dynamically; values are passed through $wpdb->prepare()
 		return $this->add_results_metadata( $results );
 	}
 
@@ -1266,10 +1268,9 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			$ref[ $regatta->post_regata_id ] = $i++;
 		}
 		$args  = array(
-			'post_type'        => $this->post_type_name,
-			'post__in'         => $ids,
-			'fields'           => 'ids',
-			'suppress_filters' => true,
+			'post_type' => $this->post_type_name,
+			'post__in'  => $ids,
+			'fields'    => 'ids',
 		);
 		$query = new WP_Query( $args );
 		/**
@@ -1876,11 +1877,11 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 		}
 		$row  = 1;
 		$data = array();
-		if ( ( $handle = fopen( $file['tmp_name'], 'r' ) ) !== false ) {
+		if ( ( $handle = fopen( $file['tmp_name'], 'r' ) ) !== false ) { // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fopen -- reading a tmp upload file for CSV parsing
 			while ( ( $d = fgetcsv( $handle, 1000, ',' ) ) !== false ) {
 				$data[] = $d;
 			}
-			fclose( $handle );
+			fclose( $handle ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fclose -- reading a tmp upload file for CSV parsing
 		}
 		if ( empty( $data ) ) {
 			wp_send_json_error();
@@ -2166,7 +2167,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 					break;
 				case 'data_source':
 					if ( wp_http_validate_url( $value ) ) {
-						$host = parse_url( $value, PHP_URL_HOST );
+						$host = wp_parse_url( $value, PHP_URL_HOST );
 						if ( $host ) {
 							$host  = preg_replace( '/^www\./', '', $host );
 							$value = sprintf( '<a href="%s" target="_blank" rel="external">%s</a>', esc_url( $value ), $host );
@@ -3314,7 +3315,7 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 			)
 		);
 
-		$where = '1=1';
+		$object_ids = array();
 		/**
 		 * for location
 		 */
@@ -3333,23 +3334,21 @@ class iworks_fleet_posttypes_result extends iworks_fleet_posttypes {
 				);
 				$wp_query      = new WP_Query( $wp_query_args );
 				$object_ids    = $wp_query->posts;
-				if ( empty( $object_ids ) ) {
-					$where = '1=0';
-				} else {
-					$where .= ' and post_id in (' . implode( ',', $object_ids ) . ')';
-				}
 		}
-		$where .= ' and meta_key = %s and meta_value is not null';
-		$years  = $wpdb->get_results(
+		// phpcs:disable WordPress.DB.PreparedSQL.NotPrepared -- the IN() id list is built from integer post IDs; values are passed through $wpdb->prepare()
+		$years = $wpdb->get_results(
 			$wpdb->prepare(
 				sprintf(
 					'select substring( date_add(from_unixtime(1), interval meta_value second), 1, 4 ) as year, count(*) as counter from %s where %s group by 1 order by 1 desc',
 					$wpdb->postmeta,
-					$where
+					empty( $object_ids )
+						? '1=0 and meta_key = %s and meta_value is not null'
+						: '1=1 and post_id in ( ' . implode( ',', array_map( 'absint', $object_ids ) ) . ' ) and meta_key = %s and meta_value is not null'
 				),
 				$this->options->get_option_name( 'result_date_start' )
 			)
 		);
+		// phpcs:enable
 		if ( empty( $years ) ) {
 			return $content;
 		}

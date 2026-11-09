@@ -1,3 +1,4 @@
+<?php defined( 'ABSPATH' ) || exit; ?>
 <table class="iworks-fleet-ranking-table">
 	<thead class="iworks-fleet-ranking-table-thead">
 		<tr>

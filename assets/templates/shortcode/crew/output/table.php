@@ -1,3 +1,4 @@
+<?php defined( 'ABSPATH' ) || exit; ?>
 <table class="iworks-fleet-ranking-table">
 	<thead class="iworks-fleet-ranking-table-thead">
 		<tr>
@@ -67,7 +68,7 @@ foreach ( $args['data']['teams'] as $one ) {
 				esc_html( $sailor['name'] )
 			);
 		} else {
-			echo $sailor['name'];
+			echo esc_html( $sailor['name'] );
 		}
 		echo '</li>';
 	}

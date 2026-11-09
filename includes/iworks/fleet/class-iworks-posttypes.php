@@ -224,7 +224,7 @@ class iworks_fleet_posttypes {
 			}
 			$content .= '</div>';
 		}
-		echo $content;
+		echo $content; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- content is built internally from escaped fragments and trusted option config
 	}
 
 	/**

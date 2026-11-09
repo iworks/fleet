@@ -1,3 +1,4 @@
+<?php defined( 'ABSPATH' ) || exit; ?>
 <table class="iworks-fleet-ranking-table">
 	<thead class="iworks-fleet-ranking-table-thead">
 		<tr>
@@ -7,8 +8,8 @@
 foreach ( $args['data']['events'] as $event_id ) {
 	printf(
 		'<th colspan="2" class="iworks-fleet-ranking-table-thead-event"><span><a href="%s">%s</a></span></th>',
-		get_permalink( $event_id ),
-		get_the_title( $event_id )
+		esc_url( get_permalink( $event_id ) ),
+		esc_html( get_the_title( $event_id ) )
 	);
 }
 ?>

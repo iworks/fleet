@@ -129,6 +129,7 @@ export function copyRules(flavor) {
     { glob: ".editorconfig", include: false },
     { glob: "**/.editorconfig", include: false },
     { glob: ".env*", include: false },
+    { glob: "**/.*", include: false },
     { glob: ".opencode/**", include: false },
     { glob: "**/.opencode/**", include: false },
     { glob: ".playwright-mcp/**", include: false },

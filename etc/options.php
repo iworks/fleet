@@ -1,4 +1,5 @@
 <?php
+defined( 'ABSPATH' ) || exit;
 function iworks_fleet_options() {
 	$iworks_fleet_options = array();
 	/**
