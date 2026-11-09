@@ -1,4 +1,4 @@
-@import "_mixin";
+@use "mixin" as *;
 
 .fleet-results-person {
 	@include table;
