@@ -1,17 +1,16 @@
-# Translation of Plugins - Fleet Manager - Development (trunk) in Polish
-# This file is distributed under the same license as the Plugins - Fleet Manager - Development (trunk) package.
 msgid ""
 msgstr ""
 "Project-Id-Version: Plugins - Fleet Manager - Development (trunk)\n"
 "Report-Msgid-Bugs-To: http://iworks.pl\n"
-"POT-Creation-Date: 2026-10-14 06:08:38+00:00\n"
-"PO-Revision-Date: 2026-10-14 06:03:25+0000\n"
-"Language: pl\n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n == 1) ? 0 : ((n % 10 >= 2 && n % 10 <= 4 "
-"&& (n % 100 < 12 || n % 100 > 14)) ? 1 : 2);\n"
+"POT-Creation-Date: 2026-10-14 06:08:38+00:00\n"
+"PO-Revision-Date: 2026-10-14 06:03:25+0000\n"
+"Language: pl\n"
+"Plural-Forms: nplurals=3; plural=(n == 1) ? 0 : ((n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14)) ? 1 : 2);\n"
 "X-Generator: GlotPress/4.1.0\n"
 
 #: assets/templates/shortcode/crew/output/table.php:5
@@ -67,11 +66,13 @@ msgstr "Nazwa"
 msgid "Years"
 msgstr "Lata"
 
-#: assets/templates/shortcode/medals/output/table.php:7 etc/options.php:512
+#: assets/templates/shortcode/medals/output/table.php:7
+#: etc/options.php:512
 msgid "Gold"
 msgstr "Złoty"
 
-#: assets/templates/shortcode/medals/output/table.php:8 etc/options.php:590
+#: assets/templates/shortcode/medals/output/table.php:8
+#: etc/options.php:590
 msgid "Silver"
 msgstr "Srebrny"
 
@@ -94,12 +95,8 @@ msgstr "Fleet: identyfikator rankingu nie jest prawidłowy!"
 
 #. translators: %1$s is: <code>id</code>
 #: assets/templates/shortcode/ranking-wrong-id.php:14
-msgid ""
-"The shortcode attribute %1$s is invalid. Please use a correct %1$s value "
-"that matches an existing item."
-msgstr ""
-"Nieprawidłowy atrybut shortcode %1$s. Użyj poprawnej wartości %1$s, która "
-"pasuje do istniejącego elementu."
+msgid "The shortcode attribute %1$s is invalid. Please use a correct %1$s value that matches an existing item."
+msgstr "Nieprawidłowy atrybut shortcode %1$s. Użyj poprawnej wartości %1$s, która pasuje do istniejącego elementu."
 
 #: etc/options.php:11
 msgid "Configuration"
@@ -109,16 +106,14 @@ msgstr "Konfiguracja"
 msgid "General"
 msgstr "Główne"
 
-#: etc/options.php:22 includes/iworks/options/options.php:2261
+#: etc/options.php:22
+#: includes/iworks/options/options.php:2261
 msgid "Country"
 msgstr "Kraj"
 
 #: etc/options.php:25
-msgid ""
-"Select country or countries if you need to show only boats and sailors from "
-"it."
-msgstr ""
-"Wybierz kraj lub kraje, aby wyświetlić tylko łodzie i żeglarzy z wybranych."
+msgid "Select country or countries if you need to show only boats and sailors from it."
+msgstr "Wybierz kraj lub kraje, aby wyświetlić tylko łodzie i żeglarzy z wybranych."
 
 #: etc/options.php:30
 msgid "Add wide body class"
@@ -188,7 +183,9 @@ msgstr "Seria narodowa"
 msgid "Select national serie to show trophy"
 msgstr "Wybierz serię narodowe na liście medalowej"
 
-#: etc/options.php:159 etc/options.php:258 etc/options.php:349
+#: etc/options.php:159
+#: etc/options.php:258
+#: etc/options.php:349
 msgid "Allow download CSV"
 msgstr "Zezwalaj na pobieranie pliku CSV"
 
@@ -246,7 +243,8 @@ msgstr "Pokaż flagę"
 msgid "Show country flag before person on single person page."
 msgstr "Pokaż flagę kraju przez osobą na stronie żeglarza."
 
-#: etc/options.php:242 etc/options.php:341
+#: etc/options.php:242
+#: etc/options.php:341
 msgid "Show trophy"
 msgstr "Pokaż zwycięstwa"
 
@@ -312,8 +310,7 @@ msgid "Auto add feature image"
 msgstr "Automatycznie ustaw obrazek wyróżniający"
 
 #: etc/options.php:333
-msgid ""
-"Automagicaly add feature image, if there is some taged with boat number."
+msgid "Automagicaly add feature image, if there is some taged with boat number."
 msgstr "Automagicznie dodaje obrazek wyróżniający, otagowany numerem łódki."
 
 #: etc/options.php:360
@@ -321,23 +318,28 @@ msgstr "Automagicznie dodaje obrazek wyróżniający, otagowany numerem łódki.
 msgid "Add New Boat"
 msgstr "Utwórz łódkę"
 
-#: etc/options.php:374 etc/options.php:375
+#: etc/options.php:374
+#: etc/options.php:375
 msgid "Series"
 msgstr "Serie"
 
-#: etc/options.php:390 etc/options.php:391
+#: etc/options.php:390
+#: etc/options.php:391
 msgid "Hulls Manufaturers"
 msgstr "Producenci kadłubów"
 
-#: etc/options.php:406 etc/options.php:407
+#: etc/options.php:406
+#: etc/options.php:407
 msgid "Sails Manufaturers"
 msgstr "Producenci żagli"
 
-#: etc/options.php:422 etc/options.php:423
+#: etc/options.php:422
+#: etc/options.php:423
 msgid "Masts Manufaturers"
 msgstr "Producenci masztów"
 
-#: etc/options.php:438 etc/options.php:439
+#: etc/options.php:438
+#: etc/options.php:439
 #: includes/iworks/fleet/class-iworks-posttypes.php:401
 msgid "Locations"
 msgstr "Lokalizacje"
@@ -794,7 +796,8 @@ msgstr "Papaja"
 msgid "Peach Puff"
 msgstr "Brzoskwiniowy"
 
-#: etc/options.php:575 etc/options.php:730
+#: etc/options.php:575
+#: etc/options.php:730
 msgid "Peru"
 msgstr "Peru"
 
@@ -1462,7 +1465,8 @@ msgstr "Netherlands Antilles"
 msgid "Venezuela"
 msgstr "Wenezuela"
 
-#: etc/options.php:1438 etc/options.php:1547
+#: etc/options.php:1438
+#: etc/options.php:1547
 msgid "Georgia"
 msgstr "Gruzja"
 
@@ -1766,7 +1770,8 @@ msgstr "Saskatchewan"
 msgid "Yukon"
 msgstr "Jukon"
 
-#: etc/options.php:1611 etc/options.php:1612
+#: etc/options.php:1611
+#: etc/options.php:1612
 msgid "New South Wales"
 msgstr "Nowa Południowa Walia"
 
@@ -1774,7 +1779,8 @@ msgstr "Nowa Południowa Walia"
 msgid "Northern Territory"
 msgstr "Terytorium Północne"
 
-#: etc/options.php:1614 etc/options.php:1615
+#: etc/options.php:1614
+#: etc/options.php:1615
 msgid "Queensland"
 msgstr "Queensland"
 
@@ -1782,11 +1788,13 @@ msgstr "Queensland"
 msgid "South Australia"
 msgstr "Australia Południowa"
 
-#: etc/options.php:1617 etc/options.php:1618
+#: etc/options.php:1617
+#: etc/options.php:1618
 msgid "Tasmania"
 msgstr "Tasmania"
 
-#: etc/options.php:1619 etc/options.php:1620
+#: etc/options.php:1619
+#: etc/options.php:1620
 msgid "Victoria"
 msgstr "Wiktoria (stan Australii)"
 
@@ -1818,7 +1826,8 @@ msgstr "Statystyka"
 msgid "The Fleet plugin do not have such post type!"
 msgstr "Wtyczka Fleet nie posiada takiego typu treści!"
 
-#: includes/iworks/class-iworks-fleet.php:259 includes/iworks/rate/rate.php:159
+#: includes/iworks/class-iworks-fleet.php:259
+#: includes/iworks/rate/rate.php:159
 msgid "Settings"
 msgstr "Ustawienia"
 
@@ -2760,13 +2769,8 @@ msgid "Order of Regatta"
 msgstr "Kolejność regat"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:132
-msgid ""
-"Select special reggata to set ranking order when tie. First select a year "
-"and a serie, then save and reload page to load regatta. "
-msgstr ""
-"Wybierz specjalne regaty, aby ustawić kolejność w rankingu po remisie. "
-"Najpierw wybierz rok i serię, a następnie zapisz i przeładuj stronę, aby "
-"załadować regaty. "
+msgid "Select special reggata to set ranking order when tie. First select a year and a serie, then save and reload page to load regatta. "
+msgstr "Wybierz specjalne regaty, aby ustawić kolejność w rankingu po remisie. Najpierw wybierz rok i serię, a następnie zapisz i przeładuj stronę, aby załadować regaty. "
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:136
 msgid "Not Discardable Serie"
@@ -2895,11 +2899,8 @@ msgid "Custom columns name"
 msgstr "Własne nazwy kolumn"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:240
-msgid ""
-"Add one column per line if you want to have a custom race column header."
-msgstr ""
-"Dodaj jedną kolumnę w każdym wierszu, jeśli nagłówek wyścigu ma mieć własną "
-"wartość."
+msgid "Add one column per line if you want to have a custom race column header."
+msgstr "Dodaj jedną kolumnę w każdym wierszu, jeśli nagłówek wyścigu ma mieć własną wartość."
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:243
 msgid "Data source"
@@ -3098,12 +3099,8 @@ msgid "Import regatta results!"
 msgstr "Importuj wyniki regat!"
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1757
-msgid ""
-"CSV file with fields: Nation, Boat, Helm. Crew(s), Club, R1, R..n, any-"
-"fileds, netto points, place."
-msgstr ""
-"Plik CSV z polami: narodowość, numer łódki, sternik, załoga, klub, R1, R..n, "
-"dowolne pola, punkty netto, miejsce."
+msgid "CSV file with fields: Nation, Boat, Helm. Crew(s), Club, R1, R..n, any-fileds, netto points, place."
+msgstr "Plik CSV z polami: narodowość, numer łódki, sternik, załoga, klub, R1, R..n, dowolne pola, punkty netto, miejsce."
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:2187
 msgid "Show meta"
@@ -3180,12 +3177,8 @@ msgid "Places"
 msgstr "Miejsca"
 
 #: includes/iworks/options/includes/class-iworks-options-logger.php:99
-msgid ""
-"Option \"{option_name}\" has been updated. From \"{old_value}\" to "
-"\"{new_value}\"."
-msgstr ""
-"Wartość opcji „{option_name}” została zmieniona z „{old_value}” na "
-"„{new_value}”."
+msgid "Option \"{option_name}\" has been updated. From \"{old_value}\" to \"{new_value}\"."
+msgstr "Wartość opcji „{option_name}” została zmieniona z „{old_value}” na „{new_value}”."
 
 #: includes/iworks/options/options.php:247
 msgid "No Page Title"
@@ -3256,27 +3249,13 @@ msgid "🎉 Happy Anniversary! 🎉"
 msgstr "🎉 Wszystkiego najlepszego z okazji rocznicy! 🎉"
 
 #: includes/iworks/rate/templates/happy-anniversary/anniversary.php:21
-msgid ""
-"Wow, it’s already been a whole year since you’ve been using our plugin—thank "
-"you so much for being part of our journey! We truly appreciate your support "
-"and hope the plugin has made your work easier and more enjoyable."
-msgstr ""
-"Wow, minął już cały rok odkąd używasz naszej wtyczki — bardzo dziękujemy za "
-"bycie częścią naszej wspólnej przygody! Naprawdę doceniam Twoje wsparcie i "
-"mam nadzieję, że wtyczka ułatwiła Ci pracę i uczyniła ją przyjemniejszą."
+msgid "Wow, it’s already been a whole year since you’ve been using our plugin—thank you so much for being part of our journey! We truly appreciate your support and hope the plugin has made your work easier and more enjoyable."
+msgstr "Wow, minął już cały rok odkąd używasz naszej wtyczki — bardzo dziękujemy za bycie częścią naszej wspólnej przygody! Naprawdę doceniam Twoje wsparcie i mam nadzieję, że wtyczka ułatwiła Ci pracę i uczyniła ją przyjemniejszą."
 
 #: includes/iworks/rate/templates/happy-anniversary/anniversary.php:22
 #: includes/iworks/rate/templates/happy-anniversary/first-year.php:24
-msgid ""
-"If you’ve found our plugin helpful and would like to support its continued "
-"development, we’d be incredibly grateful if you’d consider buying us a "
-"coffee. Every little bit helps us keep improving and adding new features for "
-"awesome users like you!"
-msgstr ""
-"Jeśli nasza wtyczka okazała się pomocna i chcesz wesprzeć jej dalszy rozwój, "
-"byłbym niezmiernie wdzięczny, gdybyś rozważyła lub rozważył postawienie mi "
-"kawy. Każda odrobina pomaga nam w ciągłym doskonaleniu i dodawaniu nowych "
-"funkcji dla wspaniałych użytkowników, takich jak Ty!"
+msgid "If you’ve found our plugin helpful and would like to support its continued development, we’d be incredibly grateful if you’d consider buying us a coffee. Every little bit helps us keep improving and adding new features for awesome users like you!"
+msgstr "Jeśli nasza wtyczka okazała się pomocna i chcesz wesprzeć jej dalszy rozwój, byłbym niezmiernie wdzięczny, gdybyś rozważyła lub rozważył postawienie mi kawy. Każda odrobina pomaga nam w ciągłym doskonaleniu i dodawaniu nowych funkcji dla wspaniałych użytkowników, takich jak Ty!"
 
 #: includes/iworks/rate/templates/happy-anniversary/anniversary.php:23
 #: includes/iworks/rate/templates/happy-anniversary/first-year.php:25
@@ -3286,8 +3265,7 @@ msgstr "☕ Kup mi kawę"
 #: includes/iworks/rate/templates/happy-anniversary/anniversary.php:24
 #: includes/iworks/rate/templates/happy-anniversary/first-year.php:26
 msgid "Thank you for your support and for making this community amazing!"
-msgstr ""
-"Dziękuję za Twoje wsparcie i za to, że tworzysz niesamowitą społeczność!"
+msgstr "Dziękuję za Twoje wsparcie i za to, że tworzysz niesamowitą społeczność!"
 
 #: includes/iworks/rate/templates/happy-anniversary/anniversary.php:28
 #: includes/iworks/rate/templates/happy-anniversary/first-year.php:30
@@ -3305,14 +3283,8 @@ msgid "Plugin Author"
 msgstr "Autor wtyczki"
 
 #: includes/iworks/rate/templates/happy-anniversary/first-year.php:23
-msgid ""
-"Wow, it’s already been a whole year since you started using our plugin—thank "
-"you so much for being part of our journey! We hope it’s made your work "
-"easier and more enjoyable."
-msgstr ""
-"Wow, minął już cały rok odkąd używasz naszej wtyczki — bardzo dziękujemy za "
-"bycie częścią naszej wspólnej przygody! Mam nadzieję, że wtyczka ułatwiła "
-"Twoją pracę i uczyniła ją przyjemniejszą."
+msgid "Wow, it’s already been a whole year since you started using our plugin—thank you so much for being part of our journey! We hope it’s made your work easier and more enjoyable."
+msgstr "Wow, minął już cały rok odkąd używasz naszej wtyczki — bardzo dziękujemy za bycie częścią naszej wspólnej przygody! Mam nadzieję, że wtyczka ułatwiła Twoją pracę i uczyniła ją przyjemniejszą."
 
 #: includes/iworks/rate/templates/plugins/og.php:4
 msgid "Would you like to boost your website sharing abilities?"
@@ -3335,18 +3307,8 @@ msgstr "Dziękujemy za używanie naszej wtyczki %s!"
 
 #. translators: %1$s: open anchor tag, %2$s: close anchor tag
 #: includes/iworks/rate/templates/thanks.php:31
-msgid ""
-"Please let us know what you think about our plugin. It is important that we "
-"can develop this tool. Thank you for all the ratings, reviews and donates. "
-"If you have a technical problem, please before you add a review %1$scheck "
-"our FAQ%2$s or contact us if you did not find help there. We will try to "
-"help you!"
-msgstr ""
-"Powiedz nam co myślisz o naszej wtyczce. To jest bardzo ważne dla nas i "
-"pozwoli nam ją rozwijać. Dziękujemy serdecznie za wszystkie oceny, recenzje "
-"i dodatkowe wsparcie. Jeżeli masz problem techniczny, prosimy zanim dodasz "
-"recenzję %1$ssprawdź nasze FAQ%2$s lub skontaktuj się z nami, jeżeli nie "
-"znajdziesz tam pomocy. Postaramy się tobie pomóc!"
+msgid "Please let us know what you think about our plugin. It is important that we can develop this tool. Thank you for all the ratings, reviews and donates. If you have a technical problem, please before you add a review %1$scheck our FAQ%2$s or contact us if you did not find help there. We will try to help you!"
+msgstr "Powiedz nam co myślisz o naszej wtyczce. To jest bardzo ważne dla nas i pozwoli nam ją rozwijać. Dziękujemy serdecznie za wszystkie oceny, recenzje i dodatkowe wsparcie. Jeżeli masz problem techniczny, prosimy zanim dodasz recenzję %1$ssprawdź nasze FAQ%2$s lub skontaktuj się z nami, jeżeli nie znajdziesz tam pomocy. Postaramy się tobie pomóc!"
 
 #: includes/iworks/rate/templates/thanks.php:35
 #: includes/iworks/rate/templates/widgets/support.php:21
@@ -3363,57 +3325,30 @@ msgid "I added review, do not show again"
 msgstr "Recenzja została dodana, nie pokazuj ponownie"
 
 #: includes/iworks/rate/templates/widgets/donate.php:2
-msgid ""
-"However, working on plugins and technical support requires many hours of "
-"work. If you want to appreciate it, you can provide me a coffee."
-msgstr ""
-"Praca nad wtyczkami oraz świadczenie pomocy technicznej wymaga ode mnie "
-"wielu godzin ciężkiej pracy. Jeżeli chcesz to docenić, możesz postawić mi "
-"kawę."
+msgid "However, working on plugins and technical support requires many hours of work. If you want to appreciate it, you can provide me a coffee."
+msgstr "Praca nad wtyczkami oraz świadczenie pomocy technicznej wymaga ode mnie wielu godzin ciężkiej pracy. Jeżeli chcesz to docenić, możesz postawić mi kawę."
 
 #: includes/iworks/rate/templates/widgets/donate.php:3
-msgid ""
-"If every plugin user did it, I could devote myself fully to working on this "
-"plugin. Thanks everyone!"
-msgstr ""
-"Gdyby każdy użytkownik wtyczki to zrobił, to mógłbym poświęcić cały swój "
-"czas pracy nad wtyczką. Dziękuję każdemu!"
+msgid "If every plugin user did it, I could devote myself fully to working on this plugin. Thanks everyone!"
+msgstr "Gdyby każdy użytkownik wtyczki to zrobił, to mógłbym poświęcić cały swój czas pracy nad wtyczką. Dziękuję każdemu!"
 
 #: includes/iworks/rate/templates/widgets/donate.php:4
 msgid "Provide me a coffee"
 msgstr "Postaw mi kawę"
 
 #: includes/iworks/rate/templates/widgets/support.php:4
-msgid ""
-"Do you have a technical problem? Please contact us. We will be happy to help "
-"you. Or maybe you have an idea for a new feature? Please let us know about "
-"it by filling the support form. We will try to add it!"
-msgstr ""
-"Masz problem techniczny? Prosimy o kontakt z nami. Z przyjemnością tobie "
-"pomożemy. A może masz pomysł na nową funkcjonalność? Poinformuj nas o tym, "
-"dodając wątek na forum technicznym. Weźmiemy to pod uwagę!"
+msgid "Do you have a technical problem? Please contact us. We will be happy to help you. Or maybe you have an idea for a new feature? Please let us know about it by filling the support form. We will try to add it!"
+msgstr "Masz problem techniczny? Prosimy o kontakt z nami. Z przyjemnością tobie pomożemy. A może masz pomysł na nową funkcjonalność? Poinformuj nas o tym, dodając wątek na forum technicznym. Weźmiemy to pod uwagę!"
 
 #. translators: %1$s: open anchor tag, %2$s: close anchor tag, %3$s: open
 #. anchor tag, %4$s: close anchor tag
 #: includes/iworks/rate/templates/widgets/support.php:11
-msgid ""
-"Please %1$scheck our FAQ%2$s before adding a thread with technical problem. "
-"If you do not find help there, %3$scheck support forum%4$s for similar "
-"problems."
-msgstr ""
-"Zobacz %1$snasze FAQ%2$s zanim dodasz wątek w dziale pomocy technicznej. "
-"Jeżeli nie znajdziesz tam pomocy, sprawdź również %3$sforum techniczne%4$s "
-"pod kątem podobnych problemów."
+msgid "Please %1$scheck our FAQ%2$s before adding a thread with technical problem. If you do not find help there, %3$scheck support forum%4$s for similar problems."
+msgstr "Zobacz %1$snasze FAQ%2$s zanim dodasz wątek w dziale pomocy technicznej. Jeżeli nie znajdziesz tam pomocy, sprawdź również %3$sforum techniczne%4$s pod kątem podobnych problemów."
 
 #: includes/iworks/rate/templates/widgets/support.php:26
-msgid ""
-"Do you like our plugin? Could you rate him? Please let us know what you "
-"think about our plugin. It is important that we can develop this tool. Thank "
-"you for all the ratings, reviews and donates."
-msgstr ""
-"Jak podoba się nasza wtyczka? Masz możliwość ją ocenić? Daj nam znać, co o "
-"niej myślisz. To dla nas bardzo ważne, aby móc ją rozwijać. Dziękujemy za "
-"wszystkie oceny, recenzje oraz dodatkowe wsparcie."
+msgid "Do you like our plugin? Could you rate him? Please let us know what you think about our plugin. It is important that we can develop this tool. Thank you for all the ratings, reviews and donates."
+msgstr "Jak podoba się nasza wtyczka? Masz możliwość ją ocenić? Daj nam znać, co o niej myślisz. To dla nas bardzo ważne, aby móc ją rozwijać. Dziękujemy za wszystkie oceny, recenzje oraz dodatkowe wsparcie."
 
 #: integration/themes/twentytwenty-5o5-child/5o5-archive.php:15
 #, fuzzy
@@ -3429,9 +3364,7 @@ msgstr[1] ""
 msgstr[2] ""
 
 #: integration/themes/twentytwenty-5o5-child/5o5-archive.php:31
-msgid ""
-"We could not find any results for your search. You can give it another try "
-"through the search form below."
+msgid "We could not find any results for your search. You can give it another try through the search form below."
 msgstr ""
 
 #: integration/themes/twentytwenty-5o5-child/5o5-archive.php:75
@@ -3684,14 +3617,8 @@ msgctxt "plugins support home"
 msgid "https://wordpress.org/support/plugin/%s"
 msgstr "https://wordpress.org/support/plugin/%s"
 
-#~ msgid ""
-#~ "Manage sailboats, sailors, regattas, and results with ease. Track boats, "
-#~ "record sailor statistics, and organize sailing competitions—all within "
-#~ "WordPress."
-#~ msgstr ""
-#~ "Zarządzaj żaglówkami, żeglarzami, regatami i wynikami z łatwością. Śledź "
-#~ "łodzie, rejestruj statystyki żeglarzy i organizuj zawody żeglarskie — "
-#~ "wszystko w WordPressie."
+#~ msgid "Manage sailboats, sailors, regattas, and results with ease. Track boats, record sailor statistics, and organize sailing competitions—all within WordPress."
+#~ msgstr "Zarządzaj żaglówkami, żeglarzami, regatami i wynikami z łatwością. Śledź łodzie, rejestruj statystyki żeglarzy i organizuj zawody żeglarskie — wszystko w WordPressie."
 
 #~ msgid "http://iworks.pl/en/plugins/fleet/"
 #~ msgstr "http://iworks.pl/wtyczki/flota/"

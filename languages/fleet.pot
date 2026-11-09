@@ -2,27 +2,42 @@
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: 2.6.1\n"
-"Report-Msgid-Bugs-To: http://iworks.pl\n"
-"POT-Creation-Date: 2026-10-14 06:08:47+00:00\n"
+"Project-Id-Version: Development Fleet Manager PLUGIN_VERSION\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/fleet\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2026-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Marcin Pietrzak <marcin@iworks.pl>\n"
-"Language-Team: iWorks <support@iworks.pl>\n"
-"Language: en\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-Country: United States\n"
-"X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: "
-"__;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;_nx_noop:1,2,3c;esc_"
-"attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;esc_html_x:1,2c;\n"
-"X-Poedit-Basepath: ../\n"
-"X-Poedit-SearchPath-0: .\n"
-"X-Poedit-Bookmarks: \n"
-"X-Textdomain-Support: yes\n"
-"X-Generator: grunt-wp-i18n 1.0.3\n"
+"POT-Creation-Date: 2026-11-09T15:15:19+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: fleet\n"
+
+#. Plugin Name of the plugin
+#: fleet.php
+msgid "Development Fleet Manager"
+msgstr ""
+
+#. Plugin URI of the plugin
+#: fleet.php
+msgid "PLUGIN_URI"
+msgstr ""
+
+#. Description of the plugin
+#: fleet.php
+msgid "PLUGIN_DESCRIPTION"
+msgstr ""
+
+#. Author of the plugin
+#: fleet.php
+msgid "AUTHOR_NAME"
+msgstr ""
+
+#. Author URI of the plugin
+#: fleet.php
+msgid "AUTHOR_URI"
+msgstr ""
 
 #: assets/templates/shortcode/crew/output/table.php:5
 msgid "Team"
@@ -77,11 +92,13 @@ msgstr ""
 msgid "Years"
 msgstr ""
 
-#: assets/templates/shortcode/medals/output/table.php:7 etc/options.php:512
+#: assets/templates/shortcode/medals/output/table.php:7
+#: etc/options.php:512
 msgid "Gold"
 msgstr ""
 
-#: assets/templates/shortcode/medals/output/table.php:8 etc/options.php:590
+#: assets/templates/shortcode/medals/output/table.php:8
+#: etc/options.php:590
 msgid "Silver"
 msgstr ""
 
@@ -93,8 +110,9 @@ msgstr ""
 msgid "Fleet: the ranking id is required!"
 msgstr ""
 
-#: assets/templates/shortcode/ranking-missing-id.php:14
 #. translators: %s is: <code>id</code>
+#: assets/templates/shortcode/ranking-missing-id.php:14
+#, php-format
 msgid "The %s parameter is required for this shortcode to work."
 msgstr ""
 
@@ -102,11 +120,10 @@ msgstr ""
 msgid "Fleet: the ranking id is wrong!"
 msgstr ""
 
-#: assets/templates/shortcode/ranking-wrong-id.php:14
 #. translators: %1$s is: <code>id</code>
-msgid ""
-"The shortcode attribute %1$s is invalid. Please use a correct %1$s value "
-"that matches an existing item."
+#: assets/templates/shortcode/ranking-wrong-id.php:14
+#, php-format
+msgid "The shortcode attribute %1$s is invalid. Please use a correct %1$s value that matches an existing item."
 msgstr ""
 
 #: etc/options.php:11
@@ -117,14 +134,12 @@ msgstr ""
 msgid "General"
 msgstr ""
 
-#: etc/options.php:22 includes/iworks/options/options.php:2261
+#: etc/options.php:22
 msgid "Country"
 msgstr ""
 
 #: etc/options.php:25
-msgid ""
-"Select country or countries if you need to show only boats and sailors from "
-"it."
+msgid "Select country or countries if you need to show only boats and sailors from it."
 msgstr ""
 
 #: etc/options.php:30
@@ -195,7 +210,9 @@ msgstr ""
 msgid "Select national serie to show trophy"
 msgstr ""
 
-#: etc/options.php:159 etc/options.php:258 etc/options.php:349
+#: etc/options.php:159
+#: etc/options.php:258
+#: etc/options.php:349
 msgid "Allow download CSV"
 msgstr ""
 
@@ -253,7 +270,8 @@ msgstr ""
 msgid "Show country flag before person on single person page."
 msgstr ""
 
-#: etc/options.php:242 etc/options.php:341
+#: etc/options.php:242
+#: etc/options.php:341
 msgid "Show trophy"
 msgstr ""
 
@@ -327,23 +345,28 @@ msgstr ""
 msgid "Add New Boat"
 msgstr ""
 
-#: etc/options.php:374 etc/options.php:375
+#: etc/options.php:374
+#: etc/options.php:375
 msgid "Series"
 msgstr ""
 
-#: etc/options.php:390 etc/options.php:391
+#: etc/options.php:390
+#: etc/options.php:391
 msgid "Hulls Manufaturers"
 msgstr ""
 
-#: etc/options.php:406 etc/options.php:407
+#: etc/options.php:406
+#: etc/options.php:407
 msgid "Sails Manufaturers"
 msgstr ""
 
-#: etc/options.php:422 etc/options.php:423
+#: etc/options.php:422
+#: etc/options.php:423
 msgid "Masts Manufaturers"
 msgstr ""
 
-#: etc/options.php:438 etc/options.php:439
+#: etc/options.php:438
+#: etc/options.php:439
 #: includes/iworks/fleet/class-iworks-posttypes.php:401
 msgid "Locations"
 msgstr ""
@@ -800,7 +823,8 @@ msgstr ""
 msgid "Peach Puff"
 msgstr ""
 
-#: etc/options.php:575 etc/options.php:730
+#: etc/options.php:575
+#: etc/options.php:730
 msgid "Peru"
 msgstr ""
 
@@ -1468,7 +1492,8 @@ msgstr ""
 msgid "Venezuela"
 msgstr ""
 
-#: etc/options.php:1438 etc/options.php:1547
+#: etc/options.php:1438
+#: etc/options.php:1547
 msgid "Georgia"
 msgstr ""
 
@@ -1772,7 +1797,8 @@ msgstr ""
 msgid "Yukon"
 msgstr ""
 
-#: etc/options.php:1611 etc/options.php:1612
+#: etc/options.php:1611
+#: etc/options.php:1612
 msgid "New South Wales"
 msgstr ""
 
@@ -1780,7 +1806,8 @@ msgstr ""
 msgid "Northern Territory"
 msgstr ""
 
-#: etc/options.php:1614 etc/options.php:1615
+#: etc/options.php:1614
+#: etc/options.php:1615
 msgid "Queensland"
 msgstr ""
 
@@ -1788,11 +1815,13 @@ msgstr ""
 msgid "South Australia"
 msgstr ""
 
-#: etc/options.php:1617 etc/options.php:1618
+#: etc/options.php:1617
+#: etc/options.php:1618
 msgid "Tasmania"
 msgstr ""
 
-#: etc/options.php:1619 etc/options.php:1620
+#: etc/options.php:1619
+#: etc/options.php:1620
 msgid "Victoria"
 msgstr ""
 
@@ -1824,12 +1853,22 @@ msgstr ""
 msgid "The Fleet plugin do not have such post type!"
 msgstr ""
 
-#: includes/iworks/class-iworks-fleet.php:259 includes/iworks/rate/rate.php:159
+#: includes/iworks/class-iworks-fleet.php:259
 msgid "Settings"
 msgstr ""
 
 #: includes/iworks/class-iworks-fleet.php:262
 msgid "Donate"
+msgstr ""
+
+#: includes/iworks/class-iworks-fleet.php:270
+msgctxt "Taxonomy General Name"
+msgid "Boat Numbers"
+msgstr ""
+
+#: includes/iworks/class-iworks-fleet.php:271
+msgctxt "Taxonomy Singular Name"
+msgid "Boat Number"
 msgstr ""
 
 #: includes/iworks/class-iworks-fleet.php:272
@@ -1913,6 +1952,11 @@ msgstr ""
 msgid "Boat Numbers list navigation"
 msgstr ""
 
+#: includes/iworks/class-iworks-fleet.php:299
+msgctxt "slug for images"
+msgid "fleet-boat-number"
+msgstr ""
+
 #: includes/iworks/fleet/class-iworks-posttypes.php:130
 msgid "World Champ"
 msgstr ""
@@ -1923,6 +1967,16 @@ msgstr ""
 
 #: includes/iworks/fleet/class-iworks-posttypes.php:132
 msgid "National Championship"
+msgstr ""
+
+#: includes/iworks/fleet/class-iworks-posttypes.php:399
+msgctxt "Taxonomy General Name"
+msgid "Locations"
+msgstr ""
+
+#: includes/iworks/fleet/class-iworks-posttypes.php:400
+msgctxt "Taxonomy Singular Name"
+msgid "Location"
 msgstr ""
 
 #: includes/iworks/fleet/class-iworks-posttypes.php:402
@@ -2103,6 +2157,23 @@ msgstr ""
 msgid "Instagram"
 msgstr ""
 
+#. translators: %1$d: number of boats
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:322
+#, php-format
+msgctxt "number of boats"
+msgid "Number of boats: %1$d."
+msgstr ""
+
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:370
+msgctxt "Boat General Name"
+msgid "Boats"
+msgstr ""
+
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:371
+msgctxt "Boat Singular Name"
+msgid "Boat"
+msgstr ""
+
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:373
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:414
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:542
@@ -2226,6 +2297,26 @@ msgstr ""
 msgid "Filter items list"
 msgstr ""
 
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:425
+msgctxt "slug for archive"
+msgid "fleet-boats"
+msgstr ""
+
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:431
+msgctxt "slug for single boat"
+msgid "fleet-boat"
+msgstr ""
+
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:440
+msgctxt "Taxonomy General Name"
+msgid "Hull Manufacturers"
+msgstr ""
+
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:441
+msgctxt "Taxonomy Singular Name"
+msgid "Hull Manufacturer"
+msgstr ""
+
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:442
 msgid "Hull Manufacturer"
 msgstr ""
@@ -2285,6 +2376,16 @@ msgstr ""
 msgid "Hull Manufacturers list navigation"
 msgstr ""
 
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:479
+msgctxt "Taxonomy General Name"
+msgid "Sails Manufacturers"
+msgstr ""
+
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:480
+msgctxt "Taxonomy Singular Name"
+msgid "Sails Manufacturer"
+msgstr ""
+
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:481
 msgid "Sails Manufacturer"
 msgstr ""
@@ -2327,6 +2428,16 @@ msgstr ""
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:496
 msgid "Sails Manufacturers list navigation"
+msgstr ""
+
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:518
+msgctxt "Taxonomy General Name"
+msgid "Masts Manufacturers"
+msgstr ""
+
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:519
+msgctxt "Taxonomy Singular Name"
+msgid "Masts Manufacturer"
 msgstr ""
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:520
@@ -2399,6 +2510,16 @@ msgstr ""
 msgid "Social Media"
 msgstr ""
 
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:697
+msgctxt "Custom taxonomies separator."
+msgid ", "
+msgstr ""
+
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:793
+msgctxt "value of boat"
+msgid "unknown"
+msgstr ""
+
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:858
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:1010
 msgid "Owners"
@@ -2433,6 +2554,13 @@ msgstr ""
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:2928
 msgid "Crew"
 msgstr ""
+
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:896
+msgctxt "Past crews number"
+msgid "Past crew"
+msgid_plural "Past crews"
+msgstr[0] ""
+msgstr[1] ""
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:953
 msgid "Gallery"
@@ -2524,6 +2652,12 @@ msgstr ""
 msgid "Boats list"
 msgstr ""
 
+#. translators: user list separator
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:1985
+msgctxt "user list separator"
+msgid " "
+msgstr ""
+
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:123
 msgid "World Sailing Sailor ID"
 msgstr ""
@@ -2600,6 +2734,16 @@ msgstr ""
 msgid "Olympedia"
 msgstr ""
 
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:245
+msgctxt "Person General Name"
+msgid "Persons"
+msgstr ""
+
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:246
+msgctxt "Person Singular Name"
+msgid "Person"
+msgstr ""
+
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:247
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:202
 msgid "Fleet"
@@ -2636,6 +2780,26 @@ msgstr ""
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:273
 msgid "person"
+msgstr ""
+
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:287
+msgctxt "slug for archive"
+msgid "fleet-persons"
+msgstr ""
+
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:294
+msgctxt "slug for single person"
+msgid "fleet-person"
+msgstr ""
+
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:303
+msgctxt "Club General Name"
+msgid "Clubs"
+msgstr ""
+
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:304
+msgctxt "Club Singular Name"
+msgid "Club"
 msgstr ""
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:305
@@ -2691,27 +2855,37 @@ msgstr ""
 msgid "Birth year"
 msgstr ""
 
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:618
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:622
+msgctxt "Person name on crews list if it is not set"
+msgid "not set"
+msgstr ""
+
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:713
 msgid "Read more about sailor"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:863
 #. translators: %s: The hull's number.
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:863
+#, php-format
 msgid "Sail on %s as helmsman."
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:871
 #. translators: %s: The hull's number.
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:871
+#, php-format
 msgid "Sail on %s as crew."
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:888
 #. translators: %s: The hull's number.
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:888
+#, php-format
 msgid "Sailed on %s as helmsman."
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:900
 #. translators: %s: The hull's number.
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:900
+#, php-format
 msgid "Sailed on %s as crew."
 msgstr ""
 
@@ -2766,9 +2940,7 @@ msgid "Order of Regatta"
 msgstr ""
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:132
-msgid ""
-"Select special reggata to set ranking order when tie. First select a year "
-"and a serie, then save and reload page to load regatta. "
+msgid "Select special reggata to set ranking order when tie. First select a year and a serie, then save and reload page to load regatta. "
 msgstr ""
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:136
@@ -2785,6 +2957,16 @@ msgstr ""
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:158
 msgid "&mdash; Any &mdash;"
+msgstr ""
+
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:200
+msgctxt "Ranking General Name"
+msgid "Rankings"
+msgstr ""
+
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:201
+msgctxt "Ranking Singular Name"
+msgid "Ranking"
 msgstr ""
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:203
@@ -2830,6 +3012,11 @@ msgstr ""
 msgid "ranking"
 msgstr ""
 
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:244
+msgctxt "slug for single ranking"
+msgid "fleet-ranking"
+msgstr ""
+
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:274
 msgid "Ranking Settings"
 msgstr ""
@@ -2852,7 +3039,6 @@ msgid "Area"
 msgstr ""
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:210
-#: includes/iworks/options/options.php:2262
 msgid "City"
 msgstr ""
 
@@ -2959,24 +3145,21 @@ msgstr ""
 msgid "Start date is not set."
 msgstr ""
 
+#. translators: This is a string that is used in a specific context where it describes a sailor's role in a regatta. %1$s: The year of the regatta. %2$s: A link to the regatta's page. %3$s: The hull's number.
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1220
-#. translators: This is a string that is used in a specific context where it
-#. describes a sailor's role in a regatta. %1$s: The year of the regatta. %2$s:
-#. A link to the regatta's page. %3$s: The hull's number.
+#, php-format
 msgid "As a helmsman in %1$s in the %2$s on %3$s"
 msgstr ""
 
+#. translators: This is a string that is used in a specific context where it describes a sailor's role in a regatta. %1$s: The year of the regatta. %2$s: A link to the regatta's page. %3$s: The hull's number.
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1228
-#. translators: This is a string that is used in a specific context where it
-#. describes a sailor's role in a regatta. %1$s: The year of the regatta. %2$s:
-#. A link to the regatta's page. %3$s: The hull's number.
+#, php-format
 msgid "As a crew in %1$s in the %2$s on %3$s"
 msgstr ""
 
+#. translators: This is a string that is used in a specific context where it describes a sailor's role in a regatta. %1$s: The year of the regatta. %2$s: A link to the regatta's page. %3$s: The hull's number.
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1236
-#. translators: This is a string that is used in a specific context where it
-#. describes a sailor's role in a regatta. %1$s: The year of the regatta. %2$s:
-#. A link to the regatta's page. %3$s: The hull's number.
+#, php-format
 msgid "In %1$s in the %2$s on %3$s"
 msgstr ""
 
@@ -2998,6 +3181,16 @@ msgstr ""
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1464
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1565
 msgid "Regatta list"
+msgstr ""
+
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1585
+msgctxt "Result General Name"
+msgid "Results"
+msgstr ""
+
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1586
+msgctxt "Result Singular Name"
+msgid "Result"
 msgstr ""
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1587
@@ -3035,6 +3228,26 @@ msgstr ""
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1599
 msgid "Search Result"
+msgstr ""
+
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1627
+msgctxt "slug for archive"
+msgid "results"
+msgstr ""
+
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1633
+msgctxt "slug for single result"
+msgid "result"
+msgstr ""
+
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1641
+msgctxt "Taxonomy General Name"
+msgid "Series"
+msgstr ""
+
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1642
+msgctxt "Taxonomy Singular Name"
+msgid "Serie"
 msgstr ""
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1644
@@ -3098,9 +3311,7 @@ msgid "Import regatta results!"
 msgstr ""
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1757
-msgid ""
-"CSV file with fields: Nation, Boat, Helm. Crew(s), Club, R1, R..n, "
-"any-fileds, netto points, place."
+msgid "CSV file with fields: Nation, Boat, Helm. Crew(s), Club, R1, R..n, any-fileds, netto points, place."
 msgstr ""
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:2187
@@ -3143,13 +3354,22 @@ msgstr ""
 msgid "netto"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:3095
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:3056
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:3061
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:3514
+msgctxt "rewrite rule handler for results"
+msgid "results"
+msgstr ""
+
 #. translators: year of regatta
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:3095
+#, php-format
 msgid "Results of the %s Sailing Regatta"
 msgstr ""
 
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:3106
 #. translators: %1$s - country name, %2$s year of event
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:3106
+#, php-format
 msgid "%2$s Results of Sailing Regattas in %1$s"
 msgstr ""
 
@@ -3157,12 +3377,19 @@ msgstr ""
 msgid "Last added"
 msgstr ""
 
+#. translators: %s: serie name
+#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:3275
+#, php-format
+msgctxt "all of taxonomy link title"
+msgid "Show more: %s"
+msgstr ""
+
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:3360
 msgid "Regatta results by year"
 msgstr ""
 
 #: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:3380
-#. translators: %d is the number of results of a year
+#, php-format
 msgid "Number of result: %d"
 msgid_plural "Number of results: %d"
 msgstr[0] ""
@@ -3176,228 +3403,6 @@ msgstr ""
 msgid "Places"
 msgstr ""
 
-#: includes/iworks/options/includes/class-iworks-options-logger.php:99
-msgid ""
-"Option \"{option_name}\" has been updated. From \"{old_value}\" to "
-"\"{new_value}\"."
-msgstr ""
-
-#: includes/iworks/options/options.php:247
-msgid "No Page Title"
-msgstr ""
-
-#: includes/iworks/options/options.php:419
-msgid "An error occurred while getting the configuration."
-msgstr ""
-
-#: includes/iworks/options/options.php:998
-#: includes/iworks/options/options.php:2388
-msgid "Select Image"
-msgstr ""
-
-#: includes/iworks/options/options.php:1003
-msgid "Delete image"
-msgstr ""
-
-#: includes/iworks/options/options.php:1111
-msgid "Save Changes"
-msgstr ""
-
-#: includes/iworks/options/options.php:2263
-msgid "Street"
-msgstr ""
-
-#: includes/iworks/options/options.php:2264
-msgid "ZIP code"
-msgstr ""
-
-#: includes/iworks/options/options.php:2448
-msgid "OFF"
-msgstr ""
-
-#: includes/iworks/options/options.php:2449
-msgid "ON"
-msgstr ""
-
-#: includes/iworks/options/options.php:2514
-msgid "Failed Security Check"
-msgstr ""
-
-#: includes/iworks/rate/rate.php:173
-#: includes/iworks/rate/templates/thanks.php:39
-msgid "Provide us a coffee"
-msgstr ""
-
-#: includes/iworks/rate/rate.php:626
-#. translators: %s: plugin id
-msgid "There is no plugin with id: %s."
-msgstr ""
-
-#: includes/iworks/rate/rate.php:800
-msgid "OpenGraph"
-msgstr ""
-
-#: includes/iworks/rate/rate.php:816
-msgid "OG — Better Share on Social Media"
-msgstr ""
-
-#: includes/iworks/rate/rate.php:817
-msgid "https://wordpress.org/plugins/og/"
-msgstr ""
-
-#: includes/iworks/rate/templates/happy-anniversary/anniversary.php:19
-#: includes/iworks/rate/templates/happy-anniversary/first-year.php:21
-msgid "🎉 Happy Anniversary! 🎉"
-msgstr ""
-
-#: includes/iworks/rate/templates/happy-anniversary/anniversary.php:21
-msgid ""
-"Wow, it’s already been a whole year since you’ve been using our "
-"plugin—thank you so much for being part of our journey! We truly appreciate "
-"your support and hope the plugin has made your work easier and more "
-"enjoyable."
-msgstr ""
-
-#: includes/iworks/rate/templates/happy-anniversary/anniversary.php:22
-#: includes/iworks/rate/templates/happy-anniversary/first-year.php:24
-msgid ""
-"If you’ve found our plugin helpful and would like to support its continued "
-"development, we’d be incredibly grateful if you’d consider buying us a "
-"coffee. Every little bit helps us keep improving and adding new features "
-"for awesome users like you!"
-msgstr ""
-
-#: includes/iworks/rate/templates/happy-anniversary/anniversary.php:23
-#: includes/iworks/rate/templates/happy-anniversary/first-year.php:25
-msgid "☕ Buy Me a Coffee"
-msgstr ""
-
-#: includes/iworks/rate/templates/happy-anniversary/anniversary.php:24
-#: includes/iworks/rate/templates/happy-anniversary/first-year.php:26
-msgid "Thank you for your support and for making this community amazing!"
-msgstr ""
-
-#: includes/iworks/rate/templates/happy-anniversary/anniversary.php:28
-#: includes/iworks/rate/templates/happy-anniversary/first-year.php:30
-msgid "With gratitude"
-msgstr ""
-
-#: includes/iworks/rate/templates/happy-anniversary/anniversary.php:32
-#: includes/iworks/rate/templates/happy-anniversary/first-year.php:34
-msgid "Marcin Pietrzak"
-msgstr ""
-
-#: includes/iworks/rate/templates/happy-anniversary/anniversary.php:34
-#: includes/iworks/rate/templates/happy-anniversary/first-year.php:36
-msgid "Plugin Author"
-msgstr ""
-
-#: includes/iworks/rate/templates/happy-anniversary/first-year.php:23
-msgid ""
-"Wow, it’s already been a whole year since you started using our "
-"plugin—thank you so much for being part of our journey! We hope it’s made "
-"your work easier and more enjoyable."
-msgstr ""
-
-#: includes/iworks/rate/templates/plugins/og.php:4
-msgid "Would you like to boost your website sharing abilities?"
-msgstr ""
-
-#: includes/iworks/rate/templates/plugins/og.php:9
-#. translators: %s is a plugin name with url
-msgid "Don't wait, install plugin %s!"
-msgstr ""
-
-#: includes/iworks/rate/templates/plugins/og.php:20
-#. translators: %s is a plugin wp home name, %s plugin name
-msgid "Install"
-msgstr ""
-
-#: includes/iworks/rate/templates/thanks.php:23
-#. translators: %s is a plugin name wrapped by strong html tag
-msgid "Thank you for using our plugin %s!"
-msgstr ""
-
-#: includes/iworks/rate/templates/thanks.php:31
-#. translators: %1$s: open anchor tag, %2$s: close anchor tag
-msgid ""
-"Please let us know what you think about our plugin. It is important that we "
-"can develop this tool. Thank you for all the ratings, reviews and donates. "
-"If you have a technical problem, please before you add a review %1$scheck "
-"our FAQ%2$s or contact us if you did not find help there. We will try to "
-"help you!"
-msgstr ""
-
-#: includes/iworks/rate/templates/thanks.php:35
-#: includes/iworks/rate/templates/widgets/support.php:21
-msgid "Get help"
-msgstr ""
-
-#: includes/iworks/rate/templates/thanks.php:37
-#: includes/iworks/rate/templates/widgets/support.php:31
-msgid "Add review"
-msgstr ""
-
-#: includes/iworks/rate/templates/thanks.php:41
-msgid "I added review, do not show again"
-msgstr ""
-
-#: includes/iworks/rate/templates/widgets/donate.php:2
-msgid ""
-"However, working on plugins and technical support requires many hours of "
-"work. If you want to appreciate it, you can provide me a coffee."
-msgstr ""
-
-#: includes/iworks/rate/templates/widgets/donate.php:3
-msgid ""
-"If every plugin user did it, I could devote myself fully to working on this "
-"plugin. Thanks everyone!"
-msgstr ""
-
-#: includes/iworks/rate/templates/widgets/donate.php:4
-msgid "Provide me a coffee"
-msgstr ""
-
-#: includes/iworks/rate/templates/widgets/support.php:4
-msgid ""
-"Do you have a technical problem? Please contact us. We will be happy to "
-"help you. Or maybe you have an idea for a new feature? Please let us know "
-"about it by filling the support form. We will try to add it!"
-msgstr ""
-
-#: includes/iworks/rate/templates/widgets/support.php:11
-#. translators: %1$s: open anchor tag, %2$s: close anchor tag, %3$s: open
-#. anchor tag, %4$s: close anchor tag
-msgid ""
-"Please %1$scheck our FAQ%2$s before adding a thread with technical problem. "
-"If you do not find help there, %3$scheck support forum%4$s for similar "
-"problems."
-msgstr ""
-
-#: includes/iworks/rate/templates/widgets/support.php:26
-msgid ""
-"Do you like our plugin? Could you rate him? Please let us know what you "
-"think about our plugin. It is important that we can develop this tool. "
-"Thank you for all the ratings, reviews and donates."
-msgstr ""
-
-#: integration/themes/twentytwenty-5o5-child/5o5-archive.php:15
-msgid "Search:"
-msgstr ""
-
-#: integration/themes/twentytwenty-5o5-child/5o5-archive.php:22
-#. translators: %s: Number of search results.
-msgid "We found %s result for your search."
-msgid_plural "We found %s results for your search."
-msgstr[0] ""
-msgstr[1] ""
-
-#: integration/themes/twentytwenty-5o5-child/5o5-archive.php:31
-msgid ""
-"We could not find any results for your search. You can give it another try "
-"through the search form below."
-msgstr ""
-
 #: integration/themes/twentytwenty-5o5-child/5o5-archive.php:75
 msgid "Number"
 msgstr ""
@@ -3408,238 +3413,4 @@ msgstr ""
 
 #: integration/themes/twentytwenty-5o5-child/5o5-archive.php:77
 msgid "Last known owner"
-msgstr ""
-
-#: integration/themes/twentytwenty-5o5-child/5o5-archive.php:118
-msgid "search again"
-msgstr ""
-
-#. Plugin Name of the plugin/theme
-msgid "Development Fleet Manager"
-msgstr ""
-
-#. Plugin URI of the plugin/theme
-msgid "PLUGIN_URI"
-msgstr ""
-
-#. Description of the plugin/theme
-msgid "PLUGIN_DESCRIPTION"
-msgstr ""
-
-#. Author of the plugin/theme
-msgid "AUTHOR_NAME"
-msgstr ""
-
-#. Author URI of the plugin/theme
-msgid "AUTHOR_URI"
-msgstr ""
-
-#: includes/iworks/class-iworks-fleet.php:270
-msgctxt "Taxonomy General Name"
-msgid "Boat Numbers"
-msgstr ""
-
-#: includes/iworks/fleet/class-iworks-posttypes.php:399
-msgctxt "Taxonomy General Name"
-msgid "Locations"
-msgstr ""
-
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:440
-msgctxt "Taxonomy General Name"
-msgid "Hull Manufacturers"
-msgstr ""
-
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:479
-msgctxt "Taxonomy General Name"
-msgid "Sails Manufacturers"
-msgstr ""
-
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:518
-msgctxt "Taxonomy General Name"
-msgid "Masts Manufacturers"
-msgstr ""
-
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1641
-msgctxt "Taxonomy General Name"
-msgid "Series"
-msgstr ""
-
-#: includes/iworks/class-iworks-fleet.php:271
-msgctxt "Taxonomy Singular Name"
-msgid "Boat Number"
-msgstr ""
-
-#: includes/iworks/fleet/class-iworks-posttypes.php:400
-msgctxt "Taxonomy Singular Name"
-msgid "Location"
-msgstr ""
-
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:441
-msgctxt "Taxonomy Singular Name"
-msgid "Hull Manufacturer"
-msgstr ""
-
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:480
-msgctxt "Taxonomy Singular Name"
-msgid "Sails Manufacturer"
-msgstr ""
-
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:519
-msgctxt "Taxonomy Singular Name"
-msgid "Masts Manufacturer"
-msgstr ""
-
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1642
-msgctxt "Taxonomy Singular Name"
-msgid "Serie"
-msgstr ""
-
-#: includes/iworks/class-iworks-fleet.php:299
-msgctxt "slug for images"
-msgid "fleet-boat-number"
-msgstr ""
-
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:322
-#. translators: %1$d: number of boats
-msgctxt "number of boats"
-msgid "Number of boats: %1$d."
-msgstr ""
-
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:370
-msgctxt "Boat General Name"
-msgid "Boats"
-msgstr ""
-
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:371
-msgctxt "Boat Singular Name"
-msgid "Boat"
-msgstr ""
-
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:425
-msgctxt "slug for archive"
-msgid "fleet-boats"
-msgstr ""
-
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:287
-msgctxt "slug for archive"
-msgid "fleet-persons"
-msgstr ""
-
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1627
-msgctxt "slug for archive"
-msgid "results"
-msgstr ""
-
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:431
-msgctxt "slug for single boat"
-msgid "fleet-boat"
-msgstr ""
-
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:697
-msgctxt "Custom taxonomies separator."
-msgid ", "
-msgstr ""
-
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:793
-msgctxt "value of boat"
-msgid "unknown"
-msgstr ""
-
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:896
-msgctxt "Past crews number"
-msgid "Past crew"
-msgid_plural "Past crews"
-msgstr[0] ""
-msgstr[1] ""
-
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-boat.php:1985
-#. translators: user list separator
-msgctxt "user list separator"
-msgid " "
-msgstr ""
-
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:245
-msgctxt "Person General Name"
-msgid "Persons"
-msgstr ""
-
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:246
-msgctxt "Person Singular Name"
-msgid "Person"
-msgstr ""
-
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:294
-msgctxt "slug for single person"
-msgid "fleet-person"
-msgstr ""
-
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:303
-msgctxt "Club General Name"
-msgid "Clubs"
-msgstr ""
-
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:304
-msgctxt "Club Singular Name"
-msgid "Club"
-msgstr ""
-
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:618
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-person.php:622
-msgctxt "Person name on crews list if it is not set"
-msgid "not set"
-msgstr ""
-
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:200
-msgctxt "Ranking General Name"
-msgid "Rankings"
-msgstr ""
-
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:201
-msgctxt "Ranking Singular Name"
-msgid "Ranking"
-msgstr ""
-
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-ranking.php:244
-msgctxt "slug for single ranking"
-msgid "fleet-ranking"
-msgstr ""
-
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1585
-msgctxt "Result General Name"
-msgid "Results"
-msgstr ""
-
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1586
-msgctxt "Result Singular Name"
-msgid "Result"
-msgstr ""
-
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:1633
-msgctxt "slug for single result"
-msgid "result"
-msgstr ""
-
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:3056
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:3061
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:3514
-msgctxt "rewrite rule handler for results"
-msgid "results"
-msgstr ""
-
-#: includes/iworks/fleet/posttypes/class-iworks-fleet-posttypes-result.php:3275
-#. translators: %s: serie name
-msgctxt "all of taxonomy link title"
-msgid "Show more: %s"
-msgstr ""
-
-#: includes/iworks/rate/rate.php:649
-#. translators: %s: plugin slug
-msgctxt "plugins home"
-msgid "https://wordpress.org/plugins/%s"
-msgstr ""
-
-#: includes/iworks/rate/rate.php:656
-#. translators: %s: plugin slug
-msgctxt "plugins support home"
-msgid "https://wordpress.org/support/plugin/%s"
 msgstr ""

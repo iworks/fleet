@@ -1,7 +1,11 @@
+/*! Fleet Manager - 2.6.1
+ * https://github.com/iworks/fleet
+ * Copyright (c) 2026
+ * Licensed GPL-3.0 */
 .iworks-fleet-row {
   display: flex;
   align-items: center;
-  padding-bottom: .5em;
+  padding-bottom: 0.5em;
 }
 .iworks-fleet-row label {
   width: 100px;
@@ -24,4 +28,3 @@
   min-width: 200px;
   width: 100%;
 }
-

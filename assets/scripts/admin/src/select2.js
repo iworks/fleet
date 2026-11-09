@@ -1,3 +1,3 @@
-jQuery( document ).ready(function($) {
-    $('select.iworks-select2').select2();
+jQuery(document).ready(function ($) {
+  $("select.iworks-select2").select2();
 });

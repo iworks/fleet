@@ -1,7 +1,7 @@
 .iworks-fleet-row {
   display: flex;
   align-items: center;
-  padding-bottom: .5em;
+  padding-bottom: 0.5em;
 }
 .iworks-fleet-row label {
   width: 100px;

@@ -1,3 +1,7 @@
+/*! Fleet Manager - 2.6.1
+ * https://github.com/iworks/fleet
+ * Copyright (c) 2026
+ * Licensed GPL-3.0 */
 :root {
   --fleet-color-place-1: rgba(255, 215, 0, 0.7);
   --fleet-color-place-2: rgba(192, 192, 192, 0.7);
@@ -34,7 +38,7 @@
   text-decoration: none;
 }
 .boat-social .iworks-fleet-boat-social-media a:hover {
-  opacity: .6;
+  opacity: 0.6;
 }
 :root {
   --fleet-color-place-1: rgba(255, 215, 0, 0.7);
@@ -524,5 +528,5 @@ body.post-type-archive .results-countries-list ul a {
 }
 body.post-type-archive .results-countries-list ul a:hover {
   background-color: transparent;
-  opacity: .7;
+  opacity: 0.7;
 }
