@@ -1,4 +1,29 @@
-node_modules
+# Node artifact files
+node_modules/
+
+# Compiled files
 .sass-cache
 package-lock.json
-release
+
+# Compiled CSS files, needed to release not in repository
+assets/scripts/admin/fleet*.js
+assets/styles/fleet*.css
+*.map
+
+# release
+release/
+
+# i18n
+languages/*.mo
+
+# tests
+tests/php/.phpunit.result.cache
+
+# scratch files (OpenCode)
+.opencode/tmp/
+o
+.playwright-mcp/
+
+# bun / local tools
+wp-cli.phar
+.env

@@ -80,6 +80,12 @@ Please use the plugin support forum or submit issues/pull requests on GitHub.
 
 == Changelog ==
 
+= 2.6.2 (2026-11-09) =
+* The build system has been migrated from Grunt to Bun.
+* All Plugin Check (PCP) errors have been fixed: output escaping, `$wpdb->prepare()` usage, direct file access guards, license header alignment.
+* Sass sources have been migrated to the modern API (`@use`, namespaced `color.*` functions).
+* Hidden files are no longer included in release ZIPs.
+
 = 2.6.1 (2026-10-14) =
 * Added "location" to the JSON-LD.
 * Added the ability to display the data source.
